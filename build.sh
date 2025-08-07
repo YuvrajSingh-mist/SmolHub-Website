@@ -3,21 +3,36 @@
 # Build script for Render deployment
 set -o errexit
 
+echo "🚀 Starting Render build process..."
+
+# Install Bundler if not available
+if ! command -v bundle &> /dev/null; then
+    echo "📦 Installing Bundler..."
+    gem install bundler --no-document
+fi
+
 echo "Ruby version:"
 ruby --version
 
 echo "Bundler version:"
-bundler --version
+bundle --version
 
 echo "Node.js version:"
 node --version
 
-echo "Installing Ruby dependencies..."
+# Configure bundle for Render environment
+echo "🔧 Configuring Bundle for Render..."
 bundle config set --local deployment 'false'
+bundle config set --local path 'vendor/bundle'
 bundle config set --local without 'development test'
+
+echo "📦 Installing Ruby dependencies..."
 bundle install
 
-echo "Updating bundle..."
+echo "🏗️ Building Jekyll site for production..."
+JEKYLL_ENV=production bundle exec jekyll build
+
+echo "✅ Build completed successfully!"
 bundle update
 
 echo "Installing Node.js dependencies..."
