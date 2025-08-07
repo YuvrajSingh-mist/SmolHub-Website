@@ -64,6 +64,138 @@ author_profile: true
 {% if site.data.models %}{{ site.data.models | jsonify }}{% else %}null{% endif %}
 </script>
 
+<style>
+/* Search and filter styles */
+.search-section {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.search-container input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.search-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background: #e9ecef;
+}
+
+.filter-btn.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.search-results-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+}
+
+#clear-search {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.refresh-btn {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.refresh-btn:hover {
+    background: #0056b3;
+}
+
+/* Model card styles */
+.models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.model-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background: white;
+    transition: box-shadow 0.3s ease;
+}
+
+.model-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.model-card__title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.model-card__excerpt {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.model-details-btn {
+    background: #28a745;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+    transition: background 0.3s ease;
+}
+
+.model-details-btn:hover {
+    background: #1e7e34;
+    color: white;
+    text-decoration: none;
+}
+</style>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🔍 Page loaded, starting models data loading...');
@@ -75,9 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Simple data loading function
     function loadModels() {
         console.log('🔍 Loading models...');
-        console.log('🔍 Models container:', modelsContainer);
         
-        // First check if container exists
         if (!modelsContainer) {
             console.error('❌ Models container not found!');
             return;
@@ -95,7 +225,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const scriptContent = dataScript.textContent.trim();
             console.log('📝 Script content length:', scriptContent.length);
-            console.log('📝 First 200 chars:', scriptContent.substring(0, 200));
             
             if (!scriptContent || scriptContent === 'null' || scriptContent === '') {
                 console.warn('⚠️ Jekyll data is null/empty, trying GitHub API fallback...');
@@ -107,28 +236,17 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 modelsData = JSON.parse(scriptContent);
                 console.log('📊 Parsed models data successfully');
-                console.log('📊 Data keys:', Object.keys(modelsData));
             } catch (parseError) {
                 console.error('❌ JSON parse error:', parseError);
-                console.error('❌ Content that failed to parse:', scriptContent.substring(0, 500));
                 loadModelsFromGitHubAPI();
                 return;
             }
             
-            if (!modelsData) {
-                console.error('❌ Parsed data is null');
-                loadModelsFromGitHubAPI();
-                return;
-            }
-            
-            if (!modelsData.models || !Array.isArray(modelsData.models)) {
+            if (!modelsData || !modelsData.models || !Array.isArray(modelsData.models)) {
                 console.error('❌ No models array found in data');
-                console.error('❌ Available keys:', Object.keys(modelsData));
                 loadModelsFromGitHubAPI();
                 return;
             }
-            
-            console.log('✅ Found', modelsData.models.length, 'models');
             
             if (modelsData.models.length === 0) {
                 console.error('❌ Models array is empty');
@@ -136,12 +254,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
+            console.log('✅ Found', modelsData.models.length, 'models');
+            
             // Clear container and add models
             modelsContainer.innerHTML = '';
             
             let cardsAdded = 0;
             modelsData.models.forEach(function(model, index) {
-                console.log(`🔨 Creating card ${index + 1}/${modelsData.models.length} for:`, model.name);
                 try {
                     const modelCard = createSimpleModelCard(model);
                     if (modelCard) {
@@ -162,14 +281,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     const lastUpdated = new Date(modelsData.last_updated).toLocaleString();
                     statusMessage.innerHTML = `🔄 Models last updated: ${lastUpdated} (${modelsData.total_models || modelsData.models.length} models)`;
                 } catch (dateError) {
-                    console.error('❌ Date formatting error:', dateError);
                     statusMessage.innerHTML = `🔄 ${modelsData.models.length} models loaded`;
                 }
             }
             
+            // Store data globally for detail pages
+            window.modelData = {};
+            modelsData.models.forEach(function(model) {
+                const modelId = model.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+                window.modelData[modelId] = model;
+            });
+            
             // Initialize search functionality after models are loaded
             setTimeout(function() {
-                console.log('🔍 Initializing search...');
                 initializeSearch();
             }, 100);
             
@@ -177,49 +301,6 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('❌ Critical error loading models:', error);
             loadModelsFromGitHubAPI();
         }
-    }
-    
-    function loadStaticModels() {
-        console.log('🔄 Loading static Jekyll models as fallback...');
-        
-        // Clear container first
-        modelsContainer.innerHTML = '';
-        
-        // Get static models from Jekyll
-        const staticContainer = document.getElementById('static-models-container');
-        if (staticContainer) {
-            const staticCards = staticContainer.querySelectorAll('.static-model-card');
-            console.log('📦 Found', staticCards.length, 'static Jekyll models');
-            
-            if (staticCards.length > 0) {
-                staticCards.forEach(function(card, index) {
-                    // Clone the card to avoid moving the original
-                    const clonedCard = card.cloneNode(true);
-                    clonedCard.style.display = 'block';
-                    clonedCard.className = 'model-card'; // Ensure proper styling
-                    modelsContainer.appendChild(clonedCard);
-                });
-                
-                // Update status message
-                const statusMessage = document.querySelector('.refresh-section p');
-                if (statusMessage) {
-                    statusMessage.innerHTML = `🔄 Showing ${staticCards.length} models from Jekyll collections (fallback mode)`;
-                }
-                
-                // Initialize search with static models
-                setTimeout(function() {
-                    console.log('🔍 Initializing search for static models...');
-                    initializeSearch();
-                }, 100);
-                
-                console.log('✅ Successfully loaded', staticCards.length, 'static models');
-                return;
-            }
-        }
-        
-        // If no static models found, show error message
-        console.error('❌ No static models found either');
-        showNoModelsMessage();
     }
     
     async function loadModelsFromGitHubAPI() {
@@ -351,7 +432,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Initialize search functionality
             setTimeout(function() {
-                console.log('🔍 Initializing search for GitHub API models...');
                 initializeSearch();
             }, 100);
             
@@ -412,6 +492,42 @@ document.addEventListener('DOMContentLoaded', function() {
             .trim();
     }
     
+    function loadStaticModels() {
+        console.log('🔄 Loading static Jekyll models as fallback...');
+        
+        modelsContainer.innerHTML = '';
+        
+        const staticContainer = document.getElementById('static-models-container');
+        if (staticContainer) {
+            const staticCards = staticContainer.querySelectorAll('.static-model-card');
+            console.log('📦 Found', staticCards.length, 'static Jekyll models');
+            
+            if (staticCards.length > 0) {
+                staticCards.forEach(function(card) {
+                    const clonedCard = card.cloneNode(true);
+                    clonedCard.style.display = 'block';
+                    clonedCard.className = 'model-card';
+                    modelsContainer.appendChild(clonedCard);
+                });
+                
+                const statusMessage = document.querySelector('.refresh-section p');
+                if (statusMessage) {
+                    statusMessage.innerHTML = `🔄 Showing ${staticCards.length} models from Jekyll collections (fallback mode)`;
+                }
+                
+                setTimeout(function() {
+                    initializeSearch();
+                }, 100);
+                
+                console.log('✅ Successfully loaded', staticCards.length, 'static models');
+                return;
+            }
+        }
+        
+        console.error('❌ No static models found either');
+        showNoModelsMessage();
+    }
+    
     function createSimpleModelCard(model) {
         if (!model || !model.name) {
             console.error('❌ Invalid model data:', model);
@@ -427,9 +543,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const modelUrl = model.github_url || '#';
             
             card.innerHTML = `
-                <div class="model-card__image">
-                    <span>${modelName}</span>
-                </div>
                 <div class="model-card__content">
                     <h3 class="model-card__title">${modelName}</h3>
                     <div class="model-card__excerpt">
@@ -443,7 +556,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
             
-            console.log('✅ Created card for:', modelName);
             return card;
         } catch (error) {
             console.error('❌ Error creating card for', model.name, ':', error);
@@ -452,19 +564,141 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function showNoModelsMessage() {
-        console.log('🔄 Showing no models message');
         modelsContainer.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666;">
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
                 <h3>🔍 No Models Found</h3>
-                <p>The models data could not be loaded.</p>
-                <button onclick="location.reload()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 10px;">
-                    🔄 Refresh Page
-                </button>
-                <button onclick="debugDataFunction()" style="padding: 10px 20px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 10px;">
-                    🐛 Debug Data
-                </button>
+                <p>It looks like there's an issue loading the models data.</p>
+                <div style="margin: 20px 0;">
+                    <p><strong>Possible reasons:</strong></p>
+                    <ul style="text-align: left; display: inline-block; margin: 10px 0;">
+                        <li>The models data is still being generated</li>
+                        <li>GitHub API rate limit reached</li>
+                        <li>Network connectivity issue</li>
+                        <li>Deployment configuration problem</li>
+                    </ul>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                    <button onclick="location.reload()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        🔄 Refresh Page
+                    </button>
+                    <a href="https://github.com/YuvrajSingh-mist/Paper-Replications" target="_blank" style="padding: 10px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">
+                        📁 View Repository
+                    </a>
+                </div>
             </div>
         `;
+    }
+    
+    function initializeSearch() {
+        const searchInput = document.getElementById('model-search');
+        const clearButton = document.getElementById('clear-search');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const resultsCount = document.getElementById('search-results-count');
+        
+        // Store all models for filtering
+        const allModels = Array.from(document.querySelectorAll('.model-card')).map(card => ({
+            element: card,
+            name: card.querySelector('.model-card__title')?.textContent.toLowerCase() || '',
+            description: card.querySelector('.model-card__excerpt')?.textContent.toLowerCase() || '',
+            category: getModelCategory(card.querySelector('.model-card__title')?.textContent || '')
+        }));
+        
+        updateResultsCount(allModels.length);
+        
+        // Search input handler
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                filterModels(query, getActiveCategory(), allModels);
+                
+                if (query) {
+                    clearButton.style.display = 'inline-block';
+                } else {
+                    clearButton.style.display = 'none';
+                }
+            });
+        }
+        
+        // Clear search handler
+        if (clearButton) {
+            clearButton.addEventListener('click', function() {
+                searchInput.value = '';
+                clearButton.style.display = 'none';
+                filterModels('', getActiveCategory(), allModels);
+            });
+        }
+        
+        // Filter buttons handlers
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+                filterModels(query, this.dataset.category, allModels);
+            });
+        });
+        
+        function getModelCategory(modelName) {
+            const name = modelName.toLowerCase();
+            
+            if (['gpt', 'bert', 'llama', 'gemma', 'transformer', 'attention'].some(term => name.includes(term))) {
+                return 'llm';
+            }
+            if (['vit', 'clip', 'vision', 'image'].some(term => name.includes(term))) {
+                return 'vision';
+            }
+            if (['gan', 'dcgan', 'cgan', 'vae'].some(term => name.includes(term))) {
+                return 'gan';
+            }
+            if (['whisper', 'tts', 'audio'].some(term => name.includes(term))) {
+                return 'audio';
+            }
+            if (['ddp', 'distributed', 'training', 'optimization'].some(term => name.includes(term))) {
+                return 'optimization';
+            }
+            return 'other';
+        }
+        
+        function getActiveCategory() {
+            const activeBtn = document.querySelector('.filter-btn.active');
+            return activeBtn ? activeBtn.dataset.category : 'all';
+        }
+        
+        function filterModels(query, category, models) {
+            const filteredModels = models.filter(model => {
+                const matchesQuery = !query || 
+                    model.name.includes(query) || 
+                    model.description.includes(query);
+                
+                const matchesCategory = category === 'all' || model.category === category;
+                
+                return matchesQuery && matchesCategory;
+            });
+            
+            // Show/hide models
+            models.forEach(model => {
+                if (filteredModels.includes(model)) {
+                    model.element.style.display = 'block';
+                } else {
+                    model.element.style.display = 'none';
+                }
+            });
+            
+            updateResultsCount(filteredModels.length);
+        }
+        
+        function updateResultsCount(count) {
+            if (resultsCount) {
+                if (count === allModels.length) {
+                    resultsCount.textContent = `Showing all ${count} models`;
+                } else {
+                    resultsCount.textContent = `Found ${count} model${count !== 1 ? 's' : ''}`;
+                }
+            }
+        }
+        
+        console.log('Search initialized with', allModels.length, 'models');
     }
     
     // Add event listeners
@@ -475,41 +709,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    if (debugBtn) {
-        debugBtn.addEventListener('click', function() {
-            console.log('🐛 Debug button clicked');
-            
-            const dataScript = document.getElementById('models-data');
-            const content = dataScript ? dataScript.textContent : 'No script found';
-            
-            let debugInfo = 'DEBUG INFO:\\n\\n';
-            debugInfo += 'Data script exists: ' + !!dataScript + '\\n';
-            debugInfo += 'Content length: ' + content.length + '\\n';
-            debugInfo += 'Content preview: ' + content.substring(0, 200) + '\\n\\n';
-            
-            try {
-                const parsed = JSON.parse(content);
-                debugInfo += 'Parse successful: true\\n';
-                debugInfo += 'Models count: ' + (parsed && parsed.models ? parsed.models.length : 'null') + '\\n';
-                debugInfo += 'Last updated: ' + (parsed ? parsed.last_updated : 'null') + '\\n';
-            } catch (e) {
-                debugInfo += 'Parse error: ' + e.message + '\\n';
-            }
-            
-            alert(debugInfo);
-            console.log('🐛 Debug info:', debugInfo);
-        });
-    } else {
-        console.log('❌ Debug button not found');
-    }
-    
     // Start loading models
     loadModels();
 });
-</script>
 
-<script>
-// Global debug function as backup
+// Global debug function
 function debugDataFunction() {
     console.log('🐛 Global debug function called');
     
@@ -553,17 +757,14 @@ function debugDataFunction() {
         if (parsed && parsed.models) {
             debugInfo += `📈 Models count: ${parsed.models.length}\n`;
             debugInfo += `📅 Last updated: ${parsed.last_updated || 'Unknown'}\n`;
-            debugInfo += `🔢 Total models: ${parsed.total_models || 'Unknown'}\n\n`;
             
             if (parsed.models.length > 0) {
                 debugInfo += `📋 First model example:\n`;
                 debugInfo += `   Name: ${parsed.models[0].name || 'No name'}\n`;
                 debugInfo += `   Has description: ${!!parsed.models[0].description}\n`;
-                debugInfo += `   Has github_url: ${!!parsed.models[0].github_url}\n`;
             }
             
             debugInfo += '\n✅ DATA LOOKS GOOD!\n';
-            debugInfo += 'If models are not showing, check browser console for JavaScript errors.';
         } else {
             debugInfo += '❌ PROBLEM: No models array found in data!\n';
             debugInfo += `Available keys: ${Object.keys(parsed).join(', ')}\n`;
@@ -575,785 +776,5 @@ function debugDataFunction() {
     
     alert(debugInfo);
     console.log('🐛 Complete debug info:', debugInfo);
-    
-    // Also try to manually load models
-    console.log('🔄 Attempting to manually reload models...');
-    const modelsContainer = document.getElementById('models-container');
-    if (modelsContainer) {
-        // Call the loadModels function directly
-        if (typeof loadModels === 'function') {
-            loadModels();
-        } else {
-            console.error('❌ loadModels function not found');
-        }
-    }
-}
-</script>
-
-<!-- Search and filter functionality -->
-<script>
-// Search and filter functionality
-function initializeSearch() {
-    console.log('🔍 Initializing search...');
-    const searchInput = document.getElementById('model-search');
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const clearSearchBtn = document.getElementById('clear-search');
-    const searchResultsCount = document.getElementById('search-results-count');
-    
-    if (searchInput) {
-        searchInput.addEventListener('input', function(e) {
-            filterModels(e.target.value.toLowerCase());
-        });
-    }
-    
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            
-            const category = this.dataset.category;
-            filterModelsByCategory(category);
-        });
-    });
-    
-    if (clearSearchBtn) {
-        clearSearchBtn.addEventListener('click', function() {
-            if (searchInput) searchInput.value = '';
-            showAllModels();
-            this.style.display = 'none';
-            if (searchResultsCount) searchResultsCount.textContent = '';
-        });
-    }
-}
-
-function filterModels(searchTerm) {
-    const modelCards = document.querySelectorAll('.model-card');
-    let visibleCount = 0;
-    
-    modelCards.forEach(card => {
-        const title = card.querySelector('.model-card__title');
-        const excerpt = card.querySelector('.model-card__excerpt');
-        
-        if (title && excerpt) {
-            const titleText = title.textContent.toLowerCase();
-            const excerptText = excerpt.textContent.toLowerCase();
-            
-            if (titleText.includes(searchTerm) || excerptText.includes(searchTerm)) {
-                card.style.display = 'block';
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
-            }
-        }
-    });
-    
-    updateSearchResults(visibleCount, searchTerm);
-}
-
-function filterModelsByCategory(category) {
-    const modelCards = document.querySelectorAll('.model-card');
-    let visibleCount = 0;
-    
-    modelCards.forEach(card => {
-        if (category === 'all') {
-            card.style.display = 'block';
-            visibleCount++;
-        } else {
-            const title = card.querySelector('.model-card__title');
-            const excerpt = card.querySelector('.model-card__excerpt');
-            
-            if (title && excerpt) {
-                const titleText = title.textContent.toLowerCase();
-                const excerptText = excerpt.textContent.toLowerCase();
-                
-                // Simple category matching
-                let matches = false;
-                switch (category) {
-                    case 'llm':
-                        matches = titleText.includes('gpt') || titleText.includes('llama') || titleText.includes('bert') || 
-                                 titleText.includes('transformer') || titleText.includes('gemma') || titleText.includes('mistral') ||
-                                 excerptText.includes('language model') || excerptText.includes('llm');
-                        break;
-                    case 'vision':
-                        matches = titleText.includes('vit') || titleText.includes('vision') || excerptText.includes('vision') ||
-                                 titleText.includes('clip') || titleText.includes('image') || titleText.includes('siglip') ||
-                                 titleText.includes('paligemma') || titleText.includes('llava');
-                        break;
-                    case 'gan':
-                        matches = titleText.includes('gan') || titleText.includes('generative') || titleText.includes('vae') ||
-                                 titleText.includes('dcgan') || titleText.includes('wgan') || titleText.includes('cyclegan');
-                        break;
-                    case 'audio':
-                        matches = titleText.includes('whisper') || titleText.includes('audio') || titleText.includes('tts') ||
-                                 titleText.includes('speech') || titleText.includes('clap') || titleText.includes('moonshine');
-                        break;
-                    case 'optimization':
-                        matches = titleText.includes('lora') || titleText.includes('peft') || titleText.includes('fine') ||
-                                 titleText.includes('training') || titleText.includes('dpo') || titleText.includes('orpo') ||
-                                 titleText.includes('ddp') || titleText.includes('simplePO');
-                        break;
-                }
-                
-                if (matches) {
-                    card.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            }
-        }
-    });
-    
-    updateSearchResults(visibleCount, category);
-}
-
-function showAllModels() {
-    const modelCards = document.querySelectorAll('.model-card');
-    modelCards.forEach(card => {
-        card.style.display = 'block';
-    });
-    
-    // Reset filter buttons
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    filterBtns.forEach(btn => btn.classList.remove('active'));
-    const allBtn = document.querySelector('.filter-btn[data-category="all"]');
-    if (allBtn) allBtn.classList.add('active');
-}
-
-function updateSearchResults(count, term) {
-    const searchResultsCount = document.getElementById('search-results-count');
-    const clearSearchBtn = document.getElementById('clear-search');
-    
-    if (searchResultsCount) {
-        if (term && term !== '' && term !== 'all') {
-            searchResultsCount.textContent = `Found ${count} model${count !== 1 ? 's' : ''}`;
-            if (clearSearchBtn) clearSearchBtn.style.display = 'inline-block';
-        } else {
-            searchResultsCount.textContent = '';
-            if (clearSearchBtn) clearSearchBtn.style.display = 'none';
-        }
-    }
-}
-
-// Initialize search when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Wait a bit for models to load first
-    setTimeout(initializeSearch, 500);
-});
-</script>
-
-<style>
-/* Search and filter styles */
-.search-section {
-    margin: 30px 0;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-/* Loading spinner animation */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.search-container input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    margin-bottom: 15px;
-}
-
-.search-filters {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-}
-
-.filter-btn {
-    padding: 8px 16px;
-    border: 1px solid #ddd;
-    background: white;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.filter-btn:hover {
-    background: #e9ecef;
-}
-
-.filter-btn.active {
-    background: #007bff;
-    color: white;
-    border-color: #007bff;
-}
-
-.search-results-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    color: #666;
-}
-
-#clear-search {
-    background: #dc3545;
-    color: white;
-    border: none;
-    padding: 4px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.refresh-btn {
-    padding: 10px 20px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 10px;
-}
-
-.refresh-btn:hover {
-    background: #0056b3;
-}
-
-/* Model card styles */
-.models-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.model-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    background: white;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.model-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.model-card__image {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 20px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.model-card__content {
-    padding: 20px;
-}
-
-.model-card__title {
-    margin: 0 0 10px 0;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.model-card__excerpt {
-    color: #666;
-    line-height: 1.5;
-    margin-bottom: 15px;
-}
-
-.model-card__footer {
-    text-align: center;
-}
-
-.model-details-btn {
-    background: #28a745;
-    color: white;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 4px;
-    display: inline-block;
-    transition: background 0.3s ease;
-}
-
-.model-details-btn:hover {
-    background: #1e7e34;
-    color: white;
-    text-decoration: none;
-}
-</style>
-    
-    function showNoModelsMessage() {
-        modelsContainer.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
-                <h3>🔍 No Models Found</h3>
-                <p>It looks like there's an issue loading the models data.</p>
-                <div style="margin: 20px 0;">
-                    <p><strong>Possible reasons:</strong></p>
-                    <ul style="text-align: left; display: inline-block; margin: 10px 0;">
-                        <li>The models data is still being generated</li>
-                        <li>GitHub API rate limit reached</li>
-                        <li>Network connectivity issue</li>
-                        <li>Deployment configuration problem</li>
-                    </ul>
-                </div>
-                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                    <button onclick="location.reload()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                        🔄 Refresh Page
-                    </button>
-                    <a href="https://github.com/YuvrajSingh-mist/Paper-Replications" target="_blank" style="padding: 10px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">
-                        📁 View Repository
-                    </a>
-                    <a href="https://github.com/YuvrajSingh-mist/SmolHub-Website/actions" target="_blank" style="padding: 10px 20px; background: #6f42c1; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">
-                        ⚙️ Check Workflow
-                    </a>
-                </div>
-                <button onclick="debugDataFunction()" style="padding: 10px 20px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 10px;">
-                    🐛 Debug Data
-                </button>
-            </div>
-        `;
-    }
-    
-    function debugDataLoading() {
-        console.log('🐛 DEBUG: Starting data loading debug...');
-        
-        // Check if Jekyll data exists
-        const dataScript = document.getElementById('models-data');
-        console.log('🐛 Data script element:', !!dataScript);
-        
-        if (dataScript) {
-            const content = dataScript.textContent;
-            console.log('🐛 Data script content length:', content.length);
-            console.log('🐛 Data script content preview:', content.substring(0, 200));
-            
-            try {
-                const parsed = JSON.parse(content);
-                console.log('🐛 Parsed data:', parsed);
-                alert('Debug Info:\\n\\n' + 
-                      'Data script found: ' + !!dataScript + '\\n' +
-                      'Content length: ' + content.length + '\\n' +
-                      'Models count: ' + (parsed && parsed.models ? parsed.models.length : 'null') + '\\n' +
-                      'Last updated: ' + (parsed ? parsed.last_updated : 'null') + '\\n\\n' +
-                      'Check browser console for detailed logs.');
-            } catch (e) {
-                console.error('🐛 Parse error:', e);
-                alert('Parse Error: ' + e.message);
-            }
-        } else {
-            alert('Debug: No data script element found!');
-        }
-        
-        // Check static models
-        const staticContainer = document.getElementById('static-models-container');
-        const staticCards = staticContainer ? staticContainer.querySelectorAll('.static-model-card') : [];
-        console.log('🐛 Static models found:', staticCards.length);
-    }
-    
-    function triggerDataUpdate() {
-        refreshBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Triggering Update...';
-        refreshBtn.disabled = true;
-        
-        // GitHub doesn't allow triggering workflows via client-side JS for security
-        // Instead, show instructions to the user
-        setTimeout(() => {
-            alert('To manually update the models data:\n\n1. Go to your repository on GitHub\n2. Click "Actions" tab\n3. Select "Update Models Data" workflow\n4. Click "Run workflow"\n\nOr wait for the automatic update (every 6 hours)');
-            
-            refreshBtn.innerHTML = '<i class="fa fa-refresh"></i> Check for Updates';
-            refreshBtn.disabled = false;
-        }, 1000);
-    }
-    
-    function loadFallbackModels() {
-        // If no pre-built data, show the static Jekyll models
-        const staticModels = document.querySelectorAll('.static-model-card');
-        if (staticModels.length > 0) {
-            staticModels.forEach(model => model.style.display = 'block');
-        } else {
-            showNoModelsMessage();
-        }
-    }
-});
-
-// Function to show model detail page
-function showModelDetail(modelId) {
-    const modelData = window.modelData[modelId];
-    if (!modelData) {
-        alert('Model data not found');
-        return;
-    }
-    
-    // Create detail page HTML
-    const detailPageHTML = `
-        <div class="model-detail-page">
-            <div class="model-detail-header" style="margin-bottom: 24px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-                    <button class="back-btn" onclick="goBackToModels()" style="flex-shrink: 0;">
-                        <i class="fa fa-arrow-left"></i> Back to Models
-                    </button>
-                    <h1 class="model-detail-title" style="margin: 0; flex: 1; text-align: center; min-width: 0; overflow-wrap: break-word;">${modelData.title}</h1>
-                    <div class="model-action-buttons" style="flex-shrink: 0;">
-                        <a href="${modelData.repoUrl}" target="_blank" rel="noopener" class="action-btn github-btn" style="padding: 12px 20px; background: #24292e; color: white; text-decoration: none; border-radius: 6px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s;">
-                            <i class="fab fa-github"></i> View on GitHub
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="model-detail-content">
-                <div class="readme-content">
-                    ${markdownToHTML(modelData.readmeContent || `# ${modelData.title}\n\n${modelData.description}\n\nThis model is part of the Paper-Replications project.`, modelData.repoUrl)}
-                </div>
-            </div>
-        </div>
-    `;
-    
-    // Hide models grid, search section and show detail page
-    document.querySelector('.models-intro').style.display = 'none';
-    document.querySelector('.search-section').style.display = 'none';
-    document.querySelector('.models-grid').style.display = 'none';
-    
-    // Create detail container if it doesn't exist
-    let detailContainer = document.getElementById('model-detail-container');
-    if (!detailContainer) {
-        detailContainer = document.createElement('div');
-        detailContainer.id = 'model-detail-container';
-        document.querySelector('.models-page').appendChild(detailContainer);
-    }
-    
-    detailContainer.innerHTML = detailPageHTML;
-    detailContainer.style.display = 'block';
-    
-    // Scroll to top
-    window.scrollTo(0, 0);
-}
-
-// Function to go back to models grid
-function goBackToModels() {
-    // Always show the models grid, search section when going back
-    document.querySelector('.models-intro').style.display = 'block';
-    document.querySelector('.search-section').style.display = 'block';
-    document.querySelector('.models-grid').style.display = 'grid';
-    
-    const detailContainer = document.getElementById('model-detail-container');
-    if (detailContainer) {
-        detailContainer.style.display = 'none';
-    }
-    
-    // Scroll to top
-    window.scrollTo(0, 0);
-}
-
-// Enhanced markdown to HTML converter with GitHub image link conversion
-function markdownToHTML(markdown, repoUrl) {
-    if (!markdown) return '';
-    
-    let html = markdown;
-    
-    // Extract base URL for converting relative image paths
-    let baseRawUrl = '';
-    if (repoUrl) {
-        // Convert GitHub tree URL to raw content URL
-        // From: https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ModelName
-        // To: https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/ModelName
-        const repoMatch = repoUrl.match(/https:\/\/github\.com\/([^\/]+)\/([^\/]+)\/tree\/([^\/]+)\/(.+)/);
-        if (repoMatch) {
-            const [, owner, repo, branch, folder] = repoMatch;
-            baseRawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${folder}/`;
-        }
-    }
-    
-    // Process headers first (before any other transformations)
-    html = html.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
-    html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
-    html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
-    html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
-    
-    // Code blocks with language detection (process before other formatting)
-    html = html.replace(/```(\w+)?\n?([\s\S]*?)```/g, function(match, lang, code) {
-        return `<pre style="background: #f6f8fa; border: 1px solid #d1d9e0; border-radius: 6px; padding: 16px; overflow-x: auto; margin: 16px 0;"><code style="font-family: ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 0.875em;">${code.trim()}</code></pre>`;
-    });
-    
-    // Inline code (process before other formatting)
-    html = html.replace(/`([^`]+)`/g, '<code style="background: #f6f8fa; padding: 2px 4px; border-radius: 3px; font-family: ui-monospace, SFMono-Regular, \'SF Mono\', Consolas, \'Liberation Mono\', Menlo, monospace; font-size: 0.875em; border: 1px solid #d1d9e0;">$1</code>');
-    
-    // Convert images to clickable links instead of displaying them
-    html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(match, alt, src) {
-        let finalSrc = src;
-        
-        // Convert relative paths to absolute GitHub raw URLs
-        if (baseRawUrl && !src.startsWith('http') && !src.startsWith('//')) {
-            // Remove leading ./ if present
-            const cleanSrc = src.replace(/^\.\//, '');
-            finalSrc = baseRawUrl + cleanSrc;
-        }
-        
-        const linkText = alt || 'View Image';
-        return `<a href="${finalSrc}" target="_blank" rel="noopener" style="color: #0969da; text-decoration: none; font-weight: 500;">${linkText}</a>`;
-    });
-    
-    // Handle HTML img tags too
-    html = html.replace(/<img\s+([^>]*?)>/g, function(match, attrs) {
-        // Extract src and alt from attributes
-        const srcMatch = attrs.match(/src="([^"]+)"/);
-        const altMatch = attrs.match(/alt="([^"]+)"/);
-        
-        if (srcMatch) {
-            let src = srcMatch[1];
-            const alt = altMatch ? altMatch[1] : 'View Image';
-            let finalSrc = src;
-            
-            // Convert relative paths to absolute GitHub raw URLs
-            if (baseRawUrl && !src.startsWith('http') && !src.startsWith('//')) {
-                const cleanSrc = src.replace(/^\.\//, '');
-                finalSrc = baseRawUrl + cleanSrc;
-            }
-            
-            return `<a href="${finalSrc}" target="_blank" rel="noopener" style="color: #0969da; text-decoration: none; font-weight: 500;">${alt}</a>`;
-        }
-        return match;
-    });
-    
-    // Tables - improved regex to handle markdown tables properly
-    html = html.replace(/(\n|^)\|(.+)\|\n\|[\s\-\|:]+\|\n((?:\|.+\|\n?)*)/g, function(match, prefix, headerRow, bodyRows) {
-        // Process header
-        const headerCells = headerRow.split('|').map(cell => cell.trim()).filter(cell => cell);
-        if (headerCells.length === 0) return match;
-        
-        const headerHTML = headerCells.map(cell => 
-            `<th style="background: #f6f8fa; padding: 8px 12px; border: 1px solid #d1d9e0; font-weight: 600; text-align: left;">${cell}</th>`
-        ).join('');
-        
-        // Process body rows
-        const bodyHTML = bodyRows.split('\n')
-            .filter(row => row.trim() && row.includes('|'))
-            .map(row => {
-                const cells = row.replace(/^\||\|$/g, '').split('|').map(cell => cell.trim());
-                if (cells.length === 0) return '';
-                return `<tr>${cells.map(cell => 
-                    `<td style="padding: 8px 12px; border: 1px solid #d1d9e0; vertical-align: top;">${cell}</td>`
-                ).join('')}</tr>`;
-            })
-            .filter(row => row)
-            .join('');
-        
-        return `${prefix}<table style="width: 100%; border-collapse: collapse; margin: 16px 0; background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"><thead><tr>${headerHTML}</tr></thead><tbody>${bodyHTML}</tbody></table>\n`;
-    });
-    
-    // Bold and italic
-    html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
-    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-    
-    // Links - process markdown links but avoid duplicates
-    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, text, url) {
-        // Avoid processing if this is already an HTML link
-        if (match.includes('href=')) return match;
-        return `<a href="${url}" target="_blank" rel="noopener" style="color: #0969da; text-decoration: none; font-weight: 500;">${text}</a>`;
-    });
-    
-    // Lists
-    html = html.replace(/^\* (.+$)/gm, '<li>$1</li>');
-    html = html.replace(/^\d+\. (.+$)/gm, '<li>$1</li>');
-    
-    // Wrap consecutive list items in ul - improved to avoid duplicates
-    html = html.replace(/(<li>(?:(?!<\/li>|<li>).)*<\/li>(?:\s*<li>(?:(?!<\/li>|<li>).)*<\/li>)*)/gs, function(match) {
-        // Check if already wrapped in ul
-        if (match.includes('<ul>')) return match;
-        return `<ul style="margin: 16px 0; padding-left: 32px;">${match}</ul>`;
-    });
-    
-    // Blockquotes
-    html = html.replace(/^> (.+$)/gm, '<blockquote style="border-left: 4px solid #d1d9e0; padding: 0 16px; margin: 16px 0; color: #656d76; background: #f6f8fa; border-radius: 0 6px 6px 0;"><p>$1</p></blockquote>');
-    
-    // Horizontal rules
-    html = html.replace(/^---+$/gm, '<hr style="border: none; height: 1px; background: #d1d9e0; margin: 24px 0;">');
-    
-    // Line breaks and paragraphs - improved handling
-    html = html.replace(/\n\s*\n/g, '\n\n'); // Normalize multiple newlines
-    html = html.replace(/\n\n/g, '</p><p>');
-    html = html.replace(/\n/g, '<br>');
-    
-    // Wrap in paragraphs if not already starting with HTML
-    if (!html.startsWith('<')) {
-        html = '<p>' + html + '</p>';
-    }
-    
-    // Fix empty paragraphs and nesting
-    html = html.replace(/<p><\/p>/g, '');
-    html = html.replace(/<p>\s*<\/p>/g, '');
-    html = html.replace(/<p><h([1-6])>/g, '<h$1>');
-    html = html.replace(/<\/h([1-6])><\/p>/g, '</h$1>');
-    html = html.replace(/<p><pre/g, '<pre');
-    html = html.replace(/<\/pre><\/p>/g, '</pre>');
-    html = html.replace(/<p><table/g, '<table');
-    html = html.replace(/<\/table><\/p>/g, '</table>');
-    html = html.replace(/<p><ul/g, '<ul');
-    html = html.replace(/<\/ul><\/p>/g, '</ul>');
-    html = html.replace(/<p><blockquote>/g, '<blockquote');
-    html = html.replace(/<\/blockquote><\/p>/g, '</blockquote>');
-    html = html.replace(/<p><hr/g, '<hr');
-    html = html.replace(/\/><\/p>/g, '/>');
-    html = html.replace(/<p><div/g, '<div');
-    html = html.replace(/<\/div><\/p>/g, '</div>');
-    
-    return html;
-}
-
-// Search and Filter Functionality
-let allModels = [];
-let filteredModels = [];
-
-function initializeSearch() {
-    const searchInput = document.getElementById('model-search');
-    const clearButton = document.getElementById('clear-search');
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const resultsCount = document.getElementById('search-results-count');
-    
-    // Store all models for filtering
-    allModels = Array.from(document.querySelectorAll('.model-card')).map(card => ({
-        element: card,
-        name: card.querySelector('.model-card__title')?.textContent.toLowerCase() || '',
-        description: card.querySelector('.model-card__excerpt')?.textContent.toLowerCase() || '',
-        category: getModelCategory(card.querySelector('.model-card__title')?.textContent || '')
-    }));
-    
-    updateResultsCount(allModels.length);
-    
-    // Search input handler
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase().trim();
-            filterModels(query, getActiveCategory());
-            
-            if (query) {
-                clearButton.style.display = 'inline-block';
-            } else {
-                clearButton.style.display = 'none';
-            }
-        });
-    }
-    
-    // Clear search handler
-    if (clearButton) {
-        clearButton.addEventListener('click', function() {
-            searchInput.value = '';
-            clearButton.style.display = 'none';
-            filterModels('', getActiveCategory());
-        });
-    }
-    
-    // Filter buttons handlers
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Update active button
-            filterButtons.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Filter models
-            const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
-            filterModels(query, this.dataset.category);
-        });
-    });
-    
-    console.log('Search initialized with', allModels.length, 'models');
-}
-
-function getModelCategory(modelName) {
-    const name = modelName.toLowerCase();
-    
-    // LLM category
-    if (['gpt', 'bert', 'llama', 'gemma', 'kimi', 'deepseek', 'transformer', 'attention', 'encoder', 'decoder', 'fine tuning', 'lora', 'dpo', 'orpo', 'simplepo'].some(term => name.includes(term))) {
-        return 'llm';
-    }
-    
-    // Vision category  
-    if (['vit', 'clip', 'clap', 'siglip', 'llava', 'paligemma', 'vision'].some(term => name.includes(term))) {
-        return 'vision';
-    }
-    
-    // GAN category
-    if (['gan', 'dcgan', 'cgan', 'cyclegan', 'wgan', 'pix2pix', 'vae'].some(term => name.includes(term))) {
-        return 'gan';
-    }
-    
-    // Audio category
-    if (['whisper', 'tts', 'moonshine', 'audio'].some(term => name.includes(term))) {
-        return 'audio';
-    }
-    
-    // Training/Optimization category
-    if (['ddp', 'distributed', 'training', 'optimization'].some(term => name.includes(term))) {
-        return 'optimization';
-    }
-    
-    return 'other';
-}
-
-function getActiveCategory() {
-    const activeBtn = document.querySelector('.filter-btn.active');
-    return activeBtn ? activeBtn.dataset.category : 'all';
-}
-
-function filterModels(query, category) {
-    filteredModels = allModels.filter(model => {
-        const matchesQuery = !query || 
-            model.name.includes(query) || 
-            model.description.includes(query);
-        
-        const matchesCategory = category === 'all' || model.category === category;
-        
-        return matchesQuery && matchesCategory;
-    });
-    
-    // Show/hide models
-    allModels.forEach(model => {
-        if (filteredModels.includes(model)) {
-            model.element.style.display = 'block';
-            model.element.style.animation = 'fadeIn 0.3s ease-in';
-        } else {
-            model.element.style.display = 'none';
-        }
-    });
-    
-    updateResultsCount(filteredModels.length);
-    
-    // Show no results message if needed
-    showNoResultsMessage(filteredModels.length === 0 && (query || category !== 'all'));
-}
-
-function updateResultsCount(count) {
-    const resultsCount = document.getElementById('search-results-count');
-    if (count === allModels.length) {
-        resultsCount.textContent = `Showing all ${count} models`;
-    } else {
-        resultsCount.textContent = `Found ${count} model${count !== 1 ? 's' : ''}`;
-    }
-}
-
-function showNoResultsMessage(show) {
-    let noResultsMsg = document.getElementById('no-results-message');
-    
-    if (show && !noResultsMsg) {
-        noResultsMsg = document.createElement('div');
-        noResultsMsg.id = 'no-results-message';
-        noResultsMsg.className = 'no-results-message';
-        noResultsMsg.innerHTML = `
-            <div style="text-align: center; padding: 40px; color: #666;">
-                <i class="fa fa-search" style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;"></i>
-                <h3>No models found</h3>
-                <p>Try adjusting your search or filter criteria</p>
-            </div>
-        `;
-        document.getElementById('models-container').appendChild(noResultsMsg);
-    } else if (!show && noResultsMsg) {
-        noResultsMsg.remove();
-    }
 }
 </script>
