@@ -1,0 +1,159 @@
+---
+layout: archive
+title: "From Scratch Implementations"
+permalink: /models/
+author_profile: true
+---
+
+{% include base_path %}
+
+<link rel="stylesheet" href="{{ base_path }}/assets/css/models.css">
+
+<div class="models-page">
+  <div class="models-intro">
+    <h1>From Scratch Implementations</h1>
+    <p>Explore our collection of cutting-edge AI models built from scratch. Each implementation demonstrates deep understanding of algorithms and provides educational insights into modern ML techniques.</p>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-section">
+    <div class="search-container">
+      <input type="text" id="model-search" placeholder="🔍 Search models (e.g., GPT, BERT, GAN, Transformer...)">
+      <div class="search-filters">
+        <button class="filter-btn active" data-category="all">All Models</button>
+        <button class="filter-btn" data-category="llm">LLMs</button>
+        <button class="filter-btn" data-category="vision">Vision</button>
+        <button class="filter-btn" data-category="gan">GANs</button>
+        <button class="filter-btn" data-category="audio">Audio</button>
+        <button class="filter-btn" data-category="optimization">Training</button>
+      </div>
+    </div>
+    <div class="search-results-info">
+      <span id="search-results-count"></span>
+      <button id="clear-search" style="display: none;">Clear Search</button>
+    </div>
+  </div>
+
+  <div class="models-grid" id="models-container">
+    {% for post in site.models %}
+      {% include model-card.html %}
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    initializeSearch();
+    
+    function initializeSearch() {
+        const searchInput = document.getElementById('model-search');
+        const clearButton = document.getElementById('clear-search');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const resultsCount = document.getElementById('search-results-count');
+        
+        // Store all models for filtering - only Jekyll models
+        const allModels = Array.from(document.querySelectorAll('.model-card')).map(card => ({
+            element: card,
+            name: card.querySelector('.model-card__title')?.textContent.toLowerCase() || '',
+            description: card.querySelector('.model-card__excerpt')?.textContent.toLowerCase() || '',
+            category: getModelCategory(card.querySelector('.model-card__title')?.textContent || '')
+        }));
+        
+        console.log('Found', allModels.length, 'Jekyll models');
+        updateResultsCount(allModels.length);
+        
+        // Search input handler
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                filterModels(query, getActiveCategory(), allModels);
+                
+                if (query) {
+                    clearButton.style.display = 'inline-block';
+                } else {
+                    clearButton.style.display = 'none';
+                }
+            });
+        }
+        
+        // Clear search handler
+        if (clearButton) {
+            clearButton.addEventListener('click', function() {
+                searchInput.value = '';
+                clearButton.style.display = 'none';
+                filterModels('', getActiveCategory(), allModels);
+            });
+        }
+        
+        // Filter buttons handlers
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+                filterModels(query, this.dataset.category, allModels);
+            });
+        });
+        
+        function getModelCategory(modelName) {
+            const name = modelName.toLowerCase();
+            
+            if (['gpt', 'bert', 'llama', 'gemma', 'transformer', 'attention'].some(term => name.includes(term))) {
+                return 'llm';
+            }
+            if (['vit', 'clip', 'vision', 'image'].some(term => name.includes(term))) {
+                return 'vision';
+            }
+            if (['gan', 'dcgan', 'cgan', 'vae'].some(term => name.includes(term))) {
+                return 'gan';
+            }
+            if (['whisper', 'tts', 'audio'].some(term => name.includes(term))) {
+                return 'audio';
+            }
+            if (['ddp', 'distributed', 'training', 'optimization'].some(term => name.includes(term))) {
+                return 'optimization';
+            }
+            return 'other';
+        }
+        
+        function getActiveCategory() {
+            const activeBtn = document.querySelector('.filter-btn.active');
+            return activeBtn ? activeBtn.dataset.category : 'all';
+        }
+        
+        function filterModels(query, category, models) {
+            const filteredModels = models.filter(model => {
+                const matchesQuery = !query || 
+                    model.name.includes(query) || 
+                    model.description.includes(query);
+                
+                const matchesCategory = category === 'all' || model.category === category;
+                
+                return matchesQuery && matchesCategory;
+            });
+            
+            // Show/hide models
+            models.forEach(model => {
+                if (filteredModels.includes(model)) {
+                    model.element.style.display = 'block';
+                } else {
+                    model.element.style.display = 'none';
+                }
+            });
+            
+            updateResultsCount(filteredModels.length);
+        }
+        
+        function updateResultsCount(count) {
+            if (resultsCount) {
+                if (count === allModels.length) {
+                    resultsCount.textContent = `Showing all ${count} models`;
+                } else {
+                    resultsCount.textContent = `Found ${count} model${count !== 1 ? 's' : ''}`;
+                }
+            }
+        }
+    }
+});
+</script>
