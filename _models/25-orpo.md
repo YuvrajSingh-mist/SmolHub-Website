@@ -1,9 +1,9 @@
 ---
-title: "ORPO"
-excerpt: "Trained OPT-330M model using ORPO in Pytorch for Instruction Following"
-collection: models
-layout: single
-category: "Other"
+title: "Orpo"
+excerpt: "Implementation of ORPO from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
+category: "Fine-tuning"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ORPO"
@@ -11,12 +11,12 @@ date: 2025-08-07
 ---
 
 ## Overview
-Trained OPT-330M model using ORPO in Pytorch for Instruction Following
+Implementation of ORPO from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: UltraFeedback
-- **Category**: Other
+- **Category**: Fine-tuning
 
 ## Implementation Details
 

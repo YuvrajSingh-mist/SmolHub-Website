@@ -1,8 +1,8 @@
 ---
-title: "CGANs"
-excerpt: "![CGAN Architecture](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/main/CGANs/output_images/MNIST/fake_images_steps_14000.png)"
-collection: models
-layout: single
+title: "Cgans"
+excerpt: "Implementation of CGANs from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Generative Models"
 framework: "PyTorch"
 dataset: "MNIST"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-![CGAN Architecture](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/main/CGANs/output_images/MNIST/fake_images_steps_14000.png)
+Implementation of CGANs from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch

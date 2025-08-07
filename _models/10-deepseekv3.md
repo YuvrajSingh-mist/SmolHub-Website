@@ -1,8 +1,8 @@
 ---
-title: "DeepSeekV3"
-excerpt: "This repository contains a PyTorch implementation of the DeepSeekV3 architecture, trained on the TinyStories dataset. The model is designed for efficient text generation and understanding tasks, lever..."
-collection: models
-layout: single
+title: "Deepseekv3"
+excerpt: "Implementation of DeepSeekV3 from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyStories"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-This repository contains a PyTorch implementation of the DeepSeekV3 architecture, trained on the TinyStories dataset. The model is designed for efficient text generation and understanding tasks, leveraging a mixture of experts (MoE) architecture.
+Implementation of DeepSeekV3 from the Paper Replications repository
 
 ## Key Features
 - Mixture of Experts (MoE)

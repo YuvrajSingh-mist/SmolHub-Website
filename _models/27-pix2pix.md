@@ -1,8 +1,8 @@
 ---
 title: "Pix2Pix"
-excerpt: "I implemented the Pix2Pix using Pytorch on the cityscapes dataset."
-collection: models
-layout: single
+excerpt: "Implementation of Pix2Pix from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Generative Models"
 framework: "PyTorch"
 dataset: "Cityscapes"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented the Pix2Pix using Pytorch on the cityscapes dataset.
+Implementation of Pix2Pix from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch

@@ -1,9 +1,9 @@
 ---
 title: "Llava"
-excerpt: "I implemented the Llava using Pytorch on the flickr8000 dataset."
-collection: models
-layout: single
-category: "Training Methods"
+excerpt: "Implementation of Llava from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
+category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Flickr"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llava"
@@ -11,12 +11,12 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented the Llava using Pytorch on the flickr8000 dataset.
+Implementation of Llava from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Flickr
-- **Category**: Training Methods
+- **Category**: Computer Vision
 
 ## Implementation Details
 

@@ -1,8 +1,8 @@
 ---
-title: "ViT"
-excerpt: "Implmented a ViT Architecture from Scratch using Pytorch on a subset of Food-101 dataset."
-collection: models
-layout: single
+title: "Vit"
+excerpt: "Implementation of ViT from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
 dataset: "Custom"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-Implmented a ViT Architecture from Scratch using Pytorch on a subset of Food-101 dataset.
+Implementation of ViT from the Paper Replications repository
 
 ## Key Features
 - Transformer Architecture

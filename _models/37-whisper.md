@@ -1,8 +1,8 @@
 ---
 title: "Whisper"
-excerpt: "Trained a small whisper model coded and trained from scratch in Pytorch"
-collection: models
-layout: single
+excerpt: "Implementation of Whisper from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Gigaspeech"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-Trained a small whisper model coded and trained from scratch in Pytorch
+Implementation of Whisper from the Paper Replications repository
 
 ## Key Features
 - Attention Mechanism

@@ -1,8 +1,8 @@
 ---
 title: "Differential Transformer"
-excerpt: "I implemented the Differential Transformers using Pytorch on Tinyshakespeare dataset."
-collection: models
-layout: single
+excerpt: "Implementation of Differential Transformer from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyShakespeare"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented the Differential Transformers using Pytorch on Tinyshakespeare dataset.
+Implementation of Differential Transformer from the Paper Replications repository
 
 ## Key Features
 - Transformer Architecture

@@ -1,8 +1,8 @@
 ---
 title: "Mixtral"
-excerpt: "I implemented the Mixtral architecture from scratch using Pytorch on Tinyshakespeare dataset."
-collection: models
-layout: single
+excerpt: "Implementation of Mixtral from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Training Methods"
 framework: "PyTorch"
 dataset: "TinyShakespeare"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented the Mixtral architecture from scratch using Pytorch on Tinyshakespeare dataset.
+Implementation of Mixtral from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch

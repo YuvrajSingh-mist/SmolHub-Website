@@ -1,9 +1,9 @@
 ---
 title: "Gemma"
-excerpt: "I implemented the Gemma using Pytorch on the tineshakespeare dataset."
-collection: models
-layout: single
-category: "Other"
+excerpt: "Implementation of Gemma from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
+category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyShakespeare"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma"
@@ -11,12 +11,12 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented the Gemma using Pytorch on the tineshakespeare dataset.
+Implementation of Gemma from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: TinyShakespeare
-- **Category**: Other
+- **Category**: Language Models
 
 ## Implementation Details
 

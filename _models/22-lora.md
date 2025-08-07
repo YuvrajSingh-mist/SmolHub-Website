@@ -1,8 +1,8 @@
 ---
-title: "LoRA"
-excerpt: "I implemented the LoRA framework using Pytorch on Tinyshakespeare dataset."
-collection: models
-layout: single
+title: "Lora"
+excerpt: "Implementation of LoRA from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyShakespeare"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented the LoRA framework using Pytorch on Tinyshakespeare dataset.
+Implementation of LoRA from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch

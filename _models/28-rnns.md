@@ -1,9 +1,9 @@
 ---
-title: "RNNs"
-excerpt: "Trained a RNN model coded from scratch in Pytorch"
-collection: models
-layout: single
-category: "Other"
+title: "Rnns"
+excerpt: "Implementation of RNNs from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
+category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/RNNs"
@@ -11,12 +11,12 @@ date: 2025-08-07
 ---
 
 ## Overview
-Trained a RNN model coded from scratch in Pytorch
+Implementation of RNNs from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Other
+- **Category**: Sequential Models
 
 ## Implementation Details
 

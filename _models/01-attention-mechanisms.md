@@ -1,8 +1,8 @@
 ---
 title: "Attention Mechanisms"
-excerpt: "[Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/abs/1409.0473)"
-collection: models
-layout: single
+excerpt: "Implementation of Attention Mechanisms from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Attention Mechanisms"
 framework: "PyTorch"
 dataset: "Custom"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-[Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/abs/1409.0473)
+Implementation of Attention Mechanisms from the Paper Replications repository
 
 ## Key Features
 - Attention Mechanism

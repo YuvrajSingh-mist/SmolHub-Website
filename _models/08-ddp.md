@@ -1,17 +1,17 @@
 ---
-title: "DDP"
-excerpt: "I implemented a training loop and trained a Llama made from scratch using Data Distributed Parallel and torchrun."
-collection: models
-layout: single
+title: "Ddp"
+excerpt: "Implementation of DDP from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
-dataset: "Custom"
+dataset: "Shakespeare"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DDP"
 date: 2025-08-07
 ---
 
 ## Overview
-I implemented a training loop and trained a Llama made from scratch using Data Distributed Parallel and torchrun.
+Implementation of DDP from the Paper Replications repository
 
 ## Key Features
 - Attention Mechanism
@@ -19,7 +19,7 @@ I implemented a training loop and trained a Llama made from scratch using Data D
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: Custom
+- **Dataset**: Shakespeare
 - **Category**: Language Models
 
 ## Implementation Details

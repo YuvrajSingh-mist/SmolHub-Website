@@ -1,8 +1,8 @@
 ---
-title: "SigLip"
-excerpt: "I implemented the SigLIP using Pytorch on the flickr8000 dataset."
-collection: models
-layout: single
+title: "Siglip"
+excerpt: "Implementation of SigLip from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Flickr"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented the SigLIP using Pytorch on the flickr8000 dataset.
+Implementation of SigLip from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch

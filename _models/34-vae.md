@@ -1,9 +1,9 @@
 ---
-title: "VAE"
-excerpt: "I implemented a Variational Autoencoder Architecture from Scratch using PyTorch on the **CelebA dataset** for high-resolution face generation and reconstruction."
-collection: models
-layout: single
-category: "Computer Vision"
+title: "Vae"
+excerpt: "Implementation of VAE from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
+category: "Generative Models"
 framework: "PyTorch"
 dataset: "MNIST"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/VAE"
@@ -11,12 +11,12 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented a Variational Autoencoder Architecture from Scratch using PyTorch on the **CelebA dataset** for high-resolution face generation and reconstruction.
+Implementation of VAE from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: MNIST
-- **Category**: Computer Vision
+- **Category**: Generative Models
 
 ## Implementation Details
 

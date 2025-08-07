@@ -1,8 +1,8 @@
 ---
-title: "WGANs"
-excerpt: "I implemented the WGAN and WGAN-GP using Pytorch on the flickr8000 dataset."
-collection: models
-layout: single
+title: "Wgans"
+excerpt: "Implementation of WGANs from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Generative Models"
 framework: "PyTorch"
 dataset: "MNIST"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented the WGAN and WGAN-GP using Pytorch on the flickr8000 dataset.
+Implementation of WGANs from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch

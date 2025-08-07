@@ -1,8 +1,8 @@
 ---
 title: "Seq2Seq"
-excerpt: "Trained a Seq2Seq model with the said attention mechanism  coded from scratch in Pytorch"
-collection: models
-layout: single
+excerpt: "Implementation of Seq2Seq from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Attention Mechanisms"
 framework: "PyTorch"
 dataset: "Custom"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-Trained a Seq2Seq model with the said attention mechanism  coded from scratch in Pytorch
+Implementation of Seq2Seq from the Paper Replications repository
 
 ## Key Features
 - Attention Mechanism

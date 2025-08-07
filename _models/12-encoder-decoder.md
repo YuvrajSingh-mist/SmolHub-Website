@@ -1,9 +1,9 @@
 ---
-title: "Encoder-Decoder"
-excerpt: "Trained on the on German (de) to English (en) dataset"
-collection: models
-layout: single
-category: "Other"
+title: "Encoder Decoder"
+excerpt: "Implementation of Encoder-Decoder from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
+category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Encoder-Decoder"
@@ -11,12 +11,12 @@ date: 2025-08-07
 ---
 
 ## Overview
-Trained on the on German (de) to English (en) dataset
+Implementation of Encoder-Decoder from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Other
+- **Category**: Sequential Models
 
 ## Implementation Details
 

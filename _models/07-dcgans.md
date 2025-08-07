@@ -1,8 +1,8 @@
 ---
-title: "DCGANs"
-excerpt: "I implemented a DCGAN Architecture from Scratch using Pytorch on CelebA and CIFAR10 dataset."
-collection: models
-layout: single
+title: "Dcgans"
+excerpt: "Implementation of DCGANs from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Generative Models"
 framework: "PyTorch"
 dataset: "CIFAR"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented a DCGAN Architecture from Scratch using Pytorch on CelebA and CIFAR10 dataset.
+Implementation of DCGANs from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch
