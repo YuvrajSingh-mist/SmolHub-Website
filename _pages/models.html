@@ -17,7 +17,7 @@ author_profile: true
       <button id="refresh-models-btn" class="refresh-btn">
         <i class="fa fa-refresh"></i> Check for Updates
       </button>
-      <button id="debug-data-btn" class="refresh-btn" style="background: #6c757d; margin-left: 10px;">
+      <button id="debug-data-btn" class="refresh-btn" style="background: #6c757d; margin-left: 10px;" onclick="debugDataFunction()">
         <i class="fa fa-bug"></i> Debug Data
       </button>
       <p style="margin-top: 10px; font-size: 0.9em; color: #666; font-style: italic;">
@@ -61,154 +61,509 @@ author_profile: true
 
 <!-- Models data injected from Jekyll -->
 <script id="models-data" type="application/json">
-{% if site.data.models %}{{ site.data.models | jsonify }}{% else %}null{% endif %}
+{{ site.data.models | jsonify }}
 </script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const refreshBtn = document.getElementById('refresh-models-btn');
+    console.log('🔍 Page loaded, starting models data loading...');
+    
     const modelsContainer = document.getElementById('models-container');
-    
-    console.log('🔍 Starting to load models data...');
-    
-    // Load models from Jekyll data (pre-built by GitHub Actions)
-    loadModelsFromData();
-    
-    refreshBtn.addEventListener('click', function() {
-        // Trigger GitHub Actions workflow to update data
-        triggerDataUpdate();
-    });
-    
-    // Add debug button functionality
+    const refreshBtn = document.getElementById('refresh-models-btn');
     const debugBtn = document.getElementById('debug-data-btn');
-    if (debugBtn) {
-        debugBtn.addEventListener('click', function() {
-            debugDataLoading();
-        });
-    }
     
-    function loadModelsFromData() {
+    // Simple data loading function
+    function loadModels() {
+        console.log('🔍 Loading models...');
+        
         try {
-            // Get data from the script tag
             const dataScript = document.getElementById('models-data');
-            console.log('📄 Data script element found:', !!dataScript);
+            console.log('📄 Data script found:', !!dataScript);
             
             if (!dataScript) {
                 console.error('❌ No data script element found');
-                showFallbackModels();
+                showNoModelsMessage();
                 return;
             }
             
-            const scriptContent = dataScript.textContent;
+            const scriptContent = dataScript.textContent.trim();
             console.log('📝 Script content length:', scriptContent.length);
-            console.log('📝 Script content preview:', scriptContent.substring(0, 100) + '...');
+            console.log('📝 Script content preview:', scriptContent.substring(0, 100));
+            
+            if (!scriptContent || scriptContent === 'null' || scriptContent === '') {
+                console.error('❌ Script content is empty or null');
+                showNoModelsMessage();
+                return;
+            }
             
             const modelsData = JSON.parse(scriptContent);
             console.log('📊 Parsed models data:', modelsData);
             
-            if (modelsData && modelsData.models && modelsData.models.length > 0) {
-                console.log('✅ Loading models from pre-built data...');
-                console.log('📊 Found', modelsData.models.length, 'models');
-                
-                modelsContainer.innerHTML = '';
-                
-                modelsData.models.forEach(function(model, index) {
-                    console.log('🔨 Creating card for model:', model.name);
-                    const modelHTML = createModelCardFromData(model, index);
-                    if (modelHTML) {
-                        modelsContainer.innerHTML += modelHTML;
-                    }
-                });
-                
-                // Show last updated info
-                const lastUpdated = new Date(modelsData.last_updated).toLocaleString();
-                const statusMessage = document.querySelector('.refresh-section p');
-                if (statusMessage) {
-                    statusMessage.innerHTML = '🔄 Models last updated: ' + lastUpdated + ' (' + modelsData.total_models + ' models)';
-                }
-                
-                console.log('✅ Loaded ' + modelsData.models.length + ' models from Jekyll data');
-                
-                // Initialize search after models are loaded
-                setTimeout(initializeSearch, 100);
-            } else {
-                console.log('❌ No models found in data, trying fallback...');
-                showFallbackModels();
+            if (!modelsData) {
+                console.error('❌ Parsed data is null');
+                showNoModelsMessage();
+                return;
             }
-        } catch (error) {
-            console.error('❌ Error loading models data:', error);
-            console.log('🔄 Trying fallback due to error...');
-            showFallbackModels();
-        }
-    }
-    
-    function showFallbackModels() {
-        console.log('🔄 Loading fallback models from Jekyll collection...');
-        
-        // Try to load from Jekyll collections
-        const staticContainer = document.getElementById('static-models-container');
-        const staticCards = staticContainer ? staticContainer.querySelectorAll('.static-model-card') : [];
-        console.log('📊 Found', staticCards.length, 'static model cards');
-        
-        if (staticCards.length > 0) {
+            
+            if (!modelsData.models || !Array.isArray(modelsData.models)) {
+                console.error('❌ No models array found in data');
+                showNoModelsMessage();
+                return;
+            }
+            
+            console.log('✅ Found', modelsData.models.length, 'models');
+            
+            if (modelsData.models.length === 0) {
+                console.error('❌ Models array is empty');
+                showNoModelsMessage();
+                return;
+            }
+            
+            // Clear container and add models
             modelsContainer.innerHTML = '';
-            staticCards.forEach(function(card) {
-                const clonedCard = card.cloneNode(true);
-                clonedCard.style.display = 'block';
-                clonedCard.classList.remove('static-model-card');
-                clonedCard.classList.add('model-card');
-                modelsContainer.appendChild(clonedCard);
+            
+            modelsData.models.forEach(function(model, index) {
+                console.log('🔨 Creating card for model:', model.name);
+                const modelCard = createSimpleModelCard(model);
+                modelsContainer.appendChild(modelCard);
             });
             
-            console.log('✅ Loaded', staticCards.length, 'fallback models');
+            console.log('✅ Successfully loaded', modelsData.models.length, 'models');
             
-            // Initialize search after models are loaded
+            // Update status message
+            const statusMessage = document.querySelector('.refresh-section p');
+            if (statusMessage) {
+                const lastUpdated = new Date(modelsData.last_updated).toLocaleString();
+                statusMessage.innerHTML = '🔄 Models last updated: ' + lastUpdated + ' (' + modelsData.total_models + ' models)';
+            }
+            
+            // Initialize search functionality after models are loaded
             setTimeout(initializeSearch, 100);
-        } else {
-            console.log('❌ No fallback models available');
+            
+        } catch (error) {
+            console.error('❌ Error loading models:', error);
             showNoModelsMessage();
         }
     }
     
-    function createModelCardFromData(model, index) {
-        try {
-            const detailPageId = `model-detail-${model.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
-            
-            // Store model data for detail page
-            if (!window.modelData) window.modelData = {};
-            window.modelData[detailPageId] = {
-                title: model.name, // Use the actual name instead of display_name
-                folderName: model.name,
-                description: model.description,
-                readmeContent: model.readme_content,
-                repoUrl: model.github_url
-            };
-            
-            return `
-                <div class="model-card">
-                    <div class="model-card__image">
-                        <span>${model.name}</span>
-                    </div>
-                    <div class="model-card__content">
-                        <h3 class="model-card__title">
-                            ${model.name}
-                        </h3>
-                        <div class="model-card__excerpt">
-                            ${model.description}
-                        </div>
-                        <div class="model-card__footer">
-                            <button class="model-details-btn" onclick="showModelDetail('${detailPageId}')">
-                                Model Details
-                            </button>
-                        </div>
-                    </div>
+    function createSimpleModelCard(model) {
+        const card = document.createElement('div');
+        card.className = 'model-card';
+        card.innerHTML = `
+            <div class="model-card__image">
+                <span>${model.name}</span>
+            </div>
+            <div class="model-card__content">
+                <h3 class="model-card__title">${model.name}</h3>
+                <div class="model-card__excerpt">
+                    ${model.description || 'No description available'}
                 </div>
-            `;
-        } catch (error) {
-            console.error(`Error creating card for ${model.name}:`, error);
-            return null;
+                <div class="model-card__footer">
+                    <a href="${model.github_url}" target="_blank" class="model-details-btn">
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+        `;
+        return card;
+    }
+    
+    function showNoModelsMessage() {
+        console.log('🔄 Showing no models message');
+        modelsContainer.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                <h3>🔍 No Models Found</h3>
+                <p>Unable to load models data.</p>
+                <button onclick="location.reload()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    🔄 Refresh Page
+                </button>
+            </div>
+        `;
+    }
+    
+    // Add event listeners
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+            location.reload();
+        });
+    }
+    
+    if (debugBtn) {
+        debugBtn.addEventListener('click', function() {
+            console.log('🐛 Debug button clicked');
+            
+            const dataScript = document.getElementById('models-data');
+            const content = dataScript ? dataScript.textContent : 'No script found';
+            
+            let debugInfo = 'DEBUG INFO:\\n\\n';
+            debugInfo += 'Data script exists: ' + !!dataScript + '\\n';
+            debugInfo += 'Content length: ' + content.length + '\\n';
+            debugInfo += 'Content preview: ' + content.substring(0, 200) + '\\n\\n';
+            
+            try {
+                const parsed = JSON.parse(content);
+                debugInfo += 'Parse successful: true\\n';
+                debugInfo += 'Models count: ' + (parsed && parsed.models ? parsed.models.length : 'null') + '\\n';
+                debugInfo += 'Last updated: ' + (parsed ? parsed.last_updated : 'null') + '\\n';
+            } catch (e) {
+                debugInfo += 'Parse error: ' + e.message + '\\n';
+            }
+            
+            alert(debugInfo);
+            console.log('🐛 Debug info:', debugInfo);
+        });
+    } else {
+        console.log('❌ Debug button not found');
+    }
+    
+    // Start loading models
+    loadModels();
+});
+</script>
+
+<script>
+// Global debug function as backup
+function debugDataFunction() {
+    console.log('🐛 Global debug function called');
+    
+    const dataScript = document.getElementById('models-data');
+    console.log('🐛 Data script element:', dataScript);
+    
+    if (!dataScript) {
+        alert('❌ No data script element found!');
+        return;
+    }
+    
+    const content = dataScript.textContent || '';
+    console.log('🐛 Content length:', content.length);
+    console.log('🐛 Content preview:', content.substring(0, 200));
+    
+    let debugInfo = 'DEBUG INFO:\\n\\n';
+    debugInfo += 'Data script exists: YES\\n';
+    debugInfo += 'Content length: ' + content.length + '\\n';
+    debugInfo += 'Content preview: ' + content.substring(0, 200) + '...\\n\\n';
+    
+    if (content.length === 0) {
+        debugInfo += 'ERROR: Content is empty!\\n';
+        alert(debugInfo);
+        return;
+    }
+    
+    if (content === 'null') {
+        debugInfo += 'ERROR: Jekyll data is null!\\n';
+        alert(debugInfo);
+        return;
+    }
+    
+    try {
+        const parsed = JSON.parse(content);
+        debugInfo += 'Parse successful: YES\\n';
+        debugInfo += 'Models array exists: ' + !!(parsed && parsed.models) + '\\n';
+        debugInfo += 'Models count: ' + (parsed && parsed.models ? parsed.models.length : 'null') + '\\n';
+        debugInfo += 'Last updated: ' + (parsed ? parsed.last_updated : 'null') + '\\n';
+        debugInfo += 'Total models: ' + (parsed ? parsed.total_models : 'null') + '\\n';
+    } catch (e) {
+        debugInfo += 'Parse error: ' + e.message + '\\n';
+        debugInfo += 'Raw content: ' + content.substring(0, 500) + '\\n';
+    }
+    
+    alert(debugInfo);
+    console.log('🐛 Complete debug info:', debugInfo);
+}
+</script>
+
+<!-- Search and filter functionality -->
+<script>
+// Search and filter functionality
+function initializeSearch() {
+    console.log('🔍 Initializing search...');
+    const searchInput = document.getElementById('model-search');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const clearSearchBtn = document.getElementById('clear-search');
+    const searchResultsCount = document.getElementById('search-results-count');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+            filterModels(e.target.value.toLowerCase());
+        });
+    }
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            const category = this.dataset.category;
+            filterModelsByCategory(category);
+        });
+    });
+    
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', function() {
+            if (searchInput) searchInput.value = '';
+            showAllModels();
+            this.style.display = 'none';
+            if (searchResultsCount) searchResultsCount.textContent = '';
+        });
+    }
+}
+
+function filterModels(searchTerm) {
+    const modelCards = document.querySelectorAll('.model-card');
+    let visibleCount = 0;
+    
+    modelCards.forEach(card => {
+        const title = card.querySelector('.model-card__title');
+        const excerpt = card.querySelector('.model-card__excerpt');
+        
+        if (title && excerpt) {
+            const titleText = title.textContent.toLowerCase();
+            const excerptText = excerpt.textContent.toLowerCase();
+            
+            if (titleText.includes(searchTerm) || excerptText.includes(searchTerm)) {
+                card.style.display = 'block';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        }
+    });
+    
+    updateSearchResults(visibleCount, searchTerm);
+}
+
+function filterModelsByCategory(category) {
+    const modelCards = document.querySelectorAll('.model-card');
+    let visibleCount = 0;
+    
+    modelCards.forEach(card => {
+        if (category === 'all') {
+            card.style.display = 'block';
+            visibleCount++;
+        } else {
+            const title = card.querySelector('.model-card__title');
+            const excerpt = card.querySelector('.model-card__excerpt');
+            
+            if (title && excerpt) {
+                const titleText = title.textContent.toLowerCase();
+                const excerptText = excerpt.textContent.toLowerCase();
+                
+                // Simple category matching
+                let matches = false;
+                switch (category) {
+                    case 'llm':
+                        matches = titleText.includes('gpt') || titleText.includes('llama') || titleText.includes('bert') || 
+                                 titleText.includes('transformer') || titleText.includes('gemma') || titleText.includes('mistral') ||
+                                 excerptText.includes('language model') || excerptText.includes('llm');
+                        break;
+                    case 'vision':
+                        matches = titleText.includes('vit') || titleText.includes('vision') || excerptText.includes('vision') ||
+                                 titleText.includes('clip') || titleText.includes('image') || titleText.includes('siglip') ||
+                                 titleText.includes('paligemma') || titleText.includes('llava');
+                        break;
+                    case 'gan':
+                        matches = titleText.includes('gan') || titleText.includes('generative') || titleText.includes('vae') ||
+                                 titleText.includes('dcgan') || titleText.includes('wgan') || titleText.includes('cyclegan');
+                        break;
+                    case 'audio':
+                        matches = titleText.includes('whisper') || titleText.includes('audio') || titleText.includes('tts') ||
+                                 titleText.includes('speech') || titleText.includes('clap') || titleText.includes('moonshine');
+                        break;
+                    case 'optimization':
+                        matches = titleText.includes('lora') || titleText.includes('peft') || titleText.includes('fine') ||
+                                 titleText.includes('training') || titleText.includes('dpo') || titleText.includes('orpo') ||
+                                 titleText.includes('ddp') || titleText.includes('simplePO');
+                        break;
+                }
+                
+                if (matches) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        }
+    });
+    
+    updateSearchResults(visibleCount, category);
+}
+
+function showAllModels() {
+    const modelCards = document.querySelectorAll('.model-card');
+    modelCards.forEach(card => {
+        card.style.display = 'block';
+    });
+    
+    // Reset filter buttons
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => btn.classList.remove('active'));
+    const allBtn = document.querySelector('.filter-btn[data-category="all"]');
+    if (allBtn) allBtn.classList.add('active');
+}
+
+function updateSearchResults(count, term) {
+    const searchResultsCount = document.getElementById('search-results-count');
+    const clearSearchBtn = document.getElementById('clear-search');
+    
+    if (searchResultsCount) {
+        if (term && term !== '' && term !== 'all') {
+            searchResultsCount.textContent = `Found ${count} model${count !== 1 ? 's' : ''}`;
+            if (clearSearchBtn) clearSearchBtn.style.display = 'inline-block';
+        } else {
+            searchResultsCount.textContent = '';
+            if (clearSearchBtn) clearSearchBtn.style.display = 'none';
         }
     }
+}
+
+// Initialize search when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait a bit for models to load first
+    setTimeout(initializeSearch, 500);
+});
+</script>
+
+<style>
+/* Search and filter styles */
+.search-section {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.search-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background: #e9ecef;
+}
+
+.filter-btn.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.search-results-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+}
+
+#clear-search {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.refresh-btn {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.refresh-btn:hover {
+    background: #0056b3;
+}
+
+/* Model card styles */
+.models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.model-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.model-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.model-card__image {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.model-card__content {
+    padding: 20px;
+}
+
+.model-card__title {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.model-card__excerpt {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.model-card__footer {
+    text-align: center;
+}
+
+.model-details-btn {
+    background: #28a745;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+    transition: background 0.3s ease;
+}
+
+.model-details-btn:hover {
+    background: #1e7e34;
+    color: white;
+    text-decoration: none;
+}
+</style>
     
     function showNoModelsMessage() {
         modelsContainer.innerHTML = `
