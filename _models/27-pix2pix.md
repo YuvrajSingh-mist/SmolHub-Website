@@ -1,7 +1,7 @@
 ---
 title: "Pix2Pix"
 excerpt: "Implementation of Pix2Pix from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Generative Models"
 framework: "PyTorch"

@@ -1,7 +1,7 @@
 ---
 title: "Cyclegans"
 excerpt: "Implementation of CycleGANs from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Generative Models"
 framework: "PyTorch"

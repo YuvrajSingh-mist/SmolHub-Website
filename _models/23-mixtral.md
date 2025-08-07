@@ -1,7 +1,7 @@
 ---
 title: "Mixtral"
 excerpt: "Implementation of Mixtral from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Training Methods"
 framework: "PyTorch"

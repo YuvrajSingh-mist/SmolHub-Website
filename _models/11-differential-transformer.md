@@ -1,7 +1,7 @@
 ---
 title: "Differential Transformer"
 excerpt: "Implementation of Differential Transformer from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"

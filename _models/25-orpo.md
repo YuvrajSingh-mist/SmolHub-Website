@@ -1,7 +1,7 @@
 ---
 title: "Orpo"
 excerpt: "Implementation of ORPO from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Fine-tuning"
 framework: "PyTorch"

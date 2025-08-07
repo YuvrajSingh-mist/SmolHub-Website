@@ -1,7 +1,7 @@
 ---
 title: "Attention Mechanisms"
 excerpt: "Implementation of Attention Mechanisms from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Attention Mechanisms"
 framework: "PyTorch"

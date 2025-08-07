@@ -1,7 +1,7 @@
 ---
 title: "Fine Tuning Using Peft"
 excerpt: "Implementation of Fine Tuning using PEFT from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Training Methods"
 framework: "PyTorch"

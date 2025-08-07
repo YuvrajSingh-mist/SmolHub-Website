@@ -1,7 +1,7 @@
 ---
 title: "Kimi K2"
 excerpt: "Implementation of Kimi-K2 from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"

@@ -1,7 +1,7 @@
 ---
 title: "Wgans"
 excerpt: "Implementation of WGANs from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Generative Models"
 framework: "PyTorch"

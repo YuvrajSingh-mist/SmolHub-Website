@@ -1,7 +1,7 @@
 ---
 title: "Encoder Decoder"
 excerpt: "Implementation of Encoder-Decoder from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Sequential Models"
 framework: "PyTorch"

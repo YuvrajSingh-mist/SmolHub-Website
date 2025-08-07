@@ -1,7 +1,7 @@
 ---
 title: "Seq2Seq"
 excerpt: "Implementation of Seq2Seq from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Attention Mechanisms"
 framework: "PyTorch"

@@ -1,7 +1,7 @@
 ---
 title: "Gru"
 excerpt: "Implementation of GRU from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Sequential Models"
 framework: "PyTorch"

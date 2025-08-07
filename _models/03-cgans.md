@@ -1,7 +1,7 @@
 ---
 title: "Cgans"
 excerpt: "Implementation of CGANs from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Generative Models"
 framework: "PyTorch"

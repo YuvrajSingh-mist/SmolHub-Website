@@ -1,7 +1,7 @@
 ---
 title: "Gemma"
 excerpt: "Implementation of Gemma from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"

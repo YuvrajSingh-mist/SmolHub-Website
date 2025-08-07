@@ -1,7 +1,7 @@
 ---
 title: "Simplepo"
 excerpt: "Implementation of SimplePO from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Training Methods"
 framework: "PyTorch"

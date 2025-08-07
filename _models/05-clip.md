@@ -1,7 +1,7 @@
 ---
 title: "Clip"
 excerpt: "Implementation of CLiP from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Computer Vision"
 framework: "PyTorch"

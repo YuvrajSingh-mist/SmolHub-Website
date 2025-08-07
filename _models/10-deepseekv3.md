@@ -1,7 +1,7 @@
 ---
 title: "Deepseekv3"
 excerpt: "Implementation of DeepSeekV3 from the Paper Replications repository"
-collection: paper_replications
+collection: models
 layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
