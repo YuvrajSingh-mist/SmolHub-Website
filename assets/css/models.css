@@ -303,23 +303,54 @@
 }
 
 .github-btn {
-    background: #28a745;
+    background: #28a745 !important;
     color: white !important;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 6px;
     text-decoration: none;
     font-weight: 500;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     border: none;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(40, 167, 69, 0.2);
+    transition: all 0.3s ease;
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 .github-btn:hover {
-    background: #218838;
+    background: #218838 !important;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
     color: white !important;
+    text-decoration: none;
+}
+
+.github-repo-btn {
+    background: #24292e !important;
+    color: white !important;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(36, 41, 46, 0.2);
+    transition: all 0.3s ease;
+}
+
+.github-repo-btn:hover {
+    background: #1a1e22 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(36, 41, 46, 0.4);
+    color: white !important;
+    text-decoration: none;
 }
 
 .huggingface-btn {

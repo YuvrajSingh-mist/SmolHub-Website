@@ -7,7 +7,7 @@ author_profile: true
 
 {% include base_path %}
 
-<link rel="stylesheet" href="{{ '/assets/css/models.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/models.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 
 <div class="models-page">
   <div class="models-intro">
@@ -138,54 +138,7 @@ author_profile: true
     background: #0056b3;
 }
 
-/* Model card styles */
-.models-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.model-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    background: white;
-    transition: box-shadow 0.3s ease;
-}
-
-.model-card:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.model-card__title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.model-card__excerpt {
-    color: #666;
-    margin-bottom: 15px;
-    line-height: 1.5;
-}
-
-.model-details-btn {
-    background: #28a745;
-    color: white;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 4px;
-    display: inline-block;
-    transition: background 0.3s ease;
-}
-
-.model-details-btn:hover {
-    background: #1e7e34;
-    color: white;
-    text-decoration: none;
-}
+/* Remove conflicting inline styles - use the main CSS file styles instead */
 </style>
 
 <script>
@@ -530,22 +483,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const card = document.createElement('div');
             card.className = 'model-card';
             
-            const modelName = model.name || 'Unknown Model';
+            const modelName = model.display_name || model.name || 'Unknown Model';
             const modelDescription = model.description || 'No description available';
-            const modelUrl = model.github_url || '#';
+            const modelUrl = model.permalink || model.url || `/models/${(model.name || '').toLowerCase().replace(/\s+/g, '-')}` || '#';
             
             card.innerHTML = `
                 <div class="model-card__image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
                     <span>${modelName}</span>
                 </div>
                 <div class="model-card__content">
-                    <h3 class="model-card__title">${modelName}</h3>
+                    <h3 class="model-card__title">
+                        ${modelName}
+                    </h3>
                     <div class="model-card__excerpt">
                         ${modelDescription}
                     </div>
                     <div class="model-card__footer">
-                        <a href="${modelUrl}" target="_blank" class="model-details-btn">
-                            View on GitHub
+                        <a href="${modelUrl}" class="model-details-btn" rel="permalink">
+                            Model Details
                         </a>
                     </div>
                 </div>
