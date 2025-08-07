@@ -1,0 +1,39 @@
+# main links links
+main:
+
+  - title: "Projects"
+    url: /talks/ 
+
+  - title: "From Scratch Implementations"
+    url: /models/
+
+  - title: "Datasets"
+    url: /datasets/
+
+  - title: "SmolHub Playground!"
+    url: /smolhub/
+
+  - title: "CV"
+    url: /files/Resume-Yuvraj Singh.pdf
+
+#Add your CV here for Research Purposes when you have blog/talks/publications
+  # - title: "CV"
+  #   url: /files/Resume-Yuvraj-Singh.pdf
+
+  # - title: "Paper Replications"
+  #   url: /publications/
+
+   
+
+  # - title: "Teachings"
+  #   url: /teachings/    
+    
+  # - title: "Achievements"
+  #   url: /portfolio/
+        
+  # - title: "Blog Posts"
+  #   url: /year-archive/
+
+    
+  # - title: "Guide"
+  #   url: /markdown/

@@ -1,0 +1,585 @@
+---
+layout: archive
+title: "From Scratch Implementations"
+permalink: /models/
+author_profile: true
+---
+
+{% include base_path %}
+
+<link rel="stylesheet" href="{{ base_path }}/assets/css/models.css">
+
+<div class="models-page">
+  <div class="models-intro">
+    <h1>From Scratch Implementations</h1>
+    <p>Explore our collection of cutting-edge AI models built from scratch. Each implementation demonstrates deep understanding of algorithms and provides educational insights into modern ML techniques.</p>
+    <div class="refresh-section">
+      <button id="refresh-models-btn" class="refresh-btn">
+        <i class="fa fa-refresh"></i> Check for Updates
+      </button>
+      <p style="margin-top: 10px; font-size: 0.9em; color: #666; font-style: italic;">
+        🔄 Models are automatically updated every 6 hours via GitHub Actions
+      </p>
+    </div>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-section">
+    <div class="search-container">
+      <input type="text" id="model-search" placeholder="🔍 Search models (e.g., GPT, BERT, GAN, Transformer...)">
+      <div class="search-filters">
+        <button class="filter-btn active" data-category="all">All Models</button>
+        <button class="filter-btn" data-category="llm">LLMs</button>
+        <button class="filter-btn" data-category="vision">Vision</button>
+        <button class="filter-btn" data-category="gan">GANs</button>
+        <button class="filter-btn" data-category="audio">Audio</button>
+        <button class="filter-btn" data-category="optimization">Training</button>
+      </div>
+    </div>
+    <div class="search-results-info">
+      <span id="search-results-count"></span>
+      <button id="clear-search" style="display: none;">Clear Search</button>
+    </div>
+  </div>
+
+  <div class="models-grid" id="models-container">
+    <!-- Static models (hidden by default, used as fallback) -->
+    <div style="display: none;">
+      {% for post in site.models %}
+        <div class="static-model-card">
+          {% include model-card.html %}
+        </div>
+      {% endfor %}
+    </div>
+    
+    <!-- Dynamic models from GitHub will be loaded here -->
+  </div>
+</div>
+
+<!-- Models data injected from Jekyll -->
+<script id="models-data" type="application/json">
+{% if site.data.models %}{{ site.data.models | jsonify }}{% else %}null{% endif %}
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const refreshBtn = document.getElementById('refresh-models-btn');
+    const modelsContainer = document.getElementById('models-container');
+    
+    // Load models from Jekyll data (pre-built by GitHub Actions)
+    loadModelsFromData();
+    
+    refreshBtn.addEventListener('click', function() {
+        // Trigger GitHub Actions workflow to update data
+        triggerDataUpdate();
+    });
+    
+    function loadModelsFromData() {
+        try {
+            // Get data from the script tag
+            const dataScript = document.getElementById('models-data');
+            const modelsData = JSON.parse(dataScript.textContent);
+            
+            if (modelsData && modelsData.models && modelsData.models.length > 0) {
+                console.log('Loading models from pre-built data...');
+                
+                modelsContainer.innerHTML = '';
+                
+                modelsData.models.forEach(function(model, index) {
+                    const modelHTML = createModelCardFromData(model, index);
+                    if (modelHTML) {
+                        modelsContainer.innerHTML += modelHTML;
+                    }
+                });
+                
+                // Show last updated info
+                const lastUpdated = new Date(modelsData.last_updated).toLocaleString();
+                const statusMessage = document.querySelector('.refresh-section p');
+                if (statusMessage) {
+                    statusMessage.innerHTML = '🔄 Models last updated: ' + lastUpdated + ' (' + modelsData.total_models + ' models)';
+                }
+                
+                console.log('Loaded ' + modelsData.models.length + ' models from Jekyll data');
+                
+                // Initialize search after models are loaded
+                setTimeout(initializeSearch, 100);
+            } else {
+                console.log('No models found in data, showing fallback message');
+                showNoModelsMessage();
+            }
+        } catch (error) {
+            console.error('Error loading models data:', error);
+            console.log('Showing fallback due to error');
+            showNoModelsMessage();
+        }
+    }
+    
+    function createModelCardFromData(model, index) {
+        try {
+            const detailPageId = `model-detail-${model.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+            
+            // Store model data for detail page
+            if (!window.modelData) window.modelData = {};
+            window.modelData[detailPageId] = {
+                title: model.name, // Use the actual name instead of display_name
+                folderName: model.name,
+                description: model.description,
+                readmeContent: model.readme_content,
+                repoUrl: model.github_url
+            };
+            
+            return `
+                <div class="model-card">
+                    <div class="model-card__image">
+                        <span>${model.name}</span>
+                    </div>
+                    <div class="model-card__content">
+                        <h3 class="model-card__title">
+                            ${model.name}
+                        </h3>
+                        <div class="model-card__excerpt">
+                            ${model.description}
+                        </div>
+                        <div class="model-card__footer">
+                            <button class="model-details-btn" onclick="showModelDetail('${detailPageId}')">
+                                Model Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } catch (error) {
+            console.error(`Error creating card for ${model.name}:`, error);
+            return null;
+        }
+    }
+    
+    function showNoModelsMessage() {
+        modelsContainer.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                <h3>🔍 No Models Found</h3>
+                <p>It looks like the Paper-Replications repository is empty or the workflow hasn't run yet.</p>
+                <div style="margin: 20px 0;">
+                    <p><strong>Possible reasons:</strong></p>
+                    <ul style="text-align: left; display: inline-block; margin: 10px 0;">
+                        <li>The Paper-Replications repository doesn't have any model folders yet</li>
+                        <li>The GitHub Actions workflow is still running</li>
+                        <li>The workflow encountered an error</li>
+                    </ul>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                    <button onclick="location.reload()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        🔄 Refresh Page
+                    </button>
+                    <a href="https://github.com/YuvrajSingh-mist/Paper-Replications" target="_blank" style="padding: 10px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">
+                        📁 View Repository
+                    </a>
+                    <a href="https://github.com/YuvrajSingh-mist/yuvraj-singh-portfolio.github.io/actions" target="_blank" style="padding: 10px 20px; background: #6f42c1; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">
+                        ⚙️ Check Workflow
+                    </a>
+                </div>
+            </div>
+        `;
+    }
+    
+    function triggerDataUpdate() {
+        refreshBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Triggering Update...';
+        refreshBtn.disabled = true;
+        
+        // GitHub doesn't allow triggering workflows via client-side JS for security
+        // Instead, show instructions to the user
+        setTimeout(() => {
+            alert('To manually update the models data:\n\n1. Go to your repository on GitHub\n2. Click "Actions" tab\n3. Select "Update Models Data" workflow\n4. Click "Run workflow"\n\nOr wait for the automatic update (every 6 hours)');
+            
+            refreshBtn.innerHTML = '<i class="fa fa-refresh"></i> Check for Updates';
+            refreshBtn.disabled = false;
+        }, 1000);
+    }
+    
+    function loadFallbackModels() {
+        // If no pre-built data, show the static Jekyll models
+        const staticModels = document.querySelectorAll('.static-model-card');
+        if (staticModels.length > 0) {
+            staticModels.forEach(model => model.style.display = 'block');
+        } else {
+            showNoModelsMessage();
+        }
+    }
+});
+
+// Function to show model detail page
+function showModelDetail(modelId) {
+    const modelData = window.modelData[modelId];
+    if (!modelData) {
+        alert('Model data not found');
+        return;
+    }
+    
+    // Create detail page HTML
+    const detailPageHTML = `
+        <div class="model-detail-page">
+            <div class="model-detail-header" style="margin-bottom: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                    <button class="back-btn" onclick="goBackToModels()" style="flex-shrink: 0;">
+                        <i class="fa fa-arrow-left"></i> Back to Models
+                    </button>
+                    <h1 class="model-detail-title" style="margin: 0; flex: 1; text-align: center; min-width: 0; overflow-wrap: break-word;">${modelData.title}</h1>
+                    <div class="model-action-buttons" style="flex-shrink: 0;">
+                        <a href="${modelData.repoUrl}" target="_blank" rel="noopener" class="action-btn github-btn" style="padding: 12px 20px; background: #24292e; color: white; text-decoration: none; border-radius: 6px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s;">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="model-detail-content">
+                <div class="readme-content">
+                    ${markdownToHTML(modelData.readmeContent || `# ${modelData.title}\n\n${modelData.description}\n\nThis model is part of the Paper-Replications project.`, modelData.repoUrl)}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Hide models grid, search section and show detail page
+    document.querySelector('.models-intro').style.display = 'none';
+    document.querySelector('.search-section').style.display = 'none';
+    document.querySelector('.models-grid').style.display = 'none';
+    
+    // Create detail container if it doesn't exist
+    let detailContainer = document.getElementById('model-detail-container');
+    if (!detailContainer) {
+        detailContainer = document.createElement('div');
+        detailContainer.id = 'model-detail-container';
+        document.querySelector('.models-page').appendChild(detailContainer);
+    }
+    
+    detailContainer.innerHTML = detailPageHTML;
+    detailContainer.style.display = 'block';
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+
+// Function to go back to models grid
+function goBackToModels() {
+    // Always show the models grid, search section when going back
+    document.querySelector('.models-intro').style.display = 'block';
+    document.querySelector('.search-section').style.display = 'block';
+    document.querySelector('.models-grid').style.display = 'grid';
+    
+    const detailContainer = document.getElementById('model-detail-container');
+    if (detailContainer) {
+        detailContainer.style.display = 'none';
+    }
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+
+// Enhanced markdown to HTML converter with GitHub image link conversion
+function markdownToHTML(markdown, repoUrl) {
+    if (!markdown) return '';
+    
+    let html = markdown;
+    
+    // Extract base URL for converting relative image paths
+    let baseRawUrl = '';
+    if (repoUrl) {
+        // Convert GitHub tree URL to raw content URL
+        // From: https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ModelName
+        // To: https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/ModelName
+        const repoMatch = repoUrl.match(/https:\/\/github\.com\/([^\/]+)\/([^\/]+)\/tree\/([^\/]+)\/(.+)/);
+        if (repoMatch) {
+            const [, owner, repo, branch, folder] = repoMatch;
+            baseRawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${folder}/`;
+        }
+    }
+    
+    // Process headers first (before any other transformations)
+    html = html.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
+    html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+    html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+    html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+    
+    // Code blocks with language detection (process before other formatting)
+    html = html.replace(/```(\w+)?\n?([\s\S]*?)```/g, function(match, lang, code) {
+        return `<pre style="background: #f6f8fa; border: 1px solid #d1d9e0; border-radius: 6px; padding: 16px; overflow-x: auto; margin: 16px 0;"><code style="font-family: ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 0.875em;">${code.trim()}</code></pre>`;
+    });
+    
+    // Inline code (process before other formatting)
+    html = html.replace(/`([^`]+)`/g, '<code style="background: #f6f8fa; padding: 2px 4px; border-radius: 3px; font-family: ui-monospace, SFMono-Regular, \'SF Mono\', Consolas, \'Liberation Mono\', Menlo, monospace; font-size: 0.875em; border: 1px solid #d1d9e0;">$1</code>');
+    
+    // Convert images to clickable links instead of displaying them
+    html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function(match, alt, src) {
+        let finalSrc = src;
+        
+        // Convert relative paths to absolute GitHub raw URLs
+        if (baseRawUrl && !src.startsWith('http') && !src.startsWith('//')) {
+            // Remove leading ./ if present
+            const cleanSrc = src.replace(/^\.\//, '');
+            finalSrc = baseRawUrl + cleanSrc;
+        }
+        
+        const linkText = alt || 'View Image';
+        return `<a href="${finalSrc}" target="_blank" rel="noopener" style="color: #0969da; text-decoration: none; font-weight: 500;">${linkText}</a>`;
+    });
+    
+    // Handle HTML img tags too
+    html = html.replace(/<img\s+([^>]*?)>/g, function(match, attrs) {
+        // Extract src and alt from attributes
+        const srcMatch = attrs.match(/src="([^"]+)"/);
+        const altMatch = attrs.match(/alt="([^"]+)"/);
+        
+        if (srcMatch) {
+            let src = srcMatch[1];
+            const alt = altMatch ? altMatch[1] : 'View Image';
+            let finalSrc = src;
+            
+            // Convert relative paths to absolute GitHub raw URLs
+            if (baseRawUrl && !src.startsWith('http') && !src.startsWith('//')) {
+                const cleanSrc = src.replace(/^\.\//, '');
+                finalSrc = baseRawUrl + cleanSrc;
+            }
+            
+            return `<a href="${finalSrc}" target="_blank" rel="noopener" style="color: #0969da; text-decoration: none; font-weight: 500;">${alt}</a>`;
+        }
+        return match;
+    });
+    
+    // Tables - improved regex to handle markdown tables properly
+    html = html.replace(/(\n|^)\|(.+)\|\n\|[\s\-\|:]+\|\n((?:\|.+\|\n?)*)/g, function(match, prefix, headerRow, bodyRows) {
+        // Process header
+        const headerCells = headerRow.split('|').map(cell => cell.trim()).filter(cell => cell);
+        if (headerCells.length === 0) return match;
+        
+        const headerHTML = headerCells.map(cell => 
+            `<th style="background: #f6f8fa; padding: 8px 12px; border: 1px solid #d1d9e0; font-weight: 600; text-align: left;">${cell}</th>`
+        ).join('');
+        
+        // Process body rows
+        const bodyHTML = bodyRows.split('\n')
+            .filter(row => row.trim() && row.includes('|'))
+            .map(row => {
+                const cells = row.replace(/^\||\|$/g, '').split('|').map(cell => cell.trim());
+                if (cells.length === 0) return '';
+                return `<tr>${cells.map(cell => 
+                    `<td style="padding: 8px 12px; border: 1px solid #d1d9e0; vertical-align: top;">${cell}</td>`
+                ).join('')}</tr>`;
+            })
+            .filter(row => row)
+            .join('');
+        
+        return `${prefix}<table style="width: 100%; border-collapse: collapse; margin: 16px 0; background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"><thead><tr>${headerHTML}</tr></thead><tbody>${bodyHTML}</tbody></table>\n`;
+    });
+    
+    // Bold and italic
+    html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    
+    // Links - process markdown links but avoid duplicates
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(match, text, url) {
+        // Avoid processing if this is already an HTML link
+        if (match.includes('href=')) return match;
+        return `<a href="${url}" target="_blank" rel="noopener" style="color: #0969da; text-decoration: none; font-weight: 500;">${text}</a>`;
+    });
+    
+    // Lists
+    html = html.replace(/^\* (.+$)/gm, '<li>$1</li>');
+    html = html.replace(/^\d+\. (.+$)/gm, '<li>$1</li>');
+    
+    // Wrap consecutive list items in ul - improved to avoid duplicates
+    html = html.replace(/(<li>(?:(?!<\/li>|<li>).)*<\/li>(?:\s*<li>(?:(?!<\/li>|<li>).)*<\/li>)*)/gs, function(match) {
+        // Check if already wrapped in ul
+        if (match.includes('<ul>')) return match;
+        return `<ul style="margin: 16px 0; padding-left: 32px;">${match}</ul>`;
+    });
+    
+    // Blockquotes
+    html = html.replace(/^> (.+$)/gm, '<blockquote style="border-left: 4px solid #d1d9e0; padding: 0 16px; margin: 16px 0; color: #656d76; background: #f6f8fa; border-radius: 0 6px 6px 0;"><p>$1</p></blockquote>');
+    
+    // Horizontal rules
+    html = html.replace(/^---+$/gm, '<hr style="border: none; height: 1px; background: #d1d9e0; margin: 24px 0;">');
+    
+    // Line breaks and paragraphs - improved handling
+    html = html.replace(/\n\s*\n/g, '\n\n'); // Normalize multiple newlines
+    html = html.replace(/\n\n/g, '</p><p>');
+    html = html.replace(/\n/g, '<br>');
+    
+    // Wrap in paragraphs if not already starting with HTML
+    if (!html.startsWith('<')) {
+        html = '<p>' + html + '</p>';
+    }
+    
+    // Fix empty paragraphs and nesting
+    html = html.replace(/<p><\/p>/g, '');
+    html = html.replace(/<p>\s*<\/p>/g, '');
+    html = html.replace(/<p><h([1-6])>/g, '<h$1>');
+    html = html.replace(/<\/h([1-6])><\/p>/g, '</h$1>');
+    html = html.replace(/<p><pre/g, '<pre');
+    html = html.replace(/<\/pre><\/p>/g, '</pre>');
+    html = html.replace(/<p><table/g, '<table');
+    html = html.replace(/<\/table><\/p>/g, '</table>');
+    html = html.replace(/<p><ul/g, '<ul');
+    html = html.replace(/<\/ul><\/p>/g, '</ul>');
+    html = html.replace(/<p><blockquote>/g, '<blockquote');
+    html = html.replace(/<\/blockquote><\/p>/g, '</blockquote>');
+    html = html.replace(/<p><hr/g, '<hr');
+    html = html.replace(/\/><\/p>/g, '/>');
+    html = html.replace(/<p><div/g, '<div');
+    html = html.replace(/<\/div><\/p>/g, '</div>');
+    
+    return html;
+}
+
+// Search and Filter Functionality
+let allModels = [];
+let filteredModels = [];
+
+function initializeSearch() {
+    const searchInput = document.getElementById('model-search');
+    const clearButton = document.getElementById('clear-search');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const resultsCount = document.getElementById('search-results-count');
+    
+    // Store all models for filtering
+    allModels = Array.from(document.querySelectorAll('.model-card')).map(card => ({
+        element: card,
+        name: card.querySelector('.model-card__title')?.textContent.toLowerCase() || '',
+        description: card.querySelector('.model-card__excerpt')?.textContent.toLowerCase() || '',
+        category: getModelCategory(card.querySelector('.model-card__title')?.textContent || '')
+    }));
+    
+    updateResultsCount(allModels.length);
+    
+    // Search input handler
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            filterModels(query, getActiveCategory());
+            
+            if (query) {
+                clearButton.style.display = 'inline-block';
+            } else {
+                clearButton.style.display = 'none';
+            }
+        });
+    }
+    
+    // Clear search handler
+    if (clearButton) {
+        clearButton.addEventListener('click', function() {
+            searchInput.value = '';
+            clearButton.style.display = 'none';
+            filterModels('', getActiveCategory());
+        });
+    }
+    
+    // Filter buttons handlers
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Update active button
+            filterButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter models
+            const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+            filterModels(query, this.dataset.category);
+        });
+    });
+    
+    console.log('Search initialized with', allModels.length, 'models');
+}
+
+function getModelCategory(modelName) {
+    const name = modelName.toLowerCase();
+    
+    // LLM category
+    if (['gpt', 'bert', 'llama', 'gemma', 'kimi', 'deepseek', 'transformer', 'attention', 'encoder', 'decoder', 'fine tuning', 'lora', 'dpo', 'orpo', 'simplepo'].some(term => name.includes(term))) {
+        return 'llm';
+    }
+    
+    // Vision category  
+    if (['vit', 'clip', 'clap', 'siglip', 'llava', 'paligemma', 'vision'].some(term => name.includes(term))) {
+        return 'vision';
+    }
+    
+    // GAN category
+    if (['gan', 'dcgan', 'cgan', 'cyclegan', 'wgan', 'pix2pix', 'vae'].some(term => name.includes(term))) {
+        return 'gan';
+    }
+    
+    // Audio category
+    if (['whisper', 'tts', 'moonshine', 'audio'].some(term => name.includes(term))) {
+        return 'audio';
+    }
+    
+    // Training/Optimization category
+    if (['ddp', 'distributed', 'training', 'optimization'].some(term => name.includes(term))) {
+        return 'optimization';
+    }
+    
+    return 'other';
+}
+
+function getActiveCategory() {
+    const activeBtn = document.querySelector('.filter-btn.active');
+    return activeBtn ? activeBtn.dataset.category : 'all';
+}
+
+function filterModels(query, category) {
+    filteredModels = allModels.filter(model => {
+        const matchesQuery = !query || 
+            model.name.includes(query) || 
+            model.description.includes(query);
+        
+        const matchesCategory = category === 'all' || model.category === category;
+        
+        return matchesQuery && matchesCategory;
+    });
+    
+    // Show/hide models
+    allModels.forEach(model => {
+        if (filteredModels.includes(model)) {
+            model.element.style.display = 'block';
+            model.element.style.animation = 'fadeIn 0.3s ease-in';
+        } else {
+            model.element.style.display = 'none';
+        }
+    });
+    
+    updateResultsCount(filteredModels.length);
+    
+    // Show no results message if needed
+    showNoResultsMessage(filteredModels.length === 0 && (query || category !== 'all'));
+}
+
+function updateResultsCount(count) {
+    const resultsCount = document.getElementById('search-results-count');
+    if (count === allModels.length) {
+        resultsCount.textContent = `Showing all ${count} models`;
+    } else {
+        resultsCount.textContent = `Found ${count} model${count !== 1 ? 's' : ''}`;
+    }
+}
+
+function showNoResultsMessage(show) {
+    let noResultsMsg = document.getElementById('no-results-message');
+    
+    if (show && !noResultsMsg) {
+        noResultsMsg = document.createElement('div');
+        noResultsMsg.id = 'no-results-message';
+        noResultsMsg.className = 'no-results-message';
+        noResultsMsg.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: #666;">
+                <i class="fa fa-search" style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;"></i>
+                <h3>No models found</h3>
+                <p>Try adjusting your search or filter criteria</p>
+            </div>
+        `;
+        document.getElementById('models-container').appendChild(noResultsMsg);
+    } else if (!show && noResultsMsg) {
+        noResultsMsg.remove();
+    }
+}
+</script>

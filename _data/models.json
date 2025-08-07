@@ -1,0 +1,348 @@
+{
+  "last_updated": "2025-08-07T17:59:08.363Z",
+  "total_models": 38,
+  "models": [
+    {
+      "name": "Attention Mechanisms",
+      "display_name": "Attention Mechanisms",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Attention Mechanisms",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Attention%20Mechanisms?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for attention mechanisms.",
+      "readme_content": "# Attention Mechanisms\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Attention Mechanisms)"
+    },
+    {
+      "name": "BERT",
+      "display_name": "Bert",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/BERT",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/BERT?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for bert.",
+      "readme_content": "# BERT\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/BERT)"
+    },
+    {
+      "name": "CGANs",
+      "display_name": "Cgans",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CGANs",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/CGANs?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for cgans.",
+      "readme_content": "# CGANs\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CGANs)"
+    },
+    {
+      "name": "CLAP",
+      "display_name": "Clap",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CLAP",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/CLAP?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for clap.",
+      "readme_content": "# CLAP\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CLAP)"
+    },
+    {
+      "name": "CLiP",
+      "display_name": "Clip",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CLiP",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/CLiP?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for clip.",
+      "readme_content": "# CLiP\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CLiP)"
+    },
+    {
+      "name": "CycleGANs",
+      "display_name": "Cyclegans",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CycleGANs",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/CycleGANs?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for cyclegans.",
+      "readme_content": "# CycleGANs\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CycleGANs)"
+    },
+    {
+      "name": "DCGANs",
+      "display_name": "Dcgans",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DCGANs",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/DCGANs?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for dcgans.",
+      "readme_content": "# DCGANs\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DCGANs)"
+    },
+    {
+      "name": "DDP",
+      "display_name": "Ddp",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DDP",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/DDP?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for ddp.",
+      "readme_content": "# DDP\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DDP)"
+    },
+    {
+      "name": "DPO",
+      "display_name": "Dpo",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DPO",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/DPO?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for dpo.",
+      "readme_content": "# DPO\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DPO)"
+    },
+    {
+      "name": "DeepSeekV3",
+      "display_name": "Deepseekv3",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DeepSeekV3",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/DeepSeekV3?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for deepseekv3.",
+      "readme_content": "# DeepSeekV3\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DeepSeekV3)"
+    },
+    {
+      "name": "Differential Transformer",
+      "display_name": "Differential Transformer",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Differential Transformer",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Differential%20Transformer?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for differential transformer.",
+      "readme_content": "# Differential Transformer\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Differential Transformer)"
+    },
+    {
+      "name": "Encoder-Decoder",
+      "display_name": "Encoder Decoder",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Encoder-Decoder",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Encoder-Decoder?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for encoder decoder.",
+      "readme_content": "# Encoder Decoder\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Encoder-Decoder)"
+    },
+    {
+      "name": "Fine Tuning using PEFT",
+      "display_name": "Fine Tuning Using Peft",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Fine Tuning using PEFT",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Fine%20Tuning%20using%20PEFT?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for fine tuning using peft.",
+      "readme_content": "# Fine Tuning using PEFT\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Fine Tuning using PEFT)"
+    },
+    {
+      "name": "GPT",
+      "display_name": "Gpt",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/GPT",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/GPT?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for gpt.",
+      "readme_content": "# GPT\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/GPT)"
+    },
+    {
+      "name": "GRU",
+      "display_name": "Gru",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/GRU",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/GRU?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for gru.",
+      "readme_content": "# GRU\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/GRU)"
+    },
+    {
+      "name": "Gemma",
+      "display_name": "Gemma",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Gemma?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for gemma.",
+      "readme_content": "# Gemma\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma)"
+    },
+    {
+      "name": "Gemma3",
+      "display_name": "Gemma3",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma3",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Gemma3?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for gemma3.",
+      "readme_content": "# Gemma3\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma3)"
+    },
+    {
+      "name": "Kimi-K2",
+      "display_name": "Kimi K2",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Kimi-K2",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Kimi-K2?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for kimi k2.",
+      "readme_content": "# Kimi K2\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Kimi-K2)"
+    },
+    {
+      "name": "Llama",
+      "display_name": "Llama",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Llama?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for llama.",
+      "readme_content": "# Llama\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama)"
+    },
+    {
+      "name": "Llama4",
+      "display_name": "Llama4",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama4",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Llama4?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for llama4.",
+      "readme_content": "# Llama4\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama4)"
+    },
+    {
+      "name": "Llava",
+      "display_name": "Llava",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llava",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Llava?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for llava.",
+      "readme_content": "# Llava\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llava)"
+    },
+    {
+      "name": "LoRA",
+      "display_name": "Lora",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/LoRA",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/LoRA?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for lora.",
+      "readme_content": "# LoRA\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/LoRA)"
+    },
+    {
+      "name": "Mixtral",
+      "display_name": "Mixtral",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Mixtral",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Mixtral?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for mixtral.",
+      "readme_content": "# Mixtral\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Mixtral)"
+    },
+    {
+      "name": "Moonshine",
+      "display_name": "Moonshine",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Moonshine",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Moonshine?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for moonshine.",
+      "readme_content": "# Moonshine\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Moonshine)"
+    },
+    {
+      "name": "ORPO",
+      "display_name": "Orpo",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ORPO",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/ORPO?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for orpo.",
+      "readme_content": "# ORPO\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ORPO)"
+    },
+    {
+      "name": "PaliGemma",
+      "display_name": "Paligemma",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/PaliGemma",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/PaliGemma?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for paligemma.",
+      "readme_content": "# PaliGemma\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/PaliGemma)"
+    },
+    {
+      "name": "Pix2Pix",
+      "display_name": "Pix2pix",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Pix2Pix",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Pix2Pix?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for pix2pix.",
+      "readme_content": "# Pix2Pix\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Pix2Pix)"
+    },
+    {
+      "name": "RNNs",
+      "display_name": "Rnns",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/RNNs",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/RNNs?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for rnns.",
+      "readme_content": "# RNNs\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/RNNs)"
+    },
+    {
+      "name": "Seq2Seq",
+      "display_name": "Seq2seq",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Seq2Seq",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Seq2Seq?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for seq2seq.",
+      "readme_content": "# Seq2Seq\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Seq2Seq)"
+    },
+    {
+      "name": "SigLip",
+      "display_name": "Siglip",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SigLip",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/SigLip?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for siglip.",
+      "readme_content": "# SigLip\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SigLip)"
+    },
+    {
+      "name": "SimplePO",
+      "display_name": "Simplepo",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SimplePO",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/SimplePO?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for simplepo.",
+      "readme_content": "# SimplePO\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SimplePO)"
+    },
+    {
+      "name": "TTS",
+      "display_name": "Tts",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/TTS",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/TTS?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for tts.",
+      "readme_content": "# TTS\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/TTS)"
+    },
+    {
+      "name": "Transformer",
+      "display_name": "Transformer",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Transformer",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Transformer?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for transformer.",
+      "readme_content": "# Transformer\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Transformer)"
+    },
+    {
+      "name": "VAE",
+      "display_name": "Vae",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/VAE",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/VAE?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for vae.",
+      "readme_content": "# VAE\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/VAE)"
+    },
+    {
+      "name": "ViT",
+      "display_name": "Vit",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ViT",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/ViT?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for vit.",
+      "readme_content": "# ViT\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ViT)"
+    },
+    {
+      "name": "WGANs",
+      "display_name": "Wgans",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/WGANs",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/WGANs?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for wgans.",
+      "readme_content": "# WGANs\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/WGANs)"
+    },
+    {
+      "name": "Whisper",
+      "display_name": "Whisper",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Whisper",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/Whisper?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for whisper.",
+      "readme_content": "# Whisper\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Whisper)"
+    },
+    {
+      "name": "lstm",
+      "display_name": "Lstm",
+      "github_url": "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/lstm",
+      "api_url": "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/lstm?ref=master",
+      "download_url": null,
+      "description": "Advanced AI model implementation for lstm.",
+      "readme_content": "# lstm\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/lstm)"
+    }
+  ]
+}

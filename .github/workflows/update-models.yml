@@ -1,0 +1,103 @@
+name: Update Models Data
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allow manual triggering
+  push:
+    branches: [ master ]
+    paths:
+      - '_config.yml'
+      - '.github/workflows/update-models.yml'
+
+jobs:
+  update-models:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Fetch models data from Paper-Replications
+      run: |
+        # Create data directory if it doesn't exist
+        mkdir -p _data
+        
+        # Fetch repository contents using authenticated API
+        echo "Fetching repository contents..."
+        curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+             -H "Accept: application/vnd.github.v3+json" \
+             "https://api.github.com/repos/YuvrajSingh-mist/Paper-Replications/contents/" \
+             > _data/paper_replications_raw.json
+        
+        # Check if the file was created successfully
+        if [ ! -f "_data/paper_replications_raw.json" ]; then
+          echo "Error: Failed to fetch repository contents"
+          exit 1
+        fi
+        
+        echo "Repository contents fetched successfully"
+        cat _data/paper_replications_raw.json | head -20
+        
+        # Process the data with Node.js
+        cat > process_models.js << 'EOF'
+        const fs = require('fs');
+        
+        try {
+          console.log('Processing models data...');
+          const rawData = JSON.parse(fs.readFileSync('_data/paper_replications_raw.json', 'utf8'));
+          
+          // Filter only directories
+          const folders = rawData.filter(item => item.type === 'dir');
+          console.log(`Found ${folders.length} model directories`);
+          
+          const modelsData = {
+            last_updated: new Date().toISOString(),
+            total_models: folders.length,
+            models: folders.map(folder => ({
+              name: folder.name,
+              display_name: folder.name.replace(/[-_]/g, ' ').split(' ').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' '),
+              github_url: `https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/${folder.name}`,
+              api_url: folder.url,
+              download_url: folder.download_url,
+              description: `Advanced AI model implementation for ${folder.name.replace(/[-_]/g, ' ').toLowerCase()}.`,
+              readme_content: `# ${folder.name.replace(/[-_]/g, ' ')}\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/${folder.name})`
+            }))
+          };
+          
+          fs.writeFileSync('_data/models.json', JSON.stringify(modelsData, null, 2));
+          console.log(`Successfully generated models data for ${folders.length} models`);
+        } catch (error) {
+          console.error('Error processing models data:', error);
+          process.exit(1);
+        }
+        EOF
+        
+        node process_models.js
+    
+    - name: Fetch README contents for each model (optional)
+      run: |
+        echo "Skipping README fetching for now to test basic functionality"
+        echo "Basic models data has been generated successfully"
+    
+    - name: Commit and push if changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        if git diff --quiet HEAD -- _data/models.json; then
+          echo "No changes to commit"
+        else
+          git add _data/models.json
+          git commit -m "Auto-update models data from Paper-Replications repository"
+          git push
+        fi

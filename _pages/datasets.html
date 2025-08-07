@@ -1,0 +1,161 @@
+---
+layout: archive
+title: "Datasets"
+permalink: /datasets/
+author_profile: true
+---
+
+{% include base_path %}
+
+<link rel="stylesheet" href="{{ base_path }}/assets/css/models.css">
+
+<div class="models-page">
+  <div class="models-intro">
+    <h1>Datasets Collection</h1>
+    <p>Discover our curated collection of high-quality datasets for machine learning research and development. Each dataset is carefully preprocessed and documented for easy integration into your projects.</p>
+    <div class="refresh-section">
+      <button id="refresh-datasets-btn" class="refresh-btn">
+        <i class="fa fa-refresh"></i> Refresh Datasets from Repository
+      </button>
+    </div>
+  </div>
+
+  <div class="models-grid" id="datasets-container">
+    {% for post in site.datasets %}
+      {% include dataset-card.html %}
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const refreshBtn = document.getElementById('refresh-datasets-btn');
+    const datasetsContainer = document.getElementById('datasets-container');
+    
+    refreshBtn.addEventListener('click', function() {
+        refreshBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Refreshing...';
+        refreshBtn.disabled = true;
+        
+        refreshDatasetsFromGitHub();
+    });
+    
+    async function refreshDatasetsFromGitHub() {
+        try {
+            // For now, show a message that this feature is coming soon
+            alert('Dataset refresh feature coming soon! This will fetch datasets from your data repository.');
+            
+        } catch (error) {
+            console.error('Error refreshing datasets:', error);
+            alert('Error refreshing datasets: ' + error.message);
+        } finally {
+            refreshBtn.innerHTML = '<i class="fa fa-refresh"></i> Refresh Datasets from Repository';
+            refreshBtn.disabled = false;
+        }
+    }
+});
+
+// Function to show dataset detail page
+function showDatasetDetail(datasetId) {
+    const datasetData = window.datasetData && window.datasetData[datasetId];
+    if (!datasetData) {
+        alert('Dataset data not found');
+        return;
+    }
+    
+    // Create detail page HTML
+    const detailPageHTML = `
+        <div class="model-detail-page">
+            <div class="model-detail-header">
+                <button class="back-btn" onclick="goBackToDatasets()">
+                    <i class="fa fa-arrow-left"></i> Back to Datasets
+                </button>
+                <h1 class="model-detail-title">${datasetData.title}</h1>
+                <div class="model-action-buttons">
+                    <a href="${datasetData.repoUrl}" target="_blank" rel="noopener" class="action-btn github-btn">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                    <a href="https://huggingface.co/YuvrajSingh9886" target="_blank" rel="noopener" class="action-btn huggingface-btn">
+                        🤗 HuggingFace Profile
+                    </a>
+                </div>
+            </div>
+            
+            <div class="model-detail-content">
+                <div class="readme-content">
+                    ${markdownToHTML(datasetData.readmeContent || `# ${datasetData.title}\n\n${datasetData.description}\n\nThis dataset is part of our curated collection.`)}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Hide datasets grid and show detail page
+    document.querySelector('.models-intro').style.display = 'none';
+    document.querySelector('.models-grid').style.display = 'none';
+    
+    // Create detail container if it doesn't exist
+    let detailContainer = document.getElementById('dataset-detail-container');
+    if (!detailContainer) {
+        detailContainer = document.createElement('div');
+        detailContainer.id = 'dataset-detail-container';
+        document.querySelector('.models-page').appendChild(detailContainer);
+    }
+    
+    detailContainer.innerHTML = detailPageHTML;
+    detailContainer.style.display = 'block';
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+
+// Function to go back to datasets grid
+function goBackToDatasets() {
+    document.querySelector('.models-intro').style.display = 'block';
+    document.querySelector('.models-grid').style.display = 'grid';
+    
+    const detailContainer = document.getElementById('dataset-detail-container');
+    if (detailContainer) {
+        detailContainer.style.display = 'none';
+    }
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+
+// Simple markdown to HTML converter (reuse from models)
+function markdownToHTML(markdown) {
+    let html = markdown;
+    
+    // Headers
+    html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+    html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
+    html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
+    
+    // Bold and italic
+    html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    
+    // Code blocks
+    html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+    html = html.replace(/`(.*?)`/g, '<code>$1</code>');
+    
+    // Links
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    
+    // Line breaks
+    html = html.replace(/\n\n/g, '</p><p>');
+    html = html.replace(/\n/g, '<br>');
+    
+    // Wrap in paragraphs
+    html = '<p>' + html + '</p>';
+    
+    // Fix empty paragraphs
+    html = html.replace(/<p><\/p>/g, '');
+    html = html.replace(/<p><h/g, '<h');
+    html = html.replace(/<\/h([1-6])><\/p>/g, '</h$1>');
+    html = html.replace(/<p><pre>/g, '<pre>');
+    html = html.replace(/<\/pre><\/p>/g, '</pre>');
+    
+    return html;
+}
+</script>

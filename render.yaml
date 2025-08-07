@@ -1,0 +1,16 @@
+services:
+  - type: static_site
+    name: yuvraj-portfolio
+    env: ruby
+    plan: free
+    buildCommand: "./build.sh"
+    staticPublishPath: ./_site
+    envVars:
+      - key: JEKYLL_ENV
+        value: production
+      - key: BUNDLE_WITHOUT
+        value: development:test
+      - key: NODE_ENV
+        value: production
+    domains:
+      - yuvraj-portfolio.onrender.com

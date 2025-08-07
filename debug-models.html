@@ -1,0 +1,57 @@
+---
+layout: default
+title: "Models Debug"
+---
+
+<h1>Models Data Debug</h1>
+
+<!-- Models data injected from Jekyll -->
+<script id="models-data" type="application/json">
+{% if site.data.models %}{{ site.data.models | jsonify }}{% else %}null{% endif %}
+</script>
+
+<div id="debug-output"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dataScript = document.getElementById('models-data');
+    const debugOutput = document.getElementById('debug-output');
+    
+    try {
+        const modelsData = JSON.parse(dataScript.textContent);
+        
+        let output = '<h2>Debug Information:</h2>';
+        output += '<p><strong>Raw script content:</strong></p>';
+        output += '<pre style="background: #f5f5f5; padding: 10px; overflow-x: auto;">' + 
+                  (dataScript.textContent || 'null') + '</pre>';
+        
+        if (modelsData) {
+            output += '<p><strong>Parsed data:</strong></p>';
+            output += '<ul>';
+            output += '<li>Last updated: ' + (modelsData.last_updated || 'Unknown') + '</li>';
+            output += '<li>Total models: ' + (modelsData.total_models || 0) + '</li>';
+            output += '<li>Models array length: ' + (modelsData.models ? modelsData.models.length : 0) + '</li>';
+            output += '</ul>';
+            
+            if (modelsData.models && modelsData.models.length > 0) {
+                output += '<p><strong>First few models:</strong></p>';
+                output += '<ul>';
+                for (let i = 0; i < Math.min(3, modelsData.models.length); i++) {
+                    const model = modelsData.models[i];
+                    output += '<li>' + (model.display_name || model.name || 'Unknown') + '</li>';
+                }
+                output += '</ul>';
+            }
+        } else {
+            output += '<p style="color: red;"><strong>No models data found!</strong></p>';
+            output += '<p>Site data: {{ site.data.models | inspect }}</p>';
+        }
+        
+        debugOutput.innerHTML = output;
+        
+    } catch (error) {
+        debugOutput.innerHTML = '<p style="color: red;">Error parsing JSON: ' + error.message + '</p>';
+        debugOutput.innerHTML += '<p>Raw content: <pre>' + dataScript.textContent + '</pre></p>';
+    }
+});
+</script>
