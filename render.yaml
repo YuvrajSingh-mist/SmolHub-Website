@@ -1,10 +1,10 @@
 services:
-  - type: static_site
+  - type: web
     name: yuvraj-portfolio
     env: ruby
     plan: free
     buildCommand: "./build.sh"
-    staticPublishPath: ./_site
+    startCommand: "./start.sh"
     envVars:
       - key: JEKYLL_ENV
         value: production
