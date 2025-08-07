@@ -1,8 +1,8 @@
 ---
-title: "TTS"
-excerpt: "Trained a small transformer based TTS model coded and trained from scratch in Pytorch"
-collection: models
-layout: single
+title: "Tts"
+excerpt: "Implementation of TTS from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
 dataset: "Gigaspeech"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-Trained a small transformer based TTS model coded and trained from scratch in Pytorch
+Implementation of TTS from the Paper Replications repository
 
 ## Key Features
 - Attention Mechanism

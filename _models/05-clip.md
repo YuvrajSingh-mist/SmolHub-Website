@@ -1,8 +1,8 @@
 ---
-title: "CLiP"
-excerpt: "I implemented the CLiP using Pytorch on the flickr8000 dataset."
-collection: models
-layout: single
+title: "Clip"
+excerpt: "Implementation of CLiP from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Flickr"
@@ -11,7 +11,10 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented the CLiP using Pytorch on the flickr8000 dataset.
+Implementation of CLiP from the Paper Replications repository
+
+## Key Features
+- Vision-Language
 
 ## Technical Details
 - **Framework**: PyTorch

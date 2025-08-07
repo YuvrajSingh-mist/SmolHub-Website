@@ -1,8 +1,8 @@
 ---
 title: "Llama"
-excerpt: "I implemented Llama using Pytorch on the tineshakespeare dataset."
-collection: models
-layout: single
+excerpt: "Implementation of Llama from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyShakespeare"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented Llama using Pytorch on the tineshakespeare dataset.
+Implementation of Llama from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch

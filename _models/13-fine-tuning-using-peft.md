@@ -1,8 +1,8 @@
 ---
-title: "Fine Tuning using PEFT"
-excerpt: "I implemented a simple fine tuning script using peft (qlora and bnb) for fine tuning llms."
-collection: models
-layout: single
+title: "Fine Tuning Using Peft"
+excerpt: "Implementation of Fine Tuning using PEFT from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Training Methods"
 framework: "PyTorch"
 dataset: "Custom"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented a simple fine tuning script using peft (qlora and bnb) for fine tuning llms.
+Implementation of Fine Tuning using PEFT from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch

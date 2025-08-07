@@ -1,8 +1,8 @@
 ---
 title: "Transformer"
-excerpt: "I implemented the Vanilla Transformers using Pytorch on the German-English dataset."
-collection: models
-layout: single
+excerpt: "Implementation of Transformer from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
 dataset: "Custom"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented the Vanilla Transformers using Pytorch on the German-English dataset.
+Implementation of Transformer from the Paper Replications repository
 
 ## Key Features
 - Attention Mechanism

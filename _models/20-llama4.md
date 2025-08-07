@@ -1,8 +1,8 @@
 ---
 title: "Llama4"
-excerpt: "- So, I trained a MoE based Llama 1.2B (32x12M) architecture I coded from ground up."
-collection: models
-layout: single
+excerpt: "Implementation of Llama4 from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyStories"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-- So, I trained a MoE based Llama 1.2B (32x12M) architecture I coded from ground up.
+Implementation of Llama4 from the Paper Replications repository
 
 ## Key Features
 - Mixture of Experts (MoE)

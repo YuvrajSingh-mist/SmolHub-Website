@@ -1,8 +1,8 @@
 ---
-title: "Kimi-K2"
-excerpt: "A PyTorch reimplementation of a DeepSeek V3-inspired transformer model with Mixture of Experts (MoE), Latent Attention, and other advanced features."
-collection: models
-layout: single
+title: "Kimi K2"
+excerpt: "Implementation of Kimi-K2 from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyStories"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-A PyTorch reimplementation of a DeepSeek V3-inspired transformer model with Mixture of Experts (MoE), Latent Attention, and other advanced features.
+Implementation of Kimi-K2 from the Paper Replications repository
 
 ## Key Features
 - Mixture of Experts (MoE)

@@ -1,8 +1,8 @@
 ---
-title: "BERT"
-excerpt: "I implemented the BERT using Pytorch on Cornell Movie Dialog Corpus."
-collection: models
-layout: single
+title: "Bert"
+excerpt: "Implementation of BERT from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
 dataset: "Cornell Movie Dialogs"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented the BERT using Pytorch on Cornell Movie Dialog Corpus.
+Implementation of BERT from the Paper Replications repository
 
 ## Key Features
 - Transformer Architecture

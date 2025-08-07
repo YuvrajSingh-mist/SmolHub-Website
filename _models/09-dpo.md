@@ -1,9 +1,9 @@
 ---
-title: "DPO"
-excerpt: "I Trained Qwen0.5B-Instruct using Direct Preference Optimization in Pytorch"
-collection: models
-layout: single
-category: "Training Methods"
+title: "Dpo"
+excerpt: "Implementation of DPO from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
+category: "Language Models"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DPO"
@@ -11,12 +11,12 @@ date: 2025-08-07
 ---
 
 ## Overview
-I Trained Qwen0.5B-Instruct using Direct Preference Optimization in Pytorch
+Implementation of DPO from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: UltraFeedback
-- **Category**: Training Methods
+- **Category**: Language Models
 
 ## Implementation Details
 

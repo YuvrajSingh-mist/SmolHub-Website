@@ -1,8 +1,8 @@
 ---
-title: "CLAP"
-excerpt: "Implementation of CLAP model coded from scratch in Pytorch"
-collection: models
-layout: single
+title: "Clap"
+excerpt: "Implementation of CLAP from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
 dataset: "Gigaspeech"
@@ -11,7 +11,10 @@ date: 2025-08-07
 ---
 
 ## Overview
-Implementation of CLAP model coded from scratch in Pytorch
+Implementation of CLAP from the Paper Replications repository
+
+## Key Features
+- Vision-Language
 
 ## Technical Details
 - **Framework**: PyTorch

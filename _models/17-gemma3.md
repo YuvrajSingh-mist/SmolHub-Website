@@ -1,8 +1,8 @@
 ---
 title: "Gemma3"
-excerpt: "Trained a small Gemma 3 model (90M) coded and trained from scratch in Pytorch (text only)"
-collection: models
-layout: single
+excerpt: "Implementation of Gemma3 from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyStories"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-Trained a small Gemma 3 model (90M) coded and trained from scratch in Pytorch (text only)
+Implementation of Gemma3 from the Paper Replications repository
 
 ## Key Features
 - Attention Mechanism

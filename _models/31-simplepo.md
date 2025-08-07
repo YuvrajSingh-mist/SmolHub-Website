@@ -1,8 +1,8 @@
 ---
-title: "SimplePO"
-excerpt: "Trained OPT-330M model using SimplePO in Pytorch for Instruction Following"
-collection: models
-layout: single
+title: "Simplepo"
+excerpt: "Implementation of SimplePO from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Training Methods"
 framework: "PyTorch"
 dataset: "UltraFeedback"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-Trained OPT-330M model using SimplePO in Pytorch for Instruction Following
+Implementation of SimplePO from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch

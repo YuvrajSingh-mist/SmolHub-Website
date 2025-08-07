@@ -1,8 +1,8 @@
 ---
-title: "GPT"
-excerpt: "I implemented the GPT from scratch using Pytorch on Tinyshakespeare dataset."
-collection: models
-layout: single
+title: "Gpt"
+excerpt: "Implementation of GPT from the Paper Replications repository"
+collection: paper_replications
+layout: paper-replication
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyShakespeare"
@@ -11,7 +11,7 @@ date: 2025-08-07
 ---
 
 ## Overview
-I implemented the GPT from scratch using Pytorch on Tinyshakespeare dataset.
+Implementation of GPT from the Paper Replications repository
 
 ## Technical Details
 - **Framework**: PyTorch
