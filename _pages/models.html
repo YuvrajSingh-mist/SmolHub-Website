@@ -17,6 +17,9 @@ author_profile: true
       <button id="refresh-models-btn" class="refresh-btn">
         <i class="fa fa-refresh"></i> Check for Updates
       </button>
+      <button id="debug-data-btn" class="refresh-btn" style="background: #6c757d; margin-left: 10px;">
+        <i class="fa fa-bug"></i> Debug Data
+      </button>
       <p style="margin-top: 10px; font-size: 0.9em; color: #666; font-style: italic;">
         🔄 Models are automatically updated every 6 hours via GitHub Actions
       </p>
@@ -43,16 +46,16 @@ author_profile: true
   </div>
 
   <div class="models-grid" id="models-container">
-    <!-- Static models (hidden by default, used as fallback) -->
-    <div style="display: none;">
-      {% for post in site.models %}
-        <div class="static-model-card">
-          {% include model-card.html %}
-        </div>
-      {% endfor %}
-    </div>
-    
     <!-- Dynamic models from GitHub will be loaded here -->
+  </div>
+  
+  <!-- Static models (hidden by default, used as fallback) -->
+  <div style="display: none;" id="static-models-container">
+    {% for post in site.models %}
+      <div class="static-model-card">
+        {% include model-card.html %}
+      </div>
+    {% endfor %}
   </div>
 </div>
 
@@ -66,6 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const refreshBtn = document.getElementById('refresh-models-btn');
     const modelsContainer = document.getElementById('models-container');
     
+    console.log('🔍 Starting to load models data...');
+    
     // Load models from Jekyll data (pre-built by GitHub Actions)
     loadModelsFromData();
     
@@ -74,18 +79,41 @@ document.addEventListener('DOMContentLoaded', function() {
         triggerDataUpdate();
     });
     
+    // Add debug button functionality
+    const debugBtn = document.getElementById('debug-data-btn');
+    if (debugBtn) {
+        debugBtn.addEventListener('click', function() {
+            debugDataLoading();
+        });
+    }
+    
     function loadModelsFromData() {
         try {
             // Get data from the script tag
             const dataScript = document.getElementById('models-data');
-            const modelsData = JSON.parse(dataScript.textContent);
+            console.log('📄 Data script element found:', !!dataScript);
+            
+            if (!dataScript) {
+                console.error('❌ No data script element found');
+                showFallbackModels();
+                return;
+            }
+            
+            const scriptContent = dataScript.textContent;
+            console.log('📝 Script content length:', scriptContent.length);
+            console.log('📝 Script content preview:', scriptContent.substring(0, 100) + '...');
+            
+            const modelsData = JSON.parse(scriptContent);
+            console.log('📊 Parsed models data:', modelsData);
             
             if (modelsData && modelsData.models && modelsData.models.length > 0) {
-                console.log('Loading models from pre-built data...');
+                console.log('✅ Loading models from pre-built data...');
+                console.log('📊 Found', modelsData.models.length, 'models');
                 
                 modelsContainer.innerHTML = '';
                 
                 modelsData.models.forEach(function(model, index) {
+                    console.log('🔨 Creating card for model:', model.name);
                     const modelHTML = createModelCardFromData(model, index);
                     if (modelHTML) {
                         modelsContainer.innerHTML += modelHTML;
@@ -99,17 +127,45 @@ document.addEventListener('DOMContentLoaded', function() {
                     statusMessage.innerHTML = '🔄 Models last updated: ' + lastUpdated + ' (' + modelsData.total_models + ' models)';
                 }
                 
-                console.log('Loaded ' + modelsData.models.length + ' models from Jekyll data');
+                console.log('✅ Loaded ' + modelsData.models.length + ' models from Jekyll data');
                 
                 // Initialize search after models are loaded
                 setTimeout(initializeSearch, 100);
             } else {
-                console.log('No models found in data, showing fallback message');
-                showNoModelsMessage();
+                console.log('❌ No models found in data, trying fallback...');
+                showFallbackModels();
             }
         } catch (error) {
-            console.error('Error loading models data:', error);
-            console.log('Showing fallback due to error');
+            console.error('❌ Error loading models data:', error);
+            console.log('🔄 Trying fallback due to error...');
+            showFallbackModels();
+        }
+    }
+    
+    function showFallbackModels() {
+        console.log('🔄 Loading fallback models from Jekyll collection...');
+        
+        // Try to load from Jekyll collections
+        const staticContainer = document.getElementById('static-models-container');
+        const staticCards = staticContainer ? staticContainer.querySelectorAll('.static-model-card') : [];
+        console.log('📊 Found', staticCards.length, 'static model cards');
+        
+        if (staticCards.length > 0) {
+            modelsContainer.innerHTML = '';
+            staticCards.forEach(function(card) {
+                const clonedCard = card.cloneNode(true);
+                clonedCard.style.display = 'block';
+                clonedCard.classList.remove('static-model-card');
+                clonedCard.classList.add('model-card');
+                modelsContainer.appendChild(clonedCard);
+            });
+            
+            console.log('✅ Loaded', staticCards.length, 'fallback models');
+            
+            // Initialize search after models are loaded
+            setTimeout(initializeSearch, 100);
+        } else {
+            console.log('❌ No fallback models available');
             showNoModelsMessage();
         }
     }
@@ -180,6 +236,41 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `;
+    }
+    
+    function debugDataLoading() {
+        console.log('🐛 DEBUG: Starting data loading debug...');
+        
+        // Check if Jekyll data exists
+        const dataScript = document.getElementById('models-data');
+        console.log('🐛 Data script element:', !!dataScript);
+        
+        if (dataScript) {
+            const content = dataScript.textContent;
+            console.log('🐛 Data script content length:', content.length);
+            console.log('🐛 Data script content preview:', content.substring(0, 200));
+            
+            try {
+                const parsed = JSON.parse(content);
+                console.log('🐛 Parsed data:', parsed);
+                alert('Debug Info:\\n\\n' + 
+                      'Data script found: ' + !!dataScript + '\\n' +
+                      'Content length: ' + content.length + '\\n' +
+                      'Models count: ' + (parsed && parsed.models ? parsed.models.length : 'null') + '\\n' +
+                      'Last updated: ' + (parsed ? parsed.last_updated : 'null') + '\\n\\n' +
+                      'Check browser console for detailed logs.');
+            } catch (e) {
+                console.error('🐛 Parse error:', e);
+                alert('Parse Error: ' + e.message);
+            }
+        } else {
+            alert('Debug: No data script element found!');
+        }
+        
+        // Check static models
+        const staticContainer = document.getElementById('static-models-container');
+        const staticCards = staticContainer ? staticContainer.querySelectorAll('.static-model-card') : [];
+        console.log('🐛 Static models found:', staticCards.length);
     }
     
     function triggerDataUpdate() {
