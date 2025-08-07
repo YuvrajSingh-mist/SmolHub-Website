@@ -14,6 +14,9 @@ bundle config set --local deployment 'false'
 bundle config set --local without 'development test'
 bundle install
 
+echo "Updating bundle..."
+bundle update
+
 echo "Building Jekyll site..."
 JEKYLL_ENV=production bundle exec jekyll build --verbose
 

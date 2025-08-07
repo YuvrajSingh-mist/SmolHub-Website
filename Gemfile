@@ -13,6 +13,9 @@ ruby "3.2.3"
 
 gem "github-pages", group: :jekyll_plugins
 
+# Theme
+gem "minimal-mistakes-jekyll"
+
 # If you want to use Jekyll native, uncomment the line below.
 # To upgrade, run `bundle update`.
 
@@ -26,4 +29,7 @@ group :jekyll_plugins do
   gem 'jekyll-sitemap'
   gem 'hawkins'
   gem "webrick", "~> 1.8"
+  gem "jekyll-paginate"
+  gem "jekyll-gist"
+  gem "jekyll-include-cache"
 end
