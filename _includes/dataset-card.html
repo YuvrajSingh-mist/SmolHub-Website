@@ -7,7 +7,7 @@
 {% endif %}
 
 {% assign dataset_id = post.title | slugify %}
-{% assign repo_url = post.repository_url | default: "https://github.com/YuvrajSingh-mist/Datasets" %}
+{% assign repo_url = post.github_url | default: "https://github.com/YuvrajSingh-mist/Datasets" %}
 
 <div class="model-card">
   <div class="model-card__image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
@@ -21,27 +21,14 @@
     
     {% if post.excerpt %}
     <div class="model-card__excerpt">
-      {{ post.excerpt | markdownify | strip_html | truncatewords: 25 }}
+      {{ post.excerpt | markdownify | strip_html | truncatewords: 15 }}
     </div>
     {% endif %}
     
     <div class="model-card__footer">
-      <a href="{{ base_path }}{{ post.url }}" class="model-details-btn" rel="permalink">
-        Dataset Details
+      <a href="{{ repo_url }}" target="_blank" rel="noopener" class="github-btn">
+        View on GitHub
       </a>
     </div>
   </div>
 </div>
-
-<script>
-// Store static dataset data for detail pages
-document.addEventListener('DOMContentLoaded', function() {
-    if (!window.staticDatasetData) window.staticDatasetData = {};
-    window.staticDatasetData['{{ dataset_id }}'] = {
-        title: '{{ title }}',
-        url: '{{ base_path }}{{ post.url }}',
-        repoUrl: '{{ repo_url }}',
-        content: `{{ post.content | strip_newlines | escape }}`
-    };
-});
-</script>
