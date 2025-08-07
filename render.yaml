@@ -12,5 +12,7 @@ services:
         value: development:test
       - key: NODE_ENV
         value: production
+      - key: GITHUB_TOKEN
+        sync: false  # This means you need to set it manually in Render dashboard
     domains:
       - yuvraj-portfolio.onrender.com

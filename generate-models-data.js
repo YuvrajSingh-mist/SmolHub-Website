@@ -11,6 +11,22 @@
 const fs = require('fs');
 const path = require('path');
 
+// Use built-in fetch for Node.js 18+ or fallback to node-fetch
+let fetch;
+try {
+    fetch = globalThis.fetch;
+    if (!fetch) {
+        fetch = require('node-fetch');
+    }
+} catch (e) {
+    try {
+        fetch = require('node-fetch');
+    } catch (e2) {
+        console.error('❌ Error: fetch not available. Please use Node.js 18+ or install node-fetch');
+        process.exit(1);
+    }
+}
+
 // Check for GitHub token
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 if (!GITHUB_TOKEN) {
