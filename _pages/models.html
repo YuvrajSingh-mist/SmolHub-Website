@@ -15,7 +15,7 @@ author_profile: true
     <p>Explore our collection of cutting-edge AI models built from scratch. Each implementation demonstrates deep understanding of algorithms and provides educational insights into modern ML techniques.</p>
     <div class="refresh-section">
       <button id="refresh-models-btn" class="refresh-btn">
-        <i class="fa fa-refresh"></i> Check for Updates
+        <i class="fa fa-refresh"></i> Fetch from GitHub API
       </button>
       <button id="debug-data-btn" class="refresh-btn" style="background: #6c757d; margin-left: 10px;" onclick="debugDataFunction()">
         <i class="fa fa-bug"></i> Debug Data
@@ -52,7 +52,7 @@ author_profile: true
   <!-- Static models (hidden by default, used as fallback) -->
   <div style="display: none;" id="static-models-container">
     {% for post in site.models %}
-      <div class="static-model-card">
+      <div class="static-model-card model-card">
         {% include model-card.html %}
       </div>
     {% endfor %}
@@ -61,7 +61,7 @@ author_profile: true
 
 <!-- Models data injected from Jekyll -->
 <script id="models-data" type="application/json">
-{{ site.data.models | jsonify }}
+{% if site.data.models %}{{ site.data.models | jsonify }}{% else %}null{% endif %}
 </script>
 
 <script>
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (!dataScript) {
                 console.error('❌ No data script element found');
-                showNoModelsMessage();
+                loadModelsFromGitHubAPI();
                 return;
             }
             
@@ -98,8 +98,8 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('📝 First 200 chars:', scriptContent.substring(0, 200));
             
             if (!scriptContent || scriptContent === 'null' || scriptContent === '') {
-                console.error('❌ Script content is empty or null');
-                showNoModelsMessage();
+                console.warn('⚠️ Jekyll data is null/empty, trying GitHub API fallback...');
+                loadModelsFromGitHubAPI();
                 return;
             }
             
@@ -111,20 +111,20 @@ document.addEventListener('DOMContentLoaded', function() {
             } catch (parseError) {
                 console.error('❌ JSON parse error:', parseError);
                 console.error('❌ Content that failed to parse:', scriptContent.substring(0, 500));
-                showNoModelsMessage();
+                loadModelsFromGitHubAPI();
                 return;
             }
             
             if (!modelsData) {
                 console.error('❌ Parsed data is null');
-                showNoModelsMessage();
+                loadModelsFromGitHubAPI();
                 return;
             }
             
             if (!modelsData.models || !Array.isArray(modelsData.models)) {
                 console.error('❌ No models array found in data');
                 console.error('❌ Available keys:', Object.keys(modelsData));
-                showNoModelsMessage();
+                loadModelsFromGitHubAPI();
                 return;
             }
             
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (modelsData.models.length === 0) {
                 console.error('❌ Models array is empty');
-                showNoModelsMessage();
+                loadModelsFromGitHubAPI();
                 return;
             }
             
@@ -175,8 +175,241 @@ document.addEventListener('DOMContentLoaded', function() {
             
         } catch (error) {
             console.error('❌ Critical error loading models:', error);
-            showNoModelsMessage();
+            loadModelsFromGitHubAPI();
         }
+    }
+    
+    function loadStaticModels() {
+        console.log('🔄 Loading static Jekyll models as fallback...');
+        
+        // Clear container first
+        modelsContainer.innerHTML = '';
+        
+        // Get static models from Jekyll
+        const staticContainer = document.getElementById('static-models-container');
+        if (staticContainer) {
+            const staticCards = staticContainer.querySelectorAll('.static-model-card');
+            console.log('📦 Found', staticCards.length, 'static Jekyll models');
+            
+            if (staticCards.length > 0) {
+                staticCards.forEach(function(card, index) {
+                    // Clone the card to avoid moving the original
+                    const clonedCard = card.cloneNode(true);
+                    clonedCard.style.display = 'block';
+                    clonedCard.className = 'model-card'; // Ensure proper styling
+                    modelsContainer.appendChild(clonedCard);
+                });
+                
+                // Update status message
+                const statusMessage = document.querySelector('.refresh-section p');
+                if (statusMessage) {
+                    statusMessage.innerHTML = `🔄 Showing ${staticCards.length} models from Jekyll collections (fallback mode)`;
+                }
+                
+                // Initialize search with static models
+                setTimeout(function() {
+                    console.log('🔍 Initializing search for static models...');
+                    initializeSearch();
+                }, 100);
+                
+                console.log('✅ Successfully loaded', staticCards.length, 'static models');
+                return;
+            }
+        }
+        
+        // If no static models found, show error message
+        console.error('❌ No static models found either');
+        showNoModelsMessage();
+    }
+    
+    async function loadModelsFromGitHubAPI() {
+        console.log('🌐 Attempting to fetch models data from GitHub API...');
+        
+        // Show loading state
+        modelsContainer.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                <h3>🔄 Loading Models from GitHub...</h3>
+                <p>Fetching latest data from repository...</p>
+                <div style="margin: 20px 0;">
+                    <div style="display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #007bff; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                </div>
+            </div>
+        `;
+        
+        try {
+            // GitHub API configuration
+            const REPO_OWNER = 'YuvrajSingh-mist';
+            const REPO_NAME = 'Paper-Replications';
+            const API_BASE = 'https://api.github.com';
+            
+            // Try to use a publicly available token or anonymous access
+            const headers = {
+                'Accept': 'application/vnd.github.v3+json',
+                'User-Agent': 'SmolHub-Website'
+            };
+            
+            // Fetch repository contents
+            console.log('📡 Fetching repository contents...');
+            const contentsUrl = `${API_BASE}/repos/${REPO_OWNER}/${REPO_NAME}/contents`;
+            const response = await fetch(contentsUrl, { headers });
+            
+            if (!response.ok) {
+                throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+            }
+            
+            const contents = await response.json();
+            const directories = contents.filter(item => item.type === 'dir');
+            
+            console.log('📁 Found', directories.length, 'directories');
+            
+            if (directories.length === 0) {
+                throw new Error('No model directories found in repository');
+            }
+            
+            // Process each directory to get model data
+            const models = [];
+            const maxModels = Math.min(directories.length, 20); // Limit to avoid rate limiting
+            
+            for (let i = 0; i < maxModels; i++) {
+                const folder = directories[i];
+                console.log(`📦 Processing ${folder.name} (${i + 1}/${maxModels})...`);
+                
+                try {
+                    const { description, readmeContent } = await fetchReadmeFromAPI(folder.name, headers);
+                    
+                    models.push({
+                        name: folder.name,
+                        display_name: formatDisplayName(folder.name),
+                        description: description,
+                        readme_content: readmeContent,
+                        github_url: `https://github.com/${REPO_OWNER}/${REPO_NAME}/tree/master/${folder.name}`,
+                        api_url: folder.url,
+                        download_url: folder.download_url
+                    });
+                    
+                    // Small delay to be respectful to GitHub API
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                } catch (error) {
+                    console.warn(`⚠️ Failed to process ${folder.name}:`, error.message);
+                    // Add basic model data even if README fails
+                    models.push({
+                        name: folder.name,
+                        display_name: formatDisplayName(folder.name),
+                        description: `AI model implementation for ${formatDisplayName(folder.name)}`,
+                        readme_content: `# ${folder.name}\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/${REPO_OWNER}/${REPO_NAME}/tree/master/${folder.name})`,
+                        github_url: `https://github.com/${REPO_OWNER}/${REPO_NAME}/tree/master/${folder.name}`,
+                        api_url: folder.url,
+                        download_url: folder.download_url
+                    });
+                }
+            }
+            
+            if (models.length === 0) {
+                throw new Error('No models could be processed');
+            }
+            
+            // Create final data structure
+            const modelsData = {
+                last_updated: new Date().toISOString(),
+                total_models: models.length,
+                models: models.sort((a, b) => a.display_name.localeCompare(b.display_name)),
+                source: 'github_api_client'
+            };
+            
+            console.log('✅ Successfully fetched', models.length, 'models from GitHub API');
+            
+            // Clear container and render models
+            modelsContainer.innerHTML = '';
+            
+            let cardsAdded = 0;
+            modelsData.models.forEach(function(model, index) {
+                try {
+                    const modelCard = createSimpleModelCard(model);
+                    if (modelCard) {
+                        modelsContainer.appendChild(modelCard);
+                        cardsAdded++;
+                    }
+                } catch (error) {
+                    console.error('❌ Error creating card for', model.name, ':', error);
+                }
+            });
+            
+            console.log('✅ Successfully added', cardsAdded, 'model cards from GitHub API');
+            
+            // Update status message
+            const statusMessage = document.querySelector('.refresh-section p');
+            if (statusMessage) {
+                statusMessage.innerHTML = `🔄 Models loaded from GitHub API: ${cardsAdded} models (live data)`;
+            }
+            
+            // Store data globally for detail pages
+            window.modelData = {};
+            modelsData.models.forEach(function(model) {
+                const modelId = model.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+                window.modelData[modelId] = model;
+            });
+            
+            // Initialize search functionality
+            setTimeout(function() {
+                console.log('🔍 Initializing search for GitHub API models...');
+                initializeSearch();
+            }, 100);
+            
+        } catch (error) {
+            console.error('❌ GitHub API fetch failed:', error);
+            console.log('🔄 Falling back to static models...');
+            loadStaticModels();
+        }
+    }
+    
+    async function fetchReadmeFromAPI(folderName, headers) {
+        const REPO_OWNER = 'YuvrajSingh-mist';
+        const REPO_NAME = 'Paper-Replications';
+        const API_BASE = 'https://api.github.com';
+        
+        try {
+            // Try to fetch README.md
+            const readmeUrl = `${API_BASE}/repos/${REPO_OWNER}/${REPO_NAME}/contents/${folderName}/README.md`;
+            const response = await fetch(readmeUrl, { headers });
+            
+            if (response.ok) {
+                const readmeData = await response.json();
+                const content = atob(readmeData.content.replace(/\n/g, ''));
+                
+                // Extract description from first few lines
+                const lines = content.split('\n').filter(line => line.trim());
+                let description = `AI model implementation for ${formatDisplayName(folderName)}`;
+                
+                // Look for description in first paragraph or after title
+                for (let i = 0; i < Math.min(lines.length, 10); i++) {
+                    const line = lines[i].trim();
+                    if (line && !line.startsWith('#') && !line.startsWith('!') && line.length > 20) {
+                        description = line.substring(0, 150);
+                        break;
+                    }
+                }
+                
+                return {
+                    description: description,
+                    readmeContent: content
+                };
+            }
+        } catch (error) {
+            console.warn(`⚠️ Could not fetch README for ${folderName}:`, error.message);
+        }
+        
+        // Fallback if README fetch fails
+        return {
+            description: `AI model implementation for ${formatDisplayName(folderName)}`,
+            readmeContent: `# ${folderName}\n\nThis model is part of the Paper-Replications project.\n\n[View on GitHub](https://github.com/${REPO_OWNER}/${REPO_NAME}/tree/master/${folderName})`
+        };
+    }
+    
+    function formatDisplayName(name) {
+        return name
+            .replace(/[-_]/g, ' ')
+            .replace(/\b\w/g, l => l.toUpperCase())
+            .trim();
     }
     
     function createSimpleModelCard(model) {
@@ -237,7 +470,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners
     if (refreshBtn) {
         refreshBtn.addEventListener('click', function() {
-            location.reload();
+            console.log('🔄 Refresh button clicked - trying GitHub API...');
+            loadModelsFromGitHubAPI();
         });
     }
     
@@ -517,6 +751,12 @@ document.addEventListener('DOMContentLoaded', function() {
     border-radius: 8px;
 }
 
+/* Loading spinner animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .search-container input {
     width: 100%;
     padding: 12px;
@@ -653,13 +893,14 @@ document.addEventListener('DOMContentLoaded', function() {
         modelsContainer.innerHTML = `
             <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
                 <h3>🔍 No Models Found</h3>
-                <p>It looks like the Paper-Replications repository is empty or the workflow hasn't run yet.</p>
+                <p>It looks like there's an issue loading the models data.</p>
                 <div style="margin: 20px 0;">
                     <p><strong>Possible reasons:</strong></p>
                     <ul style="text-align: left; display: inline-block; margin: 10px 0;">
-                        <li>The Paper-Replications repository doesn't have any model folders yet</li>
-                        <li>The GitHub Actions workflow is still running</li>
-                        <li>The workflow encountered an error</li>
+                        <li>The models data is still being generated</li>
+                        <li>GitHub API rate limit reached</li>
+                        <li>Network connectivity issue</li>
+                        <li>Deployment configuration problem</li>
                     </ul>
                 </div>
                 <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
@@ -669,10 +910,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     <a href="https://github.com/YuvrajSingh-mist/Paper-Replications" target="_blank" style="padding: 10px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">
                         📁 View Repository
                     </a>
-                    <a href="https://github.com/YuvrajSingh-mist/yuvraj-singh-portfolio.github.io/actions" target="_blank" style="padding: 10px 20px; background: #6f42c1; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">
+                    <a href="https://github.com/YuvrajSingh-mist/SmolHub-Website/actions" target="_blank" style="padding: 10px 20px; background: #6f42c1; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">
                         ⚙️ Check Workflow
                     </a>
                 </div>
+                <button onclick="debugDataFunction()" style="padding: 10px 20px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 10px;">
+                    🐛 Debug Data
+                </button>
             </div>
         `;
     }

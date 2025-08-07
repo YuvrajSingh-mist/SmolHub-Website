@@ -26,9 +26,23 @@ npm install
 echo "Generating models data..."
 if [ -n "$GITHUB_TOKEN" ]; then
     echo "✅ GitHub token found, generating models data..."
-    node generate-models-data.js
+    if node generate-models-data.js; then
+        echo "✅ Models data generated successfully"
+        echo "📊 Models data file info:"
+        ls -la _data/models.json
+        echo "🔍 Models count:"
+        jq '.models | length' _data/models.json 2>/dev/null || echo "Could not parse models count"
+    else
+        echo "❌ Failed to generate models data, using existing data"
+    fi
 else
     echo "⚠️ No GitHub token found, using existing models data..."
+    if [ -f "_data/models.json" ]; then
+        echo "✅ Existing models data found"
+        ls -la _data/models.json
+    else
+        echo "❌ No models data available - models page may not work correctly"
+    fi
 fi
 
 echo "Building Jekyll site..."

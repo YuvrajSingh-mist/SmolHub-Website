@@ -1,0 +1,40 @@
+---
+layout: default
+title: "Test Data"
+---
+
+<h1>Testing Data Loading</h1>
+
+<h2>Site Data Models:</h2>
+<pre>{{ site.data.models | inspect }}</pre>
+
+<h2>Models Data JSON:</h2>
+<script id="models-data" type="application/json">
+{% if site.data.models %}{{ site.data.models | jsonify }}{% else %}null{% endif %}
+</script>
+
+<div id="test-output"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dataScript = document.getElementById('models-data');
+    const output = document.getElementById('test-output');
+    
+    output.innerHTML = '<h3>JavaScript Test:</h3>';
+    output.innerHTML += '<p>Data script exists: ' + !!dataScript + '</p>';
+    
+    if (dataScript) {
+        const content = dataScript.textContent;
+        output.innerHTML += '<p>Content length: ' + content.length + '</p>';
+        output.innerHTML += '<p>Content preview: <pre>' + content.substring(0, 200) + '</pre></p>';
+        
+        try {
+            const parsed = JSON.parse(content);
+            output.innerHTML += '<p>Parse successful: YES</p>';
+            output.innerHTML += '<p>Models count: ' + (parsed && parsed.models ? parsed.models.length : 'null') + '</p>';
+        } catch (e) {
+            output.innerHTML += '<p style="color: red;">Parse error: ' + e.message + '</p>';
+        }
+    }
+});
+</script>
