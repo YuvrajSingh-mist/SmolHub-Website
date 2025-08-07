@@ -13,20 +13,6 @@ author_profile: true
   <div class="models-intro">
     <h1>From Scratch Implementations</h1>
     <p>Explore our collection of cutting-edge AI models built from scratch. Each implementation demonstrates deep understanding of algorithms and provides educational insights into modern ML techniques.</p>
-    <div class="refresh-section">
-      <button id="refresh-models-btn" class="refresh-btn">
-        <i class="fa fa-refresh"></i> Fetch from GitHub API
-      </button>
-      <button id="debug-data-btn" class="refresh-btn" style="background: #6c757d; margin-left: 10px;" onclick="debugDataFunction()">
-        <i class="fa fa-bug"></i> Debug Data
-      </button>
-      <button id="test-global-btn" class="refresh-btn" style="background: #28a745; margin-left: 10px;" onclick="window.testGlobalFunction()">
-        <i class="fa fa-cog"></i> Test Global
-      </button>
-      <p style="margin-top: 10px; font-size: 0.9em; color: #666; font-style: italic;">
-        🔄 Models are automatically updated every 6 hours via GitHub Actions
-      </p>
-    </div>
   </div>
 
   <!-- Search Section -->
@@ -57,36 +43,41 @@ author_profile: true
            data-name="{{ post.title | downcase }}"
            data-content="{{ post.content | strip_html | downcase }}">
         
-        <div class="model-header">
-          <h3 class="model-title">{{ post.title }}</h3>
+        <div class="model-card__image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+          <span>{{ post.title }}</span>
+        </div>
+        
+        <div class="model-card__content">
+          <h3 class="model-card__title">{{ post.title }}</h3>
+          
           <div class="model-badges">
             <span class="badge category-badge">{{ post.category | default: "Other" }}</span>
             <span class="badge framework-badge">{{ post.framework | default: "PyTorch" }}</span>
           </div>
-        </div>
-        
-        <div class="model-description">
-          {{ post.excerpt | strip_html | truncatewords: 25 }}
-        </div>
-        
-        <div class="model-details">
-          <div class="detail-item">
-            <strong>Dataset:</strong> {{ post.dataset | default: "Custom" }}
+          
+          <div class="model-card__excerpt">
+            {{ post.excerpt | strip_html | truncatewords: 25 }}
           </div>
-          <div class="detail-item">
-            <strong>Category:</strong> {{ post.category | default: "Other" }}
+          
+          <div class="model-details">
+            <div class="detail-item">
+              <strong>Dataset:</strong> {{ post.dataset | default: "Custom" }}
+            </div>
+            <div class="detail-item">
+              <strong>Category:</strong> {{ post.category | default: "Other" }}
+            </div>
           </div>
-        </div>
-        
-        <div class="model-actions">
-          <a href="{{ post.url | relative_url }}" class="btn btn-primary">
-            📖 View Details
-          </a>
-          {% if post.github_url %}
-            <a href="{{ post.github_url }}" target="_blank" rel="noopener" class="btn btn-secondary">
-              <i class="fab fa-github"></i> Code
+          
+          <div class="model-card__footer">
+            <a href="{{ post.url | relative_url }}" class="model-details-btn">
+              📖 Model Details
             </a>
-          {% endif %}
+            {% if post.github_url %}
+              <a href="{{ post.github_url }}" target="_blank" rel="noopener" class="btn btn-secondary" style="margin-left: 10px;">
+                <i class="fab fa-github"></i> Code
+              </a>
+            {% endif %}
+          </div>
         </div>
       </div>
     {% endfor %}
@@ -588,6 +579,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const modelUrl = model.github_url || '#';
             
             card.innerHTML = `
+                <div class="model-card__image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <span>${modelName}</span>
+                </div>
                 <div class="model-card__content">
                     <h3 class="model-card__title">${modelName}</h3>
                     <div class="model-card__excerpt">
