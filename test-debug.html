@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Test</title>
+</head>
+<body>
+    <h1>Debug Test Page</h1>
+    <button id="test-btn" onclick="testFunction()">Test Button</button>
+    <div id="result"></div>
+
+    <script>
+        console.log('Script loaded!');
+        
+        function testFunction() {
+            console.log('Test function called!');
+            alert('Test function works!');
+            document.getElementById('result').innerHTML = 'Function executed successfully!';
+        }
+        
+        // Test if function is accessible
+        window.onload = function() {
+            console.log('Page loaded');
+            console.log('testFunction exists:', typeof testFunction);
+            if (typeof testFunction === 'function') {
+                document.getElementById('result').innerHTML = 'Function is accessible!';
+            } else {
+                document.getElementById('result').innerHTML = 'Function NOT accessible!';
+            }
+        };
+    </script>
+</body>
+</html>

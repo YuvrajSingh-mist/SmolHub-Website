@@ -20,6 +20,9 @@ author_profile: true
       <button id="debug-data-btn" class="refresh-btn" style="background: #6c757d; margin-left: 10px;" onclick="debugDataFunction()">
         <i class="fa fa-bug"></i> Debug Data
       </button>
+      <button id="test-global-btn" class="refresh-btn" style="background: #28a745; margin-left: 10px;" onclick="window.testGlobalFunction()">
+        <i class="fa fa-cog"></i> Test Global
+      </button>
       <p style="margin-top: 10px; font-size: 0.9em; color: #666; font-style: italic;">
         🔄 Models are automatically updated every 6 hours via GitHub Actions
       </p>
@@ -713,7 +716,13 @@ document.addEventListener('DOMContentLoaded', function() {
     loadModels();
 });
 
-// Global debug function
+// Test if script is executing
+console.log('🔧 Models page script loaded and executing!');
+window.testGlobalFunction = function() {
+    alert('Global function test works!');
+};
+
+// Global debug function - MUST be outside DOMContentLoaded for onclick access
 function debugDataFunction() {
     console.log('🐛 Global debug function called');
     
@@ -777,4 +786,7 @@ function debugDataFunction() {
     alert(debugInfo);
     console.log('🐛 Complete debug info:', debugInfo);
 }
+
+// Explicitly assign to window for global access
+window.debugDataFunction = debugDataFunction;
 </script>
