@@ -1,8 +1,7 @@
 /* Custom styles for AI Models page */
 .models-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
     margin: 30px 0;
     padding: 0;
@@ -11,14 +10,12 @@
 @media (max-width: 1200px) {
     .models-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(5, 1fr);
     }
 }
 
 @media (max-width: 768px) {
     .models-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(5, 1fr);
         gap: 15px;
     }
 }
@@ -26,7 +23,6 @@
 @media (max-width: 480px) {
     .models-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(10, 1fr);
     }
 }
 
