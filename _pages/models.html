@@ -75,6 +75,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Simple data loading function
     function loadModels() {
         console.log('🔍 Loading models...');
+        console.log('🔍 Models container:', modelsContainer);
+        
+        // First check if container exists
+        if (!modelsContainer) {
+            console.error('❌ Models container not found!');
+            return;
+        }
         
         try {
             const dataScript = document.getElementById('models-data');
@@ -88,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const scriptContent = dataScript.textContent.trim();
             console.log('📝 Script content length:', scriptContent.length);
-            console.log('📝 Script content preview:', scriptContent.substring(0, 100));
+            console.log('📝 First 200 chars:', scriptContent.substring(0, 200));
             
             if (!scriptContent || scriptContent === 'null' || scriptContent === '') {
                 console.error('❌ Script content is empty or null');
@@ -96,8 +103,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            const modelsData = JSON.parse(scriptContent);
-            console.log('📊 Parsed models data:', modelsData);
+            let modelsData;
+            try {
+                modelsData = JSON.parse(scriptContent);
+                console.log('📊 Parsed models data successfully');
+                console.log('📊 Data keys:', Object.keys(modelsData));
+            } catch (parseError) {
+                console.error('❌ JSON parse error:', parseError);
+                console.error('❌ Content that failed to parse:', scriptContent.substring(0, 500));
+                showNoModelsMessage();
+                return;
+            }
             
             if (!modelsData) {
                 console.error('❌ Parsed data is null');
@@ -107,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (!modelsData.models || !Array.isArray(modelsData.models)) {
                 console.error('❌ No models array found in data');
+                console.error('❌ Available keys:', Object.keys(modelsData));
                 showNoModelsMessage();
                 return;
             }
@@ -122,60 +139,96 @@ document.addEventListener('DOMContentLoaded', function() {
             // Clear container and add models
             modelsContainer.innerHTML = '';
             
+            let cardsAdded = 0;
             modelsData.models.forEach(function(model, index) {
-                console.log('🔨 Creating card for model:', model.name);
-                const modelCard = createSimpleModelCard(model);
-                modelsContainer.appendChild(modelCard);
+                console.log(`🔨 Creating card ${index + 1}/${modelsData.models.length} for:`, model.name);
+                try {
+                    const modelCard = createSimpleModelCard(model);
+                    if (modelCard) {
+                        modelsContainer.appendChild(modelCard);
+                        cardsAdded++;
+                    }
+                } catch (cardError) {
+                    console.error('❌ Error creating card for', model.name, ':', cardError);
+                }
             });
             
-            console.log('✅ Successfully loaded', modelsData.models.length, 'models');
+            console.log('✅ Successfully added', cardsAdded, 'model cards');
             
             // Update status message
             const statusMessage = document.querySelector('.refresh-section p');
-            if (statusMessage) {
-                const lastUpdated = new Date(modelsData.last_updated).toLocaleString();
-                statusMessage.innerHTML = '🔄 Models last updated: ' + lastUpdated + ' (' + modelsData.total_models + ' models)';
+            if (statusMessage && modelsData.last_updated) {
+                try {
+                    const lastUpdated = new Date(modelsData.last_updated).toLocaleString();
+                    statusMessage.innerHTML = `🔄 Models last updated: ${lastUpdated} (${modelsData.total_models || modelsData.models.length} models)`;
+                } catch (dateError) {
+                    console.error('❌ Date formatting error:', dateError);
+                    statusMessage.innerHTML = `🔄 ${modelsData.models.length} models loaded`;
+                }
             }
             
             // Initialize search functionality after models are loaded
-            setTimeout(initializeSearch, 100);
+            setTimeout(function() {
+                console.log('🔍 Initializing search...');
+                initializeSearch();
+            }, 100);
             
         } catch (error) {
-            console.error('❌ Error loading models:', error);
+            console.error('❌ Critical error loading models:', error);
             showNoModelsMessage();
         }
     }
     
     function createSimpleModelCard(model) {
-        const card = document.createElement('div');
-        card.className = 'model-card';
-        card.innerHTML = `
-            <div class="model-card__image">
-                <span>${model.name}</span>
-            </div>
-            <div class="model-card__content">
-                <h3 class="model-card__title">${model.name}</h3>
-                <div class="model-card__excerpt">
-                    ${model.description || 'No description available'}
+        if (!model || !model.name) {
+            console.error('❌ Invalid model data:', model);
+            return null;
+        }
+        
+        try {
+            const card = document.createElement('div');
+            card.className = 'model-card';
+            
+            const modelName = model.name || 'Unknown Model';
+            const modelDescription = model.description || 'No description available';
+            const modelUrl = model.github_url || '#';
+            
+            card.innerHTML = `
+                <div class="model-card__image">
+                    <span>${modelName}</span>
                 </div>
-                <div class="model-card__footer">
-                    <a href="${model.github_url}" target="_blank" class="model-details-btn">
-                        View on GitHub
-                    </a>
+                <div class="model-card__content">
+                    <h3 class="model-card__title">${modelName}</h3>
+                    <div class="model-card__excerpt">
+                        ${modelDescription}
+                    </div>
+                    <div class="model-card__footer">
+                        <a href="${modelUrl}" target="_blank" class="model-details-btn">
+                            View on GitHub
+                        </a>
+                    </div>
                 </div>
-            </div>
-        `;
-        return card;
+            `;
+            
+            console.log('✅ Created card for:', modelName);
+            return card;
+        } catch (error) {
+            console.error('❌ Error creating card for', model.name, ':', error);
+            return null;
+        }
     }
     
     function showNoModelsMessage() {
         console.log('🔄 Showing no models message');
         modelsContainer.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666;">
                 <h3>🔍 No Models Found</h3>
-                <p>Unable to load models data.</p>
-                <button onclick="location.reload()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                <p>The models data could not be loaded.</p>
+                <button onclick="location.reload()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 10px;">
                     🔄 Refresh Page
+                </button>
+                <button onclick="debugDataFunction()" style="padding: 10px 20px; background: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 10px;">
+                    🐛 Debug Data
                 </button>
             </div>
         `;
@@ -230,7 +283,7 @@ function debugDataFunction() {
     console.log('🐛 Data script element:', dataScript);
     
     if (!dataScript) {
-        alert('❌ No data script element found!');
+        alert('❌ PROBLEM FOUND: No data script element found!\n\nThis means Jekyll is not injecting the models data properly.');
         return;
     }
     
@@ -238,37 +291,68 @@ function debugDataFunction() {
     console.log('🐛 Content length:', content.length);
     console.log('🐛 Content preview:', content.substring(0, 200));
     
-    let debugInfo = 'DEBUG INFO:\\n\\n';
-    debugInfo += 'Data script exists: YES\\n';
-    debugInfo += 'Content length: ' + content.length + '\\n';
-    debugInfo += 'Content preview: ' + content.substring(0, 200) + '...\\n\\n';
+    let debugInfo = 'DEBUG REPORT:\n\n';
+    debugInfo += '✅ Data script exists: YES\n';
+    debugInfo += `📏 Content length: ${content.length}\n`;
+    debugInfo += `📝 Content preview: ${content.substring(0, 150)}...\n\n`;
     
     if (content.length === 0) {
-        debugInfo += 'ERROR: Content is empty!\\n';
+        debugInfo += '❌ PROBLEM: Content is completely empty!\n';
+        debugInfo += 'This means Jekyll did not inject any data.\n';
         alert(debugInfo);
         return;
     }
     
-    if (content === 'null') {
-        debugInfo += 'ERROR: Jekyll data is null!\\n';
+    if (content.trim() === 'null') {
+        debugInfo += '❌ PROBLEM: Jekyll data is null!\n';
+        debugInfo += 'This means site.data.models is null in Jekyll.\n';
+        debugInfo += 'Check if _data/models.json exists and has valid JSON.\n';
         alert(debugInfo);
         return;
     }
     
     try {
         const parsed = JSON.parse(content);
-        debugInfo += 'Parse successful: YES\\n';
-        debugInfo += 'Models array exists: ' + !!(parsed && parsed.models) + '\\n';
-        debugInfo += 'Models count: ' + (parsed && parsed.models ? parsed.models.length : 'null') + '\\n';
-        debugInfo += 'Last updated: ' + (parsed ? parsed.last_updated : 'null') + '\\n';
-        debugInfo += 'Total models: ' + (parsed ? parsed.total_models : 'null') + '\\n';
+        debugInfo += '✅ JSON parsing: SUCCESS\n';
+        debugInfo += `📊 Data type: ${typeof parsed}\n`;
+        
+        if (parsed && parsed.models) {
+            debugInfo += `📈 Models count: ${parsed.models.length}\n`;
+            debugInfo += `📅 Last updated: ${parsed.last_updated || 'Unknown'}\n`;
+            debugInfo += `🔢 Total models: ${parsed.total_models || 'Unknown'}\n\n`;
+            
+            if (parsed.models.length > 0) {
+                debugInfo += `📋 First model example:\n`;
+                debugInfo += `   Name: ${parsed.models[0].name || 'No name'}\n`;
+                debugInfo += `   Has description: ${!!parsed.models[0].description}\n`;
+                debugInfo += `   Has github_url: ${!!parsed.models[0].github_url}\n`;
+            }
+            
+            debugInfo += '\n✅ DATA LOOKS GOOD!\n';
+            debugInfo += 'If models are not showing, check browser console for JavaScript errors.';
+        } else {
+            debugInfo += '❌ PROBLEM: No models array found in data!\n';
+            debugInfo += `Available keys: ${Object.keys(parsed).join(', ')}\n`;
+        }
     } catch (e) {
-        debugInfo += 'Parse error: ' + e.message + '\\n';
-        debugInfo += 'Raw content: ' + content.substring(0, 500) + '\\n';
+        debugInfo += `❌ JSON PARSE ERROR: ${e.message}\n`;
+        debugInfo += `💭 Raw content: ${content.substring(0, 500)}\n`;
     }
     
     alert(debugInfo);
     console.log('🐛 Complete debug info:', debugInfo);
+    
+    // Also try to manually load models
+    console.log('🔄 Attempting to manually reload models...');
+    const modelsContainer = document.getElementById('models-container');
+    if (modelsContainer) {
+        // Call the loadModels function directly
+        if (typeof loadModels === 'function') {
+            loadModels();
+        } else {
+            console.error('❌ loadModels function not found');
+        }
+    }
 }
 </script>
 
