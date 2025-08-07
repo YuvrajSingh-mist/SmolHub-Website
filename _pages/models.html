@@ -49,10 +49,52 @@ author_profile: true
   </div>
 
   <div class="models-grid" id="models-container">
-    <!-- Dynamic models from GitHub will be loaded here -->
+    <!-- Jekyll collection models -->
+    {% for post in site.models %}
+      <div class="model-card jekyll-model" 
+           data-category="{{ post.category | default: 'Other' | slugify }}" 
+           data-framework="{{ post.framework | default: 'PyTorch' | slugify }}"
+           data-name="{{ post.title | downcase }}"
+           data-content="{{ post.content | strip_html | downcase }}">
+        
+        <div class="model-header">
+          <h3 class="model-title">{{ post.title }}</h3>
+          <div class="model-badges">
+            <span class="badge category-badge">{{ post.category | default: "Other" }}</span>
+            <span class="badge framework-badge">{{ post.framework | default: "PyTorch" }}</span>
+          </div>
+        </div>
+        
+        <div class="model-description">
+          {{ post.excerpt | strip_html | truncatewords: 25 }}
+        </div>
+        
+        <div class="model-details">
+          <div class="detail-item">
+            <strong>Dataset:</strong> {{ post.dataset | default: "Custom" }}
+          </div>
+          <div class="detail-item">
+            <strong>Category:</strong> {{ post.category | default: "Other" }}
+          </div>
+        </div>
+        
+        <div class="model-actions">
+          <a href="{{ post.url | relative_url }}" class="btn btn-primary">
+            📖 View Details
+          </a>
+          {% if post.github_url %}
+            <a href="{{ post.github_url }}" target="_blank" rel="noopener" class="btn btn-secondary">
+              <i class="fab fa-github"></i> Code
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+    
+    <!-- Dynamic models from GitHub will also be loaded here -->
   </div>
   
-  <!-- Static models (hidden by default, used as fallback) -->
+  <!-- Static models (kept as fallback) -->
   <div style="display: none;" id="static-models-container">
     {% for post in site.models %}
       <div class="static-model-card model-card">
