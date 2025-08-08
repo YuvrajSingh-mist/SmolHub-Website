@@ -1,22 +1,22 @@
 ---
-title: "Simplepo"
-excerpt: "Implementation of SimplePO from the Paper Replications repository"
+title: "SimplePO"
+excerpt: "Implementation of SimplePO from scratch"
 collection: models
-layout: paper-replication
-category: "Training Methods"
+layout: model-implementation
+category: "Machine Learning"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SimplePO"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of SimplePO from the Paper Replications repository
+Implementation of SimplePO from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: UltraFeedback
-- **Category**: Training Methods
+- **Category**: Machine Learning
 
 ## Implementation Details
 
@@ -35,6 +35,7 @@ Trained OPT-330M model using SimplePO in Pytorch for Instruction Following
 | `device`     | 'cuda:0' | The device to run the model on (e.g., 'cuda:0' for GPU).                    |
 | `beta`      | 2 | Beta values                                                                 |           
 | `gamma`| 1.6     | Gamma values for the optimizer                                       |
+
 
 ### Datasets
 

@@ -1,17 +1,17 @@
 ---
-title: "Encoder Decoder"
-excerpt: "Implementation of Encoder-Decoder from the Paper Replications repository"
+title: "Encoder-Decoder"
+excerpt: "Implementation of Encoder-Decoder from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Encoder-Decoder"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Encoder-Decoder from the Paper Replications repository
+Implementation of Encoder-Decoder from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -23,6 +23,7 @@ Implementation of Encoder-Decoder from the Paper Replications repository
 # Coded an Encoder-Decoder in Pytorch from scratch  
 
 Trained on the on German (de) to English (en) dataset
+
 
 [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/pdf/1409.3215)
 
@@ -38,13 +39,16 @@ Trained on the on German (de) to English (en) dataset
 | `num_layers` | 4      | Layers for deep lstms                                                                |
 | `No of neurons`| 128      | No of neurons in an GRU per layer                                          |    
 
+
 ### Frameworks:
 **Pytorch**
+
 
 ### Epochs/Steps
 Epochs (train) = 10
 
 Val iterations = every epoch
+
 
 ### Losses
 

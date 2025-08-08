@@ -1,21 +1,21 @@
 ---
-title: "Gpt"
-excerpt: "Implementation of GPT from the Paper Replications repository"
+title: "GPT"
+excerpt: "Implementation of GPT from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "TinyShakespeare"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/GPT"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of GPT from the Paper Replications repository
+Implementation of GPT from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: TinyShakespeare
+- **Dataset**: Custom
 - **Category**: Language Models
 
 ## Implementation Details
@@ -26,6 +26,7 @@ I implemented the GPT from scratch using Pytorch on Tinyshakespeare dataset.
 
 [Improving Language Understanding
 by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf)
+
 
 ### Datasets
 

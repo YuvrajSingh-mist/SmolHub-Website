@@ -1,17 +1,17 @@
 ---
-title: "Wgans"
-excerpt: "Implementation of WGANs from the Paper Replications repository"
+title: "WGANs"
+excerpt: "Implementation of WGANs from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Generative Models"
 framework: "PyTorch"
 dataset: "MNIST"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/WGANs"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of WGANs from the Paper Replications repository
+Implementation of WGANs from scratch
 
 ## Technical Details
 - **Framework**: PyTorch

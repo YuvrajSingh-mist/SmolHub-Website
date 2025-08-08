@@ -1,20 +1,17 @@
 ---
-title: "Vit"
-excerpt: "Implementation of ViT from the Paper Replications repository"
+title: "ViT"
+excerpt: "Implementation of ViT from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ViT"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of ViT from the Paper Replications repository
-
-## Key Features
-- Transformer Architecture
+Implementation of ViT from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -29,14 +26,17 @@ Implmented a ViT Architecture from Scratch using Pytorch on a subset of Food-101
 
 [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/1511.06434)
 
+
 ## Dataset Information
 
 **Dataset (Train):** Subset of Food101 (3 classes-255 images total)
 **Dataset (Test):** Subset of Food101 (3 classes-75 images total)
 
+
 ### Frameworks
 
 **Pytorch**
+
 
 ## Results
 

@@ -8,70 +8,38 @@ layout: single
   margin: 0 auto;
 }
 
-.paper-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 40px 30px;
-  border-radius: 12px;
+.simple-header {
   margin-bottom: 30px;
-  text-align: center;
+  text-align: left;
 }
 
 .paper-title {
   font-size: 2.5em;
   margin-bottom: 15px;
   font-weight: 700;
+  color: #2c3e50;
 }
 
 .paper-meta {
   display: flex;
-  justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
-  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #e9ecef;
 }
 
 .meta-item {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 8px 16px;
-  border-radius: 20px;
+  background: #f8f9fa;
+  padding: 6px 12px;
+  border-radius: 15px;
   font-size: 0.9em;
-}
-
-.paper-actions {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 25px;
-  flex-wrap: wrap;
-}
-
-.action-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background: rgba(255, 255, 255, 0.9);
-  color: #333;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.action-btn:hover {
-  background: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  color: #333;
-  text-decoration: none;
+  color: #666;
 }
 
 .paper-content {
   background: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 40px 0;
   line-height: 1.8;
 }
 
@@ -144,36 +112,8 @@ layout: single
   text-decoration: none;
 }
 
-.tags-section {
-  margin: 30px 0;
-  padding: 20px;
-  background: #f8f9fa;
-  border-radius: 8px;
-}
-
-.tag {
-  display: inline-block;
-  background: #667eea;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 15px;
-  font-size: 0.8em;
-  margin: 2px;
-  text-decoration: none;
-}
-
-.tag:hover {
-  background: #5a67d8;
-  color: white;
-  text-decoration: none;
-}
-
 /* Responsive design */
 @media (max-width: 768px) {
-  .paper-header {
-    padding: 30px 20px;
-  }
-  
   .paper-title {
     font-size: 2em;
   }
@@ -182,27 +122,18 @@ layout: single
     gap: 10px;
   }
   
-  .paper-actions {
-    gap: 10px;
-  }
-  
-  .action-btn {
-    padding: 10px 20px;
-    font-size: 0.9em;
-  }
-  
   .paper-content {
-    padding: 25px;
+    padding: 25px 0;
   }
 }
 </style>
 
 <div class="paper-replication-page">
-  <a href="/paper-replications/" class="back-link">
-    ← Back to Paper Replications
+  <a href="/models/" class="back-link">
+    ← Back to From Scratch Implementations
   </a>
   
-  <div class="paper-header">
+  <div class="simple-header">
     <h1 class="paper-title">{{ page.title }}</h1>
     
     <div class="paper-meta">
@@ -216,31 +147,7 @@ layout: single
         <strong>Category:</strong> {{ page.category | default: "Machine Learning" }}
       </div>
     </div>
-    
-    {% if page.github_url %}
-    <div class="paper-actions">
-      <a href="{{ page.github_url }}" target="_blank" rel="noopener" class="action-btn github-repo-btn">
-        <i class="fab fa-github"></i>
-        View on GitHub
-      </a>
-    </div>
-    {% endif %}
   </div>
-  
-  {% if page.category or page.framework or page.dataset %}
-  <div class="tags-section">
-    <h3>Tags</h3>
-    {% if page.category %}
-      <a href="/paper-replications/#{{ page.category | slugify }}" class="tag">{{ page.category }}</a>
-    {% endif %}
-    {% if page.framework %}
-      <a href="/paper-replications/#{{ page.framework | slugify }}" class="tag">{{ page.framework }}</a>
-    {% endif %}
-    {% if page.dataset %}
-      <span class="tag">{{ page.dataset }}</span>
-    {% endif %}
-  </div>
-  {% endif %}
   
   <div class="paper-content">
     {{ content }}

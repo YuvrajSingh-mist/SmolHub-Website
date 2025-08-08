@@ -1,4 +1,4 @@
-name: Update Models Data
+name: Auto-Detect New Models
 
 # Permissions needed for the workflow
 permissions:
@@ -6,22 +6,19 @@ permissions:
   pull-requests: write
 
 on:
-  # Run daily at 6 AM UTC
+  # Run daily at 8 AM UTC to check for new models
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 8 * * *'
   
   # Allow manual trigger
   workflow_dispatch:
   
-  # Run when models.json or scripts are updated
-  push:
-    paths:
-      - '_data/models.json'
-      - 'update_models.py'
-      - 'generate_model_files.py'
+  # Run when repository is updated via webhook (if configured)
+  repository_dispatch:
+    types: [new-model-added]
 
 jobs:
-  update-models:
+  auto-detect-models:
     runs-on: ubuntu-latest
     
     steps:
@@ -41,22 +38,22 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
     
-    - name: Update models from GitHub API and regenerate markdown files
+    - name: Auto-detect and add new models
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "Fetching latest data from GitHub API..."
-        python update_models.py --fetch --github-token $GITHUB_TOKEN
-        echo "Regenerating all model markdown files with new layout..."
-        python regenerate_models.py
+        echo "🔍 Checking for new models in Paper-Replications repository..."
+        python auto_detect_models.py
     
     - name: Check for changes
       id: verify-changed-files
       run: |
         if [ -n "$(git status --porcelain)" ]; then
           echo "changed=true" >> $GITHUB_OUTPUT
+          echo "📝 New models detected and added!"
         else
           echo "changed=false" >> $GITHUB_OUTPUT
+          echo "✅ No new models found."
         fi
     
     - name: Commit and push changes
@@ -65,5 +62,6 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
-        git commit -m "🤖 Auto-update models from GitHub API"
-        git push 
+        git commit -m "🆕 Auto-detected and added new model implementations"
+        git push
+        echo "🚀 Successfully added new models to the website!"

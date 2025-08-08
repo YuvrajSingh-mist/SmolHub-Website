@@ -1,24 +1,21 @@
 ---
 title: "Differential Transformer"
-excerpt: "Implementation of Differential Transformer from the Paper Replications repository"
+excerpt: "Implementation of Differential Transformer from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "TinyShakespeare"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Differential Transformer"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Differential Transformer from the Paper Replications repository
-
-## Key Features
-- Transformer Architecture
+Implementation of Differential Transformer from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: TinyShakespeare
+- **Dataset**: Custom
 - **Category**: Language Models
 
 ## Implementation Details
@@ -29,12 +26,14 @@ I implemented the Differential Transformers using Pytorch on Tinyshakespeare dat
 
 [Differential Transformers](https://arxiv.org/pdf/2410.05258)
 
+
 ### Datasets
 
 **Tineshakespeare**: in the /data folder
 
 ### Frameworks:
 **Pytorch**
+
 
 ### Results (on A100 GPU Single)
 

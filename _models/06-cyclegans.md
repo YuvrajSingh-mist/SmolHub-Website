@@ -1,21 +1,21 @@
 ---
-title: "Cyclegans"
-excerpt: "Implementation of CycleGANs from the Paper Replications repository"
+title: "CycleGANs"
+excerpt: "Implementation of CycleGANs from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Generative Models"
 framework: "PyTorch"
-dataset: "Cityscapes"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CycleGANs"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of CycleGANs from the Paper Replications repository
+Implementation of CycleGANs from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: Cityscapes
+- **Dataset**: Custom
 - **Category**: Generative Models
 
 ## Implementation Details
@@ -25,6 +25,7 @@ Implementation of CycleGANs from the Paper Replications repository
 I implemented the CycleGAN using Pytorch on the cityscapes dataset.
 
 [CycleGAN](https://arxiv.org/abs/1703.10593)
+
 
 ### Datasets
 

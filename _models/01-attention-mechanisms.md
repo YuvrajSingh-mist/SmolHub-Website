@@ -1,20 +1,17 @@
 ---
 title: "Attention Mechanisms"
-excerpt: "Implementation of Attention Mechanisms from the Paper Replications repository"
+excerpt: "Implementation of Attention Mechanisms from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Attention Mechanisms"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Attention Mechanisms"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Attention Mechanisms from the Paper Replications repository
-
-## Key Features
-- Attention Mechanism
+Implementation of Attention Mechanisms from scratch
 
 ## Technical Details
 - **Framework**: PyTorch

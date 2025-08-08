@@ -1,25 +1,22 @@
 ---
 title: "Seq2Seq"
-excerpt: "Implementation of Seq2Seq from the Paper Replications repository"
+excerpt: "Implementation of Seq2Seq from scratch"
 collection: models
-layout: paper-replication
-category: "Attention Mechanisms"
+layout: model-implementation
+category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Seq2Seq"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Seq2Seq from the Paper Replications repository
-
-## Key Features
-- Attention Mechanism
+Implementation of Seq2Seq from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Attention Mechanisms
+- **Category**: Sequential Models
 
 ## Implementation Details
 
@@ -47,10 +44,12 @@ Trained a Seq2Seq model with the said attention mechanism  coded from scratch in
 ### Frameworks:
 **Pytorch**
 
+
 ### Epochs/Steps
 Epochs (train) = 50
 
 Val iterations = every epoch
+
 
 ### Loss Curves
 

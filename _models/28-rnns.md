@@ -1,17 +1,17 @@
 ---
-title: "Rnns"
-excerpt: "Implementation of RNNs from the Paper Replications repository"
+title: "RNNs"
+excerpt: "Implementation of RNNs from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/RNNs"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of RNNs from the Paper Replications repository
+Implementation of RNNs from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -35,13 +35,16 @@ Trained a RNN model coded from scratch in Pytorch
 | `block_size` | 16      | Sequence Length                                       |
 | `No of neurons`| 16      | No of neurons in an RNN per layer                                          |    
 
+
 ### Frameworks:
 **Pytorch**
+
 
 ### Epochs/Steps
 Epochs (train) = 50
 
 Val iterations = every epoch
+
 
 ### Losses
 

@@ -1,21 +1,21 @@
 ---
 title: "Pix2Pix"
-excerpt: "Implementation of Pix2Pix from the Paper Replications repository"
+excerpt: "Implementation of Pix2Pix from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Generative Models"
 framework: "PyTorch"
-dataset: "Cityscapes"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Pix2Pix"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Pix2Pix from the Paper Replications repository
+Implementation of Pix2Pix from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: Cityscapes
+- **Dataset**: Custom
 - **Category**: Generative Models
 
 ## Implementation Details
@@ -25,6 +25,7 @@ Implementation of Pix2Pix from the Paper Replications repository
 I implemented the Pix2Pix using Pytorch on the cityscapes dataset.
 
 [Image-to-Image Translation with Conditional Adversarial Networks](https://arxiv.org/abs/1611.07004)
+
 
 ### Datasets
 

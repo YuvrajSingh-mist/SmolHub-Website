@@ -1,22 +1,22 @@
 ---
-title: "Siglip"
-excerpt: "Implementation of SigLip from the Paper Replications repository"
+title: "SigLip"
+excerpt: "Implementation of SigLip from scratch"
 collection: models
-layout: paper-replication
-category: "Computer Vision"
+layout: model-implementation
+category: "Language Models"
 framework: "PyTorch"
 dataset: "Flickr"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SigLip"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of SigLip from the Paper Replications repository
+Implementation of SigLip from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Flickr
-- **Category**: Computer Vision
+- **Category**: Language Models
 
 ## Implementation Details
 
@@ -25,6 +25,7 @@ Implementation of SigLip from the Paper Replications repository
 I implemented the SigLIP using Pytorch on the flickr8000 dataset.
 
 [Sigmoid Loss for Language Image Pre-Training](https://arxiv.org/abs/2303.15343)
+
 
 ### Datasets
 

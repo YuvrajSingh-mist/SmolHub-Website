@@ -1,17 +1,17 @@
 ---
-title: "Cgans"
-excerpt: "Implementation of CGANs from the Paper Replications repository"
+title: "CGANs"
+excerpt: "Implementation of CGANs from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Generative Models"
 framework: "PyTorch"
 dataset: "MNIST"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CGANs"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of CGANs from the Paper Replications repository
+Implementation of CGANs from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -22,7 +22,7 @@ Implementation of CGANs from the Paper Replications repository
 
 # Conditional Generative Adversarial Networks (CGANs)
 
-![CGAN Architecture](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/main/CGANs/output_images/MNIST/fake_images_steps_14000.png)
+![CGAN Architecture](https://github.com/YuvrajSingh-mist/From-Scratch-Implementation/blob/main/CGANs/output_images/MNIST/fake_images_steps_14000.png)
 
 ## Overview
 

@@ -69,7 +69,7 @@ def fetch_github_data(github_token=None):
                 model = {
                     "name": folder_name,
                     "display_name": folder_name.replace('-', ' ').replace('_', ' ').title(),
-                    "description": f"Implementation of {folder_name} from the Paper Replications repository",
+                    "description": f"From scratch implementation of {folder_name}",
                     "readme_content": readme_content,
                     "github_url": f"https://github.com/{repo_owner}/{repo_name}/tree/master/{folder_name}",
                     "api_url": f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{quote(folder_name)}?ref=master",
@@ -218,7 +218,7 @@ def generate_model_markdown(model_data, index):
 title: "{display_name}"
 excerpt: "{description[:200]}{'...' if len(description) > 200 else ''}"
 collection: paper_replications
-layout: paper-replication
+layout: model-implementation
 category: "{category}"
 framework: "{framework}"
 dataset: "{dataset}"

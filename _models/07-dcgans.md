@@ -1,17 +1,17 @@
 ---
-title: "Dcgans"
-excerpt: "Implementation of DCGANs from the Paper Replications repository"
+title: "DCGANs"
+excerpt: "Implementation of DCGANs from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Generative Models"
 framework: "PyTorch"
 dataset: "CIFAR"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DCGANs"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of DCGANs from the Paper Replications repository
+Implementation of DCGANs from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -26,6 +26,7 @@ I implemented a DCGAN Architecture from Scratch using Pytorch on CelebA and CIFA
 
 [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/2010.11929)
 
+
 ### Datasets
 
 **CIFAR10**: Used torchvision to download the train part of the CIFAR10 dataset directly \
@@ -34,19 +35,23 @@ I implemented a DCGAN Architecture from Scratch using Pytorch on CelebA and CIFA
 ### Frameworks:
 **Pytorch**
 
+
 ### Results
 
 **Training steps:** 7800
 
 **CelebA**
 
-![fake_images_steps_11700](https://github.com/YuvrajSingh-mist/Paper-Replications/assets/141050962/0e0c42ff-3f07-40a3-9a68-60d432461186)
+![fake_images_steps_11700](https://github.com/YuvrajSingh-mist/From-Scratch-Implementation/assets/141050962/0e0c42ff-3f07-40a3-9a68-60d432461186)
+
+
 
 **Training steps:** 11700
 
 **CIFAR10**
 
-![fake_images_steps_7500](https://github.com/YuvrajSingh-mist/Paper-Replications/assets/141050962/09ce91e1-45d5-4929-ba25-50f4ef874490)
+![fake_images_steps_7500](https://github.com/YuvrajSingh-mist/From-Scratch-Implementation/assets/141050962/09ce91e1-45d5-4929-ba25-50f4ef874490)
+
 
 #### Model weights Download Link: [link](https://drive.google.com/drive/folders/1BzSxP1k-6BIhgYSodi0rMsmzITP07YVS?usp=sharing)
 

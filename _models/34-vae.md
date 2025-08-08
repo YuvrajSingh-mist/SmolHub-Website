@@ -1,22 +1,22 @@
 ---
-title: "Vae"
-excerpt: "Implementation of VAE from the Paper Replications repository"
+title: "VAE"
+excerpt: "Implementation of VAE from scratch"
 collection: models
-layout: paper-replication
-category: "Generative Models"
+layout: model-implementation
+category: "Computer Vision"
 framework: "PyTorch"
 dataset: "MNIST"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/VAE"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of VAE from the Paper Replications repository
+Implementation of VAE from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: MNIST
-- **Category**: Generative Models
+- **Category**: Computer Vision
 
 ## Implementation Details
 
@@ -137,6 +137,8 @@ The following images show the comparison between original CelebA face images (to
 **Latent Space**: 32-dimensional for rich face feature representation
 **Loss Weighting**: Balanced reconstruction and KL terms for stable training
 
+
+
 **Final Training Metrics**:
 - Reconstruction Loss: MSE between original and reconstructed images
 - KL Loss: Ensures latent variables follow standard normal distribution
@@ -204,6 +206,8 @@ with torch.no_grad():
     z = torch.randn(16, 32).to(device)  # Sample from latent space
     generated_faces = model.decoder(z)
 ```
+
+
 
 ### Frameworks:
 **PyTorch**

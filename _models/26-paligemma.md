@@ -1,17 +1,17 @@
 ---
-title: "Paligemma"
-excerpt: "Implementation of PaliGemma from the Paper Replications repository"
+title: "PaliGemma"
+excerpt: "Implementation of PaliGemma from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "Flickr"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/PaliGemma"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of PaliGemma from the Paper Replications repository
+Implementation of PaliGemma from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -25,6 +25,7 @@ Implementation of PaliGemma from the Paper Replications repository
 I implemented the Paligemma using Pytorch on the flickr8000 dataset.
 
 [PaliGemma: A versatile 3B VLM for transfer](https://arxiv.org/abs/2407.07726)
+
 
 ### Datasets
 

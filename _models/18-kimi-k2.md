@@ -1,28 +1,21 @@
 ---
-title: "Kimi K2"
-excerpt: "Implementation of Kimi-K2 from the Paper Replications repository"
+title: "Kimi-K2"
+excerpt: "Implementation of Kimi-K2 from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "TinyStories"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Kimi-K2"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Kimi-K2 from the Paper Replications repository
-
-## Key Features
-- Mixture of Experts (MoE)
-- Attention Mechanism
-- Transformer Architecture
-- Distributed Training
-- Memory Optimization
+Implementation of Kimi-K2 from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: TinyStories
+- **Dataset**: Custom
 - **Category**: Language Models
 
 ## Implementation Details

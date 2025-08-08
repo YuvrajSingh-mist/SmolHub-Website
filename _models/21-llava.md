@@ -1,22 +1,22 @@
 ---
 title: "Llava"
-excerpt: "Implementation of Llava from the Paper Replications repository"
+excerpt: "Implementation of Llava from scratch"
 collection: models
-layout: paper-replication
-category: "Computer Vision"
+layout: model-implementation
+category: "Training Optimization"
 framework: "PyTorch"
 dataset: "Flickr"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llava"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Llava from the Paper Replications repository
+Implementation of Llava from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Flickr
-- **Category**: Computer Vision
+- **Category**: Training Optimization
 
 ## Implementation Details
 
@@ -26,12 +26,14 @@ I implemented the Llava using Pytorch on the flickr8000 dataset.
 
 [Visual Instruction Tuning](https://arxiv.org/abs/2304.08485)
 
+
 ### Datasets
 
 **flickr 8000**: [Link](https://www.kaggle.com/datasets/adityajn105/flickr8k)
 
 ### Frameworks:
 **Pytorch**
+
 
 ### Results (on T4 GPU Single)
 

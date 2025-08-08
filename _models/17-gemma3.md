@@ -1,24 +1,21 @@
 ---
 title: "Gemma3"
-excerpt: "Implementation of Gemma3 from the Paper Replications repository"
+excerpt: "Implementation of Gemma3 from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "TinyStories"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma3"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Gemma3 from the Paper Replications repository
-
-## Key Features
-- Attention Mechanism
+Implementation of Gemma3 from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: TinyStories
+- **Dataset**: Custom
 - **Category**: Language Models
 
 ## Implementation Details
@@ -27,9 +24,11 @@ Implementation of Gemma3 from the Paper Replications repository
 
 Trained a small Gemma 3 model (90M) coded and trained from scratch in Pytorch (text only) 
 
+
 [Gemma 3](https://arxiv.org/abs/2503.19786)
 
 ## ModelArgs Hyperparameters
+
 
 | Parameter               | Value                                  | Description                                                                 |
 |-------------------------|----------------------------------------|-----------------------------------------------------------------------------|
@@ -50,17 +49,21 @@ Trained a small Gemma 3 model (90M) coded and trained from scratch in Pytorch (t
 | `local_block_size`      | 128                                    | Local attention block size                                                 |
 | `base_freq`             | 10000                                  | Base frequency                                                  |
 
+
 ### Dataset
 
 [TinyStories](https://huggingface.co/datasets/roneneldan/TinyStories)
 
+
 ### Frameworks:
 **Pytorch**
+
 
 ### Epochs/Steps
 Steps (train) = 25000
 
 Val iterations = every 500 steps
+
 
 ### Loss Curves
 

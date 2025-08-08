@@ -1,21 +1,21 @@
 ---
 title: "Llama"
-excerpt: "Implementation of Llama from the Paper Replications repository"
+excerpt: "Implementation of Llama from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "TinyShakespeare"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Llama from the Paper Replications repository
+Implementation of Llama from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: TinyShakespeare
+- **Dataset**: Custom
 - **Category**: Language Models
 
 ## Implementation Details
@@ -25,6 +25,7 @@ Implementation of Llama from the Paper Replications repository
 I implemented Llama using Pytorch on the tineshakespeare dataset.
 
 [LLaMA: Open and Efficient Foundation Language Models](https://arxiv.org/abs/2302.13971).
+
 
 ### Datasets
 

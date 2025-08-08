@@ -1,22 +1,22 @@
 ---
-title: "Fine Tuning Using Peft"
-excerpt: "Implementation of Fine Tuning using PEFT from the Paper Replications repository"
+title: "Fine Tuning using PEFT"
+excerpt: "Implementation of Fine Tuning using PEFT from scratch"
 collection: models
-layout: paper-replication
-category: "Training Methods"
+layout: model-implementation
+category: "Language Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Fine Tuning using PEFT"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Fine Tuning using PEFT from the Paper Replications repository
+Implementation of Fine Tuning using PEFT from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Training Methods
+- **Category**: Language Models
 
 ## Implementation Details
 
@@ -24,6 +24,7 @@ Implementation of Fine Tuning using PEFT from the Paper Replications repository
 
 I implemented a simple fine tuning script using peft (qlora and bnb) for fine tuning llms.
 Also added a file for training encoder type models.
+
 
 ### Frameworks:
 **Pytorch**

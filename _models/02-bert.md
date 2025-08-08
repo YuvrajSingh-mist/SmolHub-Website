@@ -1,24 +1,21 @@
 ---
-title: "Bert"
-excerpt: "Implementation of BERT from the Paper Replications repository"
+title: "BERT"
+excerpt: "Implementation of BERT from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "Cornell Movie Dialogs"
+dataset: "Cornell Movie Dialog"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/BERT"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of BERT from the Paper Replications repository
-
-## Key Features
-- Transformer Architecture
+Implementation of BERT from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: Cornell Movie Dialogs
+- **Dataset**: Cornell Movie Dialog
 - **Category**: Language Models
 
 ## Implementation Details
@@ -28,6 +25,7 @@ Implementation of BERT from the Paper Replications repository
 I implemented the BERT using Pytorch on Cornell Movie Dialog Corpus.
 
 [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805)
+
 
 ### Datasets
 

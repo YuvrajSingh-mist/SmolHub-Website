@@ -1,4 +1,4 @@
-name: Refresh Models from Paper-Replications
+name: Refresh Models from Implementation Repository
 
 on:
   # Allow manual triggering
@@ -8,7 +8,7 @@ on:
   schedule:
     - cron: '0 0 * * 0'
   
-  # Run when Paper-Replications repo is updated (if you add webhook)
+  # Run when Implementation repo is updated (if you add webhook)
   repository_dispatch:
     types: [refresh-models]
 
@@ -32,136 +32,33 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
         
-    - name: Clone Paper-Replications repository
+    - name: Update models from GitHub API and regenerate all markdown files
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        git clone https://github.com/YuvrajSingh-mist/Paper-Replications.git temp_paper_replications
+        echo "Updating models from GitHub API..."
+        python update_models.py --fetch --github-token $GITHUB_TOKEN
+        echo "Regenerating all model markdown files..."
+        python regenerate_models.py
         
-    - name: Generate model files
+        
+    - name: Check for changes
+      id: verify-changed-files
       run: |
-        python3 << 'EOF'
-        import os
-        import json
-        import re
-        from pathlib import Path
-        
-        # Configuration
-        TEMP_DIR = "temp_paper_replications"
-        MODELS_DIR = "_models"
-        
-        def clean_title(folder_name):
-            """Clean folder name to create a nice title."""
-            title = folder_name.replace('-', ' ').replace('_', ' ')
-            title = ' '.join(word.capitalize() for word in title.split())
-            return title
-        
-        def read_readme_content(readme_path):
-            """Read and clean README content."""
-            try:
-                with open(readme_path, 'r', encoding='utf-8') as f:
-                    content = f.read()
-                
-                # Extract first meaningful paragraph
-                lines = content.split('\n')
-                description = ""
-                full_content = content
-                
-                for line in lines:
-                    line = line.strip()
-                    if line and not line.startswith('#') and not line.startswith('!') and len(line) > 20:
-                        description = line[:200] + "..." if len(line) > 200 else line
-                        break
-                
-                if not description:
-                    description = f"Advanced AI model implementation."
-                
-                return description, full_content
-                
-            except Exception as e:
-                print(f"Error reading README: {e}")
-                return "Advanced AI model implementation.", "# Model Documentation\n\nThis model is part of the Paper-Replications project."
-        
-        def create_model_file(folder_name, index):
-            """Create a Jekyll model file."""
-            temp_path = Path(TEMP_DIR) / folder_name
-            models_path = Path(MODELS_DIR)
-            models_path.mkdir(exist_ok=True)
-            
-            title = clean_title(folder_name)
-            
-            # Look for README files
-            readme_files = list(temp_path.glob("README.md")) + list(temp_path.glob("readme.md"))
-            
-            if readme_files:
-                description, full_content = read_readme_content(readme_files[0])
-            else:
-                description = f"Advanced AI model implementation for {title.lower()}."
-                full_content = f"""# {title}
-        
-        This is an advanced AI model implementation for {title.lower()}.
-        
-        ## Features
-        - State-of-the-art architecture
-        - High performance and accuracy
-        - Well-documented codebase
-        - Easy to use and extend
-        
-        ## Repository
-        [View on GitHub](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/{folder_name})
-        """
-            
-            # Create filename
-            filename = f"model-{index+1:02d}-{folder_name.lower().replace('_', '-').replace(' ', '-')}.md"
-            filepath = models_path / filename
-            
-            # Add repository link to full content
-            repo_link = f"\n\n## Repository\n[View Source Code](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/{folder_name})"
-            full_content += repo_link
-            
-            # Create markdown content
-            markdown_content = f'''---
-        title: "{title}"
-        excerpt: "{description}<br/><img src='/images/500x300.png'>"
-        collection: models
-        repository_folder: "{folder_name}"
-        repository_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/{folder_name}"
-        ---
-        
-        {full_content}
-        '''
-            
-            # Write the file
-            with open(filepath, 'w', encoding='utf-8') as f:
-                f.write(markdown_content)
-            
-            print(f"Created model file: {filename}")
-        
-        # Main execution
-        temp_path = Path(TEMP_DIR)
-        if not temp_path.exists():
-            print("Repository not found")
-            exit(1)
-        
-        # Get model folders
-        folders = [item.name for item in temp_path.iterdir() if item.is_dir() and not item.name.startswith('.')]
-        folders.sort()
-        
-        print(f"Found {len(folders)} model folders: {folders}")
-        
-        # Clear existing models
-        models_path = Path(MODELS_DIR)
-        if models_path.exists():
-            for model_file in models_path.glob("model-*.md"):
-                model_file.unlink()
-                print(f"Removed: {model_file.name}")
-        
-        # Create new model files
-        for index, folder_name in enumerate(folders):
-            create_model_file(folder_name, index)
-        
-        print(f"Successfully created {len(folders)} model files")
-        EOF
-        
-    - name: Clean up temporary files
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "changed=true" >> $GITHUB_OUTPUT
+        else
+          echo "changed=false" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Commit and push changes
+      if: steps.verify-changed-files.outputs.changed == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "🤖 Auto-refresh models from implementation repository"
+        git push    - name: Clean up temporary files
       run: |
         rm -rf temp_paper_replications
         

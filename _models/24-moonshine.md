@@ -1,21 +1,17 @@
 ---
 title: "Moonshine"
-excerpt: "Implementation of Moonshine from the Paper Replications repository"
+excerpt: "Implementation of Moonshine from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Moonshine"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Moonshine from the Paper Replications repository
-
-## Key Features
-- Attention Mechanism
-- Transformer Architecture
+Implementation of Moonshine from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -29,6 +25,7 @@ Implementation of Moonshine from the Paper Replications repository
 Trained a small transformer-based ASR model coded and trained from scratch in Pytorch.
 
 [Moonshine: Speech Recognition for Live Transcription and Voice Commands](https://arxiv.org/pdf/2410.15608)
+
 
 ### Hyperparameters
 | Parameter                | Value      | Description                                                                 |
@@ -50,13 +47,16 @@ Trained a small transformer-based ASR model coded and trained from scratch in Py
 
 [Gigaspeech](https://huggingface.co/datasets/speechcolab/gigaspeech) 
 
+
 ### Frameworks:
 **Pytorch**
+
 
 ### Epochs/Steps
 Steps (train) = 1500
 
 Val iterations = every 50 steps
+
 
 ### Loss Curves
 

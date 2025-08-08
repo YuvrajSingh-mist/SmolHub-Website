@@ -1,21 +1,17 @@
 ---
 title: "Transformer"
-excerpt: "Implementation of Transformer from the Paper Replications repository"
+excerpt: "Implementation of Transformer from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Transformer"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Transformer from the Paper Replications repository
-
-## Key Features
-- Attention Mechanism
-- Transformer Architecture
+Implementation of Transformer from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -30,12 +26,14 @@ I implemented the Vanilla Transformers using Pytorch on the German-English datas
 
 [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
+
 ### Datasets
 
 **Multi30k de-en**: [Link](https://raw.githubusercontent.com/multi30k/dataset/master/data/task1/raw/)
 
 ### Frameworks:
 **Pytorch**
+
 
 ### Results (on T4 GPU Single)
 

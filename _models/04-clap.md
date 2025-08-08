@@ -1,20 +1,17 @@
 ---
-title: "Clap"
-excerpt: "Implementation of CLAP from the Paper Replications repository"
+title: "CLAP"
+excerpt: "Implementation of CLAP from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CLAP"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of CLAP from the Paper Replications repository
-
-## Key Features
-- Vision-Language
+Implementation of CLAP from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -26,6 +23,8 @@ Implementation of CLAP from the Paper Replications repository
 # Whisper model in Pytorch from scratch implementation
 
 Implementation of CLAP model coded from scratch in Pytorch 
+
+
 
 [CLAP : LEARNING AUDIO CONCEPTS FROM NATURAL LANGUAGE SUPERVISION](https://arxiv.org/pdf/2206.04769)
 
@@ -64,6 +63,7 @@ Used the 'xs' snapshot.
 
 ### Frameworks:
 **Pytorch**
+
 
 ### NOTE
 The loss was stagged at 2.079 -loge(1/8), that is, the logits tend to be too small for softmax to outputs anythign except uniform probs. Pls let me know where am I making a mistake.

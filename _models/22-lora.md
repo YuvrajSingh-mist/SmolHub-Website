@@ -1,21 +1,21 @@
 ---
-title: "Lora"
-excerpt: "Implementation of LoRA from the Paper Replications repository"
+title: "LoRA"
+excerpt: "Implementation of LoRA from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "TinyShakespeare"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/LoRA"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of LoRA from the Paper Replications repository
+Implementation of LoRA from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: TinyShakespeare
+- **Dataset**: Custom
 - **Category**: Language Models
 
 ## Implementation Details
@@ -26,12 +26,14 @@ I implemented the LoRA framework using Pytorch on Tinyshakespeare dataset.
 
 [LORA: LOW-RANK ADAPTATION OF LARGE LANGUAGE MODELS](https://arxiv.org/pdf/2106.09685)
 
+
 ### Datasets
 
 **Tineshakespeare**: in the /data folder
 
 ### Frameworks:
 **Pytorch**
+
 
 ### Results (on A100 GPU Single)
 

@@ -1,17 +1,17 @@
 ---
-title: "Dpo"
-excerpt: "Implementation of DPO from the Paper Replications repository"
+title: "DPO"
+excerpt: "Implementation of DPO from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DPO"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of DPO from the Paper Replications repository
+Implementation of DPO from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -39,10 +39,12 @@ I Trained Qwen0.5B-Instruct using Direct Preference Optimization in Pytorch
 ### Frameworks:
 **Pytorch**
 
+
 ### Epochs/Steps
 Iterations (train) = 3000
 
 Val iterations = every 20
+
 
 ### Losses
 Train loss - 0.67

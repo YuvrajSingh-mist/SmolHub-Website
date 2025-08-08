@@ -1,20 +1,17 @@
 ---
 title: "Whisper"
-excerpt: "Implementation of Whisper from the Paper Replications repository"
+excerpt: "Implementation of Whisper from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Whisper"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Whisper from the Paper Replications repository
-
-## Key Features
-- Attention Mechanism
+Implementation of Whisper from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -26,6 +23,8 @@ Implementation of Whisper from the Paper Replications repository
 # Whisper model in Pytorch from scratch implementation
 
 Trained a small whisper model coded and trained from scratch in Pytorch 
+
+
 
 [Robust Speech Recognition via Large-Scale Weak Supervision](https://cdn.openai.com/papers/whisper.pdf)
 
@@ -67,10 +66,12 @@ Used the 'xs' snapshot.
 ### Frameworks:
 **Pytorch**
 
+
 ### Epochs/Steps
 Epochs (train) = 10
 
 Val iterations = every epoch
+
 
 ### Loss Curves
 

@@ -1,17 +1,17 @@
 ---
-title: "Lstm"
-excerpt: "Implementation of lstm from the Paper Replications repository"
+title: "lstm"
+excerpt: "Implementation of lstm from scratch"
 collection: models
-layout: paper-replication
+layout: model-implementation
 category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/lstm"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of lstm from the Paper Replications repository
+Implementation of lstm from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -35,13 +35,16 @@ Trained 128K LSTM model coded from scratch in Pytorch
 | `block_size` | 64       | Sequence length                                                             |
 | `No of neurons`     | 128       | Epochs                                                               |   
 
+
 ### Frameworks:
 **Pytorch**
+
 
 ### Epochs/Steps
 Epochs (train) = 50
 
 Val iterations = every epoch
+
 
 ### Losses
 

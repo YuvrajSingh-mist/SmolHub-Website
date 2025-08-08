@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Script to generate markdown files for paper replications from models.json
+Script to generate markdown files for from scratch implementations from models.json
 This script reads the models.json file and creates individual markdown files
-for each model in the _paper_replications collection.
+for each model in the _models collection.
 """
 
 import json

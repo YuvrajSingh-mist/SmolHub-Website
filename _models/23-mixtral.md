@@ -1,22 +1,22 @@
 ---
 title: "Mixtral"
-excerpt: "Implementation of Mixtral from the Paper Replications repository"
+excerpt: "Implementation of Mixtral from scratch"
 collection: models
-layout: paper-replication
-category: "Training Methods"
+layout: model-implementation
+category: "Training Optimization"
 framework: "PyTorch"
-dataset: "TinyShakespeare"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Mixtral"
-date: 2025-08-07
+date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Mixtral from the Paper Replications repository
+Implementation of Mixtral from scratch
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: TinyShakespeare
-- **Category**: Training Methods
+- **Dataset**: Custom
+- **Category**: Training Optimization
 
 ## Implementation Details
 
@@ -26,12 +26,14 @@ I implemented the Mixtral architecture from scratch using Pytorch on Tinyshakesp
 
 [Mixtral of Experts](https://arxiv.org/pdf/2401.04088)
 
+
 ### Datasets
 
 **Tineshakespeare**: in the /data folder
 
 ### Frameworks:
 **Pytorch**
+
 
 ### Results (on T4 GPU Single)
 
