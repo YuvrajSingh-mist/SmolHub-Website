@@ -85,6 +85,9 @@ words_per_minute         : 160
 future                   : true
 read_more                : "enabled" # if enabled, adds "Read more" links to excerpts
 talkmap_link             : false #change to true to add link to talkmap on talks page
+search                   : true # Enable search functionality
+search_full_content      : true # Enable full content search
+search_provider          : lunr # Use Lunr.js for client-side search
 comments:
   provider               : # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "custom"
   disqus:
@@ -287,10 +290,13 @@ defaults:
       path: ""
       type: models
     values:
-      layout: single
+      layout: model-implementation
       author_profile: true
       share: true
       comments: true
+      sidebar:
+        - title: "Quick Info"
+        - text: "{{page.framework}} | {{page.category}}"
   # _datasets
   - scope:
       path: ""

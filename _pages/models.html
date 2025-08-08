@@ -7,37 +7,132 @@ author_profile: true
 
 {% include base_path %}
 
-<link rel="stylesheet" href="{{ '/assets/css/models.css' | relative_url }}?v={{ site.time | date: '%s' }}">
-
 <div class="models-page">
   <div class="models-intro">
-    <h1>From Scratch Implementations</h1>
-    <p>Explore our collection of cutting-edge AI models built from scratch. Each implementation demonstrates deep understanding of algorithms and provides educational insights into modern ML techniques.</p>
+    <h1>🧠 From Scratch Implementations</h1>
+    <p>Explore our collection of <strong>{{site.models.size}} cutting-edge AI models</strong> built from scratch. Each implementation demonstrates deep understanding of algorithms and provides educational insights into modern ML techniques.</p>
   </div>
 
-  <!-- Search Section -->
+  <!-- Enhanced Search Section -->
   <div class="search-section">
     <div class="search-container">
-      <input type="text" id="model-search" placeholder="🔍 Search models (e.g., GPT, BERT, GAN, Transformer...)">
-      <div class="search-filters">
-        <button class="filter-btn active" data-category="all">All Models</button>
-        <button class="filter-btn" data-category="llm">LLMs</button>
-        <button class="filter-btn" data-category="vision">Vision</button>
-        <button class="filter-btn" data-category="gan">GANs</button>
-        <button class="filter-btn" data-category="audio">Audio</button>
-        <button class="filter-btn" data-category="optimization">Training</button>
+      <div class="search-input-wrapper">
+        <input type="text" id="model-search" placeholder="🔍 Search models (e.g., GPT, BERT, GAN, Transformer, LSTM...)">
+        <button id="clear-search" class="clear-btn" style="display: none;">✕</button>
+      </div>
+      
+      <!-- Category Filters -->
+      <div class="filter-section">
+        <h4>📂 Categories</h4>
+        <div class="search-filters">
+          <button class="filter-btn active" data-category="all">All ({{site.models.size}})</button>
+          <button class="filter-btn" data-category="Language Models">🤖 LLMs</button>
+          <button class="filter-btn" data-category="Computer Vision">👁️ Vision</button>
+          <button class="filter-btn" data-category="Generative Models">🎨 Generative</button>
+          <button class="filter-btn" data-category="Sequential Models">📊 Sequential</button>
+          <button class="filter-btn" data-category="Attention Mechanisms">⚡ Attention</button>
+          <button class="filter-btn" data-category="Speech">🔊 Audio</button>
+        </div>
+      </div>
+
+      <!-- Framework Filters -->
+      <div class="filter-section">
+        <h4>🛠️ Frameworks</h4>
+        <div class="framework-filters">
+          <button class="framework-btn active" data-framework="all">All</button>
+          <button class="framework-btn" data-framework="PyTorch">PyTorch</button>
+          <button class="framework-btn" data-framework="TensorFlow">TensorFlow</button>
+          <button class="framework-btn" data-framework="JAX">JAX</button>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="filter-section">
+        <h4>🏷️ Popular Tags</h4>
+        <div class="tags-container" id="tags-container">
+          <!-- Tags will be populated dynamically -->
+        </div>
       </div>
     </div>
+    
     <div class="search-results-info">
-      <span id="search-results-count"></span>
-      <button id="clear-search" style="display: none;">Clear Search</button>
+      <span id="search-results-count">Showing all {{site.models.size}} models</span>
+      <div class="view-options">
+        <button id="grid-view" class="view-btn active">⊞ Grid</button>
+        <button id="list-view" class="view-btn">☰ List</button>
+      </div>
     </div>
   </div>
 
-  <div class="models-grid" id="models-container">
-    {% for post in site.models %}
-      {% include model-card.html %}
-    {% endfor %}
+  <!-- Models Grid/List -->
+  <div class="models-container" id="models-container">
+    <div class="models-grid" id="models-grid">
+      {% assign sorted_models = site.models | sort: 'date' | reverse %}
+      {% for post in sorted_models %}
+        <div class="model-card" 
+             data-category="{{ post.category | default: 'Other' }}"
+             data-framework="{{ post.framework | default: 'PyTorch' }}"
+             data-tags="{{ post.tags | join: ',' | default: '' }}"
+             data-title="{{ post.title | downcase }}"
+             data-excerpt="{{ post.excerpt | strip_html | downcase }}">
+          
+          <div class="model-card__header">
+            <div class="model-card__image">
+              <span class="model-icon">🧠</span>
+              <div class="model-category-badge">{{ post.category | default: "ML Model" }}</div>
+            </div>
+          </div>
+          
+          <div class="model-card__content">
+            <h3 class="model-card__title">
+              <a href="{{ base_path }}{{ post.url }}" rel="permalink">
+                {{ post.title }}
+              </a>
+            </h3>
+            
+            <div class="model-card__excerpt">
+              {{ post.excerpt | markdownify | strip_html | truncatewords: 20 }}
+            </div>
+            
+            <div class="model-card__meta">
+              <span class="framework-tag">🛠️ {{ post.framework | default: "PyTorch" }}</span>
+              <span class="dataset-tag">📊 {{ post.dataset | default: "Custom" }}</span>
+              {% if post.date %}
+                <span class="date-tag">📅 {{ post.date | date: "%b %Y" }}</span>
+              {% endif %}
+            </div>
+
+            {% if post.tags %}
+            <div class="model-card__tags">
+              {% for tag in post.tags %}
+                <span class="tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+            
+            <div class="model-card__footer">
+              <a href="{{ base_path }}{{ post.url }}" class="model-details-btn" rel="permalink">
+                🔍 View Details
+              </a>
+              {% if post.github_url %}
+                <a href="{{ post.github_url }}" class="github-btn" target="_blank">
+                  📁 Code
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- No Results Message -->
+  <div id="no-results" class="no-results" style="display: none;">
+    <div class="no-results-content">
+      <h3>🔍 No models found</h3>
+      <p>Try adjusting your search terms or filters</p>
+      <button id="reset-filters" class="reset-btn">Reset All Filters</button>
+    </div>
   </div>
 </div>
 
@@ -222,7 +317,626 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        console.log('Search initialized with', allModels.length, 'models');
+  </div>
+</div>
+
+<style>
+/* Enhanced Models Page Styles */
+.models-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.models-intro {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.models-intro h1 {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.models-intro p {
+  font-size: 1.2em;
+  color: #7f8c8d;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Search Section */
+.search-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.search-input-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  padding: 15px 50px 15px 20px;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.search-input-wrapper input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+}
+
+.clear-btn {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-section {
+  margin-bottom: 20px;
+}
+
+.filter-section h4 {
+  margin: 0 0 10px 0;
+  color: #495057;
+  font-size: 1.1em;
+}
+
+.search-filters, .framework-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.filter-btn, .framework-btn {
+  padding: 8px 16px;
+  border: 2px solid #e9ecef;
+  background: white;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.filter-btn:hover, .framework-btn:hover {
+  background: #f8f9fa;
+  border-color: #007bff;
+  transform: translateY(-2px);
+}
+
+.filter-btn.active, .framework-btn.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+  box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+}
+
+.tags-container {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag-filter {
+  padding: 4px 12px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.tag-filter:hover {
+  background: #e9ecef;
+}
+
+.tag-filter.active {
+  background: #28a745;
+  color: white;
+  border-color: #28a745;
+}
+
+.search-results-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px 0;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.search-results-info span {
+  font-weight: 600;
+  color: #495057;
+}
+
+.view-options {
+  display: flex;
+  gap: 5px;
+}
+
+.view-btn {
+  padding: 8px 12px;
+  border: 1px solid #dee2e6;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.view-btn.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* Models Grid */
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.models-grid.list-view {
+  grid-template-columns: 1fr;
+}
+
+.models-grid.list-view .model-card {
+  display: flex;
+  flex-direction: row;
+  max-width: none;
+}
+
+.models-grid.list-view .model-card__header {
+  flex: 0 0 150px;
+}
+
+.models-grid.list-view .model-card__content {
+  flex: 1;
+}
+
+/* Model Cards */
+.model-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  border: 1px solid #f8f9fa;
+}
+
+.model-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.model-card__header {
+  position: relative;
+  height: 120px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.model-icon {
+  font-size: 2.5em;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.model-category-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255,255,255,0.9);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.model-card__content {
+  padding: 20px;
+}
+
+.model-card__title {
+  margin: 0 0 10px 0;
+  font-size: 1.3em;
+  line-height: 1.3;
+}
+
+.model-card__title a {
+  color: #2c3e50;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.model-card__title a:hover {
+  color: #007bff;
+}
+
+.model-card__excerpt {
+  color: #6c757d;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.model-card__meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.framework-tag, .dataset-tag, .date-tag {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: #f8f9fa;
+  color: #495057;
+  font-weight: 500;
+}
+
+.model-card__tags {
+  margin-bottom: 15px;
+}
+
+.model-card__tags .tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #e9ecef;
+  border-radius: 10px;
+  font-size: 11px;
+  margin: 2px 4px 2px 0;
+  color: #495057;
+}
+
+.model-card__footer {
+  display: flex;
+  gap: 10px;
+}
+
+.model-details-btn, .github-btn {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.model-details-btn {
+  background: #007bff;
+  color: white;
+}
+
+.model-details-btn:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+.github-btn {
+  background: #f8f9fa;
+  color: #495057;
+  border: 1px solid #dee2e6;
+}
+
+.github-btn:hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.no-results-content h3 {
+  color: #6c757d;
+  margin-bottom: 10px;
+}
+
+.no-results-content p {
+  color: #9ca3af;
+  margin-bottom: 20px;
+}
+
+.reset-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .models-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .search-filters, .framework-filters {
+    gap: 5px;
+  }
+  
+  .filter-btn, .framework-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .search-results-info {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .model-card__footer {
+    flex-direction: column;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🔍 Enhanced Models Search Initialized');
+    
+    // Get all elements
+    const searchInput = document.getElementById('model-search');
+    const clearButton = document.getElementById('clear-search');
+    const resultsCount = document.getElementById('search-results-count');
+    const noResults = document.getElementById('no-results');
+    const resetFilters = document.getElementById('reset-filters');
+    const gridView = document.getElementById('grid-view');
+    const listView = document.getElementById('list-view');
+    const modelsGrid = document.getElementById('models-grid');
+    
+    // Get all filter buttons
+    const categoryFilters = document.querySelectorAll('.filter-btn');
+    const frameworkFilters = document.querySelectorAll('.framework-btn');
+    
+    // Get all model cards
+    const allModels = Array.from(document.querySelectorAll('.model-card'));
+    const totalModels = allModels.length;
+    
+    // Initialize tags
+    initializeTags();
+    
+    // State
+    let currentFilters = {
+        search: '',
+        category: 'all',
+        framework: 'all',
+        tags: []
+    };
+    
+    // Search functionality
+    searchInput?.addEventListener('input', function() {
+        currentFilters.search = this.value.toLowerCase().trim();
+        filterModels();
+        updateClearButton();
+    });
+    
+    clearButton?.addEventListener('click', function() {
+        searchInput.value = '';
+        currentFilters.search = '';
+        filterModels();
+        updateClearButton();
+    });
+    
+    // Category filters
+    categoryFilters.forEach(btn => {
+        btn.addEventListener('click', function() {
+            categoryFilters.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentFilters.category = this.dataset.category;
+            filterModels();
+        });
+    });
+    
+    // Framework filters
+    frameworkFilters.forEach(btn => {
+        btn.addEventListener('click', function() {
+            frameworkFilters.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentFilters.framework = this.dataset.framework;
+            filterModels();
+        });
+    });
+    
+    // View toggles
+    gridView?.addEventListener('click', function() {
+        modelsGrid.classList.remove('list-view');
+        gridView.classList.add('active');
+        listView.classList.remove('active');
+    });
+    
+    listView?.addEventListener('click', function() {
+        modelsGrid.classList.add('list-view');
+        listView.classList.add('active');
+        gridView.classList.remove('active');
+    });
+    
+    // Reset filters
+    resetFilters?.addEventListener('click', function() {
+        searchInput.value = '';
+        currentFilters = {
+            search: '',
+            category: 'all',
+            framework: 'all',
+            tags: []
+        };
+        
+        // Reset all filter buttons
+        categoryFilters.forEach(btn => btn.classList.remove('active'));
+        frameworkFilters.forEach(btn => btn.classList.remove('active'));
+        document.querySelector('[data-category="all"]')?.classList.add('active');
+        document.querySelector('[data-framework="all"]')?.classList.add('active');
+        
+        // Reset tag filters
+        document.querySelectorAll('.tag-filter').forEach(tag => {
+            tag.classList.remove('active');
+        });
+        
+        filterModels();
+        updateClearButton();
+    });
+    
+    function initializeTags() {
+        const allTags = new Set();
+        allModels.forEach(card => {
+            const tags = card.dataset.tags;
+            if (tags) {
+                tags.split(',').forEach(tag => {
+                    if (tag.trim()) allTags.add(tag.trim());
+                });
+            }
+        });
+        
+        const tagsContainer = document.getElementById('tags-container');
+        if (tagsContainer && allTags.size > 0) {
+            Array.from(allTags).sort().forEach(tag => {
+                const tagElement = document.createElement('span');
+                tagElement.className = 'tag-filter';
+                tagElement.textContent = tag;
+                tagElement.addEventListener('click', function() {
+                    toggleTagFilter(tag, this);
+                });
+                tagsContainer.appendChild(tagElement);
+            });
+        }
     }
+    
+    function toggleTagFilter(tag, element) {
+        const index = currentFilters.tags.indexOf(tag);
+        if (index > -1) {
+            currentFilters.tags.splice(index, 1);
+            element.classList.remove('active');
+        } else {
+            currentFilters.tags.push(tag);
+            element.classList.add('active');
+        }
+        filterModels();
+    }
+    
+    function filterModels() {
+        let visibleCount = 0;
+        
+        allModels.forEach(card => {
+            const cardData = {
+                title: card.dataset.title,
+                excerpt: card.dataset.excerpt,
+                category: card.dataset.category,
+                framework: card.dataset.framework,
+                tags: card.dataset.tags ? card.dataset.tags.split(',').map(t => t.trim()) : []
+            };
+            
+            let isVisible = true;
+            
+            // Search filter
+            if (currentFilters.search) {
+                const searchTerm = currentFilters.search;
+                isVisible = isVisible && (
+                    cardData.title.includes(searchTerm) ||
+                    cardData.excerpt.includes(searchTerm) ||
+                    cardData.category.toLowerCase().includes(searchTerm) ||
+                    cardData.framework.toLowerCase().includes(searchTerm) ||
+                    cardData.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            // Category filter
+            if (currentFilters.category !== 'all') {
+                isVisible = isVisible && cardData.category === currentFilters.category;
+            }
+            
+            // Framework filter
+            if (currentFilters.framework !== 'all') {
+                isVisible = isVisible && cardData.framework === currentFilters.framework;
+            }
+            
+            // Tag filters (must have all selected tags)
+            if (currentFilters.tags.length > 0) {
+                isVisible = isVisible && currentFilters.tags.every(tag => 
+                    cardData.tags.includes(tag)
+                );
+            }
+            
+            // Show/hide card
+            if (isVisible) {
+                card.style.display = 'block';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        updateResultsCount(visibleCount);
+        updateNoResultsMessage(visibleCount);
+    }
+    
+    function updateResultsCount(count) {
+        if (resultsCount) {
+            if (count === totalModels) {
+                resultsCount.textContent = `Showing all ${count} models`;
+            } else {
+                resultsCount.textContent = `Found ${count} of ${totalModels} models`;
+            }
+        }
+    }
+    
+    function updateNoResultsMessage(count) {
+        if (noResults) {
+            noResults.style.display = count === 0 ? 'block' : 'none';
+        }
+        
+        if (modelsGrid) {
+            modelsGrid.style.display = count === 0 ? 'none' : 'grid';
+        }
+    }
+    
+    function updateClearButton() {
+        if (clearButton) {
+            clearButton.style.display = currentFilters.search ? 'flex' : 'none';
+        }
+    }
+    
+    // Initialize
+    filterModels();
+    
+    console.log(`✅ Search initialized with ${totalModels} models`);
 });
 </script>
