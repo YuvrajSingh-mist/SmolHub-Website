@@ -1,5 +1,5 @@
 ---
-title: "lstm"
+title: "LSTM"
 excerpt: "Implementation of lstm from scratch"
 collection: models
 layout: model-implementation
