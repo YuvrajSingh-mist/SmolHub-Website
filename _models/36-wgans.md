@@ -1,6 +1,6 @@
 ---
 title: "WGANs"
-excerpt: "Implementation of WGANs from scratch"
+excerpt: "From scratch implementation of WGANs"
 collection: models
 layout: model-implementation
 category: "Generative Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of WGANs from scratch
+From scratch implementation of WGANs
 
 ## Technical Details
 - **Framework**: PyTorch

@@ -1,6 +1,6 @@
 ---
 title: "Differential Transformer"
-excerpt: "Implementation of Differential Transformer from scratch"
+excerpt: "From scratch implementation of Differential Transformer"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Differential Transformer from scratch
+From scratch implementation of Differential Transformer
 
 ## Technical Details
 - **Framework**: PyTorch

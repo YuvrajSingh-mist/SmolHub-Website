@@ -1,6 +1,6 @@
 ---
 title: "DeepSeekV3"
-excerpt: "Implementation of DeepSeekV3 from scratch"
+excerpt: "From scratch implementation of DeepSeekV3"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of DeepSeekV3 from scratch
+From scratch implementation of DeepSeekV3
 
 ## Technical Details
 - **Framework**: PyTorch

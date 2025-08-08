@@ -1,6 +1,6 @@
 ---
 title: "Kimi-K2"
-excerpt: "Implementation of Kimi-K2 from scratch"
+excerpt: "From scratch implementation of Kimi-K2"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Kimi-K2 from scratch
+From scratch implementation of Kimi-K2
 
 ## Technical Details
 - **Framework**: PyTorch

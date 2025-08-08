@@ -1,6 +1,6 @@
 ---
 title: "CLAP"
-excerpt: "Implementation of CLAP from scratch"
+excerpt: "From scratch implementation of CLAP"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of CLAP from scratch
+From scratch implementation of CLAP
 
 ## Technical Details
 - **Framework**: PyTorch

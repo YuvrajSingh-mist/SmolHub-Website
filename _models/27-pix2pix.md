@@ -1,6 +1,6 @@
 ---
 title: "Pix2Pix"
-excerpt: "Implementation of Pix2Pix from scratch"
+excerpt: "From scratch implementation of Pix2Pix"
 collection: models
 layout: model-implementation
 category: "Generative Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Pix2Pix from scratch
+From scratch implementation of Pix2Pix
 
 ## Technical Details
 - **Framework**: PyTorch

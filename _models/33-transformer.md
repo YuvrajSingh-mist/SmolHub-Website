@@ -1,6 +1,6 @@
 ---
 title: "Transformer"
-excerpt: "Implementation of Transformer from scratch"
+excerpt: "From scratch implementation of Transformer"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Transformer from scratch
+From scratch implementation of Transformer
 
 ## Technical Details
 - **Framework**: PyTorch

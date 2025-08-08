@@ -1,6 +1,6 @@
 ---
 title: "Fine Tuning using PEFT"
-excerpt: "Implementation of Fine Tuning using PEFT from scratch"
+excerpt: "From scratch implementation of Fine Tuning using PEFT"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Fine Tuning using PEFT from scratch
+From scratch implementation of Fine Tuning using PEFT
 
 ## Technical Details
 - **Framework**: PyTorch

@@ -1,6 +1,6 @@
 ---
 title: "BERT"
-excerpt: "Implementation of BERT from scratch"
+excerpt: "From scratch implementation of BERT"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of BERT from scratch
+From scratch implementation of BERT
 
 ## Technical Details
 - **Framework**: PyTorch

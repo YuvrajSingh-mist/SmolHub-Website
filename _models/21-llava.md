@@ -1,6 +1,6 @@
 ---
 title: "Llava"
-excerpt: "Implementation of Llava from scratch"
+excerpt: "From scratch implementation of Llava"
 collection: models
 layout: model-implementation
 category: "Training Optimization"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Llava from scratch
+From scratch implementation of Llava
 
 ## Technical Details
 - **Framework**: PyTorch

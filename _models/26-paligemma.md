@@ -1,6 +1,6 @@
 ---
 title: "PaliGemma"
-excerpt: "Implementation of PaliGemma from scratch"
+excerpt: "From scratch implementation of PaliGemma"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of PaliGemma from scratch
+From scratch implementation of PaliGemma
 
 ## Technical Details
 - **Framework**: PyTorch

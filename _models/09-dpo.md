@@ -1,6 +1,6 @@
 ---
 title: "DPO"
-excerpt: "Implementation of DPO from scratch"
+excerpt: "From scratch implementation of DPO"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of DPO from scratch
+From scratch implementation of DPO
 
 ## Technical Details
 - **Framework**: PyTorch

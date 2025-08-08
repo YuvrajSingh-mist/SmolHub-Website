@@ -1,6 +1,6 @@
 ---
 title: "CGANs"
-excerpt: "Implementation of CGANs from scratch"
+excerpt: "From scratch implementation of CGANs"
 collection: models
 layout: model-implementation
 category: "Generative Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of CGANs from scratch
+From scratch implementation of CGANs
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -22,7 +22,7 @@ Implementation of CGANs from scratch
 
 # Conditional Generative Adversarial Networks (CGANs)
 
-[🖼️ View Generated Samples](https://github.com/YuvrajSingh-mist/From-Scratch-Implementation/blob/main/CGANs/output_images/MNIST/fake_images_steps_14000.png)
+[🖼️ View Generated Samples](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/main/CGANs/output_images/MNIST/fake_images_steps_14000.png)
 
 ## Overview
 

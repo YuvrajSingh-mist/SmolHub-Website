@@ -11,7 +11,7 @@ date: 2025-04-25
 ---
 
 ## Overview
-From scratch implementation of lstm.
+From scratch implementation of lstm
 
 ## Technical Details
 - **Framework**: PyTorch

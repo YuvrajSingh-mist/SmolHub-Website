@@ -1,6 +1,6 @@
 ---
 title: "GRU"
-excerpt: "Implementation of GRU from scratch"
+excerpt: "From scratch implementation of GRU"
 collection: models
 layout: model-implementation
 category: "Sequential Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of GRU from scratch
+From scratch implementation of GRU
 
 ## Technical Details
 - **Framework**: PyTorch

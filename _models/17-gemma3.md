@@ -1,6 +1,6 @@
 ---
 title: "Gemma3"
-excerpt: "Implementation of Gemma3 from scratch"
+excerpt: "From scratch implementation of Gemma3"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Gemma3 from scratch
+From scratch implementation of Gemma3
 
 ## Technical Details
 - **Framework**: PyTorch
