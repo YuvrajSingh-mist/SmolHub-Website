@@ -119,8 +119,12 @@ def create_markdown_from_json(model_data, file_number):
     # Extract additional metadata
     framework, dataset, category = extract_framework_and_dataset(readme_content, description)
     
-    # Use current date as fallback
-    current_date = datetime.now().strftime('%Y-%m-%d')
+    # Use GitHub date if available, otherwise use current date as fallback
+    github_date = model_data.get('github_date') or model_data.get('created_date')
+    if github_date:
+        model_date = github_date
+    else:
+        model_date = datetime.now().strftime('%Y-%m-%d')
     
     # Clean up readme content - use exactly what's from GitHub
     clean_content = readme_content.strip() if readme_content else f"# {name}\n\nFrom scratch implementation of {name}."
@@ -147,7 +151,7 @@ category: "{category}"
 framework: "{framework}"
 dataset: "{dataset}"
 github_url: "{github_url}"
-date: {current_date}
+date: {model_date}
 ---
 
 ## Overview

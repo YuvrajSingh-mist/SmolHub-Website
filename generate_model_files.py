@@ -131,6 +131,13 @@ def generate_model_markdown(model_data, index):
     # Clean the readme content
     cleaned_readme = clean_markdown_content(readme_content)
     
+    # Use GitHub date if available, otherwise use current date as fallback
+    github_date = model_data.get('github_date') or model_data.get('created_date')
+    if github_date:
+        model_date = github_date
+    else:
+        model_date = datetime.now().strftime('%Y-%m-%d')
+    
     # Create the frontmatter
     frontmatter = f"""---
 title: "{name}"
@@ -141,7 +148,7 @@ category: "{category}"
 framework: "{framework}"
 dataset: "{dataset}"
 github_url: "{github_url}"
-date: {datetime.now().strftime('%Y-%m-%d')}
+date: {model_date}
 ---
 
 """
