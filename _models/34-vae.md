@@ -36,7 +36,7 @@ The following images show the comparison between original CelebA face images (to
 <img src="data/image.png" alt="VAE Results" width="800"/>
 
 <!-- Fallback references -->
-![VAE Results](./data/image.png) > **Note**: If images don't load, please check the `data/` folder in this repository:
+[🖼️ View Results](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/VAE/./data/image.png) > **Note**: If images don't load, please check the `data/` folder in this repository:
 > - `data/image.png` - Reconstruction comparison results
 > - `data/losses.jpg` - Training loss curves  
 > - `data/arithmetic.jpg` - Latent space visualizations
@@ -50,7 +50,7 @@ The following images show the comparison between original CelebA face images (to
 <img src="data/losses.jpg" alt="Training Losses" width="600"/>
 
 <!-- Fallback reference -->
-![Training Losses](./data/losses.jpg)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/VAE/./data/losses.jpg)
 
 *Training and validation losses over epochs showing convergence of reconstruction and KL divergence losses.*
 
@@ -60,7 +60,7 @@ The following images show the comparison between original CelebA face images (to
 <img src="data/arithmetic.jpg" alt="Latent Arithmetic" width="700"/>
 
 <!-- Fallback reference -->
-![Latent Arithmetic](./data/arithmetic.jpg)
+[🔗 View Latent Arithmetic](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/VAE/./data/arithmetic.jpg)
 
 *Latent space interpolation and arithmetic operations demonstrating the smooth and meaningful latent representations learned by the VAE.*
 
@@ -70,7 +70,7 @@ The following images show the comparison between original CelebA face images (to
 <img src="data/samples.jpg" alt="Generated Samples" width="800"/>
 
 <!-- Fallback reference -->
-![Generated Samples](./data/samples.jpg)
+[🎨 View Generated Samples](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/VAE/./data/samples.jpg)
 
 *Random samples generated from the latent space showing the diversity and quality of faces that the VAE can produce.*
 

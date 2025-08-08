@@ -53,7 +53,7 @@ Val iterations = every epoch
 
 ### Loss Curves
 
-![Train and Val loss curves](img/loss_curves.jpg)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/Seq2Seq/img/loss_curves.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [Seq2Seq](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Seq2Seq)

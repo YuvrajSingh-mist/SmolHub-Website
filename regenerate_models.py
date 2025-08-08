@@ -15,6 +15,42 @@ def slugify(text):
     slug = re.sub(r'[-\s]+', '-', slug)
     return slug.strip('-')
 
+def convert_images_to_links(content, github_url):
+    """Convert image markdown to GitHub hyperlinks"""
+    github_base_url = github_url.replace('/tree/master/', '/blob/master/')
+    
+    def replace_image(match):
+        alt_text = match.group(1)
+        image_path = match.group(2)
+        
+        # Create appropriate link text based on alt text
+        if 'loss' in alt_text.lower():
+            link_text = "📊 View Training Loss Curves"
+        elif 'train' in alt_text.lower() and 'val' in alt_text.lower():
+            link_text = "📈 View Train and Validation Loss"
+        elif 'result' in alt_text.lower():
+            link_text = "🖼️ View Results"
+        elif 'sample' in alt_text.lower():
+            link_text = "🎨 View Generated Samples"
+        elif 'architecture' in alt_text.lower():
+            link_text = "🏗️ View Model Architecture"
+        elif 'output' in alt_text.lower():
+            link_text = "📋 View Model Output"
+        elif 'arithmetic' in alt_text.lower():
+            link_text = "🔢 View Latent Arithmetic"
+        else:
+            link_text = f"🔗 View {alt_text}"
+        
+        # Create GitHub URL
+        github_image_url = f"{github_base_url}/{image_path}"
+        
+        # Return as hyperlink
+        return f"[{link_text}]({github_image_url})"
+    
+    # Find and replace all image references
+    image_pattern = r'!\[([^\]]*)\]\(([^)]+\.(jpg|jpeg|png|gif|svg))\)'
+    return re.sub(image_pattern, replace_image, content)
+
 def extract_framework_and_dataset(readme_content, description):
     """Extract framework and dataset information from readme content"""
     framework = "PyTorch"  # Default
@@ -92,6 +128,10 @@ def create_markdown_from_json(model_data, file_number):
     # Ensure it starts with proper markdown structure
     if not clean_content.startswith('#'):
         clean_content = f"# {name}\n\n{clean_content}"
+    
+    # Convert images to GitHub hyperlinks
+    if github_url:
+        clean_content = convert_images_to_links(clean_content, github_url)
     
     # Add source code section if not present
     if 'source code' not in clean_content.lower() and github_url:

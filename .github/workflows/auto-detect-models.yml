@@ -43,7 +43,17 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo "🔍 Checking for new models in Paper-Replications repository..."
+        echo "📋 Current guidelines applied:"
+        echo "  ✅ Using model-implementation layout (not paper-replication)"
+        echo "  ✅ Converting all images to GitHub hyperlinks automatically"
+        echo "  ✅ Using exact GitHub API data and real commit dates"
+        echo "  ✅ Following 'From Scratch Implementation' approach"
+        echo "  ✅ Exact title matching from models.json"
+        echo ""
         python auto_detect_models.py
+        echo ""
+        echo "🖼️ Ensuring all images in new models are converted to GitHub links..."
+        python fix_images_direct.py
     
     - name: Check for changes
       id: verify-changed-files

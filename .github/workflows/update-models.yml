@@ -45,10 +45,18 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "Fetching latest data from GitHub API..."
+        echo "🔍 Fetching latest data from GitHub API..."
         python update_models.py --fetch --github-token $GITHUB_TOKEN
-        echo "Regenerating all model markdown files with new layout..."
+        echo "🔄 Regenerating all model markdown files with new guidelines..."
+        echo "  - Using model-implementation layout"
+        echo "  - Converting images to GitHub hyperlinks"
+        echo "  - Using exact GitHub API data"
         python regenerate_models.py
+        echo "🖼️ Converting any remaining images to GitHub links..."
+        python fix_images_direct.py
+        echo "✅ All model files updated with latest guidelines!"
+        echo "🔍 Validating that all guidelines are followed..."
+        python validate_guidelines.py
     
     - name: Check for changes
       id: verify-changed-files

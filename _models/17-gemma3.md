@@ -67,7 +67,7 @@ Val iterations = every 500 steps
 
 ### Loss Curves
 
-![Train and Val loss curves](img/loss.png)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/Gemma3/img/loss.png)
 
 Train loss: 2.08 (last step)
 

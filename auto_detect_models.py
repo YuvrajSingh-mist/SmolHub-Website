@@ -146,10 +146,20 @@ def main():
         # Add to models.json
         add_new_models_to_json(new_models, token=token)
         
-        # Regenerate all markdown files
-        print("🔄 Regenerating all model markdown files...")
+        # Regenerate all markdown files with latest guidelines
+        print("🔄 Regenerating all model markdown files with latest guidelines...")
+        print("  ✅ Using model-implementation layout")
+        print("  ✅ Converting images to GitHub hyperlinks")
+        print("  ✅ Using exact GitHub API data")
         try:
             subprocess.run(['python', 'regenerate_models.py'], check=True)
+            print("  ✅ Model files regenerated successfully!")
+            
+            # Ensure images are converted to links
+            print("🖼️ Converting any images to GitHub hyperlinks...")
+            subprocess.run(['python', 'fix_images_direct.py'], check=True)
+            print("  ✅ Image conversion completed!")
+            
             print("✅ Successfully regenerated all model files!")
         except subprocess.CalledProcessError as e:
             print(f"❌ Error regenerating model files: {e}")
