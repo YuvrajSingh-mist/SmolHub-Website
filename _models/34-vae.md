@@ -1,6 +1,6 @@
 ---
 title: "VAE"
-excerpt: "Implementation of VAE from scratch"
+excerpt: "From scratch implementation of VAE"
 collection: models
 layout: model-implementation
 category: "Computer Vision"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of VAE from scratch
+From scratch implementation of VAE
 
 ## Technical Details
 - **Framework**: PyTorch

@@ -1,6 +1,6 @@
 ---
 title: "Seq2Seq"
-excerpt: "Implementation of Seq2Seq from scratch"
+excerpt: "From scratch implementation of Seq2Seq"
 collection: models
 layout: model-implementation
 category: "Sequential Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Seq2Seq from scratch
+From scratch implementation of Seq2Seq
 
 ## Technical Details
 - **Framework**: PyTorch

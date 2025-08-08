@@ -1,6 +1,6 @@
 ---
 title: "SigLip"
-excerpt: "Implementation of SigLip from scratch"
+excerpt: "From scratch implementation of SigLip"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of SigLip from scratch
+From scratch implementation of SigLip
 
 ## Technical Details
 - **Framework**: PyTorch

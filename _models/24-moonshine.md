@@ -1,6 +1,6 @@
 ---
 title: "Moonshine"
-excerpt: "Implementation of Moonshine from scratch"
+excerpt: "From scratch implementation of Moonshine"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Moonshine from scratch
+From scratch implementation of Moonshine
 
 ## Technical Details
 - **Framework**: PyTorch

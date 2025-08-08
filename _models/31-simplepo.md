@@ -1,6 +1,6 @@
 ---
 title: "SimplePO"
-excerpt: "Implementation of SimplePO from scratch"
+excerpt: "From scratch implementation of SimplePO"
 collection: models
 layout: model-implementation
 category: "Machine Learning"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of SimplePO from scratch
+From scratch implementation of SimplePO
 
 ## Technical Details
 - **Framework**: PyTorch

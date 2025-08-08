@@ -1,6 +1,6 @@
 ---
 title: "CycleGANs"
-excerpt: "Implementation of CycleGANs from scratch"
+excerpt: "From scratch implementation of CycleGANs"
 collection: models
 layout: model-implementation
 category: "Generative Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of CycleGANs from scratch
+From scratch implementation of CycleGANs
 
 ## Technical Details
 - **Framework**: PyTorch

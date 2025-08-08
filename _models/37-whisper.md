@@ -1,6 +1,6 @@
 ---
 title: "Whisper"
-excerpt: "Implementation of Whisper from scratch"
+excerpt: "From scratch implementation of Whisper"
 collection: models
 layout: model-implementation
 category: "Computer Vision"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Whisper from scratch
+From scratch implementation of Whisper
 
 ## Technical Details
 - **Framework**: PyTorch

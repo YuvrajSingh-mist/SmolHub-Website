@@ -1,6 +1,6 @@
 ---
 title: "CLiP"
-excerpt: "Implementation of CLiP from scratch"
+excerpt: "From scratch implementation of CLiP"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of CLiP from scratch
+From scratch implementation of CLiP
 
 ## Technical Details
 - **Framework**: PyTorch

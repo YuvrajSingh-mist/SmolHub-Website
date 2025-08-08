@@ -1,6 +1,6 @@
 ---
 title: "LoRA"
-excerpt: "Implementation of LoRA from scratch"
+excerpt: "From scratch implementation of LoRA"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of LoRA from scratch
+From scratch implementation of LoRA
 
 ## Technical Details
 - **Framework**: PyTorch

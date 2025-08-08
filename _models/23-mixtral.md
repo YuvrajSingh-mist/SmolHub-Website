@@ -1,6 +1,6 @@
 ---
 title: "Mixtral"
-excerpt: "Implementation of Mixtral from scratch"
+excerpt: "From scratch implementation of Mixtral"
 collection: models
 layout: model-implementation
 category: "Training Optimization"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Mixtral from scratch
+From scratch implementation of Mixtral
 
 ## Technical Details
 - **Framework**: PyTorch

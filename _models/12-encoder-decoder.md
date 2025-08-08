@@ -1,6 +1,6 @@
 ---
 title: "Encoder-Decoder"
-excerpt: "Implementation of Encoder-Decoder from scratch"
+excerpt: "From scratch implementation of Encoder-Decoder"
 collection: models
 layout: model-implementation
 category: "Sequential Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Encoder-Decoder from scratch
+From scratch implementation of Encoder-Decoder
 
 ## Technical Details
 - **Framework**: PyTorch

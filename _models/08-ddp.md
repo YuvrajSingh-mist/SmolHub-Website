@@ -1,6 +1,6 @@
 ---
 title: "DDP"
-excerpt: "Implementation of DDP from scratch"
+excerpt: "From scratch implementation of DDP"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of DDP from scratch
+From scratch implementation of DDP
 
 ## Technical Details
 - **Framework**: PyTorch

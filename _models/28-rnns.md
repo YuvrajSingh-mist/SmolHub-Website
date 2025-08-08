@@ -1,6 +1,6 @@
 ---
 title: "RNNs"
-excerpt: "Implementation of RNNs from scratch"
+excerpt: "From scratch implementation of RNNs"
 collection: models
 layout: model-implementation
 category: "Sequential Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of RNNs from scratch
+From scratch implementation of RNNs
 
 ## Technical Details
 - **Framework**: PyTorch

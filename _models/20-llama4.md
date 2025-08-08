@@ -1,6 +1,6 @@
 ---
 title: "Llama4"
-excerpt: "Implementation of Llama4 from scratch"
+excerpt: "From scratch implementation of Llama4"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of Llama4 from scratch
+From scratch implementation of Llama4
 
 ## Technical Details
 - **Framework**: PyTorch

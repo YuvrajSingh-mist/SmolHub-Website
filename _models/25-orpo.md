@@ -1,6 +1,6 @@
 ---
 title: "ORPO"
-excerpt: "Implementation of ORPO from scratch"
+excerpt: "From scratch implementation of ORPO"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of ORPO from scratch
+From scratch implementation of ORPO
 
 ## Technical Details
 - **Framework**: PyTorch

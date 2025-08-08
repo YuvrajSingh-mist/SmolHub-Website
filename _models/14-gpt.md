@@ -1,6 +1,6 @@
 ---
 title: "GPT"
-excerpt: "Implementation of GPT from scratch"
+excerpt: "From scratch implementation of GPT"
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of GPT from scratch
+From scratch implementation of GPT
 
 ## Technical Details
 - **Framework**: PyTorch

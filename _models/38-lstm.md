@@ -1,6 +1,6 @@
 ---
 title: "lstm"
-excerpt: "Implementation of lstm from scratch"
+excerpt: "From scratch implementation of lstm"
 collection: models
 layout: model-implementation
 category: "Sequential Models"
@@ -11,7 +11,7 @@ date: 2025-08-08
 ---
 
 ## Overview
-Implementation of lstm from scratch
+From scratch implementation of lstm
 
 ## Technical Details
 - **Framework**: PyTorch
