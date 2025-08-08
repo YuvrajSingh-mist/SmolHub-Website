@@ -1,6 +1,6 @@
 
 ---
-title: "lstm"
+title: "LSTM"
 excerpt: "From scratch implementation of lstm"
 collection: models
 layout: model-implementation
@@ -8,7 +8,7 @@ category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/lstm"
-date: 2024-03-15
+date: 2025-04-25
 ---
 
 ## Overview
@@ -55,6 +55,4 @@ Val loss - 0.48
 ![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/From-Scratch-Implementation/master/lstm/img/loss_curves.jpg)
 
 ## Source Code
-📁 **GitHub Repository**: [lstm](https://github.com/YuvrajSingh-mist/From-Scratch-Implementation/tree/master/lstm)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+📁 **GitHub Repository**: [lstm](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/lstm)

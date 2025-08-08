@@ -101,6 +101,9 @@ author_profile: true
 </style>
 
 <script>
+// Global variable to store all models data
+let allModels = [];
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🔍 Models page loaded - initializing search and filters...');
     
@@ -115,13 +118,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const resultsCount = document.getElementById('search-results-count');
         const tagButtons = document.querySelectorAll('.filter-btn[data-tag]');
         
-        // Store all models for filtering
-        const allModels = Array.from(document.querySelectorAll('.model-wrapper')).map(wrapper => ({
-            element: wrapper,
-            name: wrapper.querySelector('.model-card__title')?.textContent.toLowerCase() || '',
-            description: wrapper.querySelector('.model-card__excerpt')?.textContent.toLowerCase() || '',
-            tags: wrapper.getAttribute('data-tags') || ''
-        }));
+        // Store all models for filtering (make it global)
+        allModels = Array.from(document.querySelectorAll('.model-wrapper')).map(wrapper => {
+            const tagsStr = wrapper.getAttribute('data-tags') || '';
+            return {
+                element: wrapper,
+                name: wrapper.querySelector('.model-card__title')?.textContent.toLowerCase() || '',
+                description: wrapper.querySelector('.model-card__excerpt')?.textContent.toLowerCase() || '',
+                tags: tagsStr.split(',').filter(tag => tag.trim()).map(tag => tag.trim())
+            };
+        });
         
         let currentQuery = '';
         let currentTag = 'all';
@@ -169,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         function filterModels() {
             console.log(`🔍 Filtering - Query: "${currentQuery}", Tag: "${currentTag}"`);
+            console.log(`📋 Total models available: ${allModels.length}`);
             
             const filteredModels = allModels.filter(model => {
                 // Text search filter
@@ -176,11 +183,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     model.name.includes(currentQuery) || 
                     model.description.includes(currentQuery);
                 
-                // Tag filter
+                // Tag filter - check auto-generated tags
                 const matchesTag = currentTag === 'all' || 
-                    model.tags.includes(currentTag);
+                    (model.tags && model.tags.includes(currentTag));
                 
-                console.log(`Model: ${model.name.substring(0, 20)}, Tags: "${model.tags}", MatchesTag: ${matchesTag}, MatchesSearch: ${matchesSearch}`);
+                console.log(`Model: ${model.name.substring(0, 20)}..., Auto-Tags: "${Array.isArray(model.tags) ? model.tags.join(',') : 'No tags'}", MatchesTag: ${matchesTag}, MatchesSearch: ${matchesSearch}`);
                 
                 return matchesSearch && matchesTag;
             });
@@ -222,12 +229,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log('✅ Model filtering initialized with', allModels.length, 'models');
         
-        // Load GitHub dates from JSON data
-        loadGitHubDates();
+        // Load GitHub dates and auto-generate tags
+        loadGitHubDatesAndTags();
     }
     
-    function loadGitHubDates() {
-        console.log('📅 Loading GitHub creation dates...');
+    function loadGitHubDatesAndTags() {
+        console.log('📅 Loading GitHub creation dates and auto-generating tags...');
         
         const githubDataScript = document.getElementById('models-github-data');
         if (!githubDataScript) {
@@ -244,68 +251,166 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Create mapping of model names to GitHub dates
-            const nameToDate = {};
+            // Create mapping of model names to GitHub dates and auto-generated tags
+            const nameToData = {};
             githubData.models.forEach(model => {
-                if (model.github_date || model.created_date) {
-                    nameToDate[model.name] = model.github_date || model.created_date;
-                }
+                const autoTags = generateAutoTags(model);
+                nameToData[model.name] = {
+                    githubDate: model.github_date || model.created_date,
+                    tags: autoTags
+                };
             });
             
-            console.log('📅 Date mapping created:', nameToDate);
+            console.log('📅 Data mapping created:', nameToData);
             
-            // Update model cards with GitHub dates
+            // Update model cards and wrapper elements
             let updatedCards = 0;
             document.querySelectorAll('.model-wrapper').forEach(wrapper => {
                 const modelName = wrapper.dataset.name;
                 if (!modelName) return;
                 
-                // Find matching GitHub date
-                let githubDate = null;
-                for (const [name, date] of Object.entries(nameToDate)) {
+                // Find matching GitHub data
+                let modelData = null;
+                for (const [name, data] of Object.entries(nameToData)) {
                     if (name.toLowerCase().replace(/[^a-z0-9]/g, '') === 
                         modelName.toLowerCase().replace(/[^a-z0-9]/g, '')) {
-                        githubDate = date;
+                        modelData = data;
                         break;
                     }
                 }
                 
-                if (githubDate) {
+                if (modelData) {
+                    // Update wrapper with auto-generated tags
+                    wrapper.setAttribute('data-tags', modelData.tags.join(','));
+                    console.log(`🏷️ Auto-tagged ${modelName}: ${modelData.tags.join(', ')}`);
+                    
                     // Add date info to the model card
                     const modelCard = wrapper.querySelector('.model-card');
-                    if (modelCard) {
+                    if (modelCard && modelData.githubDate) {
                         let dateElement = modelCard.querySelector('.model-card__date');
                         if (!dateElement) {
                             dateElement = document.createElement('div');
                             dateElement.className = 'model-card__date';
                             
-                            // Insert before footer
+                            // Try to insert before footer, otherwise append at end
                             const footer = modelCard.querySelector('.model-card__footer');
-                            if (footer) {
-                                modelCard.insertBefore(dateElement, footer);
-                            } else {
+                            try {
+                                if (footer && footer.parentNode === modelCard) {
+                                    modelCard.insertBefore(dateElement, footer);
+                                } else {
+                                    modelCard.appendChild(dateElement);
+                                }
+                            } catch (e) {
+                                console.warn('Failed to insert date element, appending instead:', e);
                                 modelCard.appendChild(dateElement);
                             }
                         }
                         
                         // Format date nicely
-                        const formattedDate = new Date(githubDate).toLocaleDateString('en-US', {
+                        const formattedDate = new Date(modelData.githubDate).toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'short',
                             day: 'numeric'
                         });
                         
                         dateElement.innerHTML = `<small>📅 Created: ${formattedDate}</small>`;
-                        updatedCards++;
                     }
+                    updatedCards++;
                 }
             });
             
-            console.log(`✅ Updated ${updatedCards} model cards with GitHub dates`);
+            console.log(`✅ Updated ${updatedCards} model cards with GitHub dates and auto-tags`);
+            
+            // Refresh the allModels data to include new tags
+            refreshModelData();
             
         } catch (error) {
             console.error('❌ Error parsing GitHub data:', error);
         }
+    }
+    
+    function generateAutoTags(model) {
+        const content = (model.name + ' ' + model.description + ' ' + (model.readme_content || '')).toLowerCase();
+        const tags = [];
+        
+        console.log(`🏷️ Auto-tagging ${model.name}: Content snippet: "${content.substring(0, 100)}..."`);
+        
+        // NLP/Language Models
+        if (content.includes('bert') || content.includes('gpt') || content.includes('llama') || 
+            content.includes('language') || content.includes('nlp') || content.includes('text') ||
+            content.includes('transformer') || content.includes('lstm') || content.includes('rnn')) {
+            tags.push('nlp');
+            console.log(`  ✅ Added NLP tag`);
+        }
+        
+        // Computer Vision
+        if (content.includes('vision') || content.includes('clip') || content.includes('image') || 
+            content.includes('cnn') || content.includes('resnet') || content.includes('vit')) {
+            tags.push('vision');
+            console.log(`  ✅ Added Vision tag`);
+        }
+        
+        // Generative Models
+        if (content.includes('gan') || content.includes('vae') || content.includes('diffusion') || 
+            content.includes('generative') || content.includes('dcgan') || content.includes('cyclegan')) {
+            tags.push('generative');
+            console.log(`  ✅ Added Generative tag`);
+        }
+        
+        // Sequential Models
+        if (content.includes('lstm') || content.includes('gru') || content.includes('rnn') || 
+            content.includes('sequence') || content.includes('sequential')) {
+            tags.push('sequential');
+            console.log(`  ✅ Added Sequential tag`);
+        }
+        
+        // Attention Models
+        if (content.includes('attention') || content.includes('transformer') || content.includes('bert') ||
+            content.includes('self-attention')) {
+            tags.push('attention');
+            console.log(`  ✅ Added Attention tag`);
+        }
+        
+        // Optimization/Training
+        if (content.includes('ddp') || content.includes('distributed') || content.includes('training') ||
+            content.includes('optimization') || content.includes('fine') || content.includes('tune')) {
+            tags.push('optimization');
+            console.log(`  ✅ Added Optimization tag`);
+        }
+        
+        console.log(`🏷️ Final tags for ${model.name}: [${tags.join(', ')}]`);
+        return tags;
+    }
+    
+    function refreshModelData() {
+        console.log("🔄 Starting refreshModelData...");
+        
+        // Re-read all model data including the new tags
+        allModels = [];
+        document.querySelectorAll('.model-wrapper').forEach((wrapper, index) => {
+            const nameElement = wrapper.querySelector('.model-card__title');
+            const descElement = wrapper.querySelector('.model-card__excerpt');
+            
+            const name = nameElement?.textContent || `Model ${index + 1}`;
+            const description = descElement?.textContent || '';
+            
+            const model = {
+                element: wrapper,
+                name: name.toLowerCase(),
+                description: description.toLowerCase()
+            };
+            
+            // Generate auto tags for this model
+            const autoTags = generateAutoTags(model);
+            model.tags = autoTags;
+            
+            console.log(`  📝 Model "${name}" processed with tags: [${autoTags.join(', ')}]`);
+            
+            allModels.push(model);
+        });
+        
+        console.log(`🔄 Refreshed model data: ${allModels.length} models with auto-generated tags`);
+        console.log('📊 Sample model data:', allModels.slice(0, 2));
     }
 });
 </script>
