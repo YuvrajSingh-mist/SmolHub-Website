@@ -1,5 +1,6 @@
+
 ---
-title: "LSTM"
+title: "lstm"
 excerpt: "From scratch implementation of lstm"
 collection: models
 layout: model-implementation
@@ -7,7 +8,7 @@ category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/lstm"
-date: 2025-04-25
+date: 2024-03-15
 ---
 
 ## Overview
