@@ -45,14 +45,19 @@ jobs:
         pip install requests
     
     - name: Run comprehensive standardization
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "🔧 Running comprehensive markdown standardization..."
+        echo "� Ensuring GitHub creation dates are up to date..."
+        python fetch_github_dates.py
+        echo "�🔧 Running comprehensive markdown standardization..."
         echo "📋 This will ensure:"
         echo "  ✅ Consistent frontmatter format"
         echo "  ✅ Proper layout: model-implementation"
         echo "  ✅ Fixed image links using raw.githubusercontent.com"
         echo "  ✅ Standardized section structure"
         echo "  ✅ Template and automation setup"
+        echo "  ✅ Accurate GitHub creation dates"
         echo ""
         python standardize_markdowns.py
         echo ""

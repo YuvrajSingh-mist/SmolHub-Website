@@ -116,6 +116,20 @@
     border-top: 1px solid #f0f0f0;
 }
 
+.model-card__date {
+    padding: 8px 20px;
+    color: #666;
+    font-size: 0.85em;
+    border-top: 1px solid #f5f5f5;
+    background: #fafafa;
+}
+
+.model-card__date small {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 .model-details-btn {
     display: inline-block;
     background: linear-gradient(135deg, #007acc, #005fa3);

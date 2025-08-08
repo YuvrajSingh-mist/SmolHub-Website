@@ -7,7 +7,7 @@ category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/RNNs"
-date: 2025-08-08
+date: 2025-03-07
 ---
 
 ## Overview

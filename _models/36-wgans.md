@@ -7,7 +7,7 @@ category: "Generative Models"
 framework: "PyTorch"
 dataset: "MNIST"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/WGANs"
-date: 2025-08-08
+date: 2025-02-09
 ---
 
 ## Overview

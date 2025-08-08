@@ -1,6 +1,23 @@
 name: Update Models Data
 
-# Permissions needed for the workflow
+# Permissions nee    - name: Update models from GitHub API and regenerate markdown files
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "🔍 Fetching latest data from GitHub API..."
+        python update_models.py --fetch --github-token $GITHUB_TOKEN
+        echo "📅 Fetching GitHub creation dates for models and datasets..."
+        python fetch_github_dates.py
+        echo "🔄 Regenerating all model markdown files with new guidelines..."
+        echo "  - Using model-implementation layout"
+        echo "  - Converting images to raw.githubusercontent.com URLs"
+        echo "  - Using exact GitHub API data with real commit dates"
+        echo "  - Standardized frontmatter and content structure"
+        python regenerate_models.py
+        echo "🔧 Running comprehensive standardization..."
+        python standardize_markdowns.py
+        echo "🔍 Validating that all guidelines are followed..."
+        python validate_guidelines.pyflow
 permissions:
   contents: write
   pull-requests: write

@@ -38,14 +38,26 @@ author_profile: true
     </div>
   </div>
 
-  <div class="models-grid" id="datasets-container">
+    <div class="models-grid" id="datasets-container">
     {% for post in site.datasets %}
       <div class="dataset-card" 
-           data-tags="{{ post.tags | join: ',' | downcase }}">
+           data-tags="{{ post.tags | join: ',' | downcase }}"
+           data-name="{{ post.title }}">
         {% include dataset-card.html %}
       </div>
     {% endfor %}
   </div>
+
+  <!-- Hidden data container for GitHub dates -->
+  <script type="application/json" id="datasets-github-data">
+    {{ site.data.datasets | jsonify }}
+  </script>
+</div>
+
+  <!-- Hidden data container for GitHub dates -->
+  <script type="application/json" id="datasets-github-data">
+    {{ site.data.datasets | jsonify }}
+  </script>
 </div>
 
 <style>
@@ -243,6 +255,91 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         console.log('✅ Dataset filtering initialized with', allDatasets.length, 'datasets');
+        
+        // Load GitHub dates
+        loadDatasetGitHubDates();
+    }
+    
+    function loadDatasetGitHubDates() {
+        console.log('📅 Loading dataset GitHub creation dates...');
+        
+        const githubDataScript = document.getElementById('datasets-github-data');
+        if (!githubDataScript) {
+            console.warn('⚠️ No GitHub data found for datasets');
+            return;
+        }
+        
+        try {
+            const githubData = JSON.parse(githubDataScript.textContent);
+            console.log('📊 Dataset GitHub data loaded:', githubData);
+            
+            if (!githubData.datasets) {
+                console.warn('⚠️ No datasets in GitHub data');
+                return;
+            }
+            
+            // Create mapping of dataset names to GitHub dates
+            const nameToDate = {};
+            githubData.datasets.forEach(dataset => {
+                if (dataset.github_date || dataset.created_date) {
+                    nameToDate[dataset.name] = dataset.github_date || dataset.created_date;
+                }
+            });
+            
+            console.log('📅 Dataset date mapping created:', nameToDate);
+            
+            // Update dataset cards with GitHub dates
+            let updatedCards = 0;
+            document.querySelectorAll('.dataset-card').forEach(card => {
+                const datasetName = card.dataset.name;
+                if (!datasetName) return;
+                
+                // Find matching GitHub date
+                let githubDate = null;
+                for (const [name, date] of Object.entries(nameToDate)) {
+                    if (name.toLowerCase().replace(/[^a-z0-9]/g, '') === 
+                        datasetName.toLowerCase().replace(/[^a-z0-9]/g, '')) {
+                        githubDate = date;
+                        break;
+                    }
+                }
+                
+                if (githubDate) {
+                    // Add date info to the dataset card
+                    const modelCard = card.querySelector('.model-card');
+                    if (modelCard) {
+                        let dateElement = modelCard.querySelector('.model-card__date');
+                        if (!dateElement) {
+                            dateElement = document.createElement('div');
+                            dateElement.className = 'model-card__date';
+                            
+                            // Insert before footer
+                            const footer = modelCard.querySelector('.model-card__footer');
+                            if (footer) {
+                                modelCard.insertBefore(dateElement, footer);
+                            } else {
+                                modelCard.appendChild(dateElement);
+                            }
+                        }
+                        
+                        // Format date nicely
+                        const formattedDate = new Date(githubDate).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric'
+                        });
+                        
+                        dateElement.innerHTML = `<small>📅 Created: ${formattedDate}</small>`;
+                        updatedCards++;
+                    }
+                }
+            });
+            
+            console.log(`✅ Updated ${updatedCards} dataset cards with GitHub dates`);
+            
+        } catch (error) {
+            console.error('❌ Error parsing dataset GitHub data:', error);
+        }
     }
     
     // Function to show dataset detail page
@@ -349,5 +446,91 @@ document.addEventListener('DOMContentLoaded', function() {
         
         return html;
     }
+    
+    // Load GitHub dates from JSON data
+    function loadDatasetGitHubDates() {
+        console.log('📅 Loading dataset GitHub creation dates...');
+        
+        const githubDataScript = document.getElementById('datasets-github-data');
+        if (!githubDataScript) {
+            console.warn('⚠️ No GitHub data found for datasets');
+            return;
+        }
+        
+        try {
+            const githubData = JSON.parse(githubDataScript.textContent);
+            console.log('📊 Dataset GitHub data loaded:', githubData);
+            
+            if (!githubData.datasets) {
+                console.warn('⚠️ No datasets in GitHub data');
+                return;
+            }
+            
+            // Create mapping of dataset names to GitHub dates
+            const nameToDate = {};
+            githubData.datasets.forEach(dataset => {
+                if (dataset.github_date || dataset.created_date) {
+                    nameToDate[dataset.name] = dataset.github_date || dataset.created_date;
+                }
+            });
+            
+            console.log('📅 Dataset date mapping created:', nameToDate);
+            
+            // Update dataset cards with GitHub dates
+            let updatedCards = 0;
+            document.querySelectorAll('.dataset-card').forEach(wrapper => {
+                const datasetName = wrapper.dataset.name;
+                if (!datasetName) return;
+                
+                // Find matching GitHub date
+                let githubDate = null;
+                for (const [name, date] of Object.entries(nameToDate)) {
+                    if (name.toLowerCase().replace(/[^a-z0-9]/g, '') === 
+                        datasetName.toLowerCase().replace(/[^a-z0-9]/g, '')) {
+                        githubDate = date;
+                        break;
+                    }
+                }
+                
+                if (githubDate) {
+                    // Add date info to the dataset card
+                    const modelCard = wrapper.querySelector('.model-card');
+                    if (modelCard) {
+                        let dateElement = modelCard.querySelector('.model-card__date');
+                        if (!dateElement) {
+                            dateElement = document.createElement('div');
+                            dateElement.className = 'model-card__date';
+                            
+                            // Insert before footer
+                            const footer = modelCard.querySelector('.model-card__footer');
+                            if (footer) {
+                                modelCard.insertBefore(dateElement, footer);
+                            } else {
+                                modelCard.appendChild(dateElement);
+                            }
+                        }
+                        
+                        // Format date nicely
+                        const formattedDate = new Date(githubDate).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric'
+                        });
+                        
+                        dateElement.innerHTML = `<small>📅 Created: ${formattedDate}</small>`;
+                        updatedCards++;
+                    }
+                }
+            });
+            
+            console.log(`✅ Updated ${updatedCards} dataset cards with GitHub dates`);
+            
+        } catch (error) {
+            console.error('❌ Error parsing dataset GitHub data:', error);
+        }
+    }
+    
+    // Initialize dataset dates on page load
+    loadDatasetGitHubDates();
 });
 </script>

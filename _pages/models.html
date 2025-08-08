@@ -42,11 +42,18 @@ author_profile: true
   <div class="models-grid" id="models-container">
     {% for post in site.models %}
       <div class="model-wrapper" 
-           data-tags="{{ post.tags | join: ',' | downcase }}">
+           data-tags="{{ post.tags | join: ',' | downcase }}"
+           data-name="{{ post.title }}"
+           data-date="{{ post.date | date: '%Y-%m-%d' }}">
         {% include model-card.html %}
       </div>
     {% endfor %}
   </div>
+
+  <!-- Hidden data container for GitHub dates -->
+  <script type="application/json" id="models-github-data">
+    {{ site.data.models | jsonify }}
+  </script>
 </div>
 
 <style>
@@ -214,6 +221,91 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         console.log('✅ Model filtering initialized with', allModels.length, 'models');
+        
+        // Load GitHub dates from JSON data
+        loadGitHubDates();
+    }
+    
+    function loadGitHubDates() {
+        console.log('📅 Loading GitHub creation dates...');
+        
+        const githubDataScript = document.getElementById('models-github-data');
+        if (!githubDataScript) {
+            console.warn('⚠️ No GitHub data found');
+            return;
+        }
+        
+        try {
+            const githubData = JSON.parse(githubDataScript.textContent);
+            console.log('📊 GitHub data loaded:', githubData);
+            
+            if (!githubData.models) {
+                console.warn('⚠️ No models in GitHub data');
+                return;
+            }
+            
+            // Create mapping of model names to GitHub dates
+            const nameToDate = {};
+            githubData.models.forEach(model => {
+                if (model.github_date || model.created_date) {
+                    nameToDate[model.name] = model.github_date || model.created_date;
+                }
+            });
+            
+            console.log('📅 Date mapping created:', nameToDate);
+            
+            // Update model cards with GitHub dates
+            let updatedCards = 0;
+            document.querySelectorAll('.model-wrapper').forEach(wrapper => {
+                const modelName = wrapper.dataset.name;
+                if (!modelName) return;
+                
+                // Find matching GitHub date
+                let githubDate = null;
+                for (const [name, date] of Object.entries(nameToDate)) {
+                    if (name.toLowerCase().replace(/[^a-z0-9]/g, '') === 
+                        modelName.toLowerCase().replace(/[^a-z0-9]/g, '')) {
+                        githubDate = date;
+                        break;
+                    }
+                }
+                
+                if (githubDate) {
+                    // Add date info to the model card
+                    const modelCard = wrapper.querySelector('.model-card');
+                    if (modelCard) {
+                        let dateElement = modelCard.querySelector('.model-card__date');
+                        if (!dateElement) {
+                            dateElement = document.createElement('div');
+                            dateElement.className = 'model-card__date';
+                            
+                            // Insert before footer
+                            const footer = modelCard.querySelector('.model-card__footer');
+                            if (footer) {
+                                modelCard.insertBefore(dateElement, footer);
+                            } else {
+                                modelCard.appendChild(dateElement);
+                            }
+                        }
+                        
+                        // Format date nicely
+                        const formattedDate = new Date(githubDate).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric'
+                        });
+                        
+                        dateElement.innerHTML = `<small>📅 Created: ${formattedDate}</small>`;
+                        updatedCards++;
+                    }
+                }
+            });
+            
+            console.log(`✅ Updated ${updatedCards} model cards with GitHub dates`);
+            
+        } catch (error) {
+            console.error('❌ Error parsing GitHub data:', error);
+        }
     }
 });
 </script>
