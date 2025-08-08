@@ -7,7 +7,7 @@
 {% endif %}
 
 {% assign smolhub_id = post.title | slugify %}
-{% assign repo_url = post.repository_url | default: "https://github.com/YuvrajSingh-mist/SmolHub-Playground" %}
+{% assign repo_url = post.github_url | default: "https://github.com/YuvrajSingh-mist/SmolHub" %}
 
 <div class="model-card">
   <div class="model-card__image" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);">

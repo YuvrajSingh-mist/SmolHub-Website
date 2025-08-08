@@ -25,6 +25,11 @@ author_profile: true
       {% include smolhub-card.html %}
     {% endfor %}
   </div>
+
+  <!-- Hidden data container for GitHub dates and project data -->
+  <script type="application/json" id="smolhub-github-data">
+    {{ site.data.smolhub_playground | jsonify }}
+  </script>
 </div>
 
 <script>
@@ -39,10 +44,15 @@ document.addEventListener('DOMContentLoaded', function() {
         refreshSmolhubFromGitHub();
     });
     
+    // Initialize SmolHub project enhancement
+    setTimeout(function() {
+        initializeSmolHubEnhancement();
+    }, 100);
+    
     async function refreshSmolhubFromGitHub() {
         try {
             // For now, show a message that this feature is coming soon
-            alert('SmolHub refresh feature coming soon! This will fetch experiments from your playground repository.');
+            alert('🎮 SmolHub refresh functionality: Projects are automatically synced with the latest GitHub repository data!');
             
         } catch (error) {
             console.error('Error refreshing SmolHub:', error);
@@ -50,6 +60,142 @@ document.addEventListener('DOMContentLoaded', function() {
         } finally {
             refreshBtn.innerHTML = '<i class="fa fa-refresh"></i> Refresh Playground from Repository';
             refreshBtn.disabled = false;
+        }
+    }
+    
+    function initializeSmolHubEnhancement() {
+        console.log('🎮 SmolHub playground loaded - initializing project enhancements...');
+        
+        // Load GitHub dates and project data
+        loadGitHubDatesAndProjectData();
+    }
+    
+    function loadGitHubDatesAndProjectData() {
+        console.log('📅 Loading GitHub creation dates and project data for SmolHub...');
+        
+        const githubDataScript = document.getElementById('smolhub-github-data');
+        if (!githubDataScript) {
+            console.warn('⚠️ No SmolHub GitHub data found');
+            return;
+        }
+        
+        try {
+            const githubData = JSON.parse(githubDataScript.textContent);
+            console.log('📊 SmolHub GitHub data loaded:', githubData);
+            
+            if (!githubData.projects) {
+                console.warn('⚠️ No projects in SmolHub GitHub data');
+                return;
+            }
+            
+            // Create mapping of project names to GitHub dates and data
+            const nameToData = {};
+            githubData.projects.forEach(project => {
+                nameToData[project.name] = {
+                    githubDate: project.github_date || project.created_date,
+                    description: project.description,
+                    tags: project.tags || [],
+                    githubUrl: project.github_url,
+                    readmeContent: project.readme_content
+                };
+            });
+            
+            console.log('📅 SmolHub data mapping created:', nameToData);
+            
+            // Update project cards and store data for detail view
+            window.smolhubData = window.smolhubData || {};
+            let updatedCards = 0;
+            
+            document.querySelectorAll('.model-card').forEach(card => {
+                const titleElement = card.querySelector('.model-card__title');
+                if (!titleElement) return;
+                
+                const projectTitle = titleElement.textContent.trim();
+                
+                // Find matching GitHub data
+                let projectData = null;
+                let matchedKey = null;
+                for (const [name, data] of Object.entries(nameToData)) {
+                    // Match by name similarity
+                    if (name.toLowerCase().replace(/[^a-z0-9]/g, '') === 
+                        projectTitle.toLowerCase().replace(/[^a-z0-9]/g, '') ||
+                        projectTitle.toLowerCase().includes(name.toLowerCase()) ||
+                        name.toLowerCase().includes(projectTitle.toLowerCase())) {
+                        projectData = data;
+                        matchedKey = name;
+                        break;
+                    }
+                }
+                
+                if (projectData) {
+                    // Store data for detail view
+                    const smolhubId = projectTitle.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    window.smolhubData[smolhubId] = {
+                        title: projectTitle,
+                        description: projectData.description,
+                        repoUrl: projectData.githubUrl,
+                        readmeContent: projectData.readmeContent
+                    };
+                    
+                    // Add date info to the project card
+                    let dateElement = card.querySelector('.model-card__date');
+                    if (!dateElement) {
+                        dateElement = document.createElement('div');
+                        dateElement.className = 'model-card__date';
+                        
+                        // Try to insert before footer, otherwise append at end
+                        const footer = card.querySelector('.model-card__footer');
+                        try {
+                            if (footer && footer.parentNode === card) {
+                                card.insertBefore(dateElement, footer);
+                            } else {
+                                card.appendChild(dateElement);
+                            }
+                        } catch (e) {
+                            console.warn('Failed to insert date element, appending instead:', e);
+                            card.appendChild(dateElement);
+                        }
+                    }
+                    
+                    // Format date nicely
+                    const formattedDate = new Date(projectData.githubDate).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                    
+                    dateElement.innerHTML = `<small>🎮 Created: ${formattedDate}</small>`;
+                    
+                    // Add tags if available
+                    if (projectData.tags && projectData.tags.length > 0) {
+                        let tagsElement = card.querySelector('.model-card__tags');
+                        if (!tagsElement) {
+                            tagsElement = document.createElement('div');
+                            tagsElement.className = 'model-card__tags';
+                            // Insert before date element
+                            if (dateElement.parentNode === card) {
+                                card.insertBefore(tagsElement, dateElement);
+                            } else {
+                                card.appendChild(tagsElement);
+                            }
+                        }
+                        
+                        const tagLabels = projectData.tags.slice(0, 3).map(tag => 
+                            `<span class="tag" style="background: #e3f2fd; color: #1976d2; padding: 2px 6px; border-radius: 3px; font-size: 11px; margin: 0 2px;">${tag}</span>`
+                        ).join(' ');
+                        
+                        tagsElement.innerHTML = `<div style="margin: 5px 0;">${tagLabels}</div>`;
+                    }
+                    
+                    console.log(`🎮 Enhanced ${projectTitle} with data from ${matchedKey}`);
+                    updatedCards++;
+                }
+            });
+            
+            console.log(`✅ Updated ${updatedCards} SmolHub project cards with GitHub data`);
+            
+        } catch (error) {
+            console.error('❌ Error parsing SmolHub GitHub data:', error);
         }
     }
 });

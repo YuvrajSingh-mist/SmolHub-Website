@@ -296,7 +296,7 @@ defaults:
       comments: true
       sidebar:
         - title: "Quick Info"
-        - text: "{{page.framework}} | {{page.category}}"
+          text: "{{page.framework}} | {{page.category}}"
   # _datasets
   - scope:
       path: ""
@@ -315,6 +315,9 @@ defaults:
       author_profile: true
       share: true
       comments: true
+      sidebar:
+        - title: "Quick Info"
+          text: "{{page.framework}} | {{page.category}}"
 
 
 # Sass/SCSS
