@@ -25,7 +25,7 @@ repository               : "YuvrajSingh-mist/SmolHub-Website"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "YuvraSingh_photo.jpg"
+  avatar           : "unnamed.png"
   name             : "Yuvraj Singh"
   pronouns         : # example: "she/her"  
   bio              : "NLP | Interested in Multimodal LLMs | Exploring the intersection of Research and Engineering"
