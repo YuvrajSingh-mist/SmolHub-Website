@@ -3,10 +3,10 @@ title: QnA Irrigation Diseases Dataset
 excerpt: "This dataset contains a comprehensive Question & Answer collection focused on water management technologies, irrigation systems, and related agricultural practices for sustainable farming. The dataset is derived from technical documentation and research publications related to water management in ag<br/><img src='/images/500x300.png'>"
 collection: datasets
 github_url: https://github.com/YuvrajSingh-mist/Datasets-Collection/tree/main/QnA-Irrigation-Diseases
-size: Unknown
-format: ION
-samples: Unknown
-license: Unknown
+size: 4,030 Q&A pairs
+format: CSV
+samples: 4,030
+license: Open Source
 last_updated: 2025-08-08T13:46:25.247735
 tags:
   - Qna
@@ -19,7 +19,7 @@ tasks:
   - Machine Learning
 ---
 
-# QnA Irrigation Diseases Dataset
+---
 
 ## Overview
 
@@ -136,13 +136,39 @@ This dataset is suitable for:
 
 ## Sample Data
 
-```csv
-ANSWER,QUESTION.question,QUESTION.paragraph
-"25-35%","What is the percentage saving in irrigation water due to laser levelling?","Approximately 25-35 % saving in irrigation water."
-"A trained person","Who should operate and repair the laser levelling machine?","The machine should be operated and repaired only by a trained person."
-"Energy, labour, and resources.","What resource benefits does laser levelling provide?","Saves energy, labour, and resources."
-"Regularly sized and shaped fields","What type of fields is laser levelling more efficient for?","More efficient for regularly sized and shaped field."
-```
+<div class="table-responsive">
+<table class="table table-striped">
+<thead>
+<tr>
+<th>ANSWER</th>
+<th>QUESTION.question</th>
+<th>QUESTION.paragraph</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>25-35%</td>
+<td>What is the percentage saving in irrigation water due to laser levelling?</td>
+<td>Approximately 25-35 % saving in irrigation water.</td>
+</tr>
+<tr>
+<td>A trained person</td>
+<td>Who should operate and repair the laser levelling machine?</td>
+<td>The machine should be operated and repaired only by a trained person.</td>
+</tr>
+<tr>
+<td>Energy, labour, and resources.</td>
+<td>What resource benefits does laser levelling provide?</td>
+<td>Saves energy, labour, and resources.</td>
+</tr>
+<tr>
+<td>Regularly sized and shaped fields</td>
+<td>What type of fields is laser levelling more efficient for?</td>
+<td>More efficient for regularly sized and shaped field.</td>
+</tr>
+</tbody>
+</table>
+</div>
 
 ## Technical Implementation
 

@@ -6,9 +6,9 @@ permissions:
   pull-requests: write
 
 on:
-  # Run daily at 6 AM UTC
+  # Run weekly on Sundays at 6 AM UTC
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 6 * * 0'
   
   # Allow manual trigger
   workflow_dispatch:

@@ -4,6 +4,10 @@ layout: default
 
 {% include base_path %}
 
+{% if page.collection == 'datasets' %}
+<link rel="stylesheet" href="{{ base_path }}/assets/css/models.css">
+{% endif %}
+
 {% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
   {% include page__hero.html %}
 {% endif %}
@@ -38,8 +42,41 @@ layout: default
           <p> {{ page.type }}, <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.venue and page.date %}
           <p>Published in <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
-        {% elsif page.date %}
+        {% elsif page.date and page.collection != 'models' %}
           <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
+        {% endif %}
+        
+        {% if page.collection == 'datasets' %}
+          <div class="dataset-meta">
+            <div class="dataset-meta-container">
+              {% if page.github_url %}
+              <div class="dataset-meta-item">
+                <strong>GitHub:</strong> 
+                <a href="{{ page.github_url }}" target="_blank">
+                  <i class="fab fa-github"></i>View Dataset
+                </a>
+              </div>
+              {% endif %}
+              
+              {% if page.size %}
+              <div class="dataset-meta-item">
+                <strong>Size:</strong> {{ page.size }}
+              </div>
+              {% endif %}
+              
+              {% if page.format %}
+              <div class="dataset-meta-item">
+                <strong>Format:</strong> {{ page.format }}
+              </div>
+              {% endif %}
+              
+              {% if page.license %}
+              <div class="dataset-meta-item">
+                <strong>License:</strong> {{ page.license }}
+              </div>
+              {% endif %}
+            </div>
+          </div>
         {% endif %}    
         </header>
       {% endunless %}

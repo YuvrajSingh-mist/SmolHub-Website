@@ -776,3 +776,122 @@
         padding: 6px 12px;
     }
 }
+
+/* Dataset metadata styling */
+.dataset-meta {
+    margin-top: 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.dataset-meta-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.dataset-meta-item {
+    background-color: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    color: #495057;
+    border: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.dataset-meta-item:hover {
+    background-color: #e9ecef;
+    transform: translateY(-1px);
+}
+
+.dataset-meta-item strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.dataset-meta-item a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.dataset-meta-item a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.dataset-meta-item .fab {
+    margin-right: 5px;
+}
+
+/* Responsive dataset metadata */
+@media (max-width: 768px) {
+    .dataset-meta-container {
+        gap: 10px;
+    }
+    
+    .dataset-meta-item {
+        font-size: 0.8em;
+        padding: 6px 10px;
+    }
+}
+
+/* Dataset table styling */
+.table-responsive {
+    margin: 20px 0;
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    margin-bottom: 0;
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    padding: 12px 15px;
+    font-weight: 600;
+    color: #495057;
+    text-align: left;
+    font-size: 14px;
+}
+
+.table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: top;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.table tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.08);
+}
+
+/* Responsive table behavior */
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 12px;
+    }
+    
+    .table th,
+    .table td {
+        padding: 8px 10px;
+    }
+    
+    .table th:nth-child(3),
+    .table td:nth-child(3) {
+        max-width: 200px;
+        word-wrap: break-word;
+    }
+}

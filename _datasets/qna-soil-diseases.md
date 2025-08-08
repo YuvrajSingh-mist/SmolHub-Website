@@ -3,10 +3,10 @@ title: QnA Soil Diseases Dataset
 excerpt: "This dataset contains a comprehensive Question & Answer collection focused on soil management, soil health, organic farming practices, and soil-related agricultural techniques. The dataset is derived from technical guides and documentation related to sustainable soil management practices, with empha<br/><img src='/images/500x300.png'>"
 collection: datasets
 github_url: https://github.com/YuvrajSingh-mist/Datasets-Collection/tree/main/QnA-Soil-Diseases
-size: Unknown
-format: ION
-samples: Unknown
-license: Unknown
+size: 3,945 Q&A pairs
+format: CSV
+samples: 3,945
+license: Open Source
 last_updated: 2025-08-08T13:46:30.461052
 tags:
   - Qna
@@ -18,7 +18,7 @@ tasks:
   - Machine Learning
 ---
 
-# QnA Soil Diseases Dataset
+---
 
 ## Overview
 
@@ -202,12 +202,34 @@ This dataset is valuable for:
 
 ## Sample Data
 
-```csv
-ANSWER,QUESTION.question,QUESTION.paragraph
-"Good soil management","What is the key to plant and livestock nutrition in organic farming?","Good soil management is the key to plant and livestock nutrition in organic farming."
-"Understanding of soil and farming operations","What will understanding of soil management help users with?","It will give users an understanding of soil and how farming operations can affect soil properties."
-"Avoiding run-off and erosion","Which subtopic in Chapter 6 deals with erosion?","6.1 Avoiding run-off and erosion"
-```
+<div class="table-responsive">
+<table class="table table-striped">
+<thead>
+<tr>
+<th>ANSWER</th>
+<th>QUESTION.question</th>
+<th>QUESTION.paragraph</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Good soil management</td>
+<td>What is the key to plant and livestock nutrition in organic farming?</td>
+<td>Good soil management is the key to plant and livestock nutrition in organic farming.</td>
+</tr>
+<tr>
+<td>Understanding of soil and farming operations</td>
+<td>What will understanding of soil management help users with?</td>
+<td>It will give users an understanding of soil and how farming operations can affect soil properties.</td>
+</tr>
+<tr>
+<td>Avoiding run-off and erosion</td>
+<td>Which subtopic in Chapter 6 deals with erosion?</td>
+<td>6.1 Avoiding run-off and erosion</td>
+</tr>
+</tbody>
+</table>
+</div>
 
 ## Technical Applications
 

@@ -20,15 +20,31 @@ author_profile: true
     <div class="search-container">
       <input type="text" id="model-search" placeholder="🔍 Search models (e.g., GPT, BERT, GAN, Transformer...)">
     </div>
+    
+    <!-- Tag Filters -->
+    <div class="search-filters">
+      <span class="filter-label">Filter by tags:</span>
+      <button class="filter-btn active" data-tag="all">All</button>
+      <button class="filter-btn" data-tag="nlp">NLP</button>
+      <button class="filter-btn" data-tag="vision">Vision</button>
+      <button class="filter-btn" data-tag="generative">Generative</button>
+      <button class="filter-btn" data-tag="sequential">Sequential</button>
+      <button class="filter-btn" data-tag="attention">Attention</button>
+      <button class="filter-btn" data-tag="optimization">Optimization</button>
+    </div>
+    
     <div class="search-results-info">
       <span id="search-results-count"></span>
-      <button id="clear-search" style="display: none;">Clear Search</button>
+      <button id="clear-search" style="display: none;">Clear Filters</button>
     </div>
   </div>
 
   <div class="models-grid" id="models-container">
     {% for post in site.models %}
-      {% include model-card.html %}
+      <div class="model-wrapper" 
+           data-tags="{{ post.tags | join: ',' | downcase }}">
+        {% include model-card.html %}
+      </div>
     {% endfor %}
   </div>
 </div>
@@ -67,71 +83,124 @@ author_profile: true
     border-radius: 4px;
     cursor: pointer;
 }
+
+.model-wrapper {
+    display: block;
+}
+
+.model-wrapper.hidden {
+    display: none !important;
+}
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🔍 Models page loaded - initializing search...');
+    console.log('🔍 Models page loaded - initializing search and filters...');
     
-    // Initialize search functionality
+    // Initialize search and filtering functionality
     setTimeout(function() {
-        initializeSearch();
+        initializeModelFiltering();
     }, 100);
     
-    function initializeSearch() {
+    function initializeModelFiltering() {
         const searchInput = document.getElementById('model-search');
         const clearButton = document.getElementById('clear-search');
         const resultsCount = document.getElementById('search-results-count');
+        const tagButtons = document.querySelectorAll('.filter-btn[data-tag]');
         
         // Store all models for filtering
-        const allModels = Array.from(document.querySelectorAll('.model-card')).map(card => ({
-            element: card,
-            name: card.querySelector('.model-card__title')?.textContent.toLowerCase() || '',
-            description: card.querySelector('.model-card__excerpt')?.textContent.toLowerCase() || ''
+        const allModels = Array.from(document.querySelectorAll('.model-wrapper')).map(wrapper => ({
+            element: wrapper,
+            name: wrapper.querySelector('.model-card__title')?.textContent.toLowerCase() || '',
+            description: wrapper.querySelector('.model-card__excerpt')?.textContent.toLowerCase() || '',
+            tags: wrapper.getAttribute('data-tags') || ''
         }));
+        
+        let currentQuery = '';
+        let currentTag = 'all';
         
         updateResultsCount(allModels.length);
         
         // Search input handler
         if (searchInput) {
             searchInput.addEventListener('input', function() {
-                const query = this.value.toLowerCase().trim();
-                filterModels(query, allModels);
-                
-                if (query) {
-                    clearButton.style.display = 'inline-block';
-                } else {
-                    clearButton.style.display = 'none';
-                }
+                currentQuery = this.value.toLowerCase().trim();
+                filterModels();
+                updateClearButton();
             });
         }
+        
+        // Tag filter handlers
+        tagButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                tagButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                currentTag = this.getAttribute('data-tag');
+                filterModels();
+                updateClearButton();
+            });
+        });
         
         // Clear search handler
         if (clearButton) {
             clearButton.addEventListener('click', function() {
                 searchInput.value = '';
-                clearButton.style.display = 'none';
-                filterModels('', allModels);
+                currentQuery = '';
+                currentTag = 'all';
+                
+                // Reset tag filter to "All"
+                tagButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('.filter-btn[data-tag="all"]')?.classList.add('active');
+                
+                filterModels();
+                updateClearButton();
             });
         }
         
-        function filterModels(query, models) {
-            const filteredModels = models.filter(model => {
-                return !query || 
-                    model.name.includes(query) || 
-                    model.description.includes(query);
+        function filterModels() {
+            console.log(`🔍 Filtering - Query: "${currentQuery}", Tag: "${currentTag}"`);
+            
+            const filteredModels = allModels.filter(model => {
+                // Text search filter
+                const matchesSearch = !currentQuery || 
+                    model.name.includes(currentQuery) || 
+                    model.description.includes(currentQuery);
+                
+                // Tag filter
+                const matchesTag = currentTag === 'all' || 
+                    model.tags.includes(currentTag);
+                
+                console.log(`Model: ${model.name.substring(0, 20)}, Tags: "${model.tags}", MatchesTag: ${matchesTag}, MatchesSearch: ${matchesSearch}`);
+                
+                return matchesSearch && matchesTag;
             });
             
             // Show/hide models
-            models.forEach(model => {
+            allModels.forEach(model => {
                 if (filteredModels.includes(model)) {
                     model.element.style.display = 'block';
+                    model.element.classList.remove('hidden');
                 } else {
                     model.element.style.display = 'none';
+                    model.element.classList.add('hidden');
                 }
             });
             
+            console.log(`✅ Filtered from ${allModels.length} to ${filteredModels.length} models`);
             updateResultsCount(filteredModels.length);
+        }
+        
+        function updateClearButton() {
+            if (clearButton) {
+                if (currentQuery || currentTag !== 'all') {
+                    clearButton.style.display = 'inline-block';
+                } else {
+                    clearButton.style.display = 'none';
+                }
+            }
         }
         
         function updateResultsCount(count) {
@@ -144,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        console.log('✅ Search initialized with', allModels.length, 'models');
+        console.log('✅ Model filtering initialized with', allModels.length, 'models');
     }
 });
 </script>

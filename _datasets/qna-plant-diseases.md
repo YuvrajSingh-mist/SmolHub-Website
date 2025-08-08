@@ -3,10 +3,10 @@ title: QnA Plant Diseases Dataset
 excerpt: "This dataset contains a comprehensive Question & Answer collection focused on plant diseases, their management, treatment protocols, and diagnostic techniques. The dataset provides detailed information about various plant pathologies, fungicide applications, and disease identification methods for ag<br/><img src='/images/500x300.png'>"
 collection: datasets
 github_url: https://github.com/YuvrajSingh-mist/Datasets-Collection/tree/main/QnA-Plant-Diseases
-size: Unknown
-format: ION
-samples: Unknown
-license: Unknown
+size: 4,283 Q&A pairs
+format: CSV
+samples: 4,283
+license: Open Source
 last_updated: 2025-08-08T13:46:27.618071
 tags:
   - Qna
@@ -20,7 +20,7 @@ tasks:
   - Nlp
 ---
 
-# QnA Plant Diseases Dataset
+---
 
 ## Overview
 
@@ -130,12 +130,34 @@ This dataset is ideal for:
 
 ## Sample Data
 
-```csv
-ANSWER,QUESTION.question,QUESTION.paragraph
-"Root feed with tridomorph 75% EC 2ml in 100ml water once in a month for 3 months.","What is the root feed recommendation for managing tree diseases?","Root feed with tridomorph 75% EC 2ml in 100ml water once in a month for 3 months"
-"75% EC.","What is the concentration of tridomorph used in the root feed?","Root feed with tridomorph 75% EC 2ml in 100ml water once in a month for 3 months"
-"The fruiting bodies are located at the base of the infected tree.","Where are the fruiting bodies of the infected tree located?","Fruiting bodies at base of the infected tree"
-```
+<div class="table-responsive">
+<table class="table table-striped">
+<thead>
+<tr>
+<th>ANSWER</th>
+<th>QUESTION.question</th>
+<th>QUESTION.paragraph</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Root feed with tridomorph 75% EC 2ml in 100ml water once in a month for 3 months.</td>
+<td>What is the root feed recommendation for managing tree diseases?</td>
+<td>Root feed with tridomorph 75% EC 2ml in 100ml water once in a month for 3 months</td>
+</tr>
+<tr>
+<td>75% EC.</td>
+<td>What is the concentration of tridomorph used in the root feed?</td>
+<td>Root feed with tridomorph 75% EC 2ml in 100ml water once in a month for 3 months</td>
+</tr>
+<tr>
+<td>The fruiting bodies are located at the base of the infected tree.</td>
+<td>Where are the fruiting bodies of the infected tree located?</td>
+<td>Fruiting bodies at base of the infected tree</td>
+</tr>
+</tbody>
+</table>
+</div>
 
 ## Technical Specifications
 
