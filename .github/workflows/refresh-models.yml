@@ -41,12 +41,15 @@ jobs:
         python update_models.py --fetch --github-token $GITHUB_TOKEN
         echo "🔄 Regenerating all model markdown files with guidelines..."
         echo "  ✅ Using model-implementation layout (not paper-replication)"
-        echo "  ✅ Converting all images to GitHub hyperlinks"
+        echo "  ✅ Converting all images to raw.githubusercontent.com URLs"
         echo "  ✅ Using exact GitHub API data and real commit dates"
         echo "  ✅ Proper 'From Scratch Implementation' approach"
+        echo "  ✅ Standardized frontmatter and content structure"
         python regenerate_models.py
-        echo "🖼️ Ensuring all images are converted to GitHub links..."
-        python fix_images_direct.py
+        echo "� Running comprehensive standardization..."
+        python standardize_markdowns.py
+        echo "🔍 Validating all guidelines are followed..."
+        python validate_guidelines.py
         echo "🎉 All model files generated following latest guidelines!"
         
         

@@ -39,12 +39,10 @@ I Trained Qwen0.5B-Instruct using Direct Preference Optimization in Pytorch
 ### Frameworks:
 **Pytorch**
 
-
 ### Epochs/Steps
 Iterations (train) = 3000
 
 Val iterations = every 20
-
 
 ### Losses
 Train loss - 0.67

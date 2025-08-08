@@ -1,0 +1,98 @@
+name: Standardize and Validate Models
+
+# Permissions needed for the workflow
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  # Allow manual trigger
+  workflow_dispatch:
+  
+  # Run when markdown files or standardization scripts are updated
+  push:
+    paths:
+      - '_models/*.md'
+      - 'standardize_markdowns.py'
+      - 'validate_guidelines.py'
+      - 'fix_image_links.py'
+      - '_templates/*'
+  
+  # Run on pull requests that affect models
+  pull_request:
+    paths:
+      - '_models/*.md'
+
+jobs:
+  standardize-and-validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+    
+    - name: Run comprehensive standardization
+      run: |
+        echo "🔧 Running comprehensive markdown standardization..."
+        echo "📋 This will ensure:"
+        echo "  ✅ Consistent frontmatter format"
+        echo "  ✅ Proper layout: model-implementation"
+        echo "  ✅ Fixed image links using raw.githubusercontent.com"
+        echo "  ✅ Standardized section structure"
+        echo "  ✅ Template and automation setup"
+        echo ""
+        python standardize_markdowns.py
+        echo ""
+        echo "🔍 Running validation checks..."
+        python validate_guidelines.py
+    
+    - name: Check for changes
+      id: verify-changed-files
+      run: |
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "changed=true" >> $GITHUB_OUTPUT
+          echo "📝 Standardization changes detected!"
+          git status --porcelain
+        else
+          echo "changed=false" >> $GITHUB_OUTPUT
+          echo "✅ All files already follow standards."
+        fi
+    
+    - name: Commit and push standardization changes
+      if: steps.verify-changed-files.outputs.changed == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action - Standardization"
+        git add .
+        git commit -m "🔧 Auto-standardize markdown files
+
+        - Ensured consistent frontmatter format
+        - Fixed image links to use raw.githubusercontent.com
+        - Standardized content structure
+        - Updated templates and automation"
+        git push
+        echo "🚀 Successfully standardized all markdown files!"
+    
+    - name: Post-validation check
+      run: |
+        echo "🔍 Final validation after any changes..."
+        python validate_guidelines.py
+        if [ $? -eq 0 ]; then
+          echo "🎉 All validation checks passed!"
+        else
+          echo "⚠️  Some validation issues remain."
+          exit 1
+        fi

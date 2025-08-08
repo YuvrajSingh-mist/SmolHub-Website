@@ -26,7 +26,6 @@ Trained a small transformer-based ASR model coded and trained from scratch in Py
 
 [Moonshine: Speech Recognition for Live Transcription and Voice Commands](https://arxiv.org/pdf/2410.15608)
 
-
 ### Hyperparameters
 | Parameter                | Value      | Description                                                                 |
 |--------------------------|------------|-----------------------------------------------------------------------------|
@@ -47,20 +46,17 @@ Trained a small transformer-based ASR model coded and trained from scratch in Py
 
 [Gigaspeech](https://huggingface.co/datasets/speechcolab/gigaspeech) 
 
-
 ### Frameworks:
 **Pytorch**
-
 
 ### Epochs/Steps
 Steps (train) = 1500
 
 Val iterations = every 50 steps
 
-
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/Moonshine/images/loss_curves.jpg)
+![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Moonshine/images/loss_curves.jpg)
 
 Looks like 25 hours isnt enough thus started to overfit!
 

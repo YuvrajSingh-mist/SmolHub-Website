@@ -45,15 +45,18 @@ jobs:
         echo "🔍 Checking for new models in Paper-Replications repository..."
         echo "📋 Current guidelines applied:"
         echo "  ✅ Using model-implementation layout (not paper-replication)"
-        echo "  ✅ Converting all images to GitHub hyperlinks automatically"
+        echo "  ✅ Converting all images to raw.githubusercontent.com URLs"
         echo "  ✅ Using exact GitHub API data and real commit dates"
         echo "  ✅ Following 'From Scratch Implementation' approach"
-        echo "  ✅ Exact title matching from models.json"
+        echo "  ✅ Standardized frontmatter and content structure"
         echo ""
         python auto_detect_models.py
         echo ""
-        echo "🖼️ Ensuring all images in new models are converted to GitHub links..."
-        python fix_images_direct.py
+        echo "� Running comprehensive standardization..."
+        python standardize_markdowns.py
+        echo ""
+        echo "🔍 Validating all guidelines are followed..."
+        python validate_guidelines.py
     
     - name: Check for changes
       id: verify-changed-files

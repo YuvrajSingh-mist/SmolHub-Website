@@ -24,11 +24,9 @@ From scratch implementation of Gemma3
 
 Trained a small Gemma 3 model (90M) coded and trained from scratch in Pytorch (text only) 
 
-
 [Gemma 3](https://arxiv.org/abs/2503.19786)
 
 ## ModelArgs Hyperparameters
-
 
 | Parameter               | Value                                  | Description                                                                 |
 |-------------------------|----------------------------------------|-----------------------------------------------------------------------------|
@@ -49,25 +47,21 @@ Trained a small Gemma 3 model (90M) coded and trained from scratch in Pytorch (t
 | `local_block_size`      | 128                                    | Local attention block size                                                 |
 | `base_freq`             | 10000                                  | Base frequency                                                  |
 
-
 ### Dataset
 
 [TinyStories](https://huggingface.co/datasets/roneneldan/TinyStories)
 
-
 ### Frameworks:
 **Pytorch**
-
 
 ### Epochs/Steps
 Steps (train) = 25000
 
 Val iterations = every 500 steps
 
-
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/Gemma3/img/loss.png)
+![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Gemma3/img/loss.png)
 
 Train loss: 2.08 (last step)
 

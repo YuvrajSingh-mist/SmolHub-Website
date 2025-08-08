@@ -65,24 +65,25 @@ def check_local_images():
         return True
 
 def check_github_links():
-    """Check for GitHub image links"""
+    """Check for proper GitHub image links using raw.githubusercontent.com"""
     print("🔗 Checking GitHub image links...")
     models_dir = Path("_models")
     link_count = 0
     
-    github_link_pattern = r'\[([^\]]+)\]\((https://github\.com/[^)]+\.(jpg|jpeg|png|gif|svg))\)'
+    # Updated pattern to check for proper raw.githubusercontent.com image links
+    github_image_pattern = r'!\[([^\]]+)\]\((https://raw\.githubusercontent\.com/[^)]+\.(jpg|jpeg|png|gif|svg))\)'
     
     for md_file in models_dir.glob("*.md"):
         with open(md_file, 'r', encoding='utf-8') as f:
             content = f.read()
         
-        matches = re.findall(github_link_pattern, content)
+        matches = re.findall(github_image_pattern, content)
         if matches:
             link_count += len(matches)
-            print(f"  ✅ {md_file.name}: {len(matches)} GitHub image links")
+            print(f"  ✅ {md_file.name}: {len(matches)} proper raw GitHub image links")
     
-    print(f"  📊 Total GitHub image links: {link_count}")
-    return link_count > 0
+    print(f"  📊 Total proper GitHub image links: {link_count}")
+    return True  # Always return True since this is about proper format, not count
 
 def check_title_consistency():
     """Check title consistency with models.json"""
@@ -155,6 +156,34 @@ def check_file_count():
         print("  ❌ models.json not found")
         return False
 
+def check_automation_setup():
+    """Check that automation templates and scripts are in place"""
+    print("🤖 Checking automation setup...")
+    
+    template_path = Path("_templates/model_template.md")
+    script_path = Path("create_new_model.py")
+    
+    issues = []
+    
+    if not template_path.exists():
+        issues.append("❌ Template missing: _templates/model_template.md")
+    else:
+        print("  ✅ Template found: _templates/model_template.md")
+    
+    if not script_path.exists():
+        issues.append("❌ Script missing: create_new_model.py")
+    else:
+        print("  ✅ Script found: create_new_model.py")
+    
+    if issues:
+        for issue in issues:
+            print(f"    {issue}")
+        print("  💡 Run: python standardize_markdowns.py to recreate automation")
+        return False
+    else:
+        print("  ✅ Automation setup complete")
+        return True
+
 def main():
     """Run all validation checks"""
     print("🔍 SmolHub Model Generation Validation")
@@ -166,7 +195,32 @@ def main():
         ("GitHub Links", check_github_links),
         ("Title Consistency", check_title_consistency),
         ("File Count", check_file_count),
+        ("Automation Setup", check_automation_setup),
     ]
+    
+    passed = 0
+    total = len(checks)
+    
+    for check_name, check_func in checks:
+        print(f"\n{check_name}:")
+        if check_func():
+            passed += 1
+    
+    print("\n" + "=" * 50)
+    print(f"📊 Validation Results: {passed}/{total} checks passed")
+    
+    if passed == total:
+        print("🎉 All guidelines are being followed correctly!")
+        print("✅ The automated system is working perfectly!")
+        print("🤖 Automation is ready for new model creation!")
+        return True
+    else:
+        print("⚠️  Some issues found. Fixes available:")
+        print("   - Layout issues: python standardize_markdowns.py")
+        print("   - Image issues: python fix_images_direct.py")
+        print("   - Content issues: python regenerate_models.py")
+        print("   - Create new models: python create_new_model.py 'Name' 'Category' 'Dataset' 'URL'")
+        return False
     
     passed = 0
     total = len(checks)

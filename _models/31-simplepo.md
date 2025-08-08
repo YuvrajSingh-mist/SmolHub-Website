@@ -36,7 +36,6 @@ Trained OPT-330M model using SimplePO in Pytorch for Instruction Following
 | `beta`      | 2 | Beta values                                                                 |           
 | `gamma`| 1.6     | Gamma values for the optimizer                                       |
 
-
 ### Datasets
 
 [UltraFeedback](https://huggingface.co/datasets/argilla/ultrafeedback-binarized-preferences-cleaned)

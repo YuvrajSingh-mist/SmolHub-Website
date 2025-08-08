@@ -44,16 +44,14 @@ Trained a Seq2Seq model with the said attention mechanism  coded from scratch in
 ### Frameworks:
 **Pytorch**
 
-
 ### Epochs/Steps
 Epochs (train) = 50
 
 Val iterations = every epoch
 
-
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/Seq2Seq/img/loss_curves.jpg)
+![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Seq2Seq/img/loss_curves.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [Seq2Seq](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Seq2Seq)

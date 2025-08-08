@@ -24,7 +24,6 @@ From scratch implementation of Encoder-Decoder
 
 Trained on the on German (de) to English (en) dataset
 
-
 [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/pdf/1409.3215)
 
 ## ModelArgs Hyperparameters
@@ -39,16 +38,13 @@ Trained on the on German (de) to English (en) dataset
 | `num_layers` | 4      | Layers for deep lstms                                                                |
 | `No of neurons`| 128      | No of neurons in an GRU per layer                                          |    
 
-
 ### Frameworks:
 **Pytorch**
-
 
 ### Epochs/Steps
 Epochs (train) = 10
 
 Val iterations = every epoch
-
 
 ### Losses
 
@@ -58,7 +54,7 @@ Val loss - 1.39
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/Encoder-Decoder/img/loss.jpg)
+![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Encoder-Decoder/img/loss.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [Encoder-Decoder](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Encoder-Decoder)

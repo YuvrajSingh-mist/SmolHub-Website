@@ -26,8 +26,6 @@ This repository contains a PyTorch implementation of the DeepSeekV3 architecture
 - So, I trained a  DeepSeekV3 (16x4) architecture I coded from ground up.
 - Trained on TiyStories dataset form HuggingFace consisting of 4.2B tokens for a few steps with gradient accumulation ammounting to 300M tokens.
 
-
-
  ###  Pretraining
 
 #### Dataset
@@ -36,8 +34,6 @@ This repository contains a PyTorch implementation of the DeepSeekV3 architecture
 
   1) Train dataset - 2 M records approx
   2) Val dataset - 26K records approx
-
-
 
 ---
 
@@ -101,13 +97,11 @@ This dataclass defines hyperparameters and configuration settings for the DeepSe
 | `use_liger` | False | Use Liger kernels for optimized operations |
 | `ignore_pad_token_in_loss` | True | Whether to ignore padding tokens in loss calculation |
 
-
  - Used P100 on Kaggle
 ---
 
 #### Frameworks:
 **Pytorch**
-
 
 ---
 

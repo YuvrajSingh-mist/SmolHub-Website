@@ -24,7 +24,6 @@ From scratch implementation of DDP
 
 I implemented a training loop and trained a Llama made from scratch using Data Distributed Parallel and torchrun.
 
-
 ##  ModelArgs Hyperparameters
 
 | Parameter              | Value         | Description                                                                 |
@@ -44,7 +43,6 @@ I implemented a training loop and trained a Llama made from scratch using Data D
 | `device`               | 'cuda:0'      | The device to run the model on (e.g., 'cuda:0' for GPU).                    |
 | `no_kv_heads`          | 2             | Number of key-value heads.                                                 
 
-
 ### Datasets
 
 **Tineshakespeare**: in the /data folder
@@ -52,21 +50,17 @@ I implemented a training loop and trained a Llama made from scratch using Data D
 ### Frameworks:
 **Pytorch**
 
-
 ### Epochs/Steps
 Iterations (train) = 8000
 
 Val iterations = every 100
-
 
 ### Losses
 Train loss - 1.5
 
 Val loss - 1.1
 
-
 ### Local setup
-
 
 ### Requirements
 
@@ -77,7 +71,6 @@ pip install torchrun
 pip install wandb
 
 ```
-
 
 If you want to use your dataset, please take a look at the dataset provided in data/.
 If you have one, move your dataset to the data/ folder and then change the following line to point to your dataset in the data/ (currently only .txt is supported) in the llama_multi_gpu_train.py
