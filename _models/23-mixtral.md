@@ -2,7 +2,7 @@
 title: "Mixtral"
 excerpt: "From scratch implementation of Mixtral"
 collection: models
-layout: single
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyShakespeare"

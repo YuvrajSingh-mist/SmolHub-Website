@@ -2,7 +2,7 @@
 title: "LoRA"
 excerpt: "From scratch implementation of LoRA"
 collection: models
-layout: single
+layout: model-implementation
 category: "Fine-tuning"
 framework: "PyTorch"
 dataset: "TinyShakespeare"

@@ -2,7 +2,7 @@
 title: "ViT"
 excerpt: "From scratch implementation of ViT"
 collection: models
-layout: single
+layout: model-implementation
 category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Custom"

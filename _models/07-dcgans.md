@@ -2,7 +2,7 @@
 title: "DCGANs"
 excerpt: "From scratch implementation of DCGANs"
 collection: models
-layout: single
+layout: model-implementation
 category: "Generative Models"
 framework: "PyTorch"
 dataset: "CIFAR"

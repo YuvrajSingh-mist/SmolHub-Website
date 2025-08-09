@@ -2,7 +2,7 @@
 title: "Transformer"
 excerpt: "From scratch implementation of Transformer"
 collection: models
-layout: single
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "Custom"

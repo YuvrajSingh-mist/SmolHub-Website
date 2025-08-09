@@ -2,7 +2,7 @@
 title: "PaliGemma"
 excerpt: "From scratch implementation of PaliGemma"
 collection: models
-layout: single
+layout: model-implementation
 category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Flickr"

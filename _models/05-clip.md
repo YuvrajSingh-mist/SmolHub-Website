@@ -2,7 +2,7 @@
 title: "CLiP"
 excerpt: "From scratch implementation of CLiP"
 collection: models
-layout: single
+layout: model-implementation
 category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Flickr"

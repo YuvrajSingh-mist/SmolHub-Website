@@ -2,7 +2,7 @@
 title: "RNNs"
 excerpt: "From scratch implementation of RNNs"
 collection: models
-layout: single
+layout: model-implementation
 category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"

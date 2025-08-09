@@ -2,7 +2,7 @@
 title: "VAE"
 excerpt: "From scratch implementation of VAE"
 collection: models
-layout: single
+layout: model-implementation
 category: "Generative Models"
 framework: "PyTorch"
 dataset: "MNIST"
@@ -32,9 +32,6 @@ I implemented a Variational Autoencoder Architecture from Scratch using PyTorch 
 
 The following images show the comparison between original CelebA face images (top row) and their reconstructions by the VAE (bottom row):
 
-<!-- Main image reference -->
-<img src="data/image.png" alt="VAE Results" width="800"/>
-
 <!-- Fallback references -->
 ![VAE Results](./data/image.png) > **Note**: If images don't load, please check the `data/` folder in this repository:
 > - `data/image.png` - Reconstruction comparison results
@@ -46,30 +43,18 @@ The following images show the comparison between original CelebA face images (to
 
 ### Training Progress
 
-<!-- Main image reference -->
-<img src="data/losses.jpg" alt="Training Losses" width="600"/>
-
-<!-- Fallback reference -->
 ![Training Losses](./data/losses.jpg)
 
 *Training and validation losses over epochs showing convergence of reconstruction and KL divergence losses.*
 
 ### Latent Space Arithmetic
 
-<!-- Main image reference -->
-<img src="data/arithmetic.jpg" alt="Latent Arithmetic" width="700"/>
-
-<!-- Fallback reference -->
 ![Latent Arithmetic](./data/arithmetic.jpg)
 
 *Latent space interpolation and arithmetic operations demonstrating the smooth and meaningful latent representations learned by the VAE.*
 
 ### Generated Samples
 
-<!-- Main image reference -->
-<img src="data/samples.jpg" alt="Generated Samples" width="800"/>
-
-<!-- Fallback reference -->
 ![Generated Samples](./data/samples.jpg)
 
 *Random samples generated from the latent space showing the diversity and quality of faces that the VAE can produce.*

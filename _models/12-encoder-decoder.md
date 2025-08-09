@@ -2,7 +2,7 @@
 title: "Encoder-Decoder"
 excerpt: "From scratch implementation of Encoder-Decoder"
 collection: models
-layout: single
+layout: model-implementation
 category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
