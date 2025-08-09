@@ -13,6 +13,7 @@ This script will:
 import os
 import re
 import json
+import argparse
 from pathlib import Path
 from datetime import datetime
 
@@ -375,5 +376,13 @@ if __name__ == "__main__":
         print("   python create_new_model.py 'Model Name' 'Category' 'Dataset' 'GitHub URL'")
 
 if __name__ == "__main__":
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Standardize markdown files')
+    parser.add_argument('--target', default='models', 
+                       help='Target type to standardize (default: models)')
+    args = parser.parse_args()
+    
+    print(f"🔧 Standardizing {args.target} markdown files...")
+    
     standardizer = MarkdownStandardizer()
     standardizer.run()

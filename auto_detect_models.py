@@ -9,6 +9,7 @@ import json
 import requests
 import os
 import sys
+import argparse
 from datetime import datetime
 import subprocess
 
@@ -182,9 +183,17 @@ def add_new_models_to_json(new_models, token=None):
     print(f"✅ Added {len(new_models)} new models to {models_file}")
 
 def main():
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Auto-detect new models from Paper-Replications repository')
+    parser.add_argument('--source', default='paper-replications', 
+                       help='Source repository type (default: paper-replications)')
+    args = parser.parse_args()
+    
     token = os.environ.get('GITHUB_TOKEN')
     if not token:
         print("Warning: No GITHUB_TOKEN found. API requests may be rate limited.")
+    
+    print(f"🔧 Running auto-detection for source: {args.source}")
     
     # Detect new models
     new_models = detect_new_models(token=token)
@@ -214,8 +223,10 @@ def main():
         
         print(f"🎉 Successfully processed {len(new_models)} new models!")
         return True
-    
-    return False
+    else:
+        # No new models found is a successful outcome, not an error
+        print("✅ Repository is up to date. No action needed.")
+        return True
 
 if __name__ == "__main__":
     success = main()

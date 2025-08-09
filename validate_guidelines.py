@@ -7,6 +7,7 @@ Run this to verify that all automation is working correctly
 import os
 import re
 import json
+import argparse
 from pathlib import Path
 
 def check_layout_usage():
@@ -245,5 +246,13 @@ def main():
         return False
 
 if __name__ == "__main__":
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Validate markdown files against guidelines')
+    parser.add_argument('--source', default='paper-replications', 
+                       help='Source repository type (default: paper-replications)')
+    args = parser.parse_args()
+    
+    print(f"🔧 Validating guidelines for source: {args.source}")
+    
     success = main()
     exit(0 if success else 1)

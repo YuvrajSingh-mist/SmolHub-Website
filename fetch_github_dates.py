@@ -7,6 +7,7 @@ the JSON files with accurate date information.
 
 import json
 import os
+import argparse
 import requests
 from datetime import datetime
 import time
@@ -227,6 +228,12 @@ def update_model_markdown_files():
 
 def main():
     """Main function"""
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Fetch GitHub creation dates for models and datasets')
+    parser.add_argument('--source', default='paper-replications', 
+                       help='Source repository type (default: paper-replications)')
+    args = parser.parse_args()
+    
     # You can pass a GitHub token as environment variable for higher rate limits
     github_token = os.environ.get('GITHUB_TOKEN')
     
@@ -238,6 +245,7 @@ def main():
     
     print("=" * 60)
     print("🚀 Fetching GitHub Creation Dates")
+    print(f"🔧 Running for source: {args.source}")
     print("=" * 60)
     
     # Update models.json with GitHub dates

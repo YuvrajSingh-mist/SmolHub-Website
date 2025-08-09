@@ -8,6 +8,7 @@ for each model in the _models collection.
 import json
 import os
 import re
+import argparse
 from datetime import datetime
 from pathlib import Path
 
@@ -194,6 +195,14 @@ View the complete implementation, training scripts, and documentation on GitHub.
 
 def main():
     """Main function to generate all model markdown files"""
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Generate model markdown files')
+    parser.add_argument('--source', default='paper-replications', 
+                       help='Source repository type (default: paper-replications)')
+    args = parser.parse_args()
+    
+    print(f"🔧 Generating model files for source: {args.source}")
+    
     # Get the script directory
     script_dir = Path(__file__).parent
     
