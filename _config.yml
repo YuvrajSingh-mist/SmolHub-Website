@@ -16,7 +16,8 @@ title                    : "Yuvraj's Portfolio"
 title_separator          : "-"
 name                     : &name "Yuvraj Singh"
 description              : &description "personal description"
-url                      : https://smolhub.vercel.app/ # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : https://smolhub.com # Primary domain
+# Alternate domains: https://yuvrajsingh-portfoilo-website.vercel.app, https://smolhub.vercel.app
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "YuvrajSingh-mist/SmolHub-Website"
 
