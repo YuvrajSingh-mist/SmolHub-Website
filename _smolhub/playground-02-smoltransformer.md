@@ -4,9 +4,7 @@ excerpt: "A compact implementation of an Encoder-Decoder Transformer for sequenc
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolTransformer"
 date: 2025-08-08
-framework: "PyTorch"
-category: "Experimental AI/ML"
-tags: ["storytelling", "transformer", "compact", "nlp", "educational"]
+tags: ["transformer", "pytorch", "translation", "compact", "interactive", "optimized", "educational"]
 ---
 
 ## Project Overview

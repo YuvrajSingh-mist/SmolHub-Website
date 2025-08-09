@@ -4,9 +4,7 @@ excerpt: "A PyTorch implementation of a DeepSeek V3 inspired transformer model w
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryKimi"
 date: 2025-08-08
-framework: "PyTorch"
-category: "Experimental AI/ML"
-tags: ["storytelling", "mixtral", "transformer", "llama", "kimi", "compact", "nlp", "experimental", "educational"]
+tags: ["mixtral", "llama", "kimi", "transformer", "pytorch", "storytelling", "generation", "compact", "vision", "distributed", "interactive", "optimized", "experimental", "educational"]
 ---
 
 ## Project Overview
