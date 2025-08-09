@@ -3,7 +3,7 @@ title: "RNNs"
 excerpt: "From scratch implementation of RNNs"
 collection: models
 layout: model-implementation
-category: "Sequential Models"
+category: "Other"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/RNNs"
@@ -16,7 +16,7 @@ From scratch implementation of RNNs
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Sequential Models
+- **Category**: Other
 
 ## Implementation Details
 
@@ -51,7 +51,7 @@ Val loss - 0.50
 
 ### Loss Curves
 
-![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/RNNs/img/loss_curves.jpg)
+![Train and Val loss curves](img/loss_curves.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [RNNs](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/RNNs)

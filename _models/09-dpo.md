@@ -3,7 +3,7 @@ title: "DPO"
 excerpt: "From scratch implementation of DPO"
 collection: models
 layout: model-implementation
-category: "Language Models"
+category: "Training Methods"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DPO"
@@ -16,7 +16,7 @@ From scratch implementation of DPO
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: UltraFeedback
-- **Category**: Language Models
+- **Category**: Training Methods
 
 ## Implementation Details
 

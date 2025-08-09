@@ -3,7 +3,7 @@ title: "Seq2Seq"
 excerpt: "From scratch implementation of Seq2Seq"
 collection: models
 layout: model-implementation
-category: "Sequential Models"
+category: "Attention Mechanisms"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Seq2Seq"
@@ -13,10 +13,13 @@ date: 2025-04-25
 ## Overview
 From scratch implementation of Seq2Seq
 
+## Key Features
+- Attention Mechanism
+
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Sequential Models
+- **Category**: Attention Mechanisms
 
 ## Implementation Details
 
@@ -51,7 +54,7 @@ Val iterations = every epoch
 
 ### Loss Curves
 
-![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Seq2Seq/img/loss_curves.jpg)
+![Train and Val loss curves](img/loss_curves.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [Seq2Seq](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Seq2Seq)

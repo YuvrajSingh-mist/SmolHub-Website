@@ -3,7 +3,7 @@ title: "SimplePO"
 excerpt: "From scratch implementation of SimplePO"
 collection: models
 layout: model-implementation
-category: "Machine Learning"
+category: "Training Methods"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SimplePO"
@@ -16,7 +16,7 @@ From scratch implementation of SimplePO
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: UltraFeedback
-- **Category**: Machine Learning
+- **Category**: Training Methods
 
 ## Implementation Details
 
