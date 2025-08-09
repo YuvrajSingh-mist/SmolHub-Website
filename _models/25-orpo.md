@@ -2,8 +2,8 @@
 title: "ORPO"
 excerpt: "From scratch implementation of ORPO"
 collection: models
-layout: model-implementation
-category: "Other"
+layout: single
+category: "Fine-tuning"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ORPO"
@@ -16,7 +16,7 @@ From scratch implementation of ORPO
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: UltraFeedback
-- **Category**: Other
+- **Category**: Fine-tuning
 
 ## Implementation Details
 

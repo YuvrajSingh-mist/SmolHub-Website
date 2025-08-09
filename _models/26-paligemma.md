@@ -2,12 +2,12 @@
 title: "PaliGemma"
 excerpt: "From scratch implementation of PaliGemma"
 collection: models
-layout: model-implementation
-category: "Other"
+layout: single
+category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Flickr"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/PaliGemma"
-date: 2025-04-20
+date: 2025-02-09
 ---
 
 ## Overview
@@ -16,7 +16,7 @@ From scratch implementation of PaliGemma
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Flickr
-- **Category**: Other
+- **Category**: Computer Vision
 
 ## Implementation Details
 

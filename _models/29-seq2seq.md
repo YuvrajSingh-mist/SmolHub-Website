@@ -2,8 +2,8 @@
 title: "Seq2Seq"
 excerpt: "From scratch implementation of Seq2Seq"
 collection: models
-layout: model-implementation
-category: "Attention Mechanisms"
+layout: single
+category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Seq2Seq"
@@ -19,7 +19,7 @@ From scratch implementation of Seq2Seq
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Attention Mechanisms
+- **Category**: Sequential Models
 
 ## Implementation Details
 

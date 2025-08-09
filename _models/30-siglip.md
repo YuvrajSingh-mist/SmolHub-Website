@@ -2,7 +2,7 @@
 title: "SigLip"
 excerpt: "From scratch implementation of SigLip"
 collection: models
-layout: model-implementation
+layout: single
 category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Flickr"

@@ -2,7 +2,7 @@
 title: "DeepSeekV3"
 excerpt: "From scratch implementation of DeepSeekV3"
 collection: models
-layout: model-implementation
+layout: single
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyStories"

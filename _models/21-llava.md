@@ -2,8 +2,8 @@
 title: "Llava"
 excerpt: "From scratch implementation of Llava"
 collection: models
-layout: model-implementation
-category: "Training Methods"
+layout: single
+category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Flickr"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llava"
@@ -16,7 +16,7 @@ From scratch implementation of Llava
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Flickr
-- **Category**: Training Methods
+- **Category**: Computer Vision
 
 ## Implementation Details
 

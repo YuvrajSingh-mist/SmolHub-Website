@@ -4,7 +4,7 @@ excerpt: "- So, I trained a Llama a 88M architecture I coded from ground up to b
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryLlama"
 date: 2025-08-08
-tags: ["llama", "transformer", "pytorch", "storytelling", "compact", "interactive", "educational"]
+tags: ['language-model', 'transformer', 'storytelling', 'llama-inspired', 'compact']
 ---
 
 ## Project Overview
@@ -13,7 +13,7 @@ tags: ["llama", "transformer", "pytorch", "storytelling", "compact", "interactiv
 ## Technical Details
 - **Type**: SmolHub Playground Project
 - **Framework**: PyTorch
-- **Category**: Experimental AI/ML
+- **Category**: Language Models
 - **Repository**: [Story Llama](https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryLlama)
 
 ## Implementation Details

@@ -2,8 +2,8 @@
 title: "DPO"
 excerpt: "From scratch implementation of DPO"
 collection: models
-layout: model-implementation
-category: "Training Methods"
+layout: single
+category: "Fine-tuning"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DPO"
@@ -16,7 +16,7 @@ From scratch implementation of DPO
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: UltraFeedback
-- **Category**: Training Methods
+- **Category**: Fine-tuning
 
 ## Implementation Details
 

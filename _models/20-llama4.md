@@ -2,12 +2,12 @@
 title: "Llama4"
 excerpt: "From scratch implementation of Llama4"
 collection: models
-layout: model-implementation
+layout: single
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyStories"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama4"
-date: 2025-04-20
+date: 2025-08-06
 ---
 
 ## Overview

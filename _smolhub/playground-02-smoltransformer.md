@@ -4,7 +4,7 @@ excerpt: "A compact implementation of an Encoder-Decoder Transformer for sequenc
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolTransformer"
 date: 2025-08-08
-tags: ["transformer", "pytorch", "translation", "compact", "interactive", "optimized", "educational"]
+tags: ['translation', 'transformer', 'encoder-decoder', 'english-hindi', 'compact']
 ---
 
 ## Project Overview
@@ -13,7 +13,7 @@ A compact implementation of an Encoder-Decoder Transformer for sequence-to-seque
 ## Technical Details
 - **Type**: SmolHub Playground Project
 - **Framework**: PyTorch
-- **Category**: Experimental AI/ML
+- **Category**: Translation Models
 - **Repository**: [Smol Transformer](https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolTransformer)
 
 ## Implementation Details

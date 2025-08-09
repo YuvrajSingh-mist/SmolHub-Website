@@ -2,8 +2,8 @@
 title: "Fine Tuning using PEFT"
 excerpt: "From scratch implementation of Fine Tuning using PEFT"
 collection: models
-layout: model-implementation
-category: "Training Methods"
+layout: single
+category: "Fine-tuning"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Fine Tuning using PEFT"
@@ -16,7 +16,7 @@ From scratch implementation of Fine Tuning using PEFT
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Training Methods
+- **Category**: Fine-tuning
 
 ## Implementation Details
 

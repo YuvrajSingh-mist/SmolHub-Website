@@ -75,25 +75,53 @@ def extract_framework_and_dataset(readme_content, description):
 
 
 def categorize_model(name, description, readme_content):
-    """Categorize the model based on its content"""
-    content = (name + " " + description + " " + readme_content).lower()
+    """Manual categorization based on model name - no automatic detection"""
+    # Manual mapping for specific models
+    manual_categories = {
+        'whisper': 'Audio/Speech',
+        'clap': 'Audio/Speech', 
+        'moonshine': 'Audio/Speech',
+        'tts': 'Audio/Speech',
+        'clip': 'Computer Vision',
+        'siglip': 'Computer Vision',
+        'vit': 'Computer Vision',
+        'llava': 'Computer Vision',
+        'paligemma': 'Computer Vision',
+        'vae': 'Generative Models',
+        'cgans': 'Generative Models',
+        'dcgans': 'Generative Models',
+        'cyclegan': 'Generative Models',
+        'wgans': 'Generative Models',
+        'pix2pix': 'Generative Models',
+        'mixtral': 'Language Models',
+        'llama': 'Language Models',
+        'gpt': 'Language Models',
+        'bert': 'Language Models',
+        'gemma': 'Language Models',
+        'deepseekv3': 'Language Models',
+        'kimi-k2': 'Language Models',
+        'transformer': 'Language Models',
+        'encoder-decoder': 'Sequential Models',
+        'seq2seq': 'Sequential Models',
+        'rnn': 'Sequential Models',
+        'lstm': 'Sequential Models',
+        'gru': 'Sequential Models',
+        'attention': 'Attention Mechanisms',
+        'differential': 'Attention Mechanisms',
+        'lora': 'Fine-tuning',
+        'peft': 'Fine-tuning',
+        'dpo': 'Fine-tuning',
+        'orpo': 'Fine-tuning',
+        'simplepo': 'Fine-tuning',
+        'ddp': 'Training Methods'
+    }
     
-    if any(term in content for term in ['gpt', 'llama', 'bert', 'transformer', 'language model', 'text', 'nlp']):
-        return "Language Models"
-    elif any(term in content for term in ['gan', 'dcgan', 'cyclegan', 'cgan', 'generative']):
-        return "Generative Models"
-    elif any(term in content for term in ['vision', 'clip', 'image', 'computer vision', 'cnn']):
-        return "Computer Vision"
-    elif any(term in content for term in ['attention', 'differential']):
-        return "Attention Mechanisms"
-    elif any(term in content for term in ['audio', 'speech', 'clap', 'whisper']):
-        return "Audio/Speech"
-    elif any(term in content for term in ['training', 'ddp', 'distributed', 'optimization']):
-        return "Training Methods"
-    elif any(term in content for term in ['fine', 'tuning', 'peft', 'dpo']):
-        return "Fine-tuning"
-    else:
-        return "Other"
+    name_lower = name.lower()
+    for key, category in manual_categories.items():
+        if key in name_lower:
+            return category
+    
+    return "Other"
 
 
 def extract_key_features(readme_content):

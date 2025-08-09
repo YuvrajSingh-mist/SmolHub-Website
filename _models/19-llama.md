@@ -2,7 +2,7 @@
 title: "Llama"
 excerpt: "From scratch implementation of Llama"
 collection: models
-layout: model-implementation
+layout: single
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyShakespeare"

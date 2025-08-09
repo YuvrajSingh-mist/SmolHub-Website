@@ -2,8 +2,8 @@
 title: "DDP"
 excerpt: "From scratch implementation of DDP"
 collection: models
-layout: model-implementation
-category: "Language Models"
+layout: single
+category: "Training Methods"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DDP"
@@ -20,7 +20,7 @@ From scratch implementation of DDP
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Language Models
+- **Category**: Training Methods
 
 ## Implementation Details
 

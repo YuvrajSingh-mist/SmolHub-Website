@@ -148,27 +148,10 @@ def extract_framework_and_dataset(readme_content, description):
 
 
 def categorize_model(name, description, readme_content):
-    """Categorize the model based on its content"""
-    content = (name + " " + description + " " + readme_content).lower()
-    
-    if any(term in content for term in ['gpt', 'llama', 'bert', 'transformer', 'language model', 'text', 'nlp', 'gemma', 'qwen']):
-        return "Language Models"
-    elif any(term in content for term in ['gan', 'dcgan', 'cyclegan', 'cgan', 'generative', 'vae', 'diffusion']):
-        return "Generative Models"
-    elif any(term in content for term in ['vision', 'clip', 'image', 'computer vision', 'cnn', 'vit', 'paligemma', 'llava', 'siglip']):
-        return "Computer Vision"
-    elif any(term in content for term in ['attention', 'differential']):
-        return "Attention Mechanisms"
-    elif any(term in content for term in ['audio', 'speech', 'clap', 'whisper', 'tts', 'moonshine']):
-        return "Audio/Speech"
-    elif any(term in content for term in ['training', 'ddp', 'distributed', 'optimization']):
-        return "Training Methods"
-    elif any(term in content for term in ['fine', 'tuning', 'peft', 'dpo', 'orpo', 'lora', 'simplepo']):
-        return "Fine-tuning"
-    elif any(term in content for term in ['rnn', 'lstm', 'gru', 'encoder', 'decoder', 'seq2seq']):
-        return "Sequential Models"
-    else:
-        return "Other"
+    """Manual categorization - use existing category from model data or default"""
+    # For update_models.py, we'll preserve existing categories
+    # New models will get "Other" and should be manually categorized later
+    return "Other"
 
 
 def extract_key_features(readme_content):

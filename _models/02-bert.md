@@ -2,7 +2,7 @@
 title: "BERT"
 excerpt: "From scratch implementation of BERT"
 collection: models
-layout: model-implementation
+layout: single
 category: "Language Models"
 framework: "PyTorch"
 dataset: "Cornell Movie Dialogs"

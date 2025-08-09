@@ -2,12 +2,12 @@
 title: "Gemma3"
 excerpt: "From scratch implementation of Gemma3"
 collection: models
-layout: model-implementation
+layout: single
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyStories"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma3"
-date: 2025-04-20
+date: 2025-04-26
 ---
 
 ## Overview

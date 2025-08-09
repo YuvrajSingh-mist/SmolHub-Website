@@ -2,7 +2,7 @@
 title: "CycleGANs"
 excerpt: "From scratch implementation of CycleGANs"
 collection: models
-layout: model-implementation
+layout: single
 category: "Generative Models"
 framework: "PyTorch"
 dataset: "Cityscapes"

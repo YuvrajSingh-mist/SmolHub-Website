@@ -2,8 +2,8 @@
 title: "TTS"
 excerpt: "From scratch implementation of TTS"
 collection: models
-layout: model-implementation
-category: "Language Models"
+layout: single
+category: "Audio/Speech"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/TTS"
@@ -20,7 +20,7 @@ From scratch implementation of TTS
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
-- **Category**: Language Models
+- **Category**: Audio/Speech
 
 ## Implementation Details
 

@@ -2,8 +2,8 @@
 title: "RNNs"
 excerpt: "From scratch implementation of RNNs"
 collection: models
-layout: model-implementation
-category: "Other"
+layout: single
+category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/RNNs"
@@ -16,7 +16,7 @@ From scratch implementation of RNNs
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Other
+- **Category**: Sequential Models
 
 ## Implementation Details
 

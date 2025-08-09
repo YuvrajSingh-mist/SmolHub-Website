@@ -2,8 +2,8 @@
 title: "CLAP"
 excerpt: "From scratch implementation of CLAP"
 collection: models
-layout: model-implementation
-category: "Language Models"
+layout: single
+category: "Audio/Speech"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CLAP"
@@ -16,7 +16,7 @@ From scratch implementation of CLAP
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
-- **Category**: Language Models
+- **Category**: Audio/Speech
 
 ## Implementation Details
 

@@ -23,14 +23,16 @@ author_profile: true
     
     <!-- Tag Filters -->
     <div class="search-filters">
-      <span class="filter-label">Filter by tags:</span>
+      <span class="filter-label">Filter by category:</span>
       <button class="filter-btn active" data-tag="all">All</button>
-      <button class="filter-btn" data-tag="nlp">NLP</button>
-      <button class="filter-btn" data-tag="vision">Vision</button>
-      <button class="filter-btn" data-tag="generative">Generative</button>
-      <button class="filter-btn" data-tag="sequential">Sequential</button>
-      <button class="filter-btn" data-tag="attention">Attention</button>
-      <button class="filter-btn" data-tag="optimization">Optimization</button>
+      <button class="filter-btn" data-tag="language-models">Language Models</button>
+      <button class="filter-btn" data-tag="computer-vision">Computer Vision</button>
+      <button class="filter-btn" data-tag="generative-models">Generative Models</button>
+      <button class="filter-btn" data-tag="audio-speech">Audio/Speech</button>
+      <button class="filter-btn" data-tag="fine-tuning">Fine-tuning</button>
+      <button class="filter-btn" data-tag="sequential-models">Sequential Models</button>
+      <button class="filter-btn" data-tag="attention-mechanisms">Attention Mechanisms</button>
+      <button class="filter-btn" data-tag="training-methods">Training Methods</button>
     </div>
     
     <div class="search-results-info">
@@ -39,18 +41,16 @@ author_profile: true
     </div>
   </div>
 
-  <div class="models-grid" id="models-container">
+    <div class="models-grid" id="models-container">
     {% for post in site.models %}
       <div class="model-wrapper" 
-           data-tags="{{ post.tags | join: ',' | downcase }}"
+           data-category="{{ post.category | downcase | replace: '/', '-' | replace: ' ', '-' }}"
            data-name="{{ post.title }}"
            data-date="{{ post.date | date: '%Y-%m-%d' }}">
         {% include model-card.html %}
       </div>
     {% endfor %}
-  </div>
-
-  <!-- Hidden data container for GitHub dates -->
+  </div>  <!-- Hidden data container for GitHub dates -->
   <script type="application/json" id="models-github-data">
     {{ site.data.models | jsonify }}
   </script>
@@ -101,9 +101,6 @@ author_profile: true
 </style>
 
 <script>
-// Global variable to store all models data
-let allModels = [];
-
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🔍 Models page loaded - initializing search and filters...');
     
@@ -118,14 +115,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const resultsCount = document.getElementById('search-results-count');
         const tagButtons = document.querySelectorAll('.filter-btn[data-tag]');
         
-        // Store all models for filtering (make it global)
-        allModels = Array.from(document.querySelectorAll('.model-wrapper')).map(wrapper => {
-            const tagsStr = wrapper.getAttribute('data-tags') || '';
+        // Store all models for filtering using manual categories
+        const allModels = Array.from(document.querySelectorAll('.model-wrapper')).map(wrapper => {
+            const category = wrapper.getAttribute('data-category') || '';
             return {
                 element: wrapper,
                 name: wrapper.querySelector('.model-card__title')?.textContent.toLowerCase() || '',
                 description: wrapper.querySelector('.model-card__excerpt')?.textContent.toLowerCase() || '',
-                tags: tagsStr.split(',').filter(tag => tag.trim()).map(tag => tag.trim())
+                category: category
             };
         });
         
@@ -174,8 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         function filterModels() {
-            console.log(`🔍 Filtering - Query: "${currentQuery}", Tag: "${currentTag}"`);
-            console.log(`📋 Total models available: ${allModels.length}`);
+            console.log(`🔍 Filtering - Query: "${currentQuery}", Category: "${currentTag}"`);
             
             const filteredModels = allModels.filter(model => {
                 // Text search filter
@@ -183,13 +179,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     model.name.includes(currentQuery) || 
                     model.description.includes(currentQuery);
                 
-                // Tag filter - check auto-generated tags
-                const matchesTag = currentTag === 'all' || 
-                    (model.tags && model.tags.includes(currentTag));
+                // Category filter - use manual categories from frontmatter
+                const matchesCategory = currentTag === 'all' || model.category === currentTag;
                 
-                console.log(`Model: ${model.name.substring(0, 20)}..., Auto-Tags: "${Array.isArray(model.tags) ? model.tags.join(',') : 'No tags'}", MatchesTag: ${matchesTag}, MatchesSearch: ${matchesSearch}`);
+                console.log(`Model: ${model.name.substring(0, 20)}..., Category: "${model.category}", MatchesCategory: ${matchesCategory}, MatchesSearch: ${matchesSearch}`);
                 
-                return matchesSearch && matchesTag;
+                return matchesSearch && matchesCategory;
             });
             
             // Show/hide models
@@ -227,190 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        console.log('✅ Model filtering initialized with', allModels.length, 'models');
-        
-        // Load GitHub dates and auto-generate tags
-        loadGitHubDatesAndTags();
-    }
-    
-    function loadGitHubDatesAndTags() {
-        console.log('📅 Loading GitHub creation dates and auto-generating tags...');
-        
-        const githubDataScript = document.getElementById('models-github-data');
-        if (!githubDataScript) {
-            console.warn('⚠️ No GitHub data found');
-            return;
-        }
-        
-        try {
-            const githubData = JSON.parse(githubDataScript.textContent);
-            console.log('📊 GitHub data loaded:', githubData);
-            
-            if (!githubData.models) {
-                console.warn('⚠️ No models in GitHub data');
-                return;
-            }
-            
-            // Create mapping of model names to GitHub dates and auto-generated tags
-            const nameToData = {};
-            githubData.models.forEach(model => {
-                const autoTags = generateAutoTags(model);
-                nameToData[model.name] = {
-                    githubDate: model.github_date || model.created_date,
-                    tags: autoTags
-                };
-            });
-            
-            console.log('📅 Data mapping created:', nameToData);
-            
-            // Update model cards and wrapper elements
-            let updatedCards = 0;
-            document.querySelectorAll('.model-wrapper').forEach(wrapper => {
-                const modelName = wrapper.dataset.name;
-                if (!modelName) return;
-                
-                // Find matching GitHub data
-                let modelData = null;
-                for (const [name, data] of Object.entries(nameToData)) {
-                    if (name.toLowerCase().replace(/[^a-z0-9]/g, '') === 
-                        modelName.toLowerCase().replace(/[^a-z0-9]/g, '')) {
-                        modelData = data;
-                        break;
-                    }
-                }
-                
-                if (modelData) {
-                    // Update wrapper with auto-generated tags
-                    wrapper.setAttribute('data-tags', modelData.tags.join(','));
-                    console.log(`🏷️ Auto-tagged ${modelName}: ${modelData.tags.join(', ')}`);
-                    
-                    // Add date info to the model card
-                    const modelCard = wrapper.querySelector('.model-card');
-                    if (modelCard && modelData.githubDate) {
-                        let dateElement = modelCard.querySelector('.model-card__date');
-                        if (!dateElement) {
-                            dateElement = document.createElement('div');
-                            dateElement.className = 'model-card__date';
-                            
-                            // Try to insert before footer, otherwise append at end
-                            const footer = modelCard.querySelector('.model-card__footer');
-                            try {
-                                if (footer && footer.parentNode === modelCard) {
-                                    modelCard.insertBefore(dateElement, footer);
-                                } else {
-                                    modelCard.appendChild(dateElement);
-                                }
-                            } catch (e) {
-                                console.warn('Failed to insert date element, appending instead:', e);
-                                modelCard.appendChild(dateElement);
-                            }
-                        }
-                        
-                        // Format date nicely
-                        const formattedDate = new Date(modelData.githubDate).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric'
-                        });
-                        
-                        dateElement.innerHTML = `<small>📅 Created: ${formattedDate}</small>`;
-                    }
-                    updatedCards++;
-                }
-            });
-            
-            console.log(`✅ Updated ${updatedCards} model cards with GitHub dates and auto-tags`);
-            
-            // Refresh the allModels data to include new tags
-            refreshModelData();
-            
-        } catch (error) {
-            console.error('❌ Error parsing GitHub data:', error);
-        }
-    }
-    
-    function generateAutoTags(model) {
-        const content = (model.name + ' ' + model.description + ' ' + (model.readme_content || '')).toLowerCase();
-        const tags = [];
-        
-        console.log(`🏷️ Auto-tagging ${model.name}: Content snippet: "${content.substring(0, 100)}..."`);
-        
-        // NLP/Language Models
-        if (content.includes('bert') || content.includes('gpt') || content.includes('llama') || 
-            content.includes('language') || content.includes('nlp') || content.includes('text') ||
-            content.includes('transformer') || content.includes('lstm') || content.includes('rnn')) {
-            tags.push('nlp');
-            console.log(`  ✅ Added NLP tag`);
-        }
-        
-        // Computer Vision
-        if (content.includes('vision') || content.includes('clip') || content.includes('image') || 
-            content.includes('cnn') || content.includes('resnet') || content.includes('vit')) {
-            tags.push('vision');
-            console.log(`  ✅ Added Vision tag`);
-        }
-        
-        // Generative Models
-        if (content.includes('gan') || content.includes('vae') || content.includes('diffusion') || 
-            content.includes('generative') || content.includes('dcgan') || content.includes('cyclegan')) {
-            tags.push('generative');
-            console.log(`  ✅ Added Generative tag`);
-        }
-        
-        // Sequential Models
-        if (content.includes('lstm') || content.includes('gru') || content.includes('rnn') || 
-            content.includes('sequence') || content.includes('sequential')) {
-            tags.push('sequential');
-            console.log(`  ✅ Added Sequential tag`);
-        }
-        
-        // Attention Models
-        if (content.includes('attention') || content.includes('transformer') || content.includes('bert') ||
-            content.includes('self-attention')) {
-            tags.push('attention');
-            console.log(`  ✅ Added Attention tag`);
-        }
-        
-        // Optimization/Training
-        if (content.includes('ddp') || content.includes('distributed') || content.includes('training') ||
-            content.includes('optimization') || content.includes('fine') || content.includes('tune')) {
-            tags.push('optimization');
-            console.log(`  ✅ Added Optimization tag`);
-        }
-        
-        console.log(`🏷️ Final tags for ${model.name}: [${tags.join(', ')}]`);
-        return tags;
-    }
-    
-    function refreshModelData() {
-        console.log("🔄 Starting refreshModelData...");
-        
-        // Re-read all model data including the new tags
-        allModels = [];
-        document.querySelectorAll('.model-wrapper').forEach((wrapper, index) => {
-            const nameElement = wrapper.querySelector('.model-card__title');
-            const descElement = wrapper.querySelector('.model-card__excerpt');
-            
-            const name = nameElement?.textContent || `Model ${index + 1}`;
-            const description = descElement?.textContent || '';
-            
-            const model = {
-                element: wrapper,
-                name: name.toLowerCase(),
-                description: description.toLowerCase()
-            };
-            
-            // Generate auto tags for this model
-            const autoTags = generateAutoTags(model);
-            model.tags = autoTags;
-            
-            console.log(`  📝 Model "${name}" processed with tags: [${autoTags.join(', ')}]`);
-            
-            allModels.push(model);
-        });
-        
-        console.log(`🔄 Refreshed model data: ${allModels.length} models with auto-generated tags`);
-        console.log('📊 Sample model data:', allModels.slice(0, 2));
+        console.log('✅ Model filtering initialized with', allModels.length, 'models using manual categories');
     }
 });
 </script>

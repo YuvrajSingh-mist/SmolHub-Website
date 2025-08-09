@@ -1,31 +1,49 @@
----
-title: "Whisper"
-excerpt: "From scratch implementation of Whisper"
-collection: models
-layout: single
-category: "Audio/Speech"
-framework: "PyTorch"
-dataset: "Gigaspeech"
-github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Whisper"
-date: 2025-04-25
----
+#!/usr/bin/env python3
 
-## Overview
-From scratch implementation of Whisper
+def categorize_model(name, description, readme_content):
+    """Categorize the model based on its content"""
+    content = (name + " " + description + " " + readme_content).lower()
+    
+    print(f"Checking content for: {name}")
+    print(f"Content contains 'whisper': {'whisper' in content}")
+    print(f"Content contains 'audio': {'audio' in content}")
+    print(f"Content contains 'speech': {'speech' in content}")
+    print(f"Content contains 'attention': {'attention' in content}")
+    
+    # Check more specific categories first
+    if any(term in content for term in ['audio', 'speech', 'clap', 'whisper']):
+        print("✅ Matched Audio/Speech")
+        return "Audio/Speech"
+    elif any(term in content for term in ['computer vision', 'clip', 'siglip', 'vit', 'vision transformer', 'resnet', 'efficientnet', 'yolo', 'object detection', 'image classification', 'semantic segmentation']):
+        print("✅ Matched Computer Vision")
+        return "Computer Vision"
+    elif any(term in content for term in ['gan', 'dcgan', 'cyclegan', 'cgan', 'generative']):
+        print("✅ Matched Generative Models")
+        return "Generative Models"
+    elif any(term in content for term in ['fine', 'tuning', 'peft', 'dpo']):
+        print("✅ Matched Fine-tuning")
+        return "Fine-tuning"
+    elif any(term in content for term in ['training', 'ddp', 'distributed', 'optimization']):
+        print("✅ Matched Training Methods")
+        return "Training Methods"
+    elif any(term in content for term in ['gpt', 'llama', 'bert', 'transformer', 'language model', 'text', 'nlp']):
+        print("✅ Matched Language Models")
+        return "Language Models"
+    elif any(term in content for term in ['attention', 'differential']):
+        print("✅ Matched Attention Mechanisms")
+        return "Attention Mechanisms"
+    else:
+        print("✅ Matched Other")
+        return "Other"
 
-## Key Features
-- Attention Mechanism
-
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: Gigaspeech
-- **Category**: Audio/Speech
-
-## Implementation Details
-
+# Test with Whisper data
+name = "Whisper"
+description = "From scratch implementation of Whisper"
+readme_content = """
 # Whisper model in Pytorch from scratch implementation
 
 Trained a small whisper model coded and trained from scratch in Pytorch 
+
 
 [Robust Speech Recognition via Large-Scale Weak Supervision](https://cdn.openai.com/papers/whisper.pdf)
 
@@ -56,7 +74,6 @@ Trained a small whisper model coded and trained from scratch in Pytorch
 | `max_t`                 | 500                    | Maximum time steps in the spectrogram.                                      |
 | `n_channels`            | 80                     | Number of channels in the input spectrogram.                                |
 | `hidden_dim`            | 4 * `embeddings_dims`  | Number of neurons in the feed-forward network (FFN).                        |
-"""
 
 ### Dataset
 
@@ -67,16 +84,17 @@ Used the 'xs' snapshot.
 ### Frameworks:
 **Pytorch**
 
+
 ### Epochs/Steps
 Epochs (train) = 10
 
 Val iterations = every epoch
 
+
 ### Loss Curves
 
 ![Train and Val loss curves](img/loss.jpg)
+"""
 
-## Source Code
-📁 **GitHub Repository**: [Whisper](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Whisper)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+result = categorize_model(name, description, readme_content)
+print(f"Final category: {result}")
