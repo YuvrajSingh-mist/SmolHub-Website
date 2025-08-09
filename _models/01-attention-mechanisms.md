@@ -13,6 +13,9 @@ date: 2025-03-07
 ## Overview
 From scratch implementation of Attention Mechanisms
 
+## Key Features
+- Attention Mechanism
+
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom

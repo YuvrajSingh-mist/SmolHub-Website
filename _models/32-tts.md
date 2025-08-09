@@ -13,6 +13,10 @@ date: 2025-03-26
 ## Overview
 From scratch implementation of TTS
 
+## Key Features
+- Attention Mechanism
+- Transformer Architecture
+
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
@@ -76,7 +80,7 @@ Val iterations = every 50 steps
 
 ### Loss Curves
 
-![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/TTS/images/loss.jpg)
+![Train and Val loss curves](images/loss.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [TTS](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/TTS)

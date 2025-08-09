@@ -7,7 +7,7 @@ category: "Generative Models"
 framework: "PyTorch"
 dataset: "CIFAR"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DCGANs"
-date: 2025-08-06
+date: 2024-07-10
 ---
 
 ## Overview

@@ -13,6 +13,9 @@ date: 2024-06-20
 ## Overview
 From scratch implementation of ViT
 
+## Key Features
+- Transformer Architecture
+
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom

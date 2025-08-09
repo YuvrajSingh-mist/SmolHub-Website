@@ -5,17 +5,23 @@ collection: models
 layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "Custom"
+dataset: "TinyStories"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama4"
-date: 2025-04-20
+date: 2025-08-06
 ---
 
 ## Overview
 From scratch implementation of Llama4
 
+## Key Features
+- Mixture of Experts (MoE)
+- Attention Mechanism
+- Transformer Architecture
+- Memory Optimization
+
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: Custom
+- **Dataset**: TinyStories
 - **Category**: Language Models
 
 ## Implementation Details
@@ -117,7 +123,7 @@ This dataclass defines hyperparameters and configuration settings for a neural n
 
 - Loss Curves (Train and Val)
 
-![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Llama4/img/loss.png)
+![Loss Curves (Train and Val)](img/loss.png)
 
 --- 
 #### Output

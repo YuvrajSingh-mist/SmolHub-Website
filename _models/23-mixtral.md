@@ -3,9 +3,9 @@ title: "Mixtral"
 excerpt: "From scratch implementation of Mixtral"
 collection: models
 layout: model-implementation
-category: "Training Optimization"
+category: "Training Methods"
 framework: "PyTorch"
-dataset: "Custom"
+dataset: "TinyShakespeare"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Mixtral"
 date: 2025-03-20
 ---
@@ -15,8 +15,8 @@ From scratch implementation of Mixtral
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: Custom
-- **Category**: Training Optimization
+- **Dataset**: TinyShakespeare
+- **Category**: Training Methods
 
 ## Implementation Details
 

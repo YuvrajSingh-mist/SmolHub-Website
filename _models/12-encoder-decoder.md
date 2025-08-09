@@ -3,7 +3,7 @@ title: "Encoder-Decoder"
 excerpt: "From scratch implementation of Encoder-Decoder"
 collection: models
 layout: model-implementation
-category: "Sequential Models"
+category: "Other"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Encoder-Decoder"
@@ -16,7 +16,7 @@ From scratch implementation of Encoder-Decoder
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Sequential Models
+- **Category**: Other
 
 ## Implementation Details
 
@@ -54,7 +54,7 @@ Val loss - 1.39
 
 ### Loss Curves
 
-![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Encoder-Decoder/img/loss.jpg)
+![Train and Val loss curves](img/loss.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [Encoder-Decoder](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Encoder-Decoder)
