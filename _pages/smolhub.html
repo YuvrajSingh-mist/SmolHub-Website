@@ -136,6 +136,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     searchFilters.appendChild(tagButton);
                 });
                 
+                // Add event listener to the "All" button
+                const allButton = document.querySelector('.filter-btn[data-tag="all"]');
+                if (allButton) {
+                    allButton.addEventListener('click', handleTagClick);
+                    console.log('✅ Added event listener to "All" button');
+                } else {
+                    console.warn('⚠️ Could not find "All" button');
+                }
+                
                 console.log('📋 Generated tag filters:', sortedTags);
                 
             } catch (error) {
