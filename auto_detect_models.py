@@ -41,9 +41,32 @@ def get_existing_models():
         return []
     
     with open(models_file, 'r') as f:
-        models_data = json.load(f)
+        data = json.load(f)
     
-    return [model.get('folder_name', '') for model in models_data]
+    # Handle both old format (array) and new format (object with models key)
+    if isinstance(data, list):
+        models_data = data
+    elif isinstance(data, dict) and 'models' in data:
+        models_data = data['models']
+    else:
+        print(f"Warning: Unexpected format in {models_file}")
+        return []
+    
+    # Extract folder names, trying different possible field names
+    folder_names = []
+    for model in models_data:
+        if isinstance(model, dict):
+            # Try different possible field names for the folder/directory name
+            folder_name = (
+                model.get('folder_name') or 
+                model.get('name') or 
+                model.get('display_name') or 
+                ''
+            )
+            if folder_name:
+                folder_names.append(folder_name)
+    
+    return folder_names
 
 def detect_new_models(owner="YuvrajSingh-mist", repo="Paper-Replications", token=None):
     """Detect new models that don't have markdown files yet"""
@@ -118,7 +141,16 @@ def add_new_models_to_json(new_models, token=None):
     # Load existing models
     if os.path.exists(models_file):
         with open(models_file, 'r') as f:
-            models_data = json.load(f)
+            data = json.load(f)
+        
+        # Handle both old format (array) and new format (object with models key)
+        if isinstance(data, list):
+            models_data = data
+        elif isinstance(data, dict) and 'models' in data:
+            models_data = data['models']
+        else:
+            print(f"Warning: Unexpected format in {models_file}, creating new structure")
+            models_data = []
     else:
         models_data = []
     
@@ -128,9 +160,24 @@ def add_new_models_to_json(new_models, token=None):
         model_entry = create_model_entry(folder_name, token=token)
         models_data.append(model_entry)
     
-    # Save updated models.json
+    # Save updated models.json - maintain the original structure
+    if os.path.exists(models_file):
+        with open(models_file, 'r') as f:
+            original_data = json.load(f)
+        
+        if isinstance(original_data, dict) and 'models' in original_data:
+            # Maintain the object structure
+            original_data['models'] = models_data
+            final_data = original_data
+        else:
+            # Use array structure
+            final_data = models_data
+    else:
+        # Default to array structure for new files
+        final_data = models_data
+    
     with open(models_file, 'w') as f:
-        json.dump(models_data, f, indent=2)
+        json.dump(final_data, f, indent=2)
     
     print(f"✅ Added {len(new_models)} new models to {models_file}")
 
