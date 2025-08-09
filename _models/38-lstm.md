@@ -2,7 +2,7 @@
 title: "lstm"
 excerpt: "From scratch implementation of lstm"
 collection: models
-layout: single
+layout: model-implementation
 category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"

@@ -2,7 +2,7 @@
 title: "Fine Tuning using PEFT"
 excerpt: "From scratch implementation of Fine Tuning using PEFT"
 collection: models
-layout: single
+layout: model-implementation
 category: "Fine-tuning"
 framework: "PyTorch"
 dataset: "Custom"

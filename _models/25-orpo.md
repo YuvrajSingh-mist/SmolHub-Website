@@ -2,7 +2,7 @@
 title: "ORPO"
 excerpt: "From scratch implementation of ORPO"
 collection: models
-layout: single
+layout: model-implementation
 category: "Fine-tuning"
 framework: "PyTorch"
 dataset: "UltraFeedback"

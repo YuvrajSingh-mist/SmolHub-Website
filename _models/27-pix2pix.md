@@ -2,7 +2,7 @@
 title: "Pix2Pix"
 excerpt: "From scratch implementation of Pix2Pix"
 collection: models
-layout: single
+layout: model-implementation
 category: "Generative Models"
 framework: "PyTorch"
 dataset: "Cityscapes"

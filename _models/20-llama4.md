@@ -2,7 +2,7 @@
 title: "Llama4"
 excerpt: "From scratch implementation of Llama4"
 collection: models
-layout: single
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyStories"

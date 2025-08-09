@@ -2,7 +2,7 @@
 title: "Seq2Seq"
 excerpt: "From scratch implementation of Seq2Seq"
 collection: models
-layout: single
+layout: model-implementation
 category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
