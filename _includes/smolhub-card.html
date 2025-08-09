@@ -9,7 +9,18 @@
 {% assign smolhub_id = post.title | slugify %}
 {% assign repo_url = post.github_url | default: "https://github.com/YuvrajSingh-mist/SmolHub" %}
 
-<div class="model-card">
+{% comment %} Get tags from GitHub data if available {% endcomment %}
+{% assign project_tags = "" %}
+{% for project in site.data.smolhub_playground.projects %}
+  {% assign project_name_clean = project.name | downcase | replace: " ", "" | replace: "-", "" %}
+  {% assign post_title_clean = title | downcase | replace: " ", "" | replace: "-", "" %}
+  {% if project_name_clean == post_title_clean or project.display_name == title %}
+    {% assign project_tags = project.tags | join: " " %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<div class="model-card smolhub-card" data-tags="{{ project_tags }}">
   <div class="model-card__image" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);">
     <span>{{ title }} 🎮</span>
   </div>
@@ -22,6 +33,16 @@
     {% if post.excerpt %}
     <div class="model-card__excerpt">
       {{ post.excerpt | markdownify | strip_html | truncatewords: 25 }}
+    </div>
+    {% endif %}
+    
+    {% comment %} Display tags if available {% endcomment %}
+    {% if project_tags != "" %}
+    <div class="model-card__tags">
+      {% assign tags_array = project_tags | split: " " %}
+      {% for tag in tags_array limit: 5 %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
     </div>
     {% endif %}
     

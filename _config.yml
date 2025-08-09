@@ -28,9 +28,9 @@ author:
   avatar           : "unnamed.png"
   name             : "Yuvraj Singh"
   pronouns         : # example: "she/her"  
-  bio              : "NLP | Interested in Multimodal LLMs | Exploring the intersection of Research and Engineering"
-  location         : "Noida"
-  employer         : "IISER, Kolkata"
+  bio              : "NLP | Interested in RL Reasoning in LLMs and Multimodal LLMs | Exploring the intersection of Research and Engineering"
+  location         : "India"
+  employer         : "None"
   uri              : # URL
   email            : "yuvraj.mist@gmail.com" 
 
@@ -68,7 +68,7 @@ author:
   # steam            : # Username
   # telegram         : # URL
   # tumblr           : # Username
-  # twitter          : # Username for X / Twitter
+  twitter            : "YuvrajS9886" 
   # vine             : # Username
   # weibo            : # Username
   # wikipedia        : # Username
