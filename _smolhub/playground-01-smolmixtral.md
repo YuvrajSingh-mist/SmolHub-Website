@@ -4,9 +4,7 @@ excerpt: "A PyTorch implementation of a Mixtral inspired transformer model with 
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolMixtral"
 date: 2025-08-08
-framework: "PyTorch"
-category: "Experimental AI/ML"
-tags: ["storytelling", "mixtral", "transformer", "llama", "compact", "nlp", "educational"]
+tags: ["mixtral", "llama", "transformer", "pytorch", "generation", "compact", "vision", "distributed", "interactive", "optimized", "educational"]
 ---
 
 ## Project Overview
