@@ -5,6 +5,8 @@ collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryLlama"
 date: 2025-08-08
 tags: ['language-model', 'transformer', 'storytelling', 'llama-inspired', 'compact']
+framework: "PyTorch"
+category: "Language Models"
 ---
 
 ## Project Overview
@@ -17,9 +19,6 @@ tags: ['language-model', 'transformer', 'storytelling', 'llama-inspired', 'compa
 - **Repository**: [Story Llama](https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryLlama)
 
 ## Implementation Details
-
-# Story Llama
-
 
 # Introducing StoryLlama - A Smaller Language Model for Bedtime Stories! 
 
@@ -110,14 +109,14 @@ Below is a table summarizing the configuration parameters for the model:
 
 - Loss Curves (Train and Val)
 
-![Loss Curves (Train and Val)](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryLlama/imgs/loss_curves.jpg)
+![Loss Curves (Train and Val)](https://raw.githubusercontent.com/YuvrajSingh-mist/SmolHub/main/StoryLlama/imgs/loss_curves.jpg)
 
 --- 
 #### Output
 
 - Prompt: Once upon a time
 
-![Prompt: Once upon a time](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryLlama/imgs/sample.jpg)
+![Prompt: Once upon a time](https://raw.githubusercontent.com/YuvrajSingh-mist/SmolHub/main/StoryLlama/imgs/sample.jpg)
 
 ---
 

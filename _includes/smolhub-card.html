@@ -46,10 +46,15 @@
     </div>
     {% endif %}
     
-    <div class="model-card__footer">
-      <a href="{{ base_path }}{{ post.url }}" class="model-details-btn" rel="permalink" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52);">
+    <div class="model-card__footer" style="display: flex; gap: 8px; align-items: center;">
+      <a href="{{ base_path }}{{ post.url }}" class="model-details-btn" rel="permalink" style="background: linear-gradient(135deg, #ff6b6b, #ee5a52); flex: 1;">
         Explore Project
       </a>
+      {% if title == "Story Kimi" %}
+      <a href="https://huggingface.co/spaces/YuvrajSingh9886/StoryKimi-Zero" target="_blank" rel="noopener" class="model-details-btn huggingface-btn" style="background: linear-gradient(135deg, #ff9500, #ff8c00); flex: 1;">
+        🤗 Try it
+      </a>
+      {% endif %}
     </div>
   </div>
 </div>

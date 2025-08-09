@@ -1,0 +1,27 @@
+
+name: Auto-Fix SmolHub Image URLs
+on:
+  push:
+    paths:
+      - '_smolhub/*.md'
+  pull_request:
+    paths:
+      - '_smolhub/*.md'
+jobs:
+  fix-image-urls:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Auto-fix old github.com/raw image URLs
+        run: |
+          find _smolhub -name '*.md' -exec sed -i 's#https://github.com/\([^/]\+\)/\([^/]\+\)/raw/\([^/]\+\)/\([^)]\+\)#https://raw.githubusercontent.com/\1/\2/\3/\4#g' {} +
+      - name: Commit and push changes if needed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _smolhub/*.md
+          git diff --cached --quiet || git commit -m "Auto-fix: Convert github.com/raw image URLs to raw.githubusercontent.com"
+          git push || echo "No changes to push or push failed (PR context)"
+      - name: Success
+        run: echo 'All SmolHub markdown image URLs are now raw.githubusercontent.com.'

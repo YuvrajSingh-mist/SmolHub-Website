@@ -5,6 +5,8 @@ collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryKimi"
 date: 2025-08-08
 tags: ['language-model', 'transformer', 'storytelling', 'deepseek-inspired', 'moe']
+framework: "PyTorch"
+category: "Language Models"
 ---
 
 ## Project Overview
@@ -18,11 +20,10 @@ A PyTorch implementation of a DeepSeek V3 inspired transformer model with Mixtur
 
 ## Implementation Details
 
-# Story Kimi
 
 A PyTorch implementation of a DeepSeek V3 inspired transformer model with Mixture of Experts (MoE), Latent Attention, and other advanced features.
 
-![StoryKimi Model](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryKimi/[🖼️ images/image.png](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryKimi/images/image.png))
+![StoryKimi Model](https://raw.githubusercontent.com/YuvrajSingh-mist/SmolHub/main/StoryKimi/images/image.png)
 
 ## 📊 Training Results & Model Weights
 
@@ -31,6 +32,11 @@ A PyTorch implementation of a DeepSeek V3 inspired transformer model with Mixtur
 **💾 Download Pre-trained Weights**: 
 - **Hugging Face Model**: [YuvrajSingh9886/StoryKimi](https://huggingface.co/YuvrajSingh9886/StoryKimi)
 - **WandB Checkpoints**: Check the WandB report above for additional trained model checkpoints
+
+**🚀 Try the Model**: 
+<a href="https://huggingface.co/spaces/YuvrajSingh9886/StoryKimi-Zero" target="_blank" rel="noopener" class="action-btn huggingface-btn">
+    🤗 Try it on HuggingFace Spaces
+</a>
 
 ## Features
 

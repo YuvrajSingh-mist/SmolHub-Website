@@ -5,6 +5,8 @@ collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryMixtral"
 date: 2025-08-08
 tags: ['language-model', 'transformer', 'storytelling', 'mixtral-inspired', 'moe']
+framework: "PyTorch"
+category: "Language Models"
 ---
 
 ## Project Overview
@@ -18,9 +20,6 @@ A PyTorch implementation of a Mixtral inspired transformer model with Mixture of
 
 ## Implementation Details
 
-# Story Mixtral
-
-
 # StoryMixtral - Mixtral Inspired Model
 
 A PyTorch implementation of a Mixtral inspired transformer model with Mixture of Experts (MoE), Flash Attention, and other advanced features.
@@ -29,7 +28,7 @@ A PyTorch implementation of a Mixtral inspired transformer model with Mixture of
 
 Provided under the `generated_data/` directory, these examples showcase the model's capabilities in text generation and understanding.
 
-![StoryMixtral Model](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryMixtral/[🖼️ images/image.png](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryMixtral/images/image.png))
+![StoryMixtral Model](https://raw.githubusercontent.com/YuvrajSingh-mist/SmolHub/main/StoryMixtral/images/image.png)
 
 ## 📊 Training Results & Model Weights
 
