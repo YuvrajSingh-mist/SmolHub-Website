@@ -66,20 +66,17 @@ Trained a small transformer based TTS model coded and trained from scratch in Py
 
 [Gigaspeech](https://huggingface.co/datasets/speechcolab/gigaspeech) (can be used)
 
-
 ### Frameworks:
 **Pytorch**
-
 
 ### Epochs/Steps
 Steps (train) = 150
 
 Val iterations = every 50 steps
 
-
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/TTS/images/loss.jpg)
+![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/TTS/images/loss.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [TTS](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/TTS)
