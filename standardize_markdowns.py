@@ -102,7 +102,7 @@ date: {date}
     
     def fix_github_image_url(self, url):
         """Convert GitHub blob URL to raw.githubusercontent.com URL"""
-        if 'github.com' in url and '/blob/' in url:
+        if 'github.com' in url
             return url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/')
         return url
     

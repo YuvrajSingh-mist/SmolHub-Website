@@ -37,7 +37,7 @@ Trained a small whisper model coded and trained from scratch in Pytorch
 | `dropout`               | 0.1                    | Dropout rate for regularization.                                            |
 | `epochs`                | 10                     | Number of training epochs.                                                  |
 | `block_size`            | 64                     | Sequence length (number of tokens or time steps).                           |
-| `tgt_vocab_size`        | 50262     | Size of the target vocabulary.                                              |
+| `tgt_vocab_size`        | 50262                  | Size of the target vocabulary.                                              |
 | `embeddings_dims`       | 384                    | Dimensionality of token embeddings.                                         |
 | `attn_dropout`          | 0.1                    | Dropout rate for attention layers.                                          |
 | `no_of_heads`           | 6                      | Number of attention heads in multi-head attention.                          |
@@ -45,9 +45,9 @@ Trained a small whisper model coded and trained from scratch in Pytorch
 | `weight_decay_optim`    | 0.01                   | Weight decay for the optimizer.                                             |
 | `log_mel_features`      | 80                     | Number of Mel spectrogram features.                                         |
 | `kernel_size`           | 3                      | Kernel size for convolutional layers.                                       |
-| `stride`                | 2             | Stride for convolutional layers.                                            |
+| `stride`                | 2                      | Stride for convolutional layers.                                            |
 | `sr`                    | 16000                  | Sampling rate of the audio.                                                 |
-| `device`                | `'cuda:0'`             | Device to run the model on (e.g., GPU).                                     |
+| `device`                | 'cuda:0'               | Device to run the model on (e.g., GPU).                                     |
 | `SAMPLING_RATE`         | 16000                  | Sampling rate of the audio.                                                 |
 | `N_MELS`                | 80                     | Number of Mel bins in the spectrogram.                                      |
 | `WINDOW_DURATION`       | 0.025                  | Duration of the analysis window in seconds (25 ms).                         |
