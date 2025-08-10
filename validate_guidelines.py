@@ -69,22 +69,28 @@ def check_github_links():
     """Check for proper GitHub image links using raw.githubusercontent.com"""
     print("🔗 Checking GitHub image links...")
     models_dir = Path("_models")
-    link_count = 0
-    
+    issues = []
+
     # Updated pattern to check for proper raw.githubusercontent.com image links
-    github_image_pattern = r'!\[([^\]]+)\]\((https://raw\.githubusercontent\.com/[^)]+\.(jpg|jpeg|png|gif|svg))\)'
-    
+    github_image_pattern = r'!\[([^\]]+)\]\((https://raw\.githubusercontent\.com/[^/]+/[^/]+/[^)]+\.(jpg|jpeg|png|gif|svg))\)'
+
     for md_file in models_dir.glob("*.md"):
         with open(md_file, 'r', encoding='utf-8') as f:
             content = f.read()
-        
+
         matches = re.findall(github_image_pattern, content)
-        if matches:
-            link_count += len(matches)
-            print(f"  ✅ {md_file.name}: {len(matches)} proper raw GitHub image links")
-    
-    print(f"  📊 Total proper GitHub image links: {link_count}")
-    return True  # Always return True since this is about proper format, not count
+        for match in matches:
+            if not match[1].startswith("https://raw.githubusercontent.com/YuvrajSingh-mist/"):
+                issues.append(f"❌ {md_file.name}: incorrect GitHub image link '{match[1]}'")
+
+    if issues:
+        print(f"  Found {len(issues)} incorrect GitHub image links:")
+        for issue in issues:
+            print(f"    {issue}")
+        return False
+    else:
+        print("  ✅ All GitHub image links are correct")
+        return True
 
 def check_title_consistency():
     """Check title consistency with models.json"""

@@ -5,7 +5,7 @@ collection: models
 layout: model-implementation
 category: "Generative Models"
 framework: "PyTorch"
-dataset: "Cityscapes"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CycleGANs"
 date: 2025-02-09
 ---
@@ -15,7 +15,7 @@ From scratch implementation of CycleGANs
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: Cityscapes
+- **Dataset**: Custom
 - **Category**: Generative Models
 
 ## Implementation Details
@@ -25,6 +25,7 @@ From scratch implementation of CycleGANs
 I implemented the CycleGAN using Pytorch on the cityscapes dataset.
 
 [CycleGAN](https://arxiv.org/abs/1703.10593)
+
 
 ### Datasets
 

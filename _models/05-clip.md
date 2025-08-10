@@ -3,7 +3,7 @@ title: "CLiP"
 excerpt: "From scratch implementation of CLiP"
 collection: models
 layout: model-implementation
-category: "Computer Vision"
+category: "Language Models"
 framework: "PyTorch"
 dataset: "Flickr"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CLiP"
@@ -16,7 +16,7 @@ From scratch implementation of CLiP
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Flickr
-- **Category**: Computer Vision
+- **Category**: Language Models
 
 ## Implementation Details
 
@@ -26,12 +26,14 @@ I implemented the CLiP using Pytorch on the flickr8000 dataset.
 
 [Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/abs/2103.00020)
 
+
 ### Datasets
 
 **flickr 8000**: [Link](https://www.kaggle.com/datasets/adityajn105/flickr8k)
 
 ### Frameworks:
 **Pytorch**
+
 
 ### Results (on T4 GPU Single)
 

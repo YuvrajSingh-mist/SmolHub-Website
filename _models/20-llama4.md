@@ -5,7 +5,7 @@ collection: models
 layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "TinyStories"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama4"
 date: 2025-08-06
 ---
@@ -13,15 +13,9 @@ date: 2025-08-06
 ## Overview
 From scratch implementation of Llama4
 
-## Key Features
-- Mixture of Experts (MoE)
-- Attention Mechanism
-- Transformer Architecture
-- Memory Optimization
-
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: TinyStories
+- **Dataset**: Custom
 - **Category**: Language Models
 
 ## Implementation Details
@@ -29,6 +23,7 @@ From scratch implementation of Llama4
 # Llama 4 Scout from-scratch in PyTorch
 - So, I trained a MoE based Llama 1.2B (32x12M) architecture I coded from ground up.
 - Trained on TiyStories dataset form HuggingFace consisting of 4.2B tokens for 1 FULL epoch.
+
 
 ---
 
@@ -41,7 +36,10 @@ From scratch implementation of Llama4
   1) Train dataset - 2 M records approx
   2) Val dataset - 26K records approx
 
+
+
 ---
+
 
 # Model Configuration (`ModelArgs`)
 
@@ -99,11 +97,13 @@ This dataclass defines hyperparameters and configuration settings for a neural n
 | `use_liger` | True | Use Liger kernels for optimized operations |
 | `ignore_pad_token_in_loss` | True | Whether to ignore padding tokens in loss calculation |
 
+
  - Used P100 on Kaggle
 ---
 
 #### Frameworks:
 **Pytorch**
+
 
 --- 
 
@@ -123,7 +123,7 @@ This dataclass defines hyperparameters and configuration settings for a neural n
 
 - Loss Curves (Train and Val)
 
-![Loss Curves (Train and Val)](img/loss.png)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/Llama4/img/loss.png)
 
 --- 
 #### Output
@@ -136,7 +136,10 @@ This dataclass defines hyperparameters and configuration settings for a neural n
 
 <!-- ### Local setup
 
+
 ### Requirements
+
+
 
 ```python
 git [clone the repo](https://github.com/YuvrajSingh-mist/StoryLlama.git)
@@ -153,6 +156,7 @@ wandb login
 
 - Enter the api key and follow the instructions and once you are succesfully logged in follow the given steps
 
+
 - Download the model
 
 ```python
@@ -161,9 +165,11 @@ cd gradio/
 python app.py
 ```
 
+
 ---
 
 ### Running 
+
 
 #### Training a model
 

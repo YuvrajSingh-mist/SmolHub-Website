@@ -3,7 +3,7 @@ title: "Fine Tuning using PEFT"
 excerpt: "From scratch implementation of Fine Tuning using PEFT"
 collection: models
 layout: model-implementation
-category: "Fine-tuning"
+category: "Language Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Fine Tuning using PEFT"
@@ -16,7 +16,7 @@ From scratch implementation of Fine Tuning using PEFT
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Fine-tuning
+- **Category**: Language Models
 
 ## Implementation Details
 
@@ -24,6 +24,7 @@ From scratch implementation of Fine Tuning using PEFT
 
 I implemented a simple fine tuning script using peft (qlora and bnb) for fine tuning llms.
 Also added a file for training encoder type models.
+
 
 ### Frameworks:
 **Pytorch**

@@ -77,11 +77,18 @@ def validate_content_structure(filepath, content):
         r'!\[[^\]]*\]\((?!http)[^)]+\.(?:png|jpg|jpeg|gif|svg)\)',
         r'<img[^>]+src=["\'](?!http)[^"\']+\.(?:png|jpg|jpeg|gif|svg)["\']'
     ]
-    
+
     for pattern in local_image_patterns:
         matches = re.findall(pattern, content, re.IGNORECASE)
         if matches:
             issues.append(f"Found local image references that should use GitHub URLs: {matches}")
+
+    # Check for incorrect GitHub image links
+    incorrect_github_pattern = r'!\[([^\]]+)\]\((https://raw\.githubusercontent\.com/[^/]+/[^/]+/[^)]+\.(jpg|jpeg|png|gif|svg))\)'
+    matches = re.findall(incorrect_github_pattern, content, re.IGNORECASE)
+    for match in matches:
+        if not match[1].startswith("https://raw.githubusercontent.com/YuvrajSingh-mist/"):
+            issues.append(f"Incorrect GitHub image link: {match[1]}")
     
     return issues
 

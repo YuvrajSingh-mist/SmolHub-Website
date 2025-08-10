@@ -3,7 +3,7 @@ title: "DPO"
 excerpt: "From scratch implementation of DPO"
 collection: models
 layout: model-implementation
-category: "Fine-tuning"
+category: "Language Models"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DPO"
@@ -16,7 +16,7 @@ From scratch implementation of DPO
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: UltraFeedback
-- **Category**: Fine-tuning
+- **Category**: Language Models
 
 ## Implementation Details
 
@@ -39,10 +39,12 @@ I Trained Qwen0.5B-Instruct using Direct Preference Optimization in Pytorch
 ### Frameworks:
 **Pytorch**
 
+
 ### Epochs/Steps
 Iterations (train) = 3000
 
 Val iterations = every 20
+
 
 ### Losses
 Train loss - 0.67

@@ -5,7 +5,7 @@ collection: models
 layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "TinyShakespeare"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma"
 date: 2025-04-20
 ---
@@ -15,7 +15,7 @@ From scratch implementation of Gemma
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: TinyShakespeare
+- **Dataset**: Custom
 - **Category**: Language Models
 
 ## Implementation Details
@@ -25,6 +25,7 @@ From scratch implementation of Gemma
 I implemented the Gemma using Pytorch on the tineshakespeare dataset.
 
 [Gemma: Open Models Based on Gemini Research and Technology](https://arxiv.org/pdf/2403.08295)
+
 
 ### Datasets
 

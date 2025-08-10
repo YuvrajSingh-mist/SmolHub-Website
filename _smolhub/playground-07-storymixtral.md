@@ -36,7 +36,7 @@ A PyTorch implementation of a Mixtral inspired transformer model with Mixture of
 
 Provided under the `generated_data/` directory, these examples showcase the model's capabilities in text generation and understanding.
 
-![StoryMixtral Model](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryMixtral/[🖼️ images/image.png](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryMixtral/images/image.png))
+![StoryMixtral Model](https://raw.githubusercontent.com/YuvrajSingh-mist/SmolHub/main/StoryMixtral/images/image.png)
 
 ## 📊 Training Results & Model Weights
 

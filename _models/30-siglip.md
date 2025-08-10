@@ -3,7 +3,7 @@ title: "SigLip"
 excerpt: "From scratch implementation of SigLip"
 collection: models
 layout: model-implementation
-category: "Computer Vision"
+category: "Language Models"
 framework: "PyTorch"
 dataset: "Flickr"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SigLip"
@@ -16,7 +16,7 @@ From scratch implementation of SigLip
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Flickr
-- **Category**: Computer Vision
+- **Category**: Language Models
 
 ## Implementation Details
 
@@ -25,6 +25,7 @@ From scratch implementation of SigLip
 I implemented the SigLIP using Pytorch on the flickr8000 dataset.
 
 [Sigmoid Loss for Language Image Pre-Training](https://arxiv.org/abs/2303.15343)
+
 
 ### Datasets
 

@@ -13,9 +13,6 @@ date: 2025-04-25
 ## Overview
 From scratch implementation of Seq2Seq
 
-## Key Features
-- Attention Mechanism
-
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
@@ -47,14 +44,16 @@ Trained a Seq2Seq model with the said attention mechanism  coded from scratch in
 ### Frameworks:
 **Pytorch**
 
+
 ### Epochs/Steps
 Epochs (train) = 50
 
 Val iterations = every epoch
 
+
 ### Loss Curves
 
-![Train and Val loss curves](img/loss_curves.jpg)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/Seq2Seq/img/loss_curves.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [Seq2Seq](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Seq2Seq)

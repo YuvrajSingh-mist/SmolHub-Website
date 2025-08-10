@@ -151,7 +151,7 @@ The three main stages are:
 
 - Pretrain
 
-![Train Loss Curves](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/[🖼️ images/loss_curves.jpg](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/loss_curves.jpg))
+![Train Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/SmolHub/main/SmolLlama/images/loss_curves.jpg)
 
 - SFT
 

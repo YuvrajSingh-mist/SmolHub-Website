@@ -3,7 +3,7 @@ title: "TTS"
 excerpt: "From scratch implementation of TTS"
 collection: models
 layout: model-implementation
-category: "Audio/Speech"
+category: "Language Models"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/TTS"
@@ -13,14 +13,10 @@ date: 2025-03-26
 ## Overview
 From scratch implementation of TTS
 
-## Key Features
-- Attention Mechanism
-- Transformer Architecture
-
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
-- **Category**: Audio/Speech
+- **Category**: Language Models
 
 ## Implementation Details
 
@@ -70,17 +66,20 @@ Trained a small transformer based TTS model coded and trained from scratch in Py
 
 [Gigaspeech](https://huggingface.co/datasets/speechcolab/gigaspeech) (can be used)
 
+
 ### Frameworks:
 **Pytorch**
+
 
 ### Epochs/Steps
 Steps (train) = 150
 
 Val iterations = every 50 steps
 
+
 ### Loss Curves
 
-![Train and Val loss curves](images/loss.jpg)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/TTS/images/loss.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [TTS](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/TTS)

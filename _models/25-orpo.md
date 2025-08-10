@@ -3,7 +3,7 @@ title: "ORPO"
 excerpt: "From scratch implementation of ORPO"
 collection: models
 layout: model-implementation
-category: "Fine-tuning"
+category: "Language Models"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ORPO"
@@ -16,7 +16,7 @@ From scratch implementation of ORPO
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: UltraFeedback
-- **Category**: Fine-tuning
+- **Category**: Language Models
 
 ## Implementation Details
 
@@ -34,6 +34,7 @@ Trained OPT-330M model using ORPO in Pytorch for Instruction Following
 | `betas`      | 0.95,0.99| Beta values                                                                 |           
 | `weight_decay`| 0.1     | Weight decay values for the optimizer                                       |
 
+
 ### Datasets
 
 [UltraFeedback](https://huggingface.co/datasets/argilla/ultrafeedback-binarized-preferences-cleaned)
@@ -41,10 +42,12 @@ Trained OPT-330M model using ORPO in Pytorch for Instruction Following
 ### Frameworks:
 **Pytorch**
 
+
 ### Epochs/Steps
 Iterations (train) = 3k
 
 Val iterations = every 20
+
 
 ### Losses
 
@@ -55,7 +58,7 @@ Val loss - 1.98
 
 ### Loss Curves
 
-![Train and Val loss curves](img/curves.jpg)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/ORPO/img/curves.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [ORPO](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ORPO)

@@ -187,66 +187,73 @@ def generate_model_markdown(model_data, index):
     description = model_data.get('description', '')
     readme_content = model_data.get('readme_content', '')
     github_url = model_data.get('github_url', '')
-    
+
     # Extract additional information
     framework, dataset = extract_framework_and_dataset(readme_content, description)
     category = categorize_model(name, description, readme_content)
     features = extract_key_features(readme_content)
-    
+
     # Clean the readme content
     cleaned_readme = clean_markdown_content(readme_content)
-    
+
+    # Convert image URLs to raw GitHub user content URLs
+    cleaned_readme = re.sub(
+        r'!\[(.*?)\]\((.*?)\)',
+        lambda match: f"![{match.group(1)}](https://raw.githubusercontent.com/YuvrajSingh-mist/{match.group(2).replace('blob/', '')})",
+        cleaned_readme
+    )
+
     # Create the frontmatter
     frontmatter = f"""---
-title: "{display_name}"
-excerpt: "{description[:200]}{'...' if len(description) > 200 else ''}"
-collection: paper_replications
-layout: model-implementation
-category: "{category}"
-framework: "{framework}"
-dataset: "{dataset}"
-github_url: "{github_url}"
-date: {datetime.now().strftime('%Y-%m-%d')}
----
+    title: "{display_name}"
+    excerpt: "{description[:200]}{'...' if len(description) > 200 else ''}"
+    collection: paper_replications
+    layout: model-implementation
+    category: "{category}"
+    framework: "{framework}"
+    dataset: "{dataset}"
+    github_url: "{github_url}"
+    date: {datetime.now().strftime('%Y-%m-%d')}
+    ---
 
-"""
-    
+    """
+
     # Create the content
     content = frontmatter
-    
+
     # Add a brief overview if description exists
     if description and description != cleaned_readme[:200]:
         content += f"## Overview\n{description}\n\n"
-    
+
     # Add key features if any were found
     if features:
         content += "## Key Features\n"
         for feature in features:
             content += f"- {feature}\n"
         content += "\n"
-    
+
     # Add technical details
     content += f"""## Technical Details
-- **Framework**: {framework}
-- **Dataset**: {dataset}
-- **Category**: {category}
+    - **Framework**: {framework}
+    - **Dataset**: {dataset}
+    - **Category**: {category}
 
-"""
-    
+    """
+
     # Add the main readme content if it exists
     if cleaned_readme:
         content += "## Implementation Details\n\n"
         content += cleaned_readme
         content += "\n\n"
-    
+
     # Add GitHub link
     if github_url:
         content += f"""## Source Code
-📁 **GitHub Repository**: [{name}]({github_url})
+        📁 **GitHub Repository**: [{name}]({github_url})
 
-View the complete implementation, training scripts, and documentation on GitHub.
-"""
-    
+        View the complete implementation, training scripts, and documentation on GitHub.
+        """
+
     return content
 
 

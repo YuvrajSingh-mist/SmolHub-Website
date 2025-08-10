@@ -35,13 +35,16 @@ Trained a RNN model coded from scratch in Pytorch
 | `block_size` | 16      | Sequence Length                                       |
 | `No of neurons`| 16      | No of neurons in an RNN per layer                                          |    
 
+
 ### Frameworks:
 **Pytorch**
+
 
 ### Epochs/Steps
 Epochs (train) = 50
 
 Val iterations = every epoch
+
 
 ### Losses
 
@@ -51,7 +54,7 @@ Val loss - 0.50
 
 ### Loss Curves
 
-![Train and Val loss curves](img/loss_curves.jpg)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/RNNs/img/loss_curves.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [RNNs](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/RNNs)

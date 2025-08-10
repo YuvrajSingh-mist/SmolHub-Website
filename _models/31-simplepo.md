@@ -3,7 +3,7 @@ title: "SimplePO"
 excerpt: "From scratch implementation of SimplePO"
 collection: models
 layout: model-implementation
-category: "Fine-tuning"
+category: "Machine Learning"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SimplePO"
@@ -16,7 +16,7 @@ From scratch implementation of SimplePO
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: UltraFeedback
-- **Category**: Fine-tuning
+- **Category**: Machine Learning
 
 ## Implementation Details
 
@@ -35,6 +35,7 @@ Trained OPT-330M model using SimplePO in Pytorch for Instruction Following
 | `device`     | 'cuda:0' | The device to run the model on (e.g., 'cuda:0' for GPU).                    |
 | `beta`      | 2 | Beta values                                                                 |           
 | `gamma`| 1.6     | Gamma values for the optimizer                                       |
+
 
 ### Datasets
 

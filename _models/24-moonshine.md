@@ -3,7 +3,7 @@ title: "Moonshine"
 excerpt: "From scratch implementation of Moonshine"
 collection: models
 layout: model-implementation
-category: "Audio/Speech"
+category: "Language Models"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Moonshine"
@@ -13,14 +13,10 @@ date: 2025-03-29
 ## Overview
 From scratch implementation of Moonshine
 
-## Key Features
-- Attention Mechanism
-- Transformer Architecture
-
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
-- **Category**: Audio/Speech
+- **Category**: Language Models
 
 ## Implementation Details
 
@@ -29,6 +25,7 @@ From scratch implementation of Moonshine
 Trained a small transformer-based ASR model coded and trained from scratch in Pytorch.
 
 [Moonshine: Speech Recognition for Live Transcription and Voice Commands](https://arxiv.org/pdf/2410.15608)
+
 
 ### Hyperparameters
 | Parameter                | Value      | Description                                                                 |
@@ -50,17 +47,20 @@ Trained a small transformer-based ASR model coded and trained from scratch in Py
 
 [Gigaspeech](https://huggingface.co/datasets/speechcolab/gigaspeech) 
 
+
 ### Frameworks:
 **Pytorch**
+
 
 ### Epochs/Steps
 Steps (train) = 1500
 
 Val iterations = every 50 steps
 
+
 ### Loss Curves
 
-![Train and Val loss curves](images/loss_curves.jpg)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/Moonshine/images/loss_curves.jpg)
 
 Looks like 25 hours isnt enough thus started to overfit!
 
