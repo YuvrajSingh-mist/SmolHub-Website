@@ -26,14 +26,12 @@ I implemented the Differential Transformers using Pytorch on Tinyshakespeare dat
 
 [Differential Transformers](https://arxiv.org/pdf/2410.05258)
 
-
 ### Datasets
 
 **Tineshakespeare**: in the /data folder
 
 ### Frameworks:
 **Pytorch**
-
 
 ### Results (on A100 GPU Single)
 

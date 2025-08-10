@@ -24,8 +24,6 @@ From scratch implementation of CLAP
 
 Implementation of CLAP model coded from scratch in Pytorch 
 
-
-
 [CLAP : LEARNING AUDIO CONCEPTS FROM NATURAL LANGUAGE SUPERVISION](https://arxiv.org/pdf/2206.04769)
 
 ## ModelArgs Hyperparameters
@@ -63,7 +61,6 @@ Used the 'xs' snapshot.
 
 ### Frameworks:
 **Pytorch**
-
 
 ### NOTE
 The loss was stagged at 2.079 -loge(1/8), that is, the logits tend to be too small for softmax to outputs anythign except uniform probs. Pls let me know where am I making a mistake.

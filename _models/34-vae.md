@@ -32,11 +32,8 @@ I implemented a Variational Autoencoder Architecture from Scratch using PyTorch 
 
 The following images show the comparison between original CelebA face images (top row) and their reconstructions by the VAE (bottom row):
 
-<!-- Main image reference -->
-<img src="data/image.png" alt="VAE Results" width="800"/>
-
 <!-- Fallback references -->
-[🖼️ View Results](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/VAE/./data/image.png) > **Note**: If images don't load, please check the `data/` folder in this repository:
+![🖼️ View Results](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/VAE/./data/image.png) > **Note**: If images don't load, please check the `data/` folder in this repository:
 > - `data/image.png` - Reconstruction comparison results
 > - `data/losses.jpg` - Training loss curves  
 > - `data/arithmetic.jpg` - Latent space visualizations
@@ -46,31 +43,19 @@ The following images show the comparison between original CelebA face images (to
 
 ### Training Progress
 
-<!-- Main image reference -->
-<img src="data/losses.jpg" alt="Training Losses" width="600"/>
-
-<!-- Fallback reference -->
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/VAE/./data/losses.jpg)
+![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/VAE/./data/losses.jpg)
 
 *Training and validation losses over epochs showing convergence of reconstruction and KL divergence losses.*
 
 ### Latent Space Arithmetic
 
-<!-- Main image reference -->
-<img src="data/arithmetic.jpg" alt="Latent Arithmetic" width="700"/>
-
-<!-- Fallback reference -->
-[🔢 View Latent Arithmetic](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/VAE/./data/arithmetic.jpg)
+![🔢 View Latent Arithmetic](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/VAE/./data/arithmetic.jpg)
 
 *Latent space interpolation and arithmetic operations demonstrating the smooth and meaningful latent representations learned by the VAE.*
 
 ### Generated Samples
 
-<!-- Main image reference -->
-<img src="data/samples.jpg" alt="Generated Samples" width="800"/>
-
-<!-- Fallback reference -->
-[🎨 View Generated Samples](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/VAE/./data/samples.jpg)
+![🎨 View Generated Samples](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/VAE/./data/samples.jpg)
 
 *Random samples generated from the latent space showing the diversity and quality of faces that the VAE can produce.*
 
@@ -136,8 +121,6 @@ The following images show the comparison between original CelebA face images (to
 **KL Divergence**: Regularizes latent space to follow standard normal distribution  
 **Latent Space**: 32-dimensional for rich face feature representation
 **Loss Weighting**: Balanced reconstruction and KL terms for stable training
-
-
 
 **Final Training Metrics**:
 - Reconstruction Loss: MSE between original and reconstructed images
@@ -206,8 +189,6 @@ with torch.no_grad():
     z = torch.randn(16, 32).to(device)  # Sample from latent space
     generated_faces = model.decoder(z)
 ```
-
-
 
 ### Frameworks:
 **PyTorch**

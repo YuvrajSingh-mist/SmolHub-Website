@@ -24,8 +24,6 @@ From scratch implementation of Whisper
 
 Trained a small whisper model coded and trained from scratch in Pytorch 
 
-
-
 [Robust Speech Recognition via Large-Scale Weak Supervision](https://cdn.openai.com/papers/whisper.pdf)
 
 ## ModelArgs Hyperparameters
@@ -66,16 +64,14 @@ Used the 'xs' snapshot.
 ### Frameworks:
 **Pytorch**
 
-
 ### Epochs/Steps
 Epochs (train) = 10
 
 Val iterations = every epoch
 
-
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/Whisper/img/loss.jpg)
+![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Whisper/img/loss.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [Whisper](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Whisper)
