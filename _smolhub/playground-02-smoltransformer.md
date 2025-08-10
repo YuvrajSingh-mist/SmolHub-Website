@@ -18,6 +18,13 @@ A compact implementation of an Encoder-Decoder Transformer for sequence-to-seque
 - **Category**: Translation Models
 - **Repository**: [Smol Transformer](https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolTransformer)
 
+
+**🚀 Try the Model**: 
+<a href="https://huggingface.co/spaces/YuvrajSingh9886/SmolTransformer-Zero" target="_blank" rel="noopener" class="action-btn huggingface-btn">
+    🤗 Try it on HuggingFace Spaces
+</a>
+
+
 ## Implementation Details
 
 
