@@ -18,8 +18,6 @@ A PyTorch implementation of a Mixtral inspired transformer model with Mixture of
 
 ## Implementation Details
 
-# Story Mixtral
-
 
 # StoryMixtral - Mixtral Inspired Model
 
