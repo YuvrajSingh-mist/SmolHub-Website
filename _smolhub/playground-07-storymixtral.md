@@ -16,8 +16,9 @@ A PyTorch implementation of a Mixtral inspired transformer model with Mixture of
 - **Category**: Experimental AI/ML
 - **Repository**: [Story Mixtral](https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryMixtral)
 
-
 ## Implementation Details
+
+# Story Mixtral
 
 
 # StoryMixtral - Mixtral Inspired Model
@@ -28,7 +29,7 @@ A PyTorch implementation of a Mixtral inspired transformer model with Mixture of
 
 Provided under the `generated_data/` directory, these examples showcase the model's capabilities in text generation and understanding.
 
-![StoryMixtral](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryMixtral/images/image.png)
+![StoryMixtral Model](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryMixtral/[🖼️ images/image.png](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryMixtral/images/image.png))
 
 ## 📊 Training Results & Model Weights
 
