@@ -18,6 +18,19 @@ A PyTorch implementation of a Mixtral inspired transformer model with Mixture of
 - **Category**: Language Models
 - **Repository**: [Smol Mixtral](https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolMixtral)
 
+
+
+
+
+**🚀 Try the Model**: 
+<a href="https://huggingface.co/spaces/YuvrajSingh9886/SmolMixtral-Zero" target="_blank" rel="noopener" class="action-btn huggingface-btn">
+    🤗 Try it on HuggingFace Spaces
+</a>
+
+
+
+
+
 ## Implementation Details
 
 # SmolMixtral - Mixtral Inspired Model
