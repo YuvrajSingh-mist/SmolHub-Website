@@ -2,7 +2,7 @@
 title: "CGANs"
 excerpt: "From scratch implementation of CGANs"
 collection: models
-layout: single
+layout: model-implementation
 category: "Generative Models"
 framework: "PyTorch"
 dataset: "MNIST"
@@ -22,7 +22,7 @@ From scratch implementation of CGANs
 
 # Conditional Generative Adversarial Networks (CGANs)
 
-![CGAN Architecture](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/main/CGANs/output_images/MNIST/fake_images_steps_14000.png)
+!![CGAN Architecture](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/main/CGANs/output_images/MNIST/fake_images_steps_14000.png)
 
 ## Overview
 

@@ -2,7 +2,7 @@
 title: "GPT"
 excerpt: "From scratch implementation of GPT"
 collection: models
-layout: single
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyShakespeare"

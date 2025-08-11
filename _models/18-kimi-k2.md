@@ -2,7 +2,7 @@
 title: "Kimi-K2"
 excerpt: "From scratch implementation of Kimi-K2"
 collection: models
-layout: single
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyStories"

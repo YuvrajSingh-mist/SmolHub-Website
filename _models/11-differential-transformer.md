@@ -2,7 +2,7 @@
 title: "Differential Transformer"
 excerpt: "From scratch implementation of Differential Transformer"
 collection: models
-layout: single
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyShakespeare"

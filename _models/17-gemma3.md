@@ -2,7 +2,7 @@
 title: "Gemma3"
 excerpt: "From scratch implementation of Gemma3"
 collection: models
-layout: single
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyStories"

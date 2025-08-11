@@ -2,7 +2,7 @@
 title: "DPO"
 excerpt: "From scratch implementation of DPO"
 collection: models
-layout: single
+layout: model-implementation
 category: "Fine-tuning"
 framework: "PyTorch"
 dataset: "UltraFeedback"

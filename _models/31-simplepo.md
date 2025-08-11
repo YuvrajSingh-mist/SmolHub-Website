@@ -2,7 +2,7 @@
 title: "SimplePO"
 excerpt: "From scratch implementation of SimplePO"
 collection: models
-layout: single
+layout: model-implementation
 category: "Fine-tuning"
 framework: "PyTorch"
 dataset: "UltraFeedback"
