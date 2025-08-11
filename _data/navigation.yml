@@ -1,10 +1,10 @@
 # main links links
 main:
 
-  - title: "Projects"
-    url: /talks/ 
+  # - title: "Projects"
+  #   url: /talks/
 
-  - title: "From Scratch Implementations"
+  - title: "Paper Replications"
     url: /models/
 
   - title: "Datasets"

@@ -7,6 +7,17 @@ date: 2025-08-08
 tags: ["llama", "transformer", "pytorch", "storytelling", "compact", "interactive", "educational"]
 ---
 
+
+
+<div class="header-with-action">
+  <h2>Project Overview</h2>
+  <a class="btn btn--primary btn--hf" href="https://huggingface.co/spaces/YuvrajSingh9886/StoryLlama-Zero" target="_blank" rel="noopener">
+    <img class="hf-logo" alt="Hugging Face" src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" />
+    Try it on Hugging Face
+  </a>
+</div>
+
+
 ## Project Overview
 So, I trained a Llama a 88M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scratch.
 

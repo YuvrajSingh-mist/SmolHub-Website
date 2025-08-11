@@ -269,6 +269,189 @@
   [data-theme="dark"] nav {
     background-color: inherit !important;
   }
+
+  /* Wide tables for better readability on front page */
+  .page__content table.table-wide {
+    width: 100% !important;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  /* Header with action button */
+  .header-with-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0.5rem 0 0.75rem 0;
+  }
+  .header-with-action h2,
+  .header-with-action h3 {
+    margin: 0;
+  }
+
+  /* Hugging Face themed button */
+  .btn.btn--hf {
+    background-color: #ffcc4d; /* HF yellow */
+    color: #111 !important;
+    border: 1px solid #e0b100;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn.btn--hf:hover {
+    background-color: #ffd766;
+    color: #000 !important;
+    border-color: #d1a800;
+  }
+  [data-theme="dark"] .btn.btn--hf {
+    color: #111 !important;
+  }
+
+  .btn.btn--hf .hf-logo {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .page__content table.table-wide th,
+  .page__content table.table-wide td {
+    padding: 14px 16px;
+    border: 1px solid var(--border-color);
+    vertical-align: top;
+  }
+  .page__content table.table-wide thead th {
+    background: var(--sidebar-bg);
+    font-weight: 600;
+  }
+  .page__content table.table-wide .summary-col {
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+  .page__content table.table-wide .meta-col {
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+  }
+  .page__content table.table-wide .summary-bullets {
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+  .page__content table.table-wide .summary-bullets li {
+    margin-bottom: 0.25rem;
+  }
+
+  /* Card-like lists for Projects, Experience, Education */
+  .projects-list > ul,
+  .experience-list > ul,
+  .education-list > ul {
+    margin: 0;
+    padding-left: 0;
+  }
+  .projects-list > ul > li,
+  .experience-list > ul > li,
+  .education-list > ul > li {
+    list-style: none;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--link-color);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+  }
+  .projects-list > ul > li a,
+  .experience-list > ul > li a,
+  .education-list > ul > li a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .projects-list > ul > li > ul,
+  .experience-list > ul > li > ul,
+  .education-list > ul > li > ul {
+    margin-top: 6px;
+    padding-left: 1.1rem;
+  }
+
+  /* Achievements list with blue gradient accent */
+  .achievements-list > ul {
+    margin: 0;
+    padding-left: 0;
+  }
+  .achievements-list > ul > li {
+    list-style: none;
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.12), rgba(0, 102, 204, 0) 60%);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--link-color);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+  }
+  [data-theme="dark"] .achievements-list > ul > li {
+    background: linear-gradient(135deg, rgba(102, 179, 255, 0.12), rgba(102, 179, 255, 0) 60%);
+  }
+  .achievements-list .achv-title {
+    font-weight: 600;
+  }
+  .achievements-list small {
+    display: inline-block;
+    margin-top: 4px;
+    opacity: 0.9;
+  }
+
+  /* Skills list and chips */
+  .skills-list > ul {
+    margin: 0;
+    padding-left: 0;
+  }
+  .skills-list > ul > li {
+    list-style: none;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--link-color);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+  }
+  .skill-chips {
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: rgba(0,0,0,0.03);
+    font-size: 0.9em;
+  }
+  [data-theme="dark"] .chip {
+    background: rgba(255,255,255,0.06);
+  }
+  .page__content table.table-wide tbody tr:nth-child(odd) {
+    background-color: rgba(0,0,0,0.02);
+  }
+  [data-theme="dark"] .page__content table.table-wide tbody tr:nth-child(odd) {
+    background-color: rgba(255,255,255,0.03);
+  }
+  .page__content table.table-wide ul {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+  .page__content table.table-wide a {
+    text-decoration: none;
+  }
+  @media (max-width: 768px) {
+    .page__content table.table-wide {
+      table-layout: auto;
+    }
+    .page__content table.table-wide th,
+    .page__content table.table-wide td {
+      word-break: break-word;
+    }
+  }
 </style>
 
 

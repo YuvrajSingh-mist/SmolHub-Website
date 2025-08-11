@@ -7,7 +7,14 @@ date: 2025-08-08
 tags: ["mixtral", "llama", "transformer", "pytorch", "storytelling", "generation", "compact", "vision", "distributed", "interactive", "optimized", "educational"]
 ---
 
-## Project Overview
+<div class="header-with-action">
+  <h2>Project Overview</h2>
+  <a class="btn btn--primary btn--hf" href="https://huggingface.co/spaces/YuvrajSingh9886/StoryMixtral-Zero" target="_blank" rel="noopener">
+    <img class="hf-logo" alt="Hugging Face" src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" />
+    Try it on Hugging Face
+  </a>
+</div>
+
 A PyTorch implementation of a Mixtral inspired transformer model with Mixture of Experts (MoE), Flash Attention, and other advanced features.
 
 ## Technical Details

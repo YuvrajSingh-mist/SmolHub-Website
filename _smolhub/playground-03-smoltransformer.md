@@ -7,6 +7,17 @@ date: 2025-08-08
 tags: ["transformer", "pytorch", "translation", "compact", "interactive", "optimized", "educational"]
 ---
 
+
+
+<div class="header-with-action">
+  <h2>Project Overview</h2>
+  <a class="btn btn--primary btn--hf" href="https://huggingface.co/spaces/YuvrajSingh9886/SmolTransformer-Zero" target="_blank" rel="noopener">
+    <img class="hf-logo" alt="Hugging Face" src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" />
+    Try it on Hugging Face
+  </a>
+</div>
+
+
 ## Project Overview
 A compact implementation of an Encoder-Decoder Transformer for sequence-to-sequence translation tasks. This project implements a translation model from English to Hindi using the Samanantar dataset.
 

@@ -7,6 +7,18 @@ date: 2025-08-08
 tags: ["mixtral", "llama", "transformer", "pytorch", "generation", "compact", "vision", "distributed", "interactive", "optimized", "educational"]
 ---
 
+
+
+<div class="header-with-action">
+  <h2>Project Overview</h2>
+  <a class="btn btn--primary btn--hf" href="https://huggingface.co/spaces/YuvrajSingh9886/SmolMixtral-Zero" target="_blank" rel="noopener">
+    <img class="hf-logo" alt="Hugging Face" src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" />
+    Try it on Hugging Face
+  </a>
+</div>
+
+
+
 ## Project Overview
 A PyTorch implementation of a Mixtral inspired transformer model with Mixture of Experts (MoE), designed for text generation and understanding tasks. This model is built on the Mixtral architecture with enhancements like Flash Attention, SWiGLU activation, and Liger kernels for optimized performance.
 
