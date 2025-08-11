@@ -3,7 +3,7 @@ title: "ViT"
 excerpt: "From scratch implementation of ViT"
 collection: models
 layout: model-implementation
-category: "Language Models"
+category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ViT"
@@ -13,10 +13,13 @@ date: 2024-06-20
 ## Overview
 From scratch implementation of ViT
 
+## Key Features
+- Transformer Architecture
+
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Language Models
+- **Category**: Computer Vision
 
 ## Implementation Details
 

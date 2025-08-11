@@ -13,6 +13,9 @@ date: 2025-04-25
 ## Overview
 From scratch implementation of Seq2Seq
 
+## Key Features
+- Attention Mechanism
+
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
@@ -51,8 +54,12 @@ Val iterations = every epoch
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/Seq2Seq/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Seq2Seq/img/loss_curves.jpg)
+![Train and Val loss curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Seq2Seq/img/loss_curves.jpg)
 
+## ModelArgs Hyperparameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [Seq2Seq](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Seq2Seq)
 

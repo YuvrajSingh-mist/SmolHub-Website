@@ -3,7 +3,7 @@ title: "VAE"
 excerpt: "From scratch implementation of VAE"
 collection: models
 layout: model-implementation
-category: "Computer Vision"
+category: "Generative Models"
 framework: "PyTorch"
 dataset: "MNIST"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/VAE"
@@ -16,7 +16,7 @@ From scratch implementation of VAE
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: MNIST
-- **Category**: Computer Vision
+- **Category**: Generative Models
 
 ## Implementation Details
 
@@ -33,7 +33,7 @@ I implemented a Variational Autoencoder Architecture from Scratch using PyTorch 
 The following images show the comparison between original CelebA face images (top row) and their reconstructions by the VAE (bottom row):
 
 <!-- Fallback references -->
-[🖼️ View Results](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/VAE/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/VAE/./data/image.png) > **Note**: If images don't load, please check the `data/` folder in this repository:
+![VAE Results](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/VAE/data/image.png) > **Note**: If images don't load, please check the `data/` folder in this repository:
 > - `data/image.png` - Reconstruction comparison results
 > - `data/losses.jpg` - Training loss curves  
 > - `data/arithmetic.jpg` - Latent space visualizations
@@ -43,19 +43,19 @@ The following images show the comparison between original CelebA face images (to
 
 ### Training Progress
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/VAE/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/VAE/./data/losses.jpg)
+![Training Losses](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/VAE/data/losses.jpg)
 
 *Training and validation losses over epochs showing convergence of reconstruction and KL divergence losses.*
 
 ### Latent Space Arithmetic
 
-[🔗 View 🔢 View Latent Arithmetic](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/VAE/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/VAE/./data/arithmetic.jpg)
+![Latent Arithmetic](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/VAE/data/arithmetic.jpg)
 
 *Latent space interpolation and arithmetic operations demonstrating the smooth and meaningful latent representations learned by the VAE.*
 
 ### Generated Samples
 
-[🎨 View Generated Samples](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/VAE/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/VAE/./data/samples.jpg)
+![Generated Samples](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/VAE/data/samples.jpg)
 
 *Random samples generated from the latent space showing the diversity and quality of faces that the VAE can produce.*
 

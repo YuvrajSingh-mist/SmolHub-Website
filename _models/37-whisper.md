@@ -3,7 +3,7 @@ title: "Whisper"
 excerpt: "From scratch implementation of Whisper"
 collection: models
 layout: model-implementation
-category: "Computer Vision"
+category: "Audio/Speech"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Whisper"
@@ -13,10 +13,13 @@ date: 2025-04-25
 ## Overview
 From scratch implementation of Whisper
 
+## Key Features
+- Attention Mechanism
+
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
-- **Category**: Computer Vision
+- **Category**: Audio/Speech
 
 ## Implementation Details
 
@@ -71,8 +74,12 @@ Val iterations = every epoch
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/Whisper/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Whisper/img/loss.jpg)
+![Train and Val loss curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Whisper/img/loss.jpg)
 
+## ModelArgs Hyperparameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [Whisper](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Whisper)
 

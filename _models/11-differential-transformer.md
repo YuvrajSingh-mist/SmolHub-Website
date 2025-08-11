@@ -5,7 +5,7 @@ collection: models
 layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "Custom"
+dataset: "TinyShakespeare"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Differential Transformer"
 date: 2025-02-09
 ---
@@ -13,9 +13,12 @@ date: 2025-02-09
 ## Overview
 From scratch implementation of Differential Transformer
 
+## Key Features
+- Transformer Architecture
+
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: Custom
+- **Dataset**: TinyShakespeare
 - **Category**: Language Models
 
 ## Implementation Details

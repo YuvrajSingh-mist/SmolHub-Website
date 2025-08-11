@@ -51,8 +51,12 @@ Val loss - 0.48
 
 <!-- ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/GRU/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/GRU/img/loss_curves.jpg) -->
+![Train and Val loss curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/GRU/img/loss_curves.jpg) -->
 
+## ModelArgs Hyperparameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [GRU](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/GRU)
 
