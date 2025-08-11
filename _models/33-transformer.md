@@ -24,6 +24,7 @@ From scratch implementation of Transformer
 
 ## Implementation Details
 
+# Vanilla Transformers for Machine Translation in Pytorch
 
 I implemented the Vanilla Transformers using Pytorch on the German-English dataset.
 

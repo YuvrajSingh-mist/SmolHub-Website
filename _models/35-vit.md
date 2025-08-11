@@ -23,6 +23,8 @@ From scratch implementation of ViT
 
 ## Implementation Details
 
+# Vision Transformer (ViT-b-16) from Scratch
+
 Implmented a ViT Architecture from Scratch using Pytorch on a subset of Food-101 dataset.
 
 [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/1511.06434)

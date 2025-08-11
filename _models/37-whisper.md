@@ -13,6 +13,9 @@ date: 2025-04-25
 ## Overview
 From scratch implementation of Whisper
 
+## Key Features
+- Attention Mechanism
+
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
@@ -20,6 +23,7 @@ From scratch implementation of Whisper
 
 ## Implementation Details
 
+# Whisper model in Pytorch from scratch implementation
 
 Trained a small whisper model coded and trained from scratch in Pytorch 
 
@@ -52,7 +56,7 @@ Trained a small whisper model coded and trained from scratch in Pytorch
 | `max_t`                 | 500                    | Maximum time steps in the spectrogram.                                      |
 | `n_channels`            | 80                     | Number of channels in the input spectrogram.                                |
 | `hidden_dim`            | 4 * `embeddings_dims`  | Number of neurons in the feed-forward network (FFN).                        |
-
+"""
 
 ### Dataset
 
@@ -70,8 +74,12 @@ Val iterations = every epoch
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Whisper/img/loss.jpg)
+![Train and Val loss curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Whisper/img/loss.jpg)
 
+## ModelArgs Hyperparameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [Whisper](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Whisper)
 

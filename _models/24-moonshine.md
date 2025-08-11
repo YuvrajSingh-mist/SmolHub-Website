@@ -13,12 +13,18 @@ date: 2025-03-29
 ## Overview
 From scratch implementation of Moonshine
 
+## Key Features
+- Attention Mechanism
+- Transformer Architecture
+
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
 - **Category**: Audio/Speech
 
 ## Implementation Details
+
+# Moonshine- A faster Alternative to Whisper (Replication)!
 
 Trained a small transformer-based ASR model coded and trained from scratch in Pytorch.
 
@@ -54,7 +60,7 @@ Val iterations = every 50 steps
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Moonshine/images/loss_curves.jpg)
+![Train and Val loss curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Moonshine/images/loss_curves.jpg)
 
 Looks like 25 hours isnt enough thus started to overfit!
 

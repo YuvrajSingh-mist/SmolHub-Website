@@ -1,5 +1,5 @@
 ---
-title: "LSTM"
+title: "lstm"
 excerpt: "From scratch implementation of lstm"
 collection: models
 layout: model-implementation
@@ -20,6 +20,7 @@ From scratch implementation of lstm
 
 ## Implementation Details
 
+# LSTM in Pytorch from scratch implementation
 
 Trained 128K LSTM model coded from scratch in Pytorch 
 
@@ -50,8 +51,12 @@ Val loss - 0.48
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/lstm/img/loss_curves.jpg)
+![Train and Val loss curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/lstm/img/loss_curves.jpg)
 
+## ModelArgs Hyperparameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [lstm](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/lstm)
 

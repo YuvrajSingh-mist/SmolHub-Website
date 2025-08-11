@@ -7,7 +7,7 @@ category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Flickr"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/PaliGemma"
-date: 2025-04-20
+date: 2025-02-09
 ---
 
 ## Overview
@@ -19,6 +19,8 @@ From scratch implementation of PaliGemma
 - **Category**: Computer Vision
 
 ## Implementation Details
+
+# Paligemma architecture in Pytorch
 
 I implemented the Paligemma using Pytorch on the flickr8000 dataset.
 

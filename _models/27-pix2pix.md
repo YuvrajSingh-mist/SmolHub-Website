@@ -3,7 +3,7 @@ title: "Pix2Pix"
 excerpt: "From scratch implementation of Pix2Pix"
 collection: models
 layout: model-implementation
-category: "Computer Vision"
+category: "Generative Models"
 framework: "PyTorch"
 dataset: "Cityscapes"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Pix2Pix"
@@ -16,10 +16,11 @@ From scratch implementation of Pix2Pix
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Cityscapes
-- **Category**: Computer Vision
+- **Category**: Generative Models
 
 ## Implementation Details
 
+# Pix2Pix architecture in Pytorch
 
 I implemented the Pix2Pix using Pytorch on the cityscapes dataset.
 

@@ -20,6 +20,8 @@ From scratch implementation of RNNs
 
 ## Implementation Details
 
+# RNNs in Pytorch from scratch implementation
+
 Trained a RNN model coded from scratch in Pytorch 
 
 ## ModelArgs Hyperparameters
@@ -49,8 +51,12 @@ Val loss - 0.50
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/RNNs/img/loss_curves.jpg)
+![Train and Val loss curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/RNNs/img/loss_curves.jpg)
 
+## ModelArgs Hyperparameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [RNNs](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/RNNs)
 

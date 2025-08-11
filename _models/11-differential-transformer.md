@@ -23,6 +23,8 @@ From scratch implementation of Differential Transformer
 
 ## Implementation Details
 
+# Differential Transformers in Pytorch
+
 I implemented the Differential Transformers using Pytorch on Tinyshakespeare dataset.
 
 [Differential Transformers](https://arxiv.org/pdf/2410.05258)

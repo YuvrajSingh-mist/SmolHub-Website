@@ -49,7 +49,10 @@ Train loss - 0.67
 
 Val loss - 0.68
 
+## ModelArgs Hyperparameters
 
+| Parameter | Value | Description |
+|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [DPO](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DPO)
 

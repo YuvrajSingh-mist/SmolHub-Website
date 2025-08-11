@@ -111,6 +111,10 @@ This dataclass defines hyperparameters and configuration settings for the DeepSe
 
 ---
 
+## ModelArgs Hyperparameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [DeepSeekV3](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DeepSeekV3)
 

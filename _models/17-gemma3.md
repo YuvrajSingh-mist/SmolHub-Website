@@ -5,20 +5,25 @@ collection: models
 layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "Custom"
+dataset: "TinyStories"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma3"
-date: 2025-04-20
+date: 2025-04-26
 ---
 
 ## Overview
 From scratch implementation of Gemma3
 
+## Key Features
+- Attention Mechanism
+
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: Custom
+- **Dataset**: TinyStories
 - **Category**: Language Models
 
 ## Implementation Details
+
+# Gemma 3 model in Pytorch from scratch implementation
 
 Trained a small Gemma 3 model (90M) coded and trained from scratch in Pytorch (text only) 
 
@@ -59,12 +64,16 @@ Val iterations = every 500 steps
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Gemma3/img/loss.png)
+![Train and Val loss curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Gemma3/img/loss.png)
 
 Train loss: 2.08 (last step)
 
 Val loss: 1.77
 
+## ModelArgs Hyperparameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [Gemma3](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma3)
 

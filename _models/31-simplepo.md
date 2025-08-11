@@ -20,6 +20,8 @@ From scratch implementation of SimplePO
 
 ## Implementation Details
 
+# SimplePO in Pytorch from scratch implementation
+
 Trained OPT-330M model using SimplePO in Pytorch for Instruction Following
 
 [SimplePO: Simple Preference Optimization with a Reference-Free Reward](https://arxiv.org/abs/2405.14734)
@@ -41,6 +43,10 @@ Trained OPT-330M model using SimplePO in Pytorch for Instruction Following
 ### Frameworks:
 **Pytorch**
 
+## ModelArgs Hyperparameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [SimplePO](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SimplePO)
 
