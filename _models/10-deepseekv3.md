@@ -5,7 +5,7 @@ collection: models
 layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "TinyStories"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DeepSeekV3"
 date: 2025-08-06
 ---
@@ -13,15 +13,9 @@ date: 2025-08-06
 ## Overview
 From scratch implementation of DeepSeekV3
 
-## Key Features
-- Mixture of Experts (MoE)
-- Attention Mechanism
-- Transformer Architecture
-- Memory Optimization
-
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: TinyStories
+- **Dataset**: Custom
 - **Category**: Language Models
 
 ## Implementation Details
@@ -111,10 +105,6 @@ This dataclass defines hyperparameters and configuration settings for the DeepSe
 
 ---
 
-## ModelArgs Hyperparameters
-
-| Parameter | Value | Description |
-|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [DeepSeekV3](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DeepSeekV3)
 

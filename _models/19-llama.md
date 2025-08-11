@@ -5,7 +5,7 @@ collection: models
 layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "TinyShakespeare"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama"
 date: 2025-04-20
 ---
@@ -15,7 +15,7 @@ From scratch implementation of Llama
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: TinyShakespeare
+- **Dataset**: Custom
 - **Category**: Language Models
 
 ## Implementation Details

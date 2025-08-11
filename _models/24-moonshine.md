@@ -3,7 +3,7 @@ title: "Moonshine"
 excerpt: "From scratch implementation of Moonshine"
 collection: models
 layout: model-implementation
-category: "Audio/Speech"
+category: "Language Models"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Moonshine"
@@ -13,14 +13,10 @@ date: 2025-03-29
 ## Overview
 From scratch implementation of Moonshine
 
-## Key Features
-- Attention Mechanism
-- Transformer Architecture
-
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
-- **Category**: Audio/Speech
+- **Category**: Language Models
 
 ## Implementation Details
 
@@ -60,7 +56,7 @@ Val iterations = every 50 steps
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/Moonshine/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Moonshine/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Moonshine/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Moonshine/images/loss_curves.jpg)
+![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Moonshine/images/loss_curves.jpg)
 
 Looks like 25 hours isnt enough thus started to overfit!
 

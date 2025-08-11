@@ -3,7 +3,7 @@ title: "TTS"
 excerpt: "From scratch implementation of TTS"
 collection: models
 layout: model-implementation
-category: "Audio/Speech"
+category: "Language Models"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/TTS"
@@ -13,14 +13,10 @@ date: 2025-03-26
 ## Overview
 From scratch implementation of TTS
 
-## Key Features
-- Attention Mechanism
-- Transformer Architecture
-
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
-- **Category**: Audio/Speech
+- **Category**: Language Models
 
 ## Implementation Details
 
@@ -80,7 +76,7 @@ Val iterations = every 50 steps
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/TTS/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/TTS/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/TTS/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/TTS/images/loss.jpg)
+![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/TTS/images/loss.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [TTS](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/TTS)

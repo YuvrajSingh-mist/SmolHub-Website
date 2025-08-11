@@ -3,7 +3,7 @@ title: "ORPO"
 excerpt: "From scratch implementation of ORPO"
 collection: models
 layout: model-implementation
-category: "Fine-tuning"
+category: "Language Models"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ORPO"
@@ -16,7 +16,7 @@ From scratch implementation of ORPO
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: UltraFeedback
-- **Category**: Fine-tuning
+- **Category**: Language Models
 
 ## Implementation Details
 
@@ -55,12 +55,8 @@ Val loss - 1.98
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/ORPO/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/ORPO/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/ORPO/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/ORPO/img/curves.jpg)
+![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/ORPO/img/curves.jpg)
 
-## ModelArgs Hyperparameters
-
-| Parameter | Value | Description |
-|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [ORPO](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ORPO)
 

@@ -5,7 +5,7 @@ collection: models
 layout: model-implementation
 category: "Generative Models"
 framework: "PyTorch"
-dataset: "Cityscapes"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Pix2Pix"
 date: 2025-02-09
 ---
@@ -15,7 +15,7 @@ From scratch implementation of Pix2Pix
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: Cityscapes
+- **Dataset**: Custom
 - **Category**: Generative Models
 
 ## Implementation Details

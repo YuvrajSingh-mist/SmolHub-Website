@@ -5,7 +5,7 @@ collection: models
 layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "Cornell Movie Dialogs"
+dataset: "Cornell Movie Dialog"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/BERT"
 date: 2025-02-09
 ---
@@ -13,12 +13,9 @@ date: 2025-02-09
 ## Overview
 From scratch implementation of BERT
 
-## Key Features
-- Transformer Architecture
-
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: Cornell Movie Dialogs
+- **Dataset**: Cornell Movie Dialog
 - **Category**: Language Models
 
 ## Implementation Details

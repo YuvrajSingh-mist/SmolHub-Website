@@ -13,10 +13,6 @@ date: 2025-03-10
 ## Overview
 From scratch implementation of Transformer
 
-## Key Features
-- Attention Mechanism
-- Transformer Architecture
-
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom

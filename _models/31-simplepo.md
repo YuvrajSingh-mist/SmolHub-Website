@@ -3,7 +3,7 @@ title: "SimplePO"
 excerpt: "From scratch implementation of SimplePO"
 collection: models
 layout: model-implementation
-category: "Fine-tuning"
+category: "Machine Learning"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SimplePO"
@@ -16,7 +16,7 @@ From scratch implementation of SimplePO
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: UltraFeedback
-- **Category**: Fine-tuning
+- **Category**: Machine Learning
 
 ## Implementation Details
 
@@ -43,10 +43,6 @@ Trained OPT-330M model using SimplePO in Pytorch for Instruction Following
 ### Frameworks:
 **Pytorch**
 
-## ModelArgs Hyperparameters
-
-| Parameter | Value | Description |
-|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [SimplePO](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SimplePO)
 

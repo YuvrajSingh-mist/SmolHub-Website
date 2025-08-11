@@ -3,7 +3,7 @@ title: "CLiP"
 excerpt: "From scratch implementation of CLiP"
 collection: models
 layout: model-implementation
-category: "Computer Vision"
+category: "Language Models"
 framework: "PyTorch"
 dataset: "Flickr"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CLiP"
@@ -16,7 +16,7 @@ From scratch implementation of CLiP
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Flickr
-- **Category**: Computer Vision
+- **Category**: Language Models
 
 ## Implementation Details
 

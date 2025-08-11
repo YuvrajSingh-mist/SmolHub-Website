@@ -3,7 +3,7 @@ title: "DDP"
 excerpt: "From scratch implementation of DDP"
 collection: models
 layout: model-implementation
-category: "Training Methods"
+category: "Language Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DDP"
@@ -13,14 +13,10 @@ date: 2025-04-25
 ## Overview
 From scratch implementation of DDP
 
-## Key Features
-- Attention Mechanism
-- Distributed Training
-
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Custom
-- **Category**: Training Methods
+- **Category**: Language Models
 
 ## Implementation Details
 
@@ -92,10 +88,6 @@ torchrun --standalone --nproc_per_node=gpu llama_multi_gpu_train.py
 --standalone - if all the gpu are on one server
 --npro_per_node - number of gpus available and use the keyword gpu to use all
 
-## ModelArgs Hyperparameters
-
-| Parameter | Value | Description |
-|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [DDP](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DDP)
 
