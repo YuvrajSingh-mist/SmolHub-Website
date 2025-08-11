@@ -1,7 +1,7 @@
 
 # 🤖 Yuvraj Singh's AI Portfolio
 
-[![Website](https://img.shields.io/badge/Website-yuvraj--portfolio.onrender.com-blue?style=for-the-badge)](https://yuvraj-portfolio.onrender.com)
+[![Website](https://img.shields.io/badge/Website-yuvraj--portfolio.onrender.com-blue?style=for-the-badge)](https://yuvrajsingh-portfolio-website.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-YuvrajSingh--mist-black?style=for-the-badge&logo=github)](https://github.com/YuvrajSingh-mist)
 [![Paper Replications](https://img.shields.io/badge/Paper%20Replications-38%20Models-green?style=for-the-badge)](https://github.com/YuvrajSingh-mist/Paper-Replications)
 
@@ -236,3 +236,4 @@ This portfolio and associated code are released under the **MIT License**. Feel 
 [![Made with ❤️ for the AI Community](https://img.shields.io/badge/Made%20with%20❤️-for%20the%20AI%20Community-red?style=for-the-badge)](https://yuvraj-portfolio.onrender.com)
 
 </div>
+
