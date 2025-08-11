@@ -22,7 +22,7 @@ From scratch implementation of CGANs
 
 # Conditional Generative Adversarial Networks (CGANs)
 
-![🏗️ View Model Architecture](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/CGANs/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/main/CGANs/output_images/MNIST/fake_images_steps_14000.png)
+![🏗️ View Model Architecture](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/CGANs/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/CGANs/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/main/CGANs/output_images/MNIST/fake_images_steps_14000.png)
 
 ## Overview
 

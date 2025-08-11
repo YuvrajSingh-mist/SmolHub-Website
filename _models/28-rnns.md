@@ -51,7 +51,7 @@ Val loss - 0.50
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/RNNs/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/RNNs/img/loss_curves.jpg)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/RNNs/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/RNNs/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/RNNs/img/loss_curves.jpg)
 
 ## ModelArgs Hyperparameters
 
