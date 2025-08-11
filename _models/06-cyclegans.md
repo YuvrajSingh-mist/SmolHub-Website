@@ -3,7 +3,7 @@ title: "CycleGANs"
 excerpt: "From scratch implementation of CycleGANs"
 collection: models
 layout: model-implementation
-category: "Generative Models"
+category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Cityscapes"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CycleGANs"
@@ -16,11 +16,10 @@ From scratch implementation of CycleGANs
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Cityscapes
-- **Category**: Generative Models
+- **Category**: Computer Vision
 
 ## Implementation Details
 
-# CycleGAN architecture in Pytorch
 
 I implemented the CycleGAN using Pytorch on the cityscapes dataset.
 

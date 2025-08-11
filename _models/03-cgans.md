@@ -3,7 +3,7 @@ title: "CGANs"
 excerpt: "From scratch implementation of CGANs"
 collection: models
 layout: model-implementation
-category: "Generative Models"
+category: "Computer Vision"
 framework: "PyTorch"
 dataset: "MNIST"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CGANs"
@@ -16,7 +16,7 @@ From scratch implementation of CGANs
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: MNIST
-- **Category**: Generative Models
+- **Category**: Computer Vision
 
 ## Implementation Details
 

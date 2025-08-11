@@ -3,7 +3,7 @@ title: "Whisper"
 excerpt: "From scratch implementation of Whisper"
 collection: models
 layout: model-implementation
-category: "Computer Vision"
+category: "Audio/Speech"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Whisper"
@@ -16,11 +16,10 @@ From scratch implementation of Whisper
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
-- **Category**: Computer Vision
+- **Category**: Audio/Speech
 
 ## Implementation Details
 
-# Whisper model in Pytorch from scratch implementation
 
 Trained a small whisper model coded and trained from scratch in Pytorch 
 
@@ -53,7 +52,7 @@ Trained a small whisper model coded and trained from scratch in Pytorch
 | `max_t`                 | 500                    | Maximum time steps in the spectrogram.                                      |
 | `n_channels`            | 80                     | Number of channels in the input spectrogram.                                |
 | `hidden_dim`            | 4 * `embeddings_dims`  | Number of neurons in the feed-forward network (FFN).                        |
-"""
+
 
 ### Dataset
 

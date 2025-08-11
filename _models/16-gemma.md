@@ -20,8 +20,6 @@ From scratch implementation of Gemma
 
 ## Implementation Details
 
-# Gemma architecture in Pytorch
-
 I implemented the Gemma using Pytorch on the tineshakespeare dataset.
 
 [Gemma: Open Models Based on Gemini Research and Technology](https://arxiv.org/pdf/2403.08295)

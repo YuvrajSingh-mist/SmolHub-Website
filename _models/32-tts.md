@@ -3,7 +3,7 @@ title: "TTS"
 excerpt: "From scratch implementation of TTS"
 collection: models
 layout: model-implementation
-category: "Language Models"
+category: "Audio/Speech"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/TTS"
@@ -16,11 +16,9 @@ From scratch implementation of TTS
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
-- **Category**: Language Models
+- **Category**: Audio/Speech
 
 ## Implementation Details
-
-# Transformer based TTS model in Pytorch from scratch implementation
 
 Trained a small transformer based TTS model coded and trained from scratch in Pytorch 
 
@@ -31,6 +29,7 @@ Trained a small transformer based TTS model coded and trained from scratch in Py
 ## Model Hyperparameters
 
 ### Core Architecture
+
 | Parameter                      | Value            | Description                                  |
 |--------------------------------|------------------|----------------------------------------------|
 | `batch_size`                   | 32               | Number of samples per batch                 |
@@ -51,6 +50,7 @@ Trained a small transformer based TTS model coded and trained from scratch in Py
 | `clip`                         | 1.0              | Gradient clipping threshold                 |
 
 ### Audio Processing
+
 | Parameter               | Value    | Description                                  |
 |-------------------------|----------|----------------------------------------------|
 | `log_mel_features`      | 80       | Mel spectrogram channels                    |

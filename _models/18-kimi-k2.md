@@ -20,8 +20,6 @@ From scratch implementation of Kimi-K2
 
 ## Implementation Details
 
-# Kimi-K2 - DeepSeek V3 Inspired Model
-
 A PyTorch reimplementation of a DeepSeek V3-inspired transformer model with Mixture of Experts (MoE), Latent Attention, and other advanced features.
 
 [🔗 View 🔗 View StoryKimi Model](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Kimi-K2/images/image.png)

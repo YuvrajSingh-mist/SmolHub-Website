@@ -3,7 +3,7 @@ title: "DCGANs"
 excerpt: "From scratch implementation of DCGANs"
 collection: models
 layout: model-implementation
-category: "Generative Models"
+category: "Computer Vision"
 framework: "PyTorch"
 dataset: "CIFAR"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DCGANs"
@@ -16,7 +16,7 @@ From scratch implementation of DCGANs
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: CIFAR
-- **Category**: Generative Models
+- **Category**: Computer Vision
 
 ## Implementation Details
 

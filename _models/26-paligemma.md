@@ -3,7 +3,7 @@ title: "PaliGemma"
 excerpt: "From scratch implementation of PaliGemma"
 collection: models
 layout: model-implementation
-category: "Language Models"
+category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Flickr"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/PaliGemma"
@@ -16,11 +16,9 @@ From scratch implementation of PaliGemma
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Flickr
-- **Category**: Language Models
+- **Category**: Computer Vision
 
 ## Implementation Details
-
-# Paligemma architecture in Pytorch
 
 I implemented the Paligemma using Pytorch on the flickr8000 dataset.
 

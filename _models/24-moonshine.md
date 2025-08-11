@@ -3,7 +3,7 @@ title: "Moonshine"
 excerpt: "From scratch implementation of Moonshine"
 collection: models
 layout: model-implementation
-category: "Language Models"
+category: "Audio/Speech"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Moonshine"
@@ -16,11 +16,9 @@ From scratch implementation of Moonshine
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
-- **Category**: Language Models
+- **Category**: Audio/Speech
 
 ## Implementation Details
-
-# Moonshine- A faster Alternative to Whisper (Replication)!
 
 Trained a small transformer-based ASR model coded and trained from scratch in Pytorch.
 

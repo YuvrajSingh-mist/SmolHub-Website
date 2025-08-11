@@ -20,8 +20,6 @@ From scratch implementation of Llama
 
 ## Implementation Details
 
-# Llama architecture in Pytorch
-
 I implemented Llama using Pytorch on the tineshakespeare dataset.
 
 [LLaMA: Open and Efficient Foundation Language Models](https://arxiv.org/abs/2302.13971).

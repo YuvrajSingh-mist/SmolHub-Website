@@ -20,8 +20,6 @@ From scratch implementation of Gemma3
 
 ## Implementation Details
 
-# Gemma 3 model in Pytorch from scratch implementation
-
 Trained a small Gemma 3 model (90M) coded and trained from scratch in Pytorch (text only) 
 
 [Gemma 3](https://arxiv.org/abs/2503.19786)

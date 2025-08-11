@@ -20,7 +20,6 @@ From scratch implementation of SigLip
 
 ## Implementation Details
 
-# SigLIP architecture in Pytorch
 
 I implemented the SigLIP using Pytorch on the flickr8000 dataset.
 

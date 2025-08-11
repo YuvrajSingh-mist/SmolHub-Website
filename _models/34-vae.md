@@ -20,8 +20,6 @@ From scratch implementation of VAE
 
 ## Implementation Details
 
-# Variational Autoencoder (VAE) from Scratch
-
 I implemented a Variational Autoencoder Architecture from Scratch using PyTorch on the **CelebA dataset** for high-resolution face generation and reconstruction.
 
 [Auto-Encoding Variational Bayes](https://arxiv.org/abs/1312.6114)

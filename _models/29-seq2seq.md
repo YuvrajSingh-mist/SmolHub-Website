@@ -20,7 +20,6 @@ From scratch implementation of Seq2Seq
 
 ## Implementation Details
 
-# Seq2Seq with Bahdanau and Luong Attention in Pytorch from scratch implementation
 
 Trained a Seq2Seq model with the said attention mechanism  coded from scratch in Pytorch 
 

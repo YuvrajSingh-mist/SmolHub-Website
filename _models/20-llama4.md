@@ -11,7 +11,7 @@ date: 2025-04-20
 ---
 
 ## Overview
-From scratch implementation of Llama4
+From scratch implementation of Llama 4 Scout
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -20,7 +20,6 @@ From scratch implementation of Llama4
 
 ## Implementation Details
 
-# Llama 4 Scout from-scratch in PyTorch
 - So, I trained a MoE based Llama 1.2B (32x12M) architecture I coded from ground up.
 - Trained on TiyStories dataset form HuggingFace consisting of 4.2B tokens for 1 FULL epoch.
 
