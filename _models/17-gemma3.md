@@ -32,7 +32,7 @@ Trained a small Gemma 3 model (90M) coded and trained from scratch in Pytorch (t
 ## ModelArgs Hyperparameters
 
 | Parameter               | Value                                  | Description                                                                 |
-|-------------------------|----------------------------------------|-----------------------------------------------------------------------------|
+|---|---|---|
 | `batch_size`            | 64                                     | Number of samples processed before model update                             |
 | `max_lr`                | 2.5e-4                                 | Maximum learning rate                                                       |
 | `dropout`               | 0.1                                    | Dropout rate for regularization                                            |                                               |
@@ -73,7 +73,8 @@ Val loss: 1.77
 ## ModelArgs Hyperparameters
 
 | Parameter | Value | Description |
-|-----------|-------|-------------|
+|---|---|---|
+
 ## Source Code
 📁 **GitHub Repository**: [Gemma3](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma3)
 

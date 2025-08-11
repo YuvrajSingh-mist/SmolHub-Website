@@ -1,6 +1,6 @@
 ---
 title: "Smol Mixtral"
-excerpt: "A PyTorch implementation of a Mixtral inspired transformer model with Mixture of Experts (MoE), designed for text generation and understanding tasks. ... 🎮<br/><img src='/images/500x300.png'>"
+excerpt: "A PyTorch implementation of a Mixtral inspired transformer model with Mixture of Experts (MoE), designed for text generation and understanding tasks. This model is built on the Mixtral architecture wi... 🎮<br/><img src='/images/500x300.png'>"
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolMixtral"
 date: 2025-08-08
@@ -8,7 +8,7 @@ tags: ["mixtral", "llama", "transformer", "pytorch", "generation", "compact", "v
 ---
 
 ## Project Overview
-A PyTorch implementation of a Mixtral inspired transformer model with Mixture of Experts (MoE), designed for text generation and understanding tasks. ...
+A PyTorch implementation of a Mixtral inspired transformer model with Mixture of Experts (MoE), designed for text generation and understanding tasks. This model is built on the Mixtral architecture with enhancements like Flash Attention, SWiGLU activation, and Liger kernels for optimized performance.
 
 ## Technical Details
 - **Type**: SmolHub Playground Project
@@ -17,6 +17,9 @@ A PyTorch implementation of a Mixtral inspired transformer model with Mixture of
 - **Repository**: [Smol Mixtral](https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolMixtral)
 
 ## Implementation Details
+
+# Smol Mixtral
+
 
 # SmolMixtral - Mixtral Inspired Model
 
@@ -29,7 +32,7 @@ A PyTorch implementation of a Mixtral inspired transformer model with Mixture of
 
 Provided under the `generated_data/` directory, these examples showcase the model's capabilities in text generation and understanding.
 
-![SmolMixtral Model](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolMixtral/images/loss.jpg)
+![SmolMixtral Model](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolMixtral/[🖼️ images/loss.jpg](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolMixtral/images/loss.jpg))
 
 ## 📊 Training Results & Model Weights
 

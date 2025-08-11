@@ -95,10 +95,13 @@ async function fetchReadmeContent(folderName) {
         
         // Look for description in README
         for (let i = 0; i < lines.length; i++) {
-            const line = lines[i].trim();
+            let line = lines[i].trim();
             if (line && !line.startsWith('#') && !line.startsWith('![') && line.length > 10) {
-                description = line.substring(0, 150);
-                if (description.length === 150) description += '...';
+                // Strip leading list markers and excessive whitespace for clean overview
+                line = line.replace(/^[\-\*\+\u2022\u2013\u2014]\s+/, '');
+                line = line.replace(/\s+/g, ' ').trim();
+                // Use the full first descriptive line as description (no hard truncation)
+                description = line;
                 break;
             }
         }

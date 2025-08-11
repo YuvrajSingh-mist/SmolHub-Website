@@ -1,6 +1,6 @@
 ---
 title: "Story Llama"
-excerpt: "- So, I trained a Llama a 88M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scrat... 🎮<br/><img src='/images/500x300.png'>"
+excerpt: "So, I trained a Llama a 88M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scratch. 🎮<br/><img src='/images/500x300.png'>"
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryLlama"
 date: 2025-08-08
@@ -8,7 +8,7 @@ tags: ["llama", "transformer", "pytorch", "storytelling", "compact", "interactiv
 ---
 
 ## Project Overview
-- So, I trained a Llama a 88M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scrat...
+So, I trained a Llama a 88M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scratch.
 
 ## Technical Details
 - **Type**: SmolHub Playground Project
@@ -47,7 +47,7 @@ tags: ["llama", "transformer", "pytorch", "storytelling", "compact", "interactiv
 Below is a table summarizing the configuration parameters for the model:
 
 | Parameter                      | Description                                                                 | Default Value                     | Type      |
-|--------------------------------|-----------------------------------------------------------------------------|-----------------------------------|-----------|
+|---|---|---|---|
 | `epochs`                       | Number of training epochs                                                   | `4`                               | `int`     |
 | `block_size`                   | Size of each block (context length)                                         | `512`                             | `int`     |
 | `batch_size`                   | Batch size for training                                                    | `64`                              | `int`     |
@@ -80,6 +80,7 @@ Below is a table summarizing the configuration parameters for the model:
 | `total_batch_size`             | Total batch size across all devices                                         | `524288`                          | `int`     |
 | `micro_batch_size`             | Micro batch size per device                                                | `batch_size`                      | `int`     |
 | `gradient_accumulation_steps`  | Gradient accumulation steps                                                 | 524288 | `int` |
+
 ---
 #### Hardware Setup
 

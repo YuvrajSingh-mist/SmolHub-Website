@@ -40,6 +40,57 @@ def clean_content(content):
     
     return content
 
+def normalize_markdown_tables(content: str) -> str:
+    """Normalize markdown tables: fix unicode dashes and ensure spacing."""
+    lines = content.split('\n')
+    normalized = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        # Detect potential table header followed by separator
+        if '|' in line and i + 1 < len(lines) and '|' in lines[i + 1]:
+            sep = lines[i + 1]
+            # Consider it a separator if it has dashes (including unicode variants)
+            if any(ch in sep for ch in ['-', '—', '–']):
+                # Ensure blank line before table (for proper rendering)
+                if normalized and normalized[-1].strip() != '':
+                    normalized.append('')
+
+                # Header line unchanged
+                normalized.append(line)
+
+                # Normalize separator line: replace unicode dashes with '-', collapse to '---'
+                fixed_sep = sep.replace('—', '-').replace('–', '-')
+                # Replace runs between pipes with at least three hyphens
+                import re
+                def repl(cell):
+                    dashes = re.sub(r'[^-:]', '', cell)
+                    if ':' in cell:
+                        # Keep alignment colons
+                        left = ':' if cell.strip().startswith(':') else ''
+                        right = ':' if cell.strip().endswith(':') else ''
+                        return f"{left}{'-' * 3}{right}"
+                    return '-' * 3
+                parts = fixed_sep.split('|')
+                for idx in range(len(parts)):
+                    if set(parts[idx].strip()) - set('-:') == set() and parts[idx].strip() != '':
+                        parts[idx] = repl(parts[idx])
+                fixed_sep = '|'.join(parts)
+                normalized.append(fixed_sep)
+
+                # Consume subsequent table rows until a non-table line
+                i += 2
+                while i < len(lines) and '|' in lines[i]:
+                    normalized.append(lines[i])
+                    i += 1
+                # Ensure blank line after table
+                if i < len(lines) and lines[i].strip() != '':
+                    normalized.append('')
+                continue
+        normalized.append(line)
+        i += 1
+    return '\n'.join(normalized)
+
 def convert_images_to_links(content, github_url):
     """Convert local image references to GitHub links"""
     if not content or not github_url:
@@ -99,6 +150,9 @@ def create_markdown_from_json(project_data, file_number):
     # Convert images to GitHub hyperlinks
     if github_url:
         clean_readme = convert_images_to_links(clean_readme, github_url)
+
+    # Normalize tables to render correctly
+    clean_readme = normalize_markdown_tables(clean_readme)
     
     # Add source code section if not present
     if 'source code' not in clean_readme.lower() and github_url:

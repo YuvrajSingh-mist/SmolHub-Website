@@ -1,6 +1,6 @@
 ---
 title: "Smol Transformer"
-excerpt: "A compact implementation of an Encoder-Decoder Transformer for sequence-to-sequence translation tasks. This project implements a translation model fro... 🎮<br/><img src='/images/500x300.png'>"
+excerpt: "A compact implementation of an Encoder-Decoder Transformer for sequence-to-sequence translation tasks. This project implements a translation model from English to Hindi using the Samanantar dataset. 🎮<br/><img src='/images/500x300.png'>"
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolTransformer"
 date: 2025-08-08
@@ -8,7 +8,7 @@ tags: ["transformer", "pytorch", "translation", "compact", "interactive", "optim
 ---
 
 ## Project Overview
-A compact implementation of an Encoder-Decoder Transformer for sequence-to-sequence translation tasks. This project implements a translation model fro...
+A compact implementation of an Encoder-Decoder Transformer for sequence-to-sequence translation tasks. This project implements a translation model from English to Hindi using the Samanantar dataset.
 
 ## Technical Details
 - **Type**: SmolHub Playground Project

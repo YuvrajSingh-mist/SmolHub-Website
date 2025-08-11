@@ -1,6 +1,6 @@
 ---
 title: "Smol Llama"
-excerpt: "- So, I trained a Llama a 130M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scra... 🎮<br/><img src='/images/500x300.png'>"
+excerpt: "So, I trained a Llama a 130M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scratch. 🎮<br/><img src='/images/500x300.png'>"
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolLlama"
 date: 2025-08-09
@@ -8,7 +8,7 @@ tags: ["llama", "transformer", "pytorch", "compact", "vision", "interactive", "e
 ---
 
 ## Project Overview
-- So, I trained a Llama a 130M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scra...
+So, I trained a Llama a 130M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scratch.
 
 ## Technical Details
 - **Type**: SmolHub Playground Project
@@ -17,6 +17,8 @@ tags: ["llama", "transformer", "pytorch", "compact", "vision", "interactive", "e
 - **Repository**: [Smol Llama](https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolLlama)
 
 ## Implementation Details
+
+# Smol Llama
 
 
 # Introducing SmolLlama - A Smaller Language Model 
@@ -73,7 +75,7 @@ The three main stages are:
 
 
 | Parameter                      | Description                                                                 | Default Value                     | Type      |
-|--------------------------------|-----------------------------------------------------------------------------|-----------------------------------|-----------|
+|---|---|---|---|
 | `epochs`                       | Number of training epochs                                                   | `4`                               | `int`     |
 | `block_size`                   | Size of each block (context length)                                         | `512`                             | `int`     |
 | `batch_size`                   | Batch size for training                                                    | `64`                              | `int`     |
@@ -107,6 +109,7 @@ The three main stages are:
 | `micro_batch_size`             | Micro batch size per device                                                | `batch_size`                      | `int`     |
 | `gradient_accumulation_steps`  | Gradient accumulation steps                                                 | `total_batch_size // (micro_batch_size * (block_size * torch.cuda.device_count()))` | `int` |
 | `no_kv_heads`                  | Number of key-value heads                                                   | `2`                               | `int`     |
+
 ---
 ### Hardware Setup
 
@@ -166,9 +169,9 @@ The three main stages are:
 
 - Sample Ouput
 
-![Sample Ouput 1](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/sample_1.jpg)
+![Sample Ouput 1](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/[🖼️ images/sample_1.jpg](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/sample_1.jpg))
 
-![Sample Ouput 2](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/sample_2.jpg)
+![Sample Ouput 2](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/[🖼️ images/sample_2.jpg](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/sample_2.jpg))
 ---
 
 ### Local setup

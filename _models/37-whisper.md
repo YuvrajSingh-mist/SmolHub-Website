@@ -32,7 +32,7 @@ Trained a small whisper model coded and trained from scratch in Pytorch
 ## ModelArgs Hyperparameters
 
 | Parameter               | Value                  | Description                                                                 |
-|-------------------------|------------------------|-----------------------------------------------------------------------------|
+|---|---|---|
 | `batch_size`            | 64                     | The number of samples processed before the model is updated.                |
 | `max_lr`                | 2e-4                   | Maximum learning rate.                                                      |
 | `dropout`               | 0.1                    | Dropout rate for regularization.                                            |
@@ -56,6 +56,7 @@ Trained a small whisper model coded and trained from scratch in Pytorch
 | `max_t`                 | 500                    | Maximum time steps in the spectrogram.                                      |
 | `n_channels`            | 80                     | Number of channels in the input spectrogram.                                |
 | `hidden_dim`            | 4 * `embeddings_dims`  | Number of neurons in the feed-forward network (FFN).                        |
+
 """
 
 ### Dataset
@@ -79,7 +80,8 @@ Val iterations = every epoch
 ## ModelArgs Hyperparameters
 
 | Parameter | Value | Description |
-|-----------|-------|-------------|
+|---|---|---|
+
 ## Source Code
 📁 **GitHub Repository**: [Whisper](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Whisper)
 
