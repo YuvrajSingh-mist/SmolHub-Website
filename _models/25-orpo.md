@@ -55,7 +55,7 @@ Val loss - 1.98
 
 ### Loss Curves
 
-![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/ORPO/img/curves.jpg)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/ORPO/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/ORPO/img/curves.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [ORPO](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ORPO)
