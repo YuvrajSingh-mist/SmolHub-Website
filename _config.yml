@@ -20,6 +20,7 @@ url                      : https://smolhub.com # Primary domain
 # Alternate domains: https://yuvrajsingh-portfoilo-website.vercel.app, https://smolhub.vercel.app
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "YuvrajSingh-mist/SmolHub-Website"
+portfolio_home           : https://yuvrajsingh-portfolio-website.vercel.app/
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
@@ -296,9 +297,6 @@ defaults:
       author_profile: true
       share: true
       comments: true
-      sidebar:
-        - title: "Quick Info"
-          text: "{% if page.framework %}{{ page.framework }}{% endif %}{% if page.category %} | {{ page.category }}{% endif %}"
   # _datasets
   - scope:
       path: ""
@@ -317,9 +315,6 @@ defaults:
       author_profile: true
       share: true
       comments: true
-      sidebar:
-        - title: "Quick Info"
-          text: "{% if page.framework %}{{ page.framework }}{% endif %}{% if page.category %} | {{ page.category }}{% endif %}"
 
 
 # Sass/SCSS
