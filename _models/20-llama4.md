@@ -213,6 +213,13 @@ python inference.py --prompt "Once upon a time" --max_length 100 --temperature 0
 ```
  -->
 
+<<<<<<< HEAD
+=======
+## ModelArgs Hyperparameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
+>>>>>>> b04de69609104e65041548913b8cf98caa37761c
 ## Source Code
 📁 **GitHub Repository**: [Llama4](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama4)
 
