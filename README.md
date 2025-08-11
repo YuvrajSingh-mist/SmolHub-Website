@@ -1,10 +1,6 @@
 
 # 🤖 Yuvraj Singh's AI Portfolio
 
-[![Website](https://img.shields.io/badge/Website-yuvraj--portfolio.onrender.com-blue?style=for-the-badge)](https://yuvrajsingh-portfolio-website.vercel.app/)
-[![GitHub](https://img.shields.io/badge/GitHub-YuvrajSingh--mist-black?style=for-the-badge&logo=github)](https://github.com/YuvrajSingh-mist)
-[![Paper Replications](https://img.shields.io/badge/Paper%20Replications-38%20Models-green?style=for-the-badge)](https://github.com/YuvrajSingh-mist/Paper-Replications)
-
 > 🎓 **Computer Science Engineering Student** at IIIT Bhubaneswar (2023-2027)  
 > 🔬 **Research Focus**: NLP, Computer Vision, and Multimodal LLMs  
 > 🚀 **Mission**: Building AI from scratch and bridging research with practical implementation
