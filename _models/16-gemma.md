@@ -2,7 +2,7 @@
 title: "Gemma"
 excerpt: "From scratch implementation of Gemma"
 collection: models
-layout: single
+layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
 dataset: "TinyShakespeare"

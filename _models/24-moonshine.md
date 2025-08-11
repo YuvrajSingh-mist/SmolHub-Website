@@ -2,7 +2,7 @@
 title: "Moonshine"
 excerpt: "From scratch implementation of Moonshine"
 collection: models
-layout: single
+layout: model-implementation
 category: "Audio/Speech"
 framework: "PyTorch"
 dataset: "Gigaspeech"

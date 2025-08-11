@@ -2,7 +2,7 @@
 title: "GRU"
 excerpt: "From scratch implementation of GRU"
 collection: models
-layout: single
+layout: model-implementation
 category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"

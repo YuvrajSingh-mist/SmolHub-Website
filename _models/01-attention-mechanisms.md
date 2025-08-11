@@ -2,7 +2,7 @@
 title: "Attention Mechanisms"
 excerpt: "From scratch implementation of Attention Mechanisms"
 collection: models
-layout: single
+layout: model-implementation
 category: "Attention Mechanisms"
 framework: "PyTorch"
 dataset: "Custom"

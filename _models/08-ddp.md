@@ -2,7 +2,7 @@
 title: "DDP"
 excerpt: "From scratch implementation of DDP"
 collection: models
-layout: single
+layout: model-implementation
 category: "Training Methods"
 framework: "PyTorch"
 dataset: "Custom"
