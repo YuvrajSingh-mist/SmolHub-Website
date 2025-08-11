@@ -1,5 +1,5 @@
 ---
-title: "LSTM"
+title: "lstm"
 excerpt: "From scratch implementation of lstm"
 collection: models
 layout: model-implementation
@@ -51,7 +51,7 @@ Val loss - 0.48
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/lstm/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/lstm/img/loss_curves.jpg)
+[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/lstm/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/lstm/img/loss_curves.jpg)
 
 ## ModelArgs Hyperparameters
 
