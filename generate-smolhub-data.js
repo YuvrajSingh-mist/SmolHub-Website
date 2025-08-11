@@ -38,6 +38,8 @@ const REPO_OWNER = 'YuvrajSingh-mist';
 const REPO_NAME = 'SmolHub';
 const REPO_BRANCH = 'main';
 const OUTPUT_FILE = path.join(__dirname, '_data', 'smolhub_playground.json');
+// Exclude non-project directories
+const EXCLUDED_DIRS = ['hf-spaces'];
 
 console.log('🚀 Starting SmolHub playground data generation...');
 console.log(`📂 Repository: ${REPO_OWNER}/${REPO_NAME}`);
@@ -69,8 +71,10 @@ async function fetchRepositoryContents() {
     const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/?ref=${REPO_BRANCH}`;
     const contents = await fetchWithAuth(url);
     
-    // Filter only directories
-    const directories = contents.filter(item => item.type === 'dir');
+    // Filter only directories and exclude known non-project folders
+    const directories = contents
+        .filter(item => item.type === 'dir')
+        .filter(item => !EXCLUDED_DIRS.includes(item.name));
     console.log(`📁 Found ${directories.length} playground directories`);
     
     return directories;

@@ -156,16 +156,24 @@ def generate_smolhub_markdowns():
     smolhub_dir = Path(__file__).parent / '_smolhub'
     smolhub_dir.mkdir(exist_ok=True)
     
-    # Clear existing auto-generated files (keep manual ones)
+    # Clear existing auto-generated files to prevent duplicates
     print("🧹 Cleaning up old auto-generated files...")
-    existing_files = list(smolhub_dir.glob('project-*.md'))
-    manual_files = len(existing_files)
+    for old in smolhub_dir.glob('playground-*.md'):
+        try:
+            old.unlink()
+        except Exception:
+            pass
+    manual_files = 0
     
     generated_count = 0
     updated_count = 0
     
     # Generate markdown files
     for i, project in enumerate(projects, 1):
+        # Skip excluded directories if present in data (defensive)
+        if project.get('name') in ['hf-spaces']:
+            print(f"⏭️  Skipping excluded project: {project.get('name')}")
+            continue
         project_name = project.get('name', f'project-{i}')
         filename = f"playground-{i:02d}-{project_name.lower().replace(' ', '-')}.md"
         file_path = smolhub_dir / filename
