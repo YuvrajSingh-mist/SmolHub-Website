@@ -109,9 +109,46 @@ date: {date}
     def standardize_body_content(self, content):
         """Standardize the body content structure and fix image links"""
         
+        # Try to extract github_url from frontmatter to construct raw base URL
+        github_url_match = re.search(r'github_url:\s*"([^"]+)"', content)
+        raw_base_url = None
+        if github_url_match:
+            github_url = github_url_match.group(1)
+            # Convert https://github.com/user/repo/tree/{branch}/path -> https://raw.githubusercontent.com/user/repo/{branch}/path
+            raw_base_url = (
+                github_url
+                .replace('https://github.com/', 'https://raw.githubusercontent.com/')
+                .replace('/tree/master/', '/master/')
+                .replace('/tree/main/', '/main/')
+            )
+        
         # Remove local image references
         content = re.sub(r'<!-- Main image reference -->\s*<img src="[^"]*" alt="[^"]*"[^>]*>\s*', '', content, flags=re.MULTILINE)
         
+        # If we have a raw base URL, convert local markdown image references to raw.githubusercontent.com URLs
+        if raw_base_url:
+            def replace_local_md_image(match):
+                alt_text = match.group(1)
+                image_path = match.group(2)
+                if image_path.startswith('http'):
+                    return match.group(0)
+                clean_path = image_path.lstrip('./').lstrip('/')
+                return f'![{alt_text}]({raw_base_url}/{clean_path})'
+
+            local_md_image_pattern = r'!\[([^\]]*)\]\(([^)]+\.(?:jpg|jpeg|png|gif|svg|webp))\)'
+            content = re.sub(local_md_image_pattern, replace_local_md_image, content)
+
+            # Convert local HTML <img> tags as well
+            def replace_local_html_image(match):
+                src = match.group(1)
+                if src.startswith('http'):
+                    return match.group(0)
+                clean_path = src.lstrip('./').lstrip('/')
+                return match.group(0).replace(src, f'{raw_base_url}/{clean_path}')
+
+            local_html_image_pattern = r'<img[^>]+src=["\']([^"\']+\.(?:jpg|jpeg|png|gif|svg|webp))["\'][^>]*>'
+            content = re.sub(local_html_image_pattern, replace_local_html_image, content, flags=re.IGNORECASE)
+
         # Fix GitHub image links - convert [text](github_url) to ![text](raw_github_url)
         github_link_pattern = r'\[([^\]]+)\]\((https://github\.com/[^)]+\.(jpg|jpeg|png|gif|svg))\)'
         def replace_github_link(match):

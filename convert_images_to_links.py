@@ -73,8 +73,8 @@ def update_markdown_file(filepath, github_urls):
     github_url = github_url_match.group(1)
     github_base_url = github_url.replace('/tree/master/', '/blob/master/')
     
-    # Find all image references
-    image_pattern = r'!\[([^\]]*)\]\(([^)]+\.(jpg|jpeg|png|gif|svg))\)'
+    # Find all image references (including webp)
+    image_pattern = r'!\[([^\]]*)\]\(([^)]+\.(jpg|jpeg|png|gif|svg|webp))\)'
     images_found = re.findall(image_pattern, content)
     
     if not images_found:
@@ -88,6 +88,16 @@ def update_markdown_file(filepath, github_urls):
         return convert_image_to_link(match, github_base_url)
     
     updated_content = re.sub(image_pattern, replace_image, content)
+
+    # Convert local HTML <img> tags as well using the same GitHub base URL
+    html_img_pattern = r'<img[^>]+src=["\']([^"\']+\.(?:jpg|jpeg|png|gif|svg|webp))["\'][^>]*>'
+    def replace_html_img(match):
+        src = match.group(1)
+        if src.startswith('http'):
+            return match.group(0)
+        clean_path = src.lstrip('./').lstrip('/')
+        return match.group(0).replace(src, f"{github_base_url}/{clean_path}")
+    updated_content = re.sub(html_img_pattern, replace_html_img, updated_content, flags=re.IGNORECASE)
     
     # Write back to file
     with open(filepath, 'w', encoding='utf-8') as f:

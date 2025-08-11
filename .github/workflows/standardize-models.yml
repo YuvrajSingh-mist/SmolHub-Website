@@ -70,6 +70,8 @@ jobs:
         echo "  ✅ Accurate GitHub creation dates"
         echo ""
         python standardize_markdowns.py
+        echo "🔗 Converting remaining local image paths to raw.githubusercontent.com"
+        python convert_images_to_links.py || true
         echo ""
         echo "🔍 Running validation checks..."
         python validate_guidelines.py
