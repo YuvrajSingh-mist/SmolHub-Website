@@ -54,7 +54,7 @@ Val loss - 1.39
 
 ### Loss Curves
 
-![Train and Val loss curves](img/loss.jpg)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/Encoder-Decoder/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Encoder-Decoder/img/loss.jpg)
 
 ## ModelArgs Hyperparameters
 

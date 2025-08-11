@@ -74,7 +74,7 @@ Val iterations = every epoch
 
 ### Loss Curves
 
-![Train and Val loss curves](img/loss.jpg)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/blob/master/Whisper/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Whisper/img/loss.jpg)
 
 ## ModelArgs Hyperparameters
 
