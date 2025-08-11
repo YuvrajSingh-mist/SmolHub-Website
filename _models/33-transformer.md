@@ -2,7 +2,7 @@
 title: "Transformer"
 excerpt: "From scratch implementation of Transformer"
 collection: models
-layout: model-implementation
+layout: single
 category: "Language Models"
 framework: "PyTorch"
 dataset: "Custom"
@@ -12,6 +12,10 @@ date: 2025-03-10
 
 ## Overview
 From scratch implementation of Transformer
+
+## Key Features
+- Attention Mechanism
+- Transformer Architecture
 
 ## Technical Details
 - **Framework**: PyTorch

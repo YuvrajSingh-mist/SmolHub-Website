@@ -2,7 +2,7 @@
 title: "GRU"
 excerpt: "From scratch implementation of GRU"
 collection: models
-layout: model-implementation
+layout: single
 category: "Sequential Models"
 framework: "PyTorch"
 dataset: "Custom"
@@ -51,8 +51,12 @@ Val loss - 0.48
 
 <!-- ### Loss Curves
 
-![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/GRU/img/loss_curves.jpg) -->
+![Train and Val loss curves](img/loss_curves.jpg) -->
 
+## ModelArgs Hyperparameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [GRU](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/GRU)
 

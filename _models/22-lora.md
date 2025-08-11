@@ -2,10 +2,10 @@
 title: "LoRA"
 excerpt: "From scratch implementation of LoRA"
 collection: models
-layout: model-implementation
-category: "Language Models"
+layout: single
+category: "Fine-tuning"
 framework: "PyTorch"
-dataset: "Custom"
+dataset: "TinyShakespeare"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/LoRA"
 date: 2025-04-05
 ---
@@ -15,8 +15,8 @@ From scratch implementation of LoRA
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: Custom
-- **Category**: Language Models
+- **Dataset**: TinyShakespeare
+- **Category**: Fine-tuning
 
 ## Implementation Details
 

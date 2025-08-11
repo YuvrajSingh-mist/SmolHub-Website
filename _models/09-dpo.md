@@ -2,8 +2,8 @@
 title: "DPO"
 excerpt: "From scratch implementation of DPO"
 collection: models
-layout: model-implementation
-category: "Language Models"
+layout: single
+category: "Fine-tuning"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DPO"
@@ -16,7 +16,7 @@ From scratch implementation of DPO
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: UltraFeedback
-- **Category**: Language Models
+- **Category**: Fine-tuning
 
 ## Implementation Details
 
@@ -49,6 +49,10 @@ Train loss - 0.67
 
 Val loss - 0.68
 
+## ModelArgs Hyperparameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [DPO](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DPO)
 

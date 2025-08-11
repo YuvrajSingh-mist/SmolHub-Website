@@ -210,6 +210,16 @@ date: {model_date}
         content += cleaned_readme
         content += "\n\n"
     
+    # Validate if ModelArgs is relevant
+    if 'ModelArgs' in readme_content and 'hyperparameters' in readme_content.lower():
+        content += "## ModelArgs Hyperparameters\n\n"
+        content += "| Parameter | Value | Description |\n"
+        content += "|-----------|-------|-------------|\n"
+        # Add logic to extract and format ModelArgs hyperparameters here
+        # Ensure this section is only added if relevant to the model
+
+    # Otherwise, skip adding ModelArgs section
+    
     # Add GitHub link
     if github_url:
         content += f"""## Source Code

@@ -2,7 +2,7 @@
 title: "WGANs"
 excerpt: "From scratch implementation of WGANs"
 collection: models
-layout: model-implementation
+layout: single
 category: "Generative Models"
 framework: "PyTorch"
 dataset: "MNIST"

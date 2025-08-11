@@ -297,7 +297,7 @@ defaults:
       comments: true
       sidebar:
         - title: "Quick Info"
-          text: "{{page.framework}} | {{page.category}}"
+          text: "{% if page.framework %}{{ page.framework }}{% endif %}{% if page.category %} | {{ page.category }}{% endif %}"
   # _datasets
   - scope:
       path: ""
@@ -318,7 +318,7 @@ defaults:
       comments: true
       sidebar:
         - title: "Quick Info"
-          text: "{{page.framework}} | {{page.category}}"
+          text: "{% if page.framework %}{{ page.framework }}{% endif %}{% if page.category %} | {{ page.category }}{% endif %}"
 
 
 # Sass/SCSS

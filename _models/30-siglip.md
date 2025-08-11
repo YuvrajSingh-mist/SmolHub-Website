@@ -2,8 +2,8 @@
 title: "SigLip"
 excerpt: "From scratch implementation of SigLip"
 collection: models
-layout: model-implementation
-category: "Language Models"
+layout: single
+category: "Computer Vision"
 framework: "PyTorch"
 dataset: "Flickr"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SigLip"
@@ -16,7 +16,7 @@ From scratch implementation of SigLip
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Flickr
-- **Category**: Language Models
+- **Category**: Computer Vision
 
 ## Implementation Details
 

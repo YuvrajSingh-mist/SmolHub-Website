@@ -2,10 +2,10 @@
 title: "Gemma"
 excerpt: "From scratch implementation of Gemma"
 collection: models
-layout: model-implementation
+layout: single
 category: "Language Models"
 framework: "PyTorch"
-dataset: "Custom"
+dataset: "TinyShakespeare"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma"
 date: 2025-04-20
 ---
@@ -15,7 +15,7 @@ From scratch implementation of Gemma
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: Custom
+- **Dataset**: TinyShakespeare
 - **Category**: Language Models
 
 ## Implementation Details
