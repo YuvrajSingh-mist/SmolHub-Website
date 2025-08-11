@@ -46,7 +46,7 @@ Trained a small whisper model coded and trained from scratch in Pytorch
 | `kernel_size`           | 3                      | Kernel size for convolutional layers.                                       |
 | `stride`                | 2             | Stride for convolutional layers.                                            |
 | `sr`                    | 16000                  | Sampling rate of the audio.                                                 |
-| `device`                | `'cuda:0'`             | Device to run the model on (e.g., GPU).                                     |
+| `device`                | 'cuda:0'             | Device to run the model on (e.g., GPU).                                     |
 | `SAMPLING_RATE`         | 16000                  | Sampling rate of the audio.                                                 |
 | `N_MELS`                | 80                     | Number of Mel bins in the spectrogram.                                      |
 | `WINDOW_DURATION`       | 0.025                  | Duration of the analysis window in seconds (25 ms).                         |
@@ -54,7 +54,7 @@ Trained a small whisper model coded and trained from scratch in Pytorch
 | `max_t`                 | 500                    | Maximum time steps in the spectrogram.                                      |
 | `n_channels`            | 80                     | Number of channels in the input spectrogram.                                |
 | `hidden_dim`            | 4 * `embeddings_dims`  | Number of neurons in the feed-forward network (FFN).                        |
-"""
+
 
 ### Dataset
 

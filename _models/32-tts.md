@@ -29,6 +29,7 @@ Trained a small transformer based TTS model coded and trained from scratch in Py
 ## Model Hyperparameters
 
 ### Core Architecture
+
 | Parameter                      | Value            | Description                                  |
 |--------------------------------|------------------|----------------------------------------------|
 | `batch_size`                   | 32               | Number of samples per batch                 |
@@ -49,6 +50,7 @@ Trained a small transformer based TTS model coded and trained from scratch in Py
 | `clip`                         | 1.0              | Gradient clipping threshold                 |
 
 ### Audio Processing
+
 | Parameter               | Value    | Description                                  |
 |-------------------------|----------|----------------------------------------------|
 | `log_mel_features`      | 80       | Mel spectrogram channels                    |

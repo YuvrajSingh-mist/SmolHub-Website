@@ -43,6 +43,7 @@ This dataclass defines hyperparameters and configuration settings for a neural n
 ## Hyperparameters Overview
 
 ### Architecture
+
 | Parameter | Value | Description |
 |-----------|-------|-------------|
 | `block_size` | 1024 | Context window length for sequential data |
@@ -53,6 +54,7 @@ This dataclass defines hyperparameters and configuration settings for a neural n
 | `base_freq` | 10000 | Base frequency for positional encodings |
 
 ### Training
+
 | Parameter | Value | Description |
 |-----------|-------|-------------|
 | `epochs` | 1 | Total training epochs |
@@ -61,12 +63,14 @@ This dataclass defines hyperparameters and configuration settings for a neural n
 | `clip` | 1.0 | Gradient clipping threshold |
 
 ### Regularization
+
 | Parameter | Value | Description |
 |-----------|-------|-------------|
 | `attn_dropout` | 0.1 | Dropout probability for attention layers |
 | `dropout` | 0.1 | General dropout probability |
 
 ### Optimization
+
 | Parameter | Value | Description |
 |-----------|-------|-------------|
 | `weight_decay_optim` | 0.1 | L2 regularization strength |
@@ -75,6 +79,7 @@ This dataclass defines hyperparameters and configuration settings for a neural n
 | `eps` | 1e-8 | Epsilon for numerical stability |
 
 ### Mixture-of-Experts (MoE)
+
 | Parameter | Value | Description |
 |-----------|-------|-------------|
 | `experts` | 31 | Total number of experts in MoE layer |
@@ -85,6 +90,7 @@ This dataclass defines hyperparameters and configuration settings for a neural n
 | `aux_free_bias_update_rate` | 0.001 | Update rate for auxiliary-free bias |
 
 ### Hardware & Optimization
+
 | Parameter | Value | Description |
 |-----------|-------|-------------|
 | `device` | 'cuda:4' | Training accelerator (GPU/CPU) |
@@ -213,13 +219,6 @@ python inference.py --prompt "Once upon a time" --max_length 100 --temperature 0
 ```
  -->
 
-<<<<<<< HEAD
-=======
-## ModelArgs Hyperparameters
-
-| Parameter | Value | Description |
-|-----------|-------|-------------|
->>>>>>> b04de69609104e65041548913b8cf98caa37761c
 ## Source Code
 📁 **GitHub Repository**: [Llama4](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama4)
 
