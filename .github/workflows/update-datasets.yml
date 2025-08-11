@@ -46,7 +46,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo "📅 Fetching GitHub creation dates for datasets..."
-        python fetch_github_dates.py
+        python fetch_github_dates.py --only datasets
         echo "✅ Datasets updated with real GitHub commit dates"
     
     - name: Check for changes
@@ -64,17 +64,20 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         
-        # Pull latest changes first to avoid conflicts
+        # Stage only dataset-related changes
+        git add _data/datasets.json _datasets/ 2>/dev/null || true
+        
+        # Commit local changes first to avoid pull errors with unstaged changes
+        git commit -m "📅 Auto-update datasets with GitHub creation dates" || {
+          echo "⚠️ Nothing to commit or commit failed"
+          exit 0
+        }
+        
+        # Pull latest changes with rebase, fallback to merge if needed
         git pull origin master --rebase || {
           echo "⚠️ Rebase conflicts detected, trying merge strategy"
           git rebase --abort 2>/dev/null || true
           git pull origin master --no-rebase
-        }
-        
-        git add .
-        git commit -m "📅 Auto-update datasets with GitHub creation dates" || {
-          echo "⚠️ Nothing to commit or commit failed"
-          exit 0
         }
         
         # Try to push, with retry logic
@@ -84,7 +87,7 @@ jobs:
             break
           else
             echo "⚠️ Push failed on attempt $i, pulling latest changes..."
-            git pull origin master --rebase
+            git pull origin master --rebase || { git rebase --abort 2>/dev/null || true; git pull origin master --no-rebase; }
             if [ $i -eq 3 ]; then
               echo "❌ Failed to push after 3 attempts"
               exit 1

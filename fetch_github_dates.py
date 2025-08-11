@@ -232,6 +232,8 @@ def main():
     parser = argparse.ArgumentParser(description='Fetch GitHub creation dates for models and datasets')
     parser.add_argument('--source', default='paper-replications', 
                        help='Source repository type (default: paper-replications)')
+    parser.add_argument('--only', choices=['models', 'datasets', 'both'], default='both',
+                       help='Limit updates to only models, only datasets, or both (default)')
     args = parser.parse_args()
     
     # You can pass a GitHub token as environment variable for higher rate limits
@@ -248,15 +250,20 @@ def main():
     print(f"🔧 Running for source: {args.source}")
     print("=" * 60)
     
-    # Update models.json with GitHub dates
-    print("\n📁 UPDATING MODELS...")
-    models_success = update_models_with_github_dates(github_token)
-    
-    # Update datasets.json with GitHub dates
-    print("\n📊 UPDATING DATASETS...")
-    datasets_success = update_datasets_with_github_dates(github_token)
-    
-    # Update model markdown files
+    models_success = False
+    datasets_success = False
+
+    # Update models.json with GitHub dates (if requested)
+    if args.only in ('models', 'both'):
+        print("\n📁 UPDATING MODELS...")
+        models_success = update_models_with_github_dates(github_token)
+
+    # Update datasets.json with GitHub dates (if requested)
+    if args.only in ('datasets', 'both'):
+        print("\n📊 UPDATING DATASETS...")
+        datasets_success = update_datasets_with_github_dates(github_token)
+
+    # Update model markdown files only if models were updated successfully
     if models_success:
         print("\n📝 UPDATING MODEL MARKDOWN FILES...")
         update_model_markdown_files()

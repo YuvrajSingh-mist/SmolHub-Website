@@ -6,9 +6,13 @@ permissions:
   pull-requests: write
 
 on:
+  # Run automatically right after the Paper Replications workflow completes
+  workflow_run:
+    workflows: ["Update Paper Replications (From Scratch)"]
+    types:
+      - completed
   # Allow manual trigger
   workflow_dispatch:
-  
   # Run when markdown files or standardization scripts are updated
   push:
     paths:
@@ -17,7 +21,6 @@ on:
       - 'validate_guidelines.py'
       - 'fix_image_links.py'
       - '_templates/*'
-  
   # Run on pull requests that affect models
   pull_request:
     paths:
@@ -26,6 +29,8 @@ on:
 jobs:
   standardize-and-validate:
     runs-on: ubuntu-latest
+    # Only proceed when the upstream workflow succeeded (when triggered via workflow_run)
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     
     steps:
     - name: Checkout repository
@@ -33,6 +38,11 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         fetch-depth: 0
+
+    - name: Auto-fix old github.com/raw image URLs in _models
+      run: |
+        echo "🔗 Converting github.com/.../raw/... image URLs to raw.githubusercontent.com in _models/*.md"
+        find _models -name '*.md' -exec sed -i 's#https://github.com/\([^/]\+\)/\([^/]\+\)/raw/\([^/]\+\)/\([^)]\+\)#https://raw.githubusercontent.com/\1/\2/\3/\4#g' {} +
     
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -48,8 +58,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "� Ensuring GitHub creation dates are up to date..."
-        python fetch_github_dates.py
+        echo "📅 Ensuring GitHub creation dates are up to date (models only)..."
+        python fetch_github_dates.py --only models
         echo "�🔧 Running comprehensive markdown standardization..."
         echo "📋 This will ensure:"
         echo "  ✅ Consistent frontmatter format"
