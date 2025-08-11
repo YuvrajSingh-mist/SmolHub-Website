@@ -16,10 +16,6 @@ So, I trained a Llama a 88M architecture I coded from ground up to build a small
 - **Category**: Experimental AI/ML
 - **Repository**: [Story Llama](https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryLlama)
 
-## Implementation Details
-
-# Story Llama
-
 
 # Introducing StoryLlama - A Smaller Language Model for Bedtime Stories! 
 
@@ -111,14 +107,14 @@ Below is a table summarizing the configuration parameters for the model:
 
 - Loss Curves (Train and Val)
 
-![Loss Curves (Train and Val)](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryLlama/imgs/loss_curves.jpg)
+![Loss Curves (Train and Val)](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryLlama/images/loss_curves.jpg)
 
 --- 
 #### Output
 
 - Prompt: Once upon a time
 
-![Prompt: Once upon a time](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryLlama/imgs/sample.jpg)
+![Prompt: Once upon a time](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryLlama/images/sample.jpg)
 
 ---
 

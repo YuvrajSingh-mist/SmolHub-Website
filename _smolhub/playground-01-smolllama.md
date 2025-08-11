@@ -16,10 +16,6 @@ So, I trained a Llama a 130M architecture I coded from ground up to build a smal
 - **Category**: Experimental AI/ML
 - **Repository**: [Smol Llama](https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolLlama)
 
-## Implementation Details
-
-# Smol Llama
-
 
 # Introducing SmolLlama - A Smaller Language Model 
 
@@ -36,7 +32,7 @@ The three main stages are:
 
 - Models have been uploaded on HF!
 
- ### 1) Pretraining
+### 1) Pretraining
 
 #### Dataset
 
@@ -47,7 +43,7 @@ The three main stages are:
 
 
 
- ### 2) SFT
+### 2) SFT
 
 #### Dataset
 
@@ -57,8 +53,7 @@ The three main stages are:
   2) Val dataset - 5k texts
 
 
-
- ### 3) Reference Alignment
+### 3) DPO
 
 #### Dataset
 
