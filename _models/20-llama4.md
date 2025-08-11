@@ -7,7 +7,7 @@ category: "Language Models"
 framework: "PyTorch"
 dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama4"
-date: 2025-08-06
+date: 2025-04-20
 ---
 
 ## Overview
@@ -117,7 +117,7 @@ This dataclass defines hyperparameters and configuration settings for a neural n
 
 - Loss Curves (Train and Val)
 
-![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Llama4/img/loss.png)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/Llama4/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Llama4/img/loss.png)
 
 --- 
 #### Output

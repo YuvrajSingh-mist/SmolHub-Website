@@ -56,7 +56,7 @@ Val iterations = every 50 steps
 
 ### Loss Curves
 
-![📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Moonshine/images/loss_curves.jpg)
+[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/Moonshine/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Moonshine/images/loss_curves.jpg)
 
 Looks like 25 hours isnt enough thus started to overfit!
 
