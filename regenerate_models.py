@@ -16,8 +16,12 @@ def slugify(text):
     return slug.strip('-')
 
 def convert_images_to_links(content, github_url):
-    """Convert image markdown to GitHub hyperlinks"""
-    github_base_url = github_url.replace('/tree/master/', '/blob/master/')
+    """Convert image markdown to hyperlinks pointing to raw.githubusercontent.com"""
+    github_base_url = (
+        github_url
+        .replace('/tree/master/', '/raw/master/')
+        .replace('/tree/main/', '/raw/main/')
+    )
     
     def replace_image(match):
         alt_text = match.group(1)
@@ -41,8 +45,12 @@ def convert_images_to_links(content, github_url):
         else:
             link_text = f"🔗 View {alt_text}"
         
-        # Create GitHub URL
-        github_image_url = f"{github_base_url}/{image_path}"
+        # Skip if already an absolute URL
+        if image_path.startswith('http://') or image_path.startswith('https://'):
+            github_image_url = image_path
+        else:
+            # Create raw GitHub URL
+            github_image_url = f"{github_base_url}/{image_path}"
         
         # Return as hyperlink
         return f"[{link_text}]({github_image_url})"

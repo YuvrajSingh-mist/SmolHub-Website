@@ -152,15 +152,15 @@ The three main stages are:
 
 - Pretrain
 
-![Train Loss Curves](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/[🖼️ images/loss_curves.jpg](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/loss_curves.jpg))
+![Train Loss Curves](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/loss_curves.jpg)
 
 - SFT
 
-![Train Loss Curves (SFT)](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/[🖼️ images/loss_curves_sft.jpg](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/loss_curves_sft.jpg))
+![Train Loss Curves (SFT)](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/loss_curves_sft.jpg)
 
 - DPO
 
-![Train Loss Curves (DPO)](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/[🖼️ images/loss_curves_dpo.jpg](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/loss_curves_dpo.jpg))
+![Train Loss Curves (DPO)](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/loss_curves_dpo.jpg)
 
 
 
@@ -169,9 +169,9 @@ The three main stages are:
 
 - Sample Ouput
 
-![Sample Ouput 1](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/[🖼️ images/sample_1.jpg](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/sample_1.jpg))
+![Sample Ouput 1](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/sample_1.jpg)
 
-![Sample Ouput 2](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/[🖼️ images/sample_2.jpg](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/sample_2.jpg))
+![Sample Ouput 2](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/sample_2.jpg)
 ---
 
 ### Local setup

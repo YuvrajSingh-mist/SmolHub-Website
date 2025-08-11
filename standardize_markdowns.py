@@ -101,9 +101,16 @@ date: {date}
         return new_frontmatter + '\n\n' + body_content
     
     def fix_github_image_url(self, url):
-        """Convert GitHub blob URL to raw.githubusercontent.com URL"""
+        """Convert various GitHub image URL forms to raw.githubusercontent.com URL"""
+        # Already raw
+        if url.startswith('https://raw.githubusercontent.com/'):
+            return url
+        # Convert github.com/blob/... -> raw
         if 'github.com' in url and '/blob/' in url:
             return url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/')
+        # Convert github.com/.../raw/... -> raw.githubusercontent.com
+        if 'github.com' in url and '/raw/' in url:
+            return url.replace('github.com', 'raw.githubusercontent.com').replace('/raw/', '/')
         return url
     
     def standardize_body_content(self, content):
@@ -169,6 +176,13 @@ date: {date}
             return f'https://raw.githubusercontent.com/{user}/{repo}/{branch}/{path}'
         
         content = re.sub(blob_url_pattern, replace_blob_url, content)
+
+        # Fix github.com/.../raw/... links that slipped through
+        raw_path_pattern = r'https://github\.com/([^/]+)/([^/]+)/raw/([^/]+)/([^)\s]+\.(jpg|jpeg|png|gif|svg))'
+        def replace_raw_path(match):
+            user, repo, branch, path = match.groups()
+            return f'https://raw.githubusercontent.com/{user}/{repo}/{branch}/{path}'
+        content = re.sub(raw_path_pattern, replace_raw_path, content)
         
         # Remove fallback reference comments
         content = re.sub(r'<!-- Fallback reference -->\s*\n', '', content)

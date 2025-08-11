@@ -71,7 +71,11 @@ def update_markdown_file(filepath, github_urls):
         return False
     
     github_url = github_url_match.group(1)
-    github_base_url = github_url.replace('/tree/master/', '/blob/master/')
+    github_base_url = (
+        github_url
+        .replace('/tree/master/', '/raw/master/')
+        .replace('/tree/main/', '/raw/main/')
+    )
     
     # Find all image references (including webp)
     image_pattern = r'!\[([^\]]*)\]\(([^)]+\.(jpg|jpeg|png|gif|svg|webp))\)'
