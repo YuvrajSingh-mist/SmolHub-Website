@@ -76,7 +76,7 @@ Val iterations = every 50 steps
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/TTS/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/TTS/images/loss.jpg)
+[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/TTS/images/loss.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [TTS](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/TTS)

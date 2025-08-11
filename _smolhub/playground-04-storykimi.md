@@ -16,9 +16,7 @@ A PyTorch implementation of a DeepSeek V3 inspired transformer model with Mixtur
 - **Category**: Experimental AI/ML
 - **Repository**: [Story Kimi](https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryKimi)
 
-## Implementation Details
 
-# Story Kimi
 
 A PyTorch implementation of a DeepSeek V3 inspired transformer model with Mixture of Experts (MoE), Latent Attention, and other advanced features.
 

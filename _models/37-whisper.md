@@ -71,7 +71,7 @@ Val iterations = every epoch
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/Whisper/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Whisper/img/loss.jpg)
+[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Whisper/img/loss.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [Whisper](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Whisper)

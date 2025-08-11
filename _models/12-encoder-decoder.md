@@ -54,7 +54,7 @@ Val loss - 1.39
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/Encoder-Decoder/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Encoder-Decoder/img/loss.jpg)
+[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Encoder-Decoder/img/loss.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [Encoder-Decoder](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Encoder-Decoder)

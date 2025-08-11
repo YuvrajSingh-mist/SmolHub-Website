@@ -16,9 +16,6 @@ A compact implementation of an Encoder-Decoder Transformer for sequence-to-seque
 - **Category**: Experimental AI/ML
 - **Repository**: [Smol Transformer](https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolTransformer)
 
-## Implementation Details
-
-# Smol Transformer
 
 A compact implementation of an Encoder-Decoder Transformer for sequence-to-sequence translation tasks. This project implements a translation model from English to Hindi using the Samanantar dataset.
 
