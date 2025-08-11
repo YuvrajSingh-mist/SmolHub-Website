@@ -3,7 +3,7 @@ title: "CLAP"
 excerpt: "From scratch implementation of CLAP"
 collection: models
 layout: model-implementation
-category: "Language Models"
+category: "Audio/Speech"
 framework: "PyTorch"
 dataset: "Gigaspeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CLAP"
@@ -16,7 +16,7 @@ From scratch implementation of CLAP
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
-- **Category**: Language Models
+- **Category**: Audio/Speech
 
 ## Implementation Details
 
@@ -65,6 +65,10 @@ Used the 'xs' snapshot.
 ### NOTE
 The loss was stagged at 2.079 -loge(1/8), that is, the logits tend to be too small for softmax to outputs anythign except uniform probs. Pls let me know where am I making a mistake.
 
+## ModelArgs Hyperparameters
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [CLAP](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CLAP)
 
