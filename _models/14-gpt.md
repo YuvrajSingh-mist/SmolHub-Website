@@ -20,8 +20,6 @@ From scratch implementation of GPT
 
 ## Implementation Details
 
-# GPT in Pytorch
-
 I implemented the GPT from scratch using Pytorch on Tinyshakespeare dataset.
 
 [Improving Language Understanding

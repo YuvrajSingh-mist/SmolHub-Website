@@ -72,11 +72,16 @@ def check_github_links():
     issues = []
 
     # Updated pattern to check for proper raw.githubusercontent.com image links
-    github_image_pattern = r'!\[([^\]]+)\]\((https://raw\.githubusercontent\.com/[^/]+/[^/]+/[^)]+\.(jpg|jpeg|png|gif|svg))\)'
+    github_image_pattern = r'!\[([^\]]+)\]\((https://raw\.githubusercontent\.com/[^/]+/[^/]+/[^)]+\.(jpg|jpeg|png|gif|svg|webp))\)'
 
     for md_file in models_dir.glob("*.md"):
         with open(md_file, 'r', encoding='utf-8') as f:
             content = f.read()
+
+        # Flag any concatenated malformed URLs like github.com/.../raw/.../https://raw.githubusercontent.com/...
+        malformed_concat = re.findall(r'https://github\.com/[^)]+/raw/[^)]+https://raw\.githubusercontent\.com/[^)]+', content)
+        for bad in malformed_concat:
+            issues.append(f"❌ {md_file.name}: malformed concatenated URL '{bad}'")
 
         matches = re.findall(github_image_pattern, content)
         for match in matches:

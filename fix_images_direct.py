@@ -7,7 +7,7 @@ Uses the github_url from each file's frontmatter directly
 import os
 import re
 
-def convert_image_to_link(match, github_base_url):
+def convert_image_to_link(match, raw_base_url):
     """Convert an image markdown to a hyperlink"""
     alt_text = match.group(1)
     image_path = match.group(2)
@@ -30,8 +30,8 @@ def convert_image_to_link(match, github_base_url):
     else:
         link_text = f"🔗 View {alt_text}"
     
-    # Create GitHub URL
-    github_image_url = f"{github_base_url}/{image_path}"
+    # Create raw GitHub URL
+    github_image_url = f"{raw_base_url}/{image_path}"
     
     # Return as hyperlink
     return f"[{link_text}]({github_image_url})"
@@ -50,7 +50,13 @@ def update_markdown_file(filepath):
         return False
     
     github_url = github_url_match.group(1)
-    github_base_url = github_url.replace('/tree/master/', '/blob/master/')
+    # Convert to raw base URL
+    raw_base_url = (
+        github_url
+        .replace('https://github.com/', 'https://raw.githubusercontent.com/')
+        .replace('/tree/master/', '/master/')
+        .replace('/tree/main/', '/main/')
+    )
     
     # Find all image references
     image_pattern = r'!\[([^\]]*)\]\(([^)]+\.(jpg|jpeg|png|gif|svg))\)'
@@ -64,7 +70,7 @@ def update_markdown_file(filepath):
     
     # Replace all image references with hyperlinks
     def replace_image(match):
-        return convert_image_to_link(match, github_base_url)
+        return convert_image_to_link(match, raw_base_url)
     
     updated_content = re.sub(image_pattern, replace_image, content)
     

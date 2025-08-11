@@ -5,7 +5,7 @@ collection: models
 layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "TinyStories"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Kimi-K2"
 date: 2025-08-06
 ---
@@ -13,25 +13,16 @@ date: 2025-08-06
 ## Overview
 From scratch implementation of Kimi-K2
 
-## Key Features
-- Mixture of Experts (MoE)
-- Attention Mechanism
-- Transformer Architecture
-- Distributed Training
-- Memory Optimization
-
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: TinyStories
+- **Dataset**: Custom
 - **Category**: Language Models
 
 ## Implementation Details
 
-# Kimi-K2 - DeepSeek V3 Inspired Model
-
 A PyTorch reimplementation of a DeepSeek V3-inspired transformer model with Mixture of Experts (MoE), Latent Attention, and other advanced features.
 
-[🔗 View StoryKimi Model](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/Kimi-K2/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Kimi-K2/images/image.png)
+[🔗 View StoryKimi Model](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Kimi-K2/images/image.png)
 
 ## 📊 Training Results & Model Weights
 
@@ -517,10 +508,6 @@ Feel free to contribute improvements, bug fixes, or new features!
 
 MIT License
 
-## ModelArgs Hyperparameters
-
-| Parameter | Value | Description |
-|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [Kimi-K2](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Kimi-K2)
 

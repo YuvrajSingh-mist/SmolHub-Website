@@ -20,8 +20,6 @@ From scratch implementation of GRU
 
 ## Implementation Details
 
-# GRU in Pytorch from scratch implementation
-
 Trained a GRU model coded from scratch in Pytorch 
 
 ## ModelArgs Hyperparameters
@@ -49,14 +47,10 @@ Train loss - 0.51
 
 Val loss - 0.48
 
-<!-- ### Loss Curves
+### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/GRU/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/GRU/img/loss_curves.jpg) -->
+[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/GRU/img/loss_curves.jpg)
 
-## ModelArgs Hyperparameters
-
-| Parameter | Value | Description |
-|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [GRU](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/GRU)
 

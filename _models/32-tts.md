@@ -13,18 +13,12 @@ date: 2025-03-26
 ## Overview
 From scratch implementation of TTS
 
-## Key Features
-- Attention Mechanism
-- Transformer Architecture
-
 ## Technical Details
 - **Framework**: PyTorch
 - **Dataset**: Gigaspeech
 - **Category**: Audio/Speech
 
 ## Implementation Details
-
-# Transformer based TTS model in Pytorch from scratch implementation
 
 Trained a small transformer based TTS model coded and trained from scratch in Pytorch 
 
@@ -35,6 +29,7 @@ Trained a small transformer based TTS model coded and trained from scratch in Py
 ## Model Hyperparameters
 
 ### Core Architecture
+
 | Parameter                      | Value            | Description                                  |
 |--------------------------------|------------------|----------------------------------------------|
 | `batch_size`                   | 32               | Number of samples per batch                 |
@@ -55,6 +50,7 @@ Trained a small transformer based TTS model coded and trained from scratch in Py
 | `clip`                         | 1.0              | Gradient clipping threshold                 |
 
 ### Audio Processing
+
 | Parameter               | Value    | Description                                  |
 |-------------------------|----------|----------------------------------------------|
 | `log_mel_features`      | 80       | Mel spectrogram channels                    |
@@ -80,7 +76,7 @@ Val iterations = every 50 steps
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/TTS/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/TTS/images/loss.jpg)
+[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/TTS/images/loss.jpg)
 
 ## Source Code
 📁 **GitHub Repository**: [TTS](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/TTS)

@@ -20,8 +20,6 @@ From scratch implementation of LoRA
 
 ## Implementation Details
 
-# LoRA in Pytorch
-
 I implemented the LoRA framework using Pytorch on Tinyshakespeare dataset.
 
 [LORA: LOW-RANK ADAPTATION OF LARGE LANGUAGE MODELS](https://arxiv.org/pdf/2106.09685)

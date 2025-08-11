@@ -20,8 +20,6 @@ From scratch implementation of CGANs
 
 ## Implementation Details
 
-# Conditional Generative Adversarial Networks (CGANs)
-
 [🏗️ View Model Architecture](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/main/CGANs/output_images/MNIST/fake_images_steps_14000.png)
 
 ## Overview

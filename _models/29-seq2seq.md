@@ -23,8 +23,6 @@ From scratch implementation of Seq2Seq
 
 ## Implementation Details
 
-# Seq2Seq with Bahdanau and Luong Attention in Pytorch from scratch implementation
-
 Trained a Seq2Seq model with the said attention mechanism  coded from scratch in Pytorch 
 
 [Effective Approaches to Attention-based Neural Machine Translation](https://arxiv.org/abs/1508.04025)
@@ -56,10 +54,7 @@ Val iterations = every epoch
 
 [📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/Seq2Seq/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Seq2Seq/img/loss_curves.jpg)
 
-## ModelArgs Hyperparameters
 
-| Parameter | Value | Description |
-|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [Seq2Seq](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Seq2Seq)
 

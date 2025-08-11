@@ -20,8 +20,6 @@ From scratch implementation of RNNs
 
 ## Implementation Details
 
-# RNNs in Pytorch from scratch implementation
-
 Trained a RNN model coded from scratch in Pytorch 
 
 ## ModelArgs Hyperparameters

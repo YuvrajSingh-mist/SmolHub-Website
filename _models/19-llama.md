@@ -20,7 +20,6 @@ From scratch implementation of Llama
 
 ## Implementation Details
 
-# Llama architecture in Pytorch
 
 I implemented Llama using Pytorch on the tineshakespeare dataset.
 

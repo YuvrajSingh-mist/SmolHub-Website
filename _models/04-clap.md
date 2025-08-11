@@ -20,10 +20,6 @@ From scratch implementation of CLAP
 
 ## Implementation Details
 
-# CLAP model in PyTorch from scratch implementation
-
-Implementation of CLAP model coded from scratch in Pytorch 
-
 [CLAP : LEARNING AUDIO CONCEPTS FROM NATURAL LANGUAGE SUPERVISION](https://arxiv.org/pdf/2206.04769)
 
 ## ModelArgs Hyperparameters

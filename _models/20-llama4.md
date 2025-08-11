@@ -5,28 +5,21 @@ collection: models
 layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "TinyStories"
+dataset: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama4"
 date: 2025-04-20
 ---
 
 ## Overview
-From scratch implementation of Llama4
-
-## Key Features
-- Mixture of Experts (MoE)
-- Attention Mechanism
-- Transformer Architecture
-- Memory Optimization
+From scratch implementation of Llama 4 Scout
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Dataset**: TinyStories
+- **Dataset**: Custom
 - **Category**: Language Models
 
 ## Implementation Details
 
-# Llama 4 Scout from-scratch in PyTorch
 - So, I trained a MoE based Llama 1.2B (32x12M) architecture I coded from ground up.
 - Trained on TiyStories dataset form HuggingFace consisting of 4.2B tokens for 1 FULL epoch.
 
@@ -123,7 +116,7 @@ This dataclass defines hyperparameters and configuration settings for a neural n
 
 - Loss Curves (Train and Val)
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/Llama4/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Llama4/img/loss.png)
+[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Llama4/img/loss.png)
 
 --- 
 #### Output
@@ -220,10 +213,6 @@ python inference.py --prompt "Once upon a time" --max_length 100 --temperature 0
 ```
  -->
 
-## ModelArgs Hyperparameters
-
-| Parameter | Value | Description |
-|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [Llama4](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama4)
 

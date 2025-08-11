@@ -21,8 +21,6 @@ From scratch implementation of CycleGANs
 ## Implementation Details
 
 
-I implemented the CycleGAN using Pytorch on the cityscapes dataset.
-
 [CycleGAN](https://arxiv.org/abs/1703.10593)
 
 ### Datasets

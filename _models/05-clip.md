@@ -20,9 +20,6 @@ From scratch implementation of CLiP
 
 ## Implementation Details
 
-# CLIP architecture in Pytorch
-
-I implemented the CLiP using Pytorch on the flickr8000 dataset.
 
 [Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/abs/2103.00020)
 

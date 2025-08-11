@@ -20,8 +20,6 @@ From scratch implementation of Encoder-Decoder
 
 ## Implementation Details
 
-# Coded an Encoder-Decoder in Pytorch from scratch  
-
 Trained on the on German (de) to English (en) dataset
 
 [Sequence to Sequence Learning with Neural Networks](https://arxiv.org/pdf/1409.3215)
@@ -54,12 +52,8 @@ Val loss - 1.39
 
 ### Loss Curves
 
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/Encoder-Decoder/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Encoder-Decoder/img/loss.jpg)
+[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Encoder-Decoder/img/loss.jpg)
 
-## ModelArgs Hyperparameters
-
-| Parameter | Value | Description |
-|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [Encoder-Decoder](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Encoder-Decoder)
 

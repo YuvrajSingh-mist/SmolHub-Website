@@ -20,7 +20,6 @@ From scratch implementation of Llava
 
 ## Implementation Details
 
-# Llava architecture in Pytorch
 
 I implemented the Llava using Pytorch on the flickr8000 dataset.
 

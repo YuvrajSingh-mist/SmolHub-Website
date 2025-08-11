@@ -17,10 +17,11 @@ def slugify(text):
 
 def convert_images_to_links(content, github_url):
     """Convert image markdown to hyperlinks pointing to raw.githubusercontent.com"""
-    github_base_url = (
+    raw_base_url = (
         github_url
-        .replace('/tree/master/', '/raw/master/')
-        .replace('/tree/main/', '/raw/main/')
+        .replace('https://github.com/', 'https://raw.githubusercontent.com/')
+        .replace('/tree/master/', '/master/')
+        .replace('/tree/main/', '/main/')
     )
     
     def replace_image(match):
@@ -50,7 +51,7 @@ def convert_images_to_links(content, github_url):
             github_image_url = image_path
         else:
             # Create raw GitHub URL
-            github_image_url = f"{github_base_url}/{image_path}"
+            github_image_url = f"{raw_base_url}/{image_path}"
         
         # Return as hyperlink
         return f"[{link_text}]({github_image_url})"

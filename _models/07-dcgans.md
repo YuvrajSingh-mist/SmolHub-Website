@@ -22,7 +22,6 @@ From scratch implementation of DCGANs
 
 # DCGAN from Scratch
 
-I implemented a DCGAN Architecture from Scratch using Pytorch on CelebA and CIFAR10 dataset.
 
 [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/2010.11929)
 

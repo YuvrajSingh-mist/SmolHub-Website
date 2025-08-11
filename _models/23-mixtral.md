@@ -20,8 +20,6 @@ From scratch implementation of Mixtral
 
 ## Implementation Details
 
-# Mixtral in Pytorch
-
 I implemented the Mixtral architecture from scratch using Pytorch on Tinyshakespeare dataset.
 
 [Mixtral of Experts](https://arxiv.org/pdf/2401.04088)

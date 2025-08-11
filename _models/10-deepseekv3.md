@@ -26,7 +26,7 @@ From scratch implementation of DeepSeekV3
 
 ## Implementation Details
 
-# DeepSeekV3 from Scratch in PyTorch
+
 This repository contains a PyTorch implementation of the DeepSeekV3 architecture, trained on the TinyStories dataset. The model is designed for efficient text generation and understanding tasks, leveraging a mixture of experts (MoE) architecture.
 
 - So, I trained a  DeepSeekV3 (16x4) architecture I coded from ground up.
@@ -111,10 +111,6 @@ This dataclass defines hyperparameters and configuration settings for the DeepSe
 
 ---
 
-## ModelArgs Hyperparameters
-
-| Parameter | Value | Description |
-|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [DeepSeekV3](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DeepSeekV3)
 
