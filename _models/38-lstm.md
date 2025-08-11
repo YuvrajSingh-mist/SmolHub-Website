@@ -20,7 +20,6 @@ From scratch implementation of lstm
 
 ## Implementation Details
 
-# LSTM in Pytorch from scratch implementation
 
 Trained 128K LSTM model coded from scratch in Pytorch 
 

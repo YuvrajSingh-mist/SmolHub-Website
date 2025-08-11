@@ -65,10 +65,7 @@ Used the 'xs' snapshot.
 ### NOTE
 The loss was stagged at 2.079 -loge(1/8), that is, the logits tend to be too small for softmax to outputs anythign except uniform probs. Pls let me know where am I making a mistake.
 
-## ModelArgs Hyperparameters
 
-| Parameter | Value | Description |
-|-----------|-------|-------------|
 ## Source Code
 📁 **GitHub Repository**: [CLAP](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CLAP)
 
