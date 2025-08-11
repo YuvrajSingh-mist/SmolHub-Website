@@ -18,9 +18,6 @@ A PyTorch implementation of a Mixtral inspired transformer model with Mixture of
 
 ## Implementation Details
 
-# Smol Mixtral
-
-
 # SmolMixtral - Mixtral Inspired Model
 
 A PyTorch implementation of a Mixtral inspired transformer model with Mixture of Experts (MoE), designed for text generation and understanding tasks. This model is built on the Mixtral architecture with enhancements like Flash Attention, SWiGLU activation, and Liger kernels for optimized performance.
@@ -32,7 +29,7 @@ A PyTorch implementation of a Mixtral inspired transformer model with Mixture of
 
 Provided under the `generated_data/` directory, these examples showcase the model's capabilities in text generation and understanding.
 
-![SmolMixtral Model](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolMixtral/[🖼️ images/loss.jpg](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolMixtral/images/loss.jpg))
+![SmolMixtral Model](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolMixtral/images/loss.jpg)
 
 ## 📊 Training Results & Model Weights
 

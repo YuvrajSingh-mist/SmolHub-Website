@@ -22,7 +22,7 @@ A PyTorch implementation of a DeepSeek V3 inspired transformer model with Mixtur
 
 A PyTorch implementation of a DeepSeek V3 inspired transformer model with Mixture of Experts (MoE), Latent Attention, and other advanced features.
 
-![StoryKimi Model](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryKimi/[🖼️ images/image.png](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryKimi/images/image.png))
+![StoryKimi Model](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/StoryKimi/images/image.png)
 
 ## 📊 Training Results & Model Weights
 

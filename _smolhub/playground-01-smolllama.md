@@ -18,8 +18,6 @@ tags: ["llama", "transformer", "pytorch", "compact", "vision", "interactive", "e
 
 ## Implementation Details
 
-# Smol Llama
-
 
 # Introducing SmolLlama - A Smaller Language Model 
 
@@ -168,9 +166,9 @@ The three main stages are:
 
 - Sample Ouput
 
-![Sample Ouput 1](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/[🖼️ images/sample_1.jpg](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/sample_1.jpg))
+![Sample Ouput 1](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/sample_1.jpg)
 
-![Sample Ouput 2](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/[🖼️ images/sample_2.jpg](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/sample_2.jpg))
+![Sample Ouput 2](https://github.com/YuvrajSingh-mist/SmolHub/raw/main/SmolLlama/images/sample_2.jpg)
 ---
 
 ### Local setup
