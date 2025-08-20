@@ -1,5 +1,5 @@
 ---
-title: "Dqn Atari"
+title: "DQN Atari"
 excerpt: "Implementation of DQN-atari reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -17,11 +17,6 @@ Implementation of DQN-atari reinforcement learning algorithm
 - **Framework**: PyTorch
 - **Environment**: Atari
 - **Category**: Value-Based Methods
-
-## Implementation Details
-
-
-# Dqn Atari
 
 This implementation demonstrates value-based methods using PyTorch framework on Atari environment.
 

@@ -1,5 +1,5 @@
 ---
-title: "Self Play (Marl)"
+title: "Self Play (MARL)"
 excerpt: "Implementation of Self Play reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -18,10 +18,6 @@ Implementation of Self Play reinforcement learning algorithm
 - **Environment**: Custom Environment
 - **Category**: Multi-Agent RL
 
-## Implementation Details
-
-
-# Self Play (Marl)
 
 This implementation demonstrates multi-agent rl using PyTorch framework on Custom Environment environment.
 

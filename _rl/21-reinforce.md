@@ -1,5 +1,5 @@
 ---
-title: "Reinforce"
+title: "REINFORCE"
 excerpt: "Implementation of REINFORCE reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -17,11 +17,6 @@ Implementation of REINFORCE reinforcement learning algorithm
 - **Framework**: PyTorch
 - **Environment**: Custom Environment
 - **Category**: Policy-Based Methods
-
-## Implementation Details
-
-
-# Reinforce
 
 This implementation demonstrates policy-based methods using PyTorch framework on Custom Environment environment.
 

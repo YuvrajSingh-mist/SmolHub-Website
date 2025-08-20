@@ -1,5 +1,5 @@
 ---
-title: "Dqn"
+title: "DQN"
 excerpt: "Implementation of DQN reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -18,10 +18,6 @@ Implementation of DQN reinforcement learning algorithm
 - **Environment**: Custom Environment
 - **Category**: Value-Based Methods
 
-## Implementation Details
-
-
-# Dqn
 
 This implementation demonstrates value-based methods using PyTorch framework on Custom Environment environment.
 

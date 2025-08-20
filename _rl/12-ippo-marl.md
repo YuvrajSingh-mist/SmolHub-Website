@@ -1,5 +1,5 @@
 ---
-title: "Ippo (Marl)"
+title: "IPPO (MARL)"
 excerpt: "Implementation of IPPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -18,10 +18,6 @@ Implementation of IPPO reinforcement learning algorithm
 - **Environment**: Custom Environment
 - **Category**: Policy-Based Methods
 
-## Implementation Details
-
-
-# Ippo (Marl)
 
 This implementation demonstrates policy-based methods using PyTorch framework on Custom Environment environment.
 

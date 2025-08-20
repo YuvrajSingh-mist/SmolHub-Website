@@ -1,5 +1,5 @@
 ---
-title: "Mappo (Marl)"
+title: "MAPPO (MARL)"
 excerpt: "Implementation of MAPPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -17,11 +17,6 @@ Implementation of MAPPO reinforcement learning algorithm
 - **Framework**: PyTorch
 - **Environment**: Custom Environment
 - **Category**: Policy-Based Methods
-
-## Implementation Details
-
-
-# Mappo (Marl)
 
 This implementation demonstrates policy-based methods using PyTorch framework on Custom Environment environment.
 

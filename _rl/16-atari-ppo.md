@@ -1,5 +1,5 @@
 ---
-title: "Atari (Ppo)"
+title: "Atari (PPO)"
 excerpt: "Implementation of Atari reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -18,10 +18,6 @@ Implementation of Atari reinforcement learning algorithm
 - **Environment**: Atari
 - **Category**: Policy-Based Methods
 
-## Implementation Details
-
-
-# Atari (Ppo)
 
 This implementation demonstrates policy-based methods using PyTorch framework on Atari environment.
 

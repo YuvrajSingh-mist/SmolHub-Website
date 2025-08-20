@@ -1,5 +1,5 @@
 ---
-title: "Dqn Frozenlake"
+title: "DQN Frozenlake"
 excerpt: "Implementation of DQN-FrozenLake reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -18,10 +18,6 @@ Implementation of DQN-FrozenLake reinforcement learning algorithm
 - **Environment**: Frozenlake
 - **Category**: Value-Based Methods
 
-## Implementation Details
-
-
-# Dqn Frozenlake
 
 This implementation demonstrates value-based methods using PyTorch framework on Frozenlake environment.
 

@@ -1,5 +1,5 @@
 ---
-title: "Ddpg"
+title: "DDPG"
 excerpt: "Implementation of DDPG reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -18,10 +18,7 @@ Implementation of DDPG reinforcement learning algorithm
 - **Environment**: Custom Environment
 - **Category**: Actor-Critic Methods
 
-## Implementation Details
 
-
-# Ddpg
 
 This implementation demonstrates actor-critic methods using PyTorch framework on Custom Environment environment.
 

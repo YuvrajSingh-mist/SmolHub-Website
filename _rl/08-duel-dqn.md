@@ -1,5 +1,5 @@
 ---
-title: "Duel Dqn"
+title: "Duel DQN"
 excerpt: "Implementation of Duel-DQN reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -17,11 +17,6 @@ Implementation of Duel-DQN reinforcement learning algorithm
 - **Framework**: PyTorch
 - **Environment**: Custom Environment
 - **Category**: Value-Based Methods
-
-## Implementation Details
-
-
-# Duel Dqn
 
 This implementation demonstrates value-based methods using PyTorch framework on Custom Environment environment.
 

@@ -1,5 +1,5 @@
 ---
-title: "Marl"
+title: "MARL"
 excerpt: "Implementation of MARL reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -17,11 +17,6 @@ Implementation of MARL reinforcement learning algorithm
 - **Framework**: PyTorch
 - **Environment**: Custom Environment
 - **Category**: Multi-Agent RL
-
-## Implementation Details
-
-
-# Marl
 
 This implementation demonstrates multi-agent rl using PyTorch framework on Custom Environment environment.
 

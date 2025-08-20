@@ -1,5 +1,5 @@
 ---
-title: "Ppo"
+title: "PPO"
 excerpt: "Implementation of PPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -17,11 +17,6 @@ Implementation of PPO reinforcement learning algorithm
 - **Framework**: PyTorch
 - **Environment**: Custom Environment
 - **Category**: Policy-Based Methods
-
-## Implementation Details
-
-
-# Ppo
 
 This implementation demonstrates policy-based methods using PyTorch framework on Custom Environment environment.
 

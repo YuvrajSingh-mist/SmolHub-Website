@@ -18,10 +18,7 @@ Implementation of VizDoom-RL reinforcement learning algorithm
 - **Environment**: Vizdoom
 - **Category**: Game Environments
 
-## Implementation Details
 
-
-# Vizdoom Rl
 
 This implementation demonstrates game environments using PyTorch framework on Vizdoom environment.
 

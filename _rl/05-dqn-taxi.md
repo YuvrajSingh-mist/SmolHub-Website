@@ -1,5 +1,5 @@
 ---
-title: "Dqn Taxi"
+title: "DQN Taxi"
 excerpt: "Implementation of DQN-Taxi reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -18,10 +18,6 @@ Implementation of DQN-Taxi reinforcement learning algorithm
 - **Environment**: Taxi
 - **Category**: Value-Based Methods
 
-## Implementation Details
-
-
-# Dqn Taxi
 
 This implementation demonstrates value-based methods using PyTorch framework on Taxi environment.
 

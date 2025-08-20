@@ -18,10 +18,7 @@ Implementation of Imitation Learning reinforcement learning algorithm
 - **Environment**: Custom Environment
 - **Category**: Imitation Learning
 
-## Implementation Details
 
-
-# Imitation Learning
 
 This implementation demonstrates imitation learning using PyTorch framework on Custom Environment environment.
 

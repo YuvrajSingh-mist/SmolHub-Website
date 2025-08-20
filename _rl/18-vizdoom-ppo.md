@@ -1,5 +1,5 @@
 ---
-title: "Vizdoom (Ppo)"
+title: "VizDoom (PPO)"
 excerpt: "Implementation of VizDoom reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -17,11 +17,6 @@ Implementation of VizDoom reinforcement learning algorithm
 - **Framework**: PyTorch
 - **Environment**: Vizdoom
 - **Category**: Policy-Based Methods
-
-## Implementation Details
-
-
-# Vizdoom (Ppo)
 
 This implementation demonstrates policy-based methods using PyTorch framework on Vizdoom environment.
 

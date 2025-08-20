@@ -1,5 +1,5 @@
 ---
-title: "Flappybird Ppo"
+title: "Flappybird PPO"
 excerpt: "Implementation of FlappyBird-PPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -18,10 +18,6 @@ Implementation of FlappyBird-PPO reinforcement learning algorithm
 - **Environment**: Flappybird
 - **Category**: Policy-Based Methods
 
-## Implementation Details
-
-
-# Flappybird Ppo
 
 This implementation demonstrates policy-based methods using PyTorch framework on Flappybird environment.
 

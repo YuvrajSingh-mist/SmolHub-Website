@@ -1,5 +1,5 @@
 ---
-title: "Runs (Q Learning)"
+title: "Runs Q Learning"
 excerpt: "Implementation of runs reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -17,11 +17,6 @@ Implementation of runs reinforcement learning algorithm
 - **Framework**: PyTorch
 - **Environment**: Custom Environment
 - **Category**: Value-Based Methods
-
-## Implementation Details
-
-
-# Runs (Q Learning)
 
 This implementation demonstrates value-based methods using PyTorch framework on Custom Environment environment.
 

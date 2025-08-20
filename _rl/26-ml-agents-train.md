@@ -18,10 +18,6 @@ Implementation of ml-agents-train reinforcement learning algorithm
 - **Environment**: Custom Environment
 - **Category**: Unity ML-Agents
 
-## Implementation Details
-
-
-# Ml Agents Train
 
 This implementation demonstrates unity ml-agents using PyTorch framework on Custom Environment environment.
 

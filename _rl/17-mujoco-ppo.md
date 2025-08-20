@@ -1,5 +1,5 @@
 ---
-title: "Mujoco (Ppo)"
+title: "MuJoCo (PPO)"
 excerpt: "Implementation of MuJoCo reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -18,10 +18,6 @@ Implementation of MuJoCo reinforcement learning algorithm
 - **Environment**: Custom Environment
 - **Category**: Policy-Based Methods
 
-## Implementation Details
-
-
-# Mujoco (Ppo)
 
 This implementation demonstrates policy-based methods using PyTorch framework on Custom Environment environment.
 

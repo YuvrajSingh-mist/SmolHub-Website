@@ -1,5 +1,5 @@
 ---
-title: "Rnd"
+title: "RND"
 excerpt: "Implementation of RND reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -17,11 +17,6 @@ Implementation of RND reinforcement learning algorithm
 - **Framework**: PyTorch
 - **Environment**: Custom Environment
 - **Category**: Exploration Methods
-
-## Implementation Details
-
-
-# Rnd
 
 This implementation demonstrates exploration methods using PyTorch framework on Custom Environment environment.
 

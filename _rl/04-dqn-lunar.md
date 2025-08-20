@@ -1,5 +1,5 @@
 ---
-title: "Dqn Lunar"
+title: "DQN Lunar"
 excerpt: "Implementation of DQN-Lunar reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -18,10 +18,6 @@ Implementation of DQN-Lunar reinforcement learning algorithm
 - **Environment**: LunarLander
 - **Category**: Value-Based Methods
 
-## Implementation Details
-
-
-# Dqn Lunar
 
 This implementation demonstrates value-based methods using PyTorch framework on LunarLander environment.
 
