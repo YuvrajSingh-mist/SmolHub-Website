@@ -1,10 +1,6 @@
 
 # 🤖 Yuvraj Singh's AI Portfolio
 
-[![Website](https://img.shields.io/badge/Website-yuvraj--portfolio.onrender.com-blue?style=for-the-badge)](https://yuvraj-portfolio.onrender.com)
-[![GitHub](https://img.shields.io/badge/GitHub-YuvrajSingh--mist-black?style=for-the-badge&logo=github)](https://github.com/YuvrajSingh-mist)
-[![Paper Replications](https://img.shields.io/badge/Paper%20Replications-38%20Models-green?style=for-the-badge)](https://github.com/YuvrajSingh-mist/Paper-Replications)
-
 > 🎓 **Computer Science Engineering Student** at IIIT Bhubaneswar (2023-2027)  
 > 🔬 **Research Focus**: NLP, Computer Vision, and Multimodal LLMs  
 > 🚀 **Mission**: Building AI from scratch and bridging research with practical implementation
@@ -121,8 +117,7 @@ Each dataset includes:
 ### **Deployment**
 - **Platform**: Render.com with automatic deployments
 - **CI/CD**: GitHub Actions for continuous integration
-- **Monitoring**: Performance and uptime monitoring
-- **Security**: HTTPS enabled with security headers
+- **ZeroGPU**: Hf ZeroGPU support for hosting my models as spaces!
 
 ---
 
@@ -151,7 +146,7 @@ Each dataset includes:
 ## 🚀 **Getting Started**
 
 ### **Explore the Portfolio**
-1. **Visit the Website**: [yuvraj-portfolio.onrender.com](https://yuvraj-portfolio.onrender.com)
+1. **Visit the Website**: [Yuvraj's Portfolio](https://yuvrajsingh-portfolio-website.vercel.app/)
 2. **Browse Models**: Check out `/models/` for from-scratch implementations
 3. **Try SmolHub**: Experiment in `/smolhub/` playground
 4. **Download Datasets**: Access curated data in `/datasets/`
@@ -195,13 +190,10 @@ bundle exec jekyll serve
 ---
 
 ## 🤝 **Connect & Collaborate**
-
-### **Professional Links**
-- 🌐 **Portfolio**: [yuvraj-portfolio.onrender.com](https://yuvraj-portfolio.onrender.com)
-- 💻 **GitHub**: [@YuvrajSingh-mist](https://github.com/YuvrajSingh-mist)
-- 🔬 **Research**: [Paper-Replications](https://github.com/YuvrajSingh-mist/Paper-Replications)
-- 📧 **Email**: Available through portfolio contact form
-
+  
+  ### **Professional Links**
+  -  **Email**: yuvraj.mist@gmail.com
+  -  **X**: https://x.com/YuvrajS9886
 ### **Contributing**
 This portfolio is open-source and welcomes contributions:
 - 🐛 **Bug Reports**: Issues and suggestions
@@ -236,3 +228,5 @@ This portfolio and associated code are released under the **MIT License**. Feel 
 [![Made with ❤️ for the AI Community](https://img.shields.io/badge/Made%20with%20❤️-for%20the%20AI%20Community-red?style=for-the-badge)](https://yuvraj-portfolio.onrender.com)
 
 </div>
+
+
