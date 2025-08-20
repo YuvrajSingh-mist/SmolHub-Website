@@ -3,7 +3,7 @@ layout: single
 ---
 
 <style>
-.rl-implementation-page {
+.model-implementation-page {
   max-width: 900px;
   margin: 0 auto;
 }
@@ -13,14 +13,14 @@ layout: single
   text-align: left;
 }
 
-.rl-title {
+.model-title {
   font-size: 2.5em;
   margin-bottom: 15px;
   font-weight: 700;
   color: #2c3e50;
 }
 
-.rl-meta {
+.model-meta {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
@@ -43,38 +43,38 @@ layout: single
   font-weight: 600;
 }
 
-.rl-content {
+.model-content {
   line-height: 1.7;
   font-size: 1.1em;
 }
 
-.rl-content h1,
-.rl-content h2,
-.rl-content h3 {
+.model-content h1,
+.model-content h2,
+.model-content h3 {
   color: #2c3e50;
   margin-top: 2em;
   margin-bottom: 1em;
 }
 
-.rl-content h1 {
+.model-content h1 {
   font-size: 2em;
   border-bottom: 2px solid #e9ecef;
   padding-bottom: 10px;
 }
 
-.rl-content h2 {
+.model-content h2 {
   font-size: 1.6em;
 }
 
-.rl-content h3 {
+.model-content h3 {
   font-size: 1.3em;
 }
 
-.rl-content p {
+.model-content p {
   margin-bottom: 1.2em;
 }
 
-.rl-content img {
+.model-content img {
   max-width: 100%;
   height: auto;
   margin: 20px 0;
@@ -82,7 +82,7 @@ layout: single
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.rl-content pre {
+.model-content pre {
   background-color: #f8f9fa;
   border: 1px solid #e9ecef;
   border-radius: 6px;
@@ -91,14 +91,14 @@ layout: single
   margin: 20px 0;
 }
 
-.rl-content code {
+.model-content code {
   background-color: #f8f9fa;
   padding: 2px 4px;
   border-radius: 3px;
   font-size: 0.9em;
 }
 
-.rl-content blockquote {
+.model-content blockquote {
   border-left: 4px solid #007bff;
   padding-left: 20px;
   margin: 20px 0;
@@ -106,55 +106,44 @@ layout: single
   font-style: italic;
 }
 
-.rl-content table {
+.model-content table {
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
 }
 
-.rl-content table th,
-.rl-content table td {
+.model-content table th,
+.model-content table td {
   border: 1px solid #dee2e6;
   padding: 12px;
   text-align: left;
 }
 
-.rl-content table th {
+.model-content table th {
   background-color: #f8f9fa;
   font-weight: 600;
 }
 
-.rl-content ul,
-.rl-content ol {
+.model-content ul,
+.model-content ol {
   margin: 15px 0;
   padding-left: 30px;
 }
 
-.rl-content li {
+.model-content li {
   margin-bottom: 8px;
 }
 
-/* RL-specific styling */
-.rl-meta .meta-item {
-  background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
-  color: white;
-  border: none;
-}
-
-.rl-meta .meta-item strong {
-  color: white;
-}
-
 @media (max-width: 768px) {
-  .rl-implementation-page {
+  .model-implementation-page {
     padding: 0 15px;
   }
   
-  .rl-title {
+  .model-title {
     font-size: 2em;
   }
   
-  .rl-meta {
+  .model-meta {
     flex-direction: column;
     gap: 10px;
   }
@@ -165,11 +154,11 @@ layout: single
 }
 </style>
 
-<div class="rl-implementation-page">
+<div class="model-implementation-page">
   <div class="simple-header">
-    <h1 class="rl-title">{{ page.title }}</h1>
+    <h1 class="model-title">{{ page.title }}</h1>
     
-    <div class="rl-meta">
+    <div class="model-meta">
       {% if page.category %}
       <div class="meta-item">
         <strong>Category:</strong> {{ page.category }}
@@ -196,13 +185,13 @@ layout: single
       
       {% if page.github_url %}
       <div class="meta-item">
-        <strong>GitHub:</strong> <a href="{{ page.github_url }}" target="_blank" style="color: white; text-decoration: underline;">View Implementation</a>
+        <strong>GitHub:</strong> <a href="{{ page.github_url }}" target="_blank">View Implementation</a>
       </div>
       {% endif %}
     </div>
   </div>
 
-  <div class="rl-content">
+  <div class="model-content">
     {{ content }}
   </div>
 </div>
