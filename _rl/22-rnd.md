@@ -1,29 +1,29 @@
 ---
-title: "Duel Dqn"
-excerpt: "Implementation of Duel-DQN reinforcement learning algorithm"
+title: "Rnd"
+excerpt: "Implementation of RND reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Value-Based Methods"
+category: "Exploration Methods"
 framework: "PyTorch"
 environment: "Custom Environment"
-github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Duel-DQN"
+github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/RND"
 date: 2025-08-20
 ---
 
 ## Overview
-Implementation of Duel-DQN reinforcement learning algorithm
+Implementation of RND reinforcement learning algorithm
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Custom Environment
-- **Category**: Value-Based Methods
+- **Category**: Exploration Methods
 
 ## Implementation Details
 
 
-# Duel Dqn
+# Rnd
 
-This implementation demonstrates value-based methods using PyTorch framework on Custom Environment environment.
+This implementation demonstrates exploration methods using PyTorch framework on Custom Environment environment.
 
 ## Features
 - Clean and well-documented code
@@ -35,6 +35,6 @@ Please refer to the GitHub repository for detailed usage instructions and traini
 
 
 ## Source Code
-📁 **GitHub Repository**: [Duel Dqn](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Duel-DQN)
+📁 **GitHub Repository**: [Rnd](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/RND)
 
 View the complete implementation, training scripts, and documentation on GitHub.

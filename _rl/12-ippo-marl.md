@@ -1,29 +1,29 @@
 ---
-title: "Duel Dqn"
-excerpt: "Implementation of Duel-DQN reinforcement learning algorithm"
+title: "Ippo (Marl)"
+excerpt: "Implementation of IPPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Value-Based Methods"
+category: "Policy-Based Methods"
 framework: "PyTorch"
 environment: "Custom Environment"
-github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Duel-DQN"
+github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/MARL/IPPO"
 date: 2025-08-20
 ---
 
 ## Overview
-Implementation of Duel-DQN reinforcement learning algorithm
+Implementation of IPPO reinforcement learning algorithm
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Custom Environment
-- **Category**: Value-Based Methods
+- **Category**: Policy-Based Methods
 
 ## Implementation Details
 
 
-# Duel Dqn
+# Ippo (Marl)
 
-This implementation demonstrates value-based methods using PyTorch framework on Custom Environment environment.
+This implementation demonstrates policy-based methods using PyTorch framework on Custom Environment environment.
 
 ## Features
 - Clean and well-documented code
@@ -35,6 +35,6 @@ Please refer to the GitHub repository for detailed usage instructions and traini
 
 
 ## Source Code
-📁 **GitHub Repository**: [Duel Dqn](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Duel-DQN)
+📁 **GitHub Repository**: [Ippo (Marl)](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/MARL/IPPO)
 
 View the complete implementation, training scripts, and documentation on GitHub.

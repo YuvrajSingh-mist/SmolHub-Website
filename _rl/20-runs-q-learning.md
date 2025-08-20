@@ -1,17 +1,17 @@
 ---
-title: "Duel Dqn"
-excerpt: "Implementation of Duel-DQN reinforcement learning algorithm"
+title: "Runs (Q Learning)"
+excerpt: "Implementation of runs reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Value-Based Methods"
 framework: "PyTorch"
 environment: "Custom Environment"
-github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Duel-DQN"
+github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Q-Learning/runs"
 date: 2025-08-20
 ---
 
 ## Overview
-Implementation of Duel-DQN reinforcement learning algorithm
+Implementation of runs reinforcement learning algorithm
 
 ## Technical Details
 - **Framework**: PyTorch
@@ -21,7 +21,7 @@ Implementation of Duel-DQN reinforcement learning algorithm
 ## Implementation Details
 
 
-# Duel Dqn
+# Runs (Q Learning)
 
 This implementation demonstrates value-based methods using PyTorch framework on Custom Environment environment.
 
@@ -35,6 +35,6 @@ Please refer to the GitHub repository for detailed usage instructions and traini
 
 
 ## Source Code
-📁 **GitHub Repository**: [Duel Dqn](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Duel-DQN)
+📁 **GitHub Repository**: [Runs (Q Learning)](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Q-Learning/runs)
 
 View the complete implementation, training scripts, and documentation on GitHub.

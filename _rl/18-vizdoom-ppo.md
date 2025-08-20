@@ -1,29 +1,29 @@
 ---
-title: "Flappybird Ppo"
-excerpt: "Implementation of FlappyBird-PPO reinforcement learning algorithm"
+title: "Vizdoom (Ppo)"
+excerpt: "Implementation of VizDoom reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Policy-Based Methods"
 framework: "PyTorch"
-environment: "Flappybird"
-github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/FlappyBird-PPO"
+environment: "Vizdoom"
+github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/PPO/VizDoom"
 date: 2025-08-20
 ---
 
 ## Overview
-Implementation of FlappyBird-PPO reinforcement learning algorithm
+Implementation of VizDoom reinforcement learning algorithm
 
 ## Technical Details
 - **Framework**: PyTorch
-- **Environment**: Flappybird
+- **Environment**: Vizdoom
 - **Category**: Policy-Based Methods
 
 ## Implementation Details
 
 
-# Flappybird Ppo
+# Vizdoom (Ppo)
 
-This implementation demonstrates policy-based methods using PyTorch framework on Flappybird environment.
+This implementation demonstrates policy-based methods using PyTorch framework on Vizdoom environment.
 
 ## Features
 - Clean and well-documented code
@@ -35,6 +35,6 @@ Please refer to the GitHub repository for detailed usage instructions and traini
 
 
 ## Source Code
-📁 **GitHub Repository**: [Flappybird Ppo](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/FlappyBird-PPO)
+📁 **GitHub Repository**: [Vizdoom (Ppo)](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/PPO/VizDoom)
 
 View the complete implementation, training scripts, and documentation on GitHub.

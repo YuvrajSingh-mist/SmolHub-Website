@@ -1,0 +1,208 @@
+---
+layout: single
+---
+
+<style>
+.rl-implementation-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.simple-header {
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.rl-title {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.rl-meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.meta-item {
+  background-color: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  color: #495057;
+  border: 1px solid #dee2e6;
+}
+
+.meta-item strong {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.rl-content {
+  line-height: 1.7;
+  font-size: 1.1em;
+}
+
+.rl-content h1,
+.rl-content h2,
+.rl-content h3 {
+  color: #2c3e50;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.rl-content h1 {
+  font-size: 2em;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 10px;
+}
+
+.rl-content h2 {
+  font-size: 1.6em;
+}
+
+.rl-content h3 {
+  font-size: 1.3em;
+}
+
+.rl-content p {
+  margin-bottom: 1.2em;
+}
+
+.rl-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.rl-content pre {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 15px;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.rl-content code {
+  background-color: #f8f9fa;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.rl-content blockquote {
+  border-left: 4px solid #007bff;
+  padding-left: 20px;
+  margin: 20px 0;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.rl-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.rl-content table th,
+.rl-content table td {
+  border: 1px solid #dee2e6;
+  padding: 12px;
+  text-align: left;
+}
+
+.rl-content table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.rl-content ul,
+.rl-content ol {
+  margin: 15px 0;
+  padding-left: 30px;
+}
+
+.rl-content li {
+  margin-bottom: 8px;
+}
+
+/* RL-specific styling */
+.rl-meta .meta-item {
+  background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+  color: white;
+  border: none;
+}
+
+.rl-meta .meta-item strong {
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .rl-implementation-page {
+    padding: 0 15px;
+  }
+  
+  .rl-title {
+    font-size: 2em;
+  }
+  
+  .rl-meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .meta-item {
+    display: block;
+  }
+}
+</style>
+
+<div class="rl-implementation-page">
+  <div class="simple-header">
+    <h1 class="rl-title">{{ page.title }}</h1>
+    
+    <div class="rl-meta">
+      {% if page.category %}
+      <div class="meta-item">
+        <strong>Category:</strong> {{ page.category }}
+      </div>
+      {% endif %}
+      
+      {% if page.framework %}
+      <div class="meta-item">
+        <strong>Framework:</strong> {{ page.framework }}
+      </div>
+      {% endif %}
+      
+      {% if page.environment %}
+      <div class="meta-item">
+        <strong>Environment:</strong> {{ page.environment }}
+      </div>
+      {% endif %}
+      
+      {% if page.date %}
+      <div class="meta-item">
+        <strong>Created:</strong> {{ page.date | date: "%B %d, %Y" }}
+      </div>
+      {% endif %}
+      
+      {% if page.github_url %}
+      <div class="meta-item">
+        <strong>GitHub:</strong> <a href="{{ page.github_url }}" target="_blank" style="color: white; text-decoration: underline;">View Implementation</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="rl-content">
+    {{ content }}
+  </div>
+</div>

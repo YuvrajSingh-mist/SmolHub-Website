@@ -1,29 +1,29 @@
 ---
-title: "Duel Dqn"
-excerpt: "Implementation of Duel-DQN reinforcement learning algorithm"
+title: "Self Play (Marl)"
+excerpt: "Implementation of Self Play reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Value-Based Methods"
+category: "Multi-Agent RL"
 framework: "PyTorch"
 environment: "Custom Environment"
-github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Duel-DQN"
+github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/MARL/Self Play"
 date: 2025-08-20
 ---
 
 ## Overview
-Implementation of Duel-DQN reinforcement learning algorithm
+Implementation of Self Play reinforcement learning algorithm
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Custom Environment
-- **Category**: Value-Based Methods
+- **Category**: Multi-Agent RL
 
 ## Implementation Details
 
 
-# Duel Dqn
+# Self Play (Marl)
 
-This implementation demonstrates value-based methods using PyTorch framework on Custom Environment environment.
+This implementation demonstrates multi-agent rl using PyTorch framework on Custom Environment environment.
 
 ## Features
 - Clean and well-documented code
@@ -35,6 +35,6 @@ Please refer to the GitHub repository for detailed usage instructions and traini
 
 
 ## Source Code
-📁 **GitHub Repository**: [Duel Dqn](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Duel-DQN)
+📁 **GitHub Repository**: [Self Play (Marl)](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/MARL/Self Play)
 
 View the complete implementation, training scripts, and documentation on GitHub.

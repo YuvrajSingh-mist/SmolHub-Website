@@ -1,29 +1,29 @@
 ---
-title: "Dqn Atari"
-excerpt: "Implementation of DQN-atari reinforcement learning algorithm"
+title: "Atari (Ppo)"
+excerpt: "Implementation of Atari reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Value-Based Methods"
+category: "Policy-Based Methods"
 framework: "PyTorch"
 environment: "Atari"
-github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DQN-atari"
+github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/PPO/Atari"
 date: 2025-08-20
 ---
 
 ## Overview
-Implementation of DQN-atari reinforcement learning algorithm
+Implementation of Atari reinforcement learning algorithm
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Atari
-- **Category**: Value-Based Methods
+- **Category**: Policy-Based Methods
 
 ## Implementation Details
 
 
-# Dqn Atari
+# Atari (Ppo)
 
-This implementation demonstrates value-based methods using PyTorch framework on Atari environment.
+This implementation demonstrates policy-based methods using PyTorch framework on Atari environment.
 
 ## Features
 - Clean and well-documented code
@@ -35,6 +35,6 @@ Please refer to the GitHub repository for detailed usage instructions and traini
 
 
 ## Source Code
-📁 **GitHub Repository**: [Dqn Atari](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DQN-atari)
+📁 **GitHub Repository**: [Atari (Ppo)](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/PPO/Atari)
 
 View the complete implementation, training scripts, and documentation on GitHub.

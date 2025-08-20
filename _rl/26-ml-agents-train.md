@@ -21,6 +21,18 @@ Implementation of ml-agents-train reinforcement learning algorithm
 ## Implementation Details
 
 
+# Ml Agents Train
+
+This implementation demonstrates unity ml-agents using PyTorch framework on Custom Environment environment.
+
+## Features
+- Clean and well-documented code
+- Easy to understand implementation
+- Comprehensive training and evaluation scripts
+
+## Usage
+Please refer to the GitHub repository for detailed usage instructions and training procedures.
+
 
 ## Source Code
 📁 **GitHub Repository**: [Ml Agents Train](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/ml-agents-train)

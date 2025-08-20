@@ -7,7 +7,7 @@ category: "Game Environments"
 framework: "PyTorch"
 environment: "Vizdoom"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/VizDoom-RL"
-date: 2025-06-24
+date: 2025-08-20
 ---
 
 ## Overview
@@ -20,6 +20,18 @@ Implementation of VizDoom-RL reinforcement learning algorithm
 
 ## Implementation Details
 
+
+# Vizdoom Rl
+
+This implementation demonstrates game environments using PyTorch framework on Vizdoom environment.
+
+## Features
+- Clean and well-documented code
+- Easy to understand implementation
+- Comprehensive training and evaluation scripts
+
+## Usage
+Please refer to the GitHub repository for detailed usage instructions and training procedures.
 
 
 ## Source Code

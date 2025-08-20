@@ -1,29 +1,29 @@
 ---
-title: "Duel Dqn"
-excerpt: "Implementation of Duel-DQN reinforcement learning algorithm"
+title: "Sac"
+excerpt: "Implementation of SAC reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Value-Based Methods"
+category: "Actor-Critic Methods"
 framework: "PyTorch"
 environment: "Custom Environment"
-github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Duel-DQN"
+github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/SAC"
 date: 2025-08-20
 ---
 
 ## Overview
-Implementation of Duel-DQN reinforcement learning algorithm
+Implementation of SAC reinforcement learning algorithm
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Custom Environment
-- **Category**: Value-Based Methods
+- **Category**: Actor-Critic Methods
 
 ## Implementation Details
 
 
-# Duel Dqn
+# Sac
 
-This implementation demonstrates value-based methods using PyTorch framework on Custom Environment environment.
+This implementation demonstrates actor-critic methods using PyTorch framework on Custom Environment environment.
 
 ## Features
 - Clean and well-documented code
@@ -35,6 +35,6 @@ Please refer to the GitHub repository for detailed usage instructions and traini
 
 
 ## Source Code
-📁 **GitHub Repository**: [Duel Dqn](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Duel-DQN)
+📁 **GitHub Repository**: [Sac](https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/SAC)
 
 View the complete implementation, training scripts, and documentation on GitHub.

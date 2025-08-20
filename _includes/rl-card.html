@@ -1,0 +1,51 @@
+{% include base_path %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+{% assign rl_id = post.title | slugify %}
+{% assign repo_url = post.github_url | default: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning" %}
+
+<div class="model-card">
+  <div class="model-card__image" style="background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);">
+    <span>{{ title }}</span>
+  </div>
+  
+  <div class="model-card__content">
+    <h3 class="model-card__title">
+      {{ title }}
+    </h3>
+    
+    {% if post.excerpt %}
+    <div class="model-card__excerpt">
+      {{ post.excerpt | markdownify | strip_html | truncatewords: 15 }}
+    </div>
+    {% endif %}
+
+    <div class="model-card__meta">
+      {% if post.category %}
+      <span class="model-card__category">{{ post.category }}</span>
+      {% endif %}
+      {% if post.framework %}
+      <span class="model-card__framework">{{ post.framework }}</span>
+      {% endif %}
+      {% if post.environment %}
+      <span class="model-card__environment">{{ post.environment }}</span>
+      {% endif %}
+    </div>
+    
+    <div class="model-card__footer">
+      <a href="{{ base_path }}{{ post.url }}" class="model-details-btn" rel="permalink">
+        Algorithm Details
+      </a>
+      {% if post.github_url %}
+      <a href="{{ post.github_url }}" target="_blank" class="github-btn" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</div>

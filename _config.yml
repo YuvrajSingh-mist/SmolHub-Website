@@ -231,6 +231,9 @@ collections:
   smolhub:
     output: true
     permalink: /:collection/:path/
+  rl:
+    output: true
+    permalink: /:collection/:path/
 
 
 # Defaults
@@ -312,6 +315,15 @@ defaults:
       type: smolhub
     values:
       layout: single
+      author_profile: true
+      share: true
+      comments: true
+  # _rl
+  - scope:
+      path: ""
+      type: rl
+    values:
+      layout: rl-implementation
       author_profile: true
       share: true
       comments: true
