@@ -4,7 +4,7 @@ title: "PPO"
 excerpt: "Implementation of PPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Other"
+category: "Actor-Critic"
 categories: ["Actor-Critic"]
 framework: "PyTorch"
 environment: "Atari"

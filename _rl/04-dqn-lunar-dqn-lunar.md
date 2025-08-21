@@ -4,7 +4,7 @@ title: "DQN Lunar"
 excerpt: "Implementation of DQN-Lunar reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Other"
+category: "Exploration"
 categories: ["Exploration"]
 framework: "PyTorch"
 environment: "LunarLander"

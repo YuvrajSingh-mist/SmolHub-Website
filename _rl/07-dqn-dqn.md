@@ -4,7 +4,7 @@ title: "DQN"
 excerpt: "Implementation of DQN reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Other"
+category: "Exploration"
 categories: ["Exploration"]
 framework: "PyTorch"
 environment: "Gymnasium"

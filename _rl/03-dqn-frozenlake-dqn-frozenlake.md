@@ -4,7 +4,7 @@ title: "DQN Frozenlake"
 excerpt: "Implementation of DQN-FrozenLake reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Other"
+category: "Exploration"
 categories: ["Exploration"]
 framework: "PyTorch"
 environment: "Frozenlake"

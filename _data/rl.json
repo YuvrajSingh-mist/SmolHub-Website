@@ -175,7 +175,7 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Other",
+      "category": "Exploration",
       "framework": "PyTorch",
       "environment": "Frozenlake",
       "categories": [
@@ -215,6 +215,7 @@
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
+        "Actor-Critic",
         "Exploration",
         "Multi-Agent"
       ]
@@ -234,6 +235,7 @@
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
+        "Actor-Critic",
         "Exploration",
         "Multi-Agent"
       ]
@@ -269,10 +271,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Other",
+      "category": "Multi-Agent",
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
+        "Actor-Critic",
         "Exploration",
         "Multi-Agent"
       ]
@@ -306,10 +309,12 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Other",
+      "category": "Actor-Critic",
       "framework": "PyTorch",
       "environment": "Atari",
-      "categories": []
+      "categories": [
+        "Actor-Critic"
+      ]
     },
     {
       "name": "images",
@@ -322,10 +327,12 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Other",
+      "category": "Actor-Critic",
       "framework": "PyTorch",
       "environment": "Atari",
-      "categories": []
+      "categories": [
+        "Actor-Critic"
+      ]
     },
     {
       "name": "MuJoCo",
@@ -338,10 +345,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Other",
+      "category": "Actor-Critic",
       "framework": "PyTorch",
       "environment": "MuJoCo",
       "categories": [
+        "Actor-Critic",
         "Exploration"
       ]
     },
@@ -356,10 +364,12 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Other",
+      "category": "Actor-Critic",
       "framework": "PyTorch",
       "environment": "Gymnasium",
-      "categories": []
+      "categories": [
+        "Actor-Critic"
+      ]
     },
     {
       "name": "RND",
@@ -372,10 +382,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Exploration",
+      "category": "Actor-Critic",
       "framework": "PyTorch",
       "environment": "LunarLander",
       "categories": [
+        "Actor-Critic",
         "Exploration"
       ]
     },

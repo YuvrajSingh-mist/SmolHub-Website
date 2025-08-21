@@ -4,7 +4,7 @@ title: "Flappybird PPO"
 excerpt: "Implementation of FlappyBird-PPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Other"
+category: "Actor-Critic"
 categories: ["Actor-Critic", "Exploration"]
 framework: "PyTorch"
 environment: "Flappybird"

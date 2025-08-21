@@ -4,8 +4,8 @@ title: "REINFORCE"
 excerpt: "Implementation of REINFORCE reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Other"
-categories: ["Other"]
+category: "Actor-Critic"
+categories: ["Actor-Critic"]
 framework: "PyTorch"
 environment: "Gymnasium"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/REINFORCE"

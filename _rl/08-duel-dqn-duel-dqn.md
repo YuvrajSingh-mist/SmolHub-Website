@@ -4,7 +4,7 @@ title: "Duel DQN"
 excerpt: "Implementation of Duel-DQN reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Other"
+category: "Exploration"
 categories: ["Exploration"]
 framework: "PyTorch"
 environment: "Gymnasium"

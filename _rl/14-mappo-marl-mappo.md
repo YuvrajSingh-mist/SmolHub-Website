@@ -4,7 +4,7 @@ title: "MAPPO"
 excerpt: "Implementation of MAPPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Other"
+category: "Multi-Agent"
 categories: ["Actor-Critic", "Exploration", "Multi-Agent"]
 framework: "PyTorch"
 environment: "Atari"

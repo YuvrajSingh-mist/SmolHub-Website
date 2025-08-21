@@ -4,7 +4,7 @@ title: "DQN Atari"
 excerpt: "Implementation of DQN-atari reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Other"
+category: "Exploration"
 categories: ["Exploration"]
 framework: "PyTorch"
 environment: "Atari"

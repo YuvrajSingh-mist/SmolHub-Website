@@ -4,8 +4,8 @@ title: "Self Play"
 excerpt: "Implementation of Self Play reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Other"
-categories: ["Exploration", "Multi-Agent"]
+category: "Multi-Agent"
+categories: ["Actor-Critic", "Exploration", "Multi-Agent"]
 framework: "PyTorch"
 environment: "Atari"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/MARL/Self Play"
