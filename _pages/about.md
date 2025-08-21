@@ -21,7 +21,7 @@ redirect_from:
 <div class="experience-list">
   <ul>
       <li>
-      <span>🏛️</span> <strong>TurboML— AI Engineer</strong> <small>· Dec 2024 – Feb 2025</small>
+      <span>🏛️</span> <strong>TurboML— AI Engineer</strong> <small>· May 2025 – June 2025</small>
       <ul>
         <li>Worked on development of various tools for LLM, enhancing tool-calling capabilities.</li>
         <li>Developed pipeline for smooth integration of tools developed for YouTube QnA, summarization of videos and fact check features with the platform.</li>
