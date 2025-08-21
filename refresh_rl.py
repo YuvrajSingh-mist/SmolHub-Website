@@ -134,27 +134,22 @@ def categorize_rl_algorithm(name, path, readme_content=""):
     path_lower = path.lower()
     content_lower = readme_content.lower()
     
-    # Prefer Multi-agent RL FIRST to avoid matching 'ppo' inside 'ippo' etc.
+    # Prefer Multi-agent FIRST to avoid matching 'ppo' inside 'ippo' etc.
     multi_agent_terms = ['marl', 'multi-agent', 'multi agent', 'ippo', 'mappo', 'self-play', 'self play']
     if any(term in name_lower or term in path_lower or term in content_lower for term in multi_agent_terms):
         return "Multi-Agent"
 
-    # Value-based methods
-    if any(term in name_lower for term in ['dqn', 'q-learning', 'duel']):
-        return "Value-Based Methods"
-    
-    # Policy-based methods (ensure we don't catch 'ippo'/'mappo' as 'ppo')
-    # Use regex word boundaries around 'ppo'
+    # Map policy keywords to Actor-Critic (we don't expose Policy-Based)
     if re.search(r'(^|[^a-z0-9])ppo([^a-z0-9]|$)', name_lower) or 'reinforce' in name_lower or 'policy' in name_lower:
-        return "Policy-Based Methods"
+        return "Actor-Critic"
     
-    # Actor-critic methods
+    # Actor-Critic
     if any(term in name_lower for term in ['a2c', 'a3c', 'sac', 'td3', 'ddpg']) or ('actor' in name_lower or 'critic' in name_lower):
-        return "Actor-Critic Methods"
+        return "Actor-Critic"
         
-    # Exploration methods
+    # Exploration
     if any(term in name_lower for term in ['rnd', 'exploration', 'curiosity']):
-        return "Exploration Methods"
+        return "Exploration"
         
     # Imitation learning
     if any(term in name_lower for term in ['imitation', 'behavioral', 'cloning']):
@@ -178,27 +173,25 @@ def collect_categories(name, path, readme_content=""):
 
     categories = set()
 
-    # Multi-Agent RL
+    # Multi-Agent
     if any(term in name_lower or term in path_lower or term in content_lower for term in ['marl', 'multi-agent', 'multi agent', 'ippo', 'mappo', 'self-play', 'self play']):
         categories.add("Multi-Agent")
 
-    # Policy-Based Methods (protect from matching IPPO/MAPPO by boundary on ppo)
+    # Map PPO/REINFORCE/policy to Actor-Critic
     if (re.search(r'(^|[^a-z0-9])ppo([^a-z0-9]|$)', name_lower) or
         re.search(r'(^|[^a-z0-9])ppo([^a-z0-9]|$)', content_lower) or
         'reinforce' in name_lower or 'policy' in name_lower or 'policy gradient' in content_lower):
-        categories.add("Policy-Based Methods")
+        categories.add("Actor-Critic")
 
-    # Actor-Critic Methods
+    # Actor-Critic
     if any(term in name_lower for term in ['a2c', 'a3c', 'sac', 'td3', 'ddpg']) or ('actor' in name_lower or 'critic' in name_lower) or 'actor-critic' in content_lower:
-        categories.add("Actor-Critic Methods")
+        categories.add("Actor-Critic")
 
-    # Value-Based Methods
-    if any(term in name_lower for term in ['dqn', 'q-learning', 'duel']) or 'q-learning' in content_lower or 'q learning' in content_lower:
-        categories.add("Value-Based Methods")
+    # Do not add Value-Based category (hidden)
 
-    # Exploration Methods
+    # Exploration
     if any(term in name_lower for term in ['rnd']) or any(term in content_lower for term in ['exploration', 'curiosity']):
-        categories.add("Exploration Methods")
+        categories.add("Exploration")
 
     # Imitation Learning
     if any(term in name_lower for term in ['imitation', 'behavioral', 'cloning']) or 'dagger' in content_lower:

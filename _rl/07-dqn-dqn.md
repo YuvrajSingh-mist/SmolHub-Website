@@ -5,7 +5,7 @@ excerpt: "Implementation of DQN reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Other"
-categories: ["Exploration Methods"]
+categories: ["Exploration"]
 framework: "PyTorch"
 environment: "Gymnasium"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DQN"
@@ -18,9 +18,7 @@ Implementation of DQN reinforcement learning algorithm
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Gymnasium
-- **Category**: Value-Based Methods
-
-
+- **Category**: Other
 This repository contains an implementation of Deep Q-Network (DQN) for solving the CartPole-v1 environment from OpenAI Gym (Gymnasium). The implementation includes features such as experience replay, target networks, and epsilon-greedy exploration.
 
 ![CartPole DQN Training Visualization](https://raw.githubusercontent.com/YuvrajSingh-mist/Reinforcement-Learning/master/DQN/images/image.png)

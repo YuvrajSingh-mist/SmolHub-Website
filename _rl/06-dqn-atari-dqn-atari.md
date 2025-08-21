@@ -5,7 +5,7 @@ excerpt: "Implementation of DQN-atari reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Other"
-categories: ["Exploration Methods"]
+categories: ["Exploration"]
 framework: "PyTorch"
 environment: "Atari"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DQN-atari"
@@ -19,8 +19,7 @@ Implementation of DQN-atari reinforcement learning algorithm
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Atari
-- **Category**: Value-Based Methods
-
+- **Category**: Other
 This repository contains an implementation of Deep Q-Network (DQN) for solving the BreakoutNoFrameskip-v4 environment from Atari. The implementation includes features such as experience replay, target networks, epsilon-greedy exploration, and convolutional neural networks for processing visual input.
 
 ![Atari Breakout DQN Training](https://raw.githubusercontent.com/YuvrajSingh-mist/Reinforcement-Learning/master/DQN-atari/images/image.png)

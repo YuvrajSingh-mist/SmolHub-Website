@@ -4,8 +4,8 @@ title: "SAC"
 excerpt: "Implementation of SAC reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Actor-Critic Methods"
-categories: ["Actor-Critic Methods", "Exploration Methods"]
+category: "Actor-Critic"
+categories: ["Actor-Critic", "Exploration"]
 framework: "PyTorch"
 environment: "Gymnasium"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/SAC"

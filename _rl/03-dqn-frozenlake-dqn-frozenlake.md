@@ -5,7 +5,7 @@ excerpt: "Implementation of DQN-FrozenLake reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Other"
-categories: ["Exploration Methods"]
+categories: ["Exploration"]
 framework: "PyTorch"
 environment: "Frozenlake"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DQN-FrozenLake"
@@ -18,9 +18,7 @@ Implementation of DQN-FrozenLake reinforcement learning algorithm
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Frozenlake
-- **Category**: Value-Based Methods
-
-
+- **Category**: Other
 This project implements reinforcement learning algorithms for the Frozen Lake environment from OpenAI Gymnasium. The agent learns to navigate across a frozen lake from the start to a goal without falling into holes.
 
 ![Frozen Lake Environment](https://raw.githubusercontent.com/YuvrajSingh-mist/Reinforcement-Learning/master/DQN-FrozenLake/images/output.gif)

@@ -11,11 +11,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Actor-Critic Methods",
+      "category": "Actor-Critic",
       "framework": "PyTorch",
       "environment": "LunarLander",
       "categories": [
-        "Actor-Critic Methods"
+        "Actor-Critic"
       ]
     },
     {
@@ -29,12 +29,12 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Actor-Critic Methods",
+      "category": "Actor-Critic",
       "framework": "PyTorch",
       "environment": "MuJoCo",
       "categories": [
-        "Actor-Critic Methods",
-        "Exploration Methods"
+        "Actor-Critic",
+        "Exploration"
       ]
     },
     {
@@ -48,11 +48,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Exploration Methods",
+      "category": "Exploration",
       "framework": "PyTorch",
       "environment": "Frozenlake",
       "categories": [
-        "Exploration Methods"
+        "Exploration"
       ]
     },
     {
@@ -66,11 +66,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Exploration Methods",
+      "category": "Exploration",
       "framework": "PyTorch",
       "environment": "LunarLander",
       "categories": [
-        "Exploration Methods"
+        "Exploration"
       ]
     },
     {
@@ -84,11 +84,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Exploration Methods",
+      "category": "Exploration",
       "framework": "PyTorch",
       "environment": "Taxi",
       "categories": [
-        "Exploration Methods"
+        "Exploration"
       ]
     },
     {
@@ -102,11 +102,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Exploration Methods",
+      "category": "Exploration",
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
-        "Exploration Methods"
+        "Exploration"
       ]
     },
     {
@@ -120,11 +120,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Exploration Methods",
+      "category": "Exploration",
       "framework": "PyTorch",
       "environment": "Gymnasium",
       "categories": [
-        "Exploration Methods"
+        "Exploration"
       ]
     },
     {
@@ -138,11 +138,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Exploration Methods",
+      "category": "Exploration",
       "framework": "PyTorch",
       "environment": "Gymnasium",
       "categories": [
-        "Exploration Methods"
+        "Exploration"
       ]
     },
     {
@@ -156,12 +156,12 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Actor-Critic Methods",
+      "category": "Actor-Critic",
       "framework": "PyTorch",
       "environment": "Flappybird",
       "categories": [
-        "Actor-Critic Methods",
-        "Exploration Methods"
+        "Actor-Critic",
+        "Exploration"
       ]
     },
     {
@@ -179,7 +179,7 @@
       "framework": "PyTorch",
       "environment": "Frozenlake",
       "categories": [
-        "Exploration Methods"
+        "Exploration"
       ]
     },
     {
@@ -215,7 +215,7 @@
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
-        "Exploration Methods",
+        "Exploration",
         "Multi-Agent"
       ]
     },
@@ -234,7 +234,7 @@
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
-        "Exploration Methods",
+        "Exploration",
         "Multi-Agent"
       ]
     },
@@ -253,8 +253,8 @@
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
-        "Actor-Critic Methods",
-        "Exploration Methods",
+        "Actor-Critic",
+        "Exploration",
         "Multi-Agent"
       ]
     },
@@ -273,7 +273,7 @@
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
-        "Exploration Methods",
+        "Exploration",
         "Multi-Agent"
       ]
     },
@@ -288,11 +288,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Actor-Critic Methods",
+      "category": "Actor-Critic",
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
-        "Actor-Critic Methods"
+        "Actor-Critic"
       ]
     },
     {
@@ -342,7 +342,7 @@
       "framework": "PyTorch",
       "environment": "MuJoCo",
       "categories": [
-        "Exploration Methods"
+        "Exploration"
       ]
     },
     {
@@ -372,11 +372,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Exploration Methods",
+      "category": "Exploration",
       "framework": "PyTorch",
       "environment": "LunarLander",
       "categories": [
-        "Exploration Methods"
+        "Exploration"
       ]
     },
     {
@@ -390,12 +390,12 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Actor-Critic Methods",
+      "category": "Actor-Critic",
       "framework": "PyTorch",
       "environment": "Gymnasium",
       "categories": [
-        "Actor-Critic Methods",
-        "Exploration Methods"
+        "Actor-Critic",
+        "Exploration"
       ]
     },
     {
@@ -409,12 +409,12 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Actor-Critic Methods",
+      "category": "Actor-Critic",
       "framework": "PyTorch",
       "environment": "MuJoCo",
       "categories": [
-        "Actor-Critic Methods",
-        "Exploration Methods"
+        "Actor-Critic",
+        "Exploration"
       ]
     }
   ]

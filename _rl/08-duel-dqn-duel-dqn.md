@@ -5,7 +5,7 @@ excerpt: "Implementation of Duel-DQN reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Other"
-categories: ["Exploration Methods"]
+categories: ["Exploration"]
 framework: "PyTorch"
 environment: "Gymnasium"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Duel-DQN"
@@ -19,9 +19,7 @@ Implementation of Duel-DQN reinforcement learning algorithm
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Gymnasium
-- **Category**: Value-Based Methods
-
-
+- **Category**: Other
 This project implements the Dueling Deep Q-Network (Dueling DQN) algorithm for the CliffWalking environment from OpenAI Gymnasium. The agent learns to navigate through a dangerous cliff area to reach a goal without falling off.
 
 ![Cliff Climbing Environment](https://raw.githubusercontent.com/YuvrajSingh-mist/Reinforcement-Learning/master/Duel-DQN/images/output.gif)

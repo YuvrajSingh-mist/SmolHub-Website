@@ -17,10 +17,7 @@ Implementation of REINFORCE reinforcement learning algorithm
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Gymnasium
-- **Category**: Policy-Based Methods
-
-
-
+- **Category**: Other
 ## Overview
 
 This repository contains an implementation of the REINFORCE algorithm (also known as Monte Carlo Policy Gradient), a foundational policy gradient method in reinforcement learning. The implementation is built with PyTorch and supports training on various Gymnasium environments, with a focus on the CartPole-v1 environment.

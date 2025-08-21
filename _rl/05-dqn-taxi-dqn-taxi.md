@@ -5,7 +5,7 @@ excerpt: "Implementation of DQN-Taxi reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Other"
-categories: ["Exploration Methods"]
+categories: ["Exploration"]
 framework: "PyTorch"
 environment: "Taxi"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DQN-Taxi"
@@ -18,8 +18,7 @@ Implementation of DQN-Taxi reinforcement learning algorithm
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Taxi
-- **Category**: Value-Based Methods
-
+- **Category**: Other
 ## Implementation Details
 
 # DQN-Taxi: Deep Q-Network for OpenAI Gym Taxi-v3
