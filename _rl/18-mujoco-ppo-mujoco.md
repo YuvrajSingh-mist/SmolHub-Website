@@ -5,7 +5,7 @@ excerpt: "Implementation of MuJoCo reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Other"
-categories: ["Exploration Methods", "Policy-Based Methods"]
+categories: ["Exploration Methods"]
 framework: "PyTorch"
 environment: "MuJoCo"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/PPO/MuJoCo"

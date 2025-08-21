@@ -5,7 +5,7 @@ excerpt: "Implementation of MARL reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Multi-Agent"
-categories: ["Exploration Methods", "Multi-Agent", "Policy-Based Methods"]
+categories: ["Exploration Methods", "Multi-Agent"]
 framework: "PyTorch"
 environment: "Atari"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/MARL"
@@ -19,7 +19,7 @@ Implementation of MARL reinforcement learning algorithm
 - **Environment**: Atari
 - **Category**: Multi-Agent RL
 
-
+s 
 <p align="center">
   <img src="https://raw.githubusercontent.com/YuvrajSingh-mist/Reinforcement-Learning/master/MARL/IPPO/images/pong.gif" width="300" alt="IPPO Pong Demo"/>
   <img src="https://raw.githubusercontent.com/YuvrajSingh-mist/Reinforcement-Learning/master/MARL/MAPPO/images/simple_spread.mp4" width="300" alt="MAPPO Simple Spread Demo"/>

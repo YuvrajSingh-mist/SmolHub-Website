@@ -15,8 +15,7 @@
       "framework": "PyTorch",
       "environment": "LunarLander",
       "categories": [
-        "Actor-Critic Methods",
-        "Policy-Based Methods"
+        "Actor-Critic Methods"
       ]
     },
     {
@@ -35,8 +34,7 @@
       "environment": "MuJoCo",
       "categories": [
         "Actor-Critic Methods",
-        "Exploration Methods",
-        "Policy-Based Methods"
+        "Exploration Methods"
       ]
     },
     {
@@ -50,12 +48,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Value-Based Methods",
+      "category": "Exploration Methods",
       "framework": "PyTorch",
       "environment": "Frozenlake",
       "categories": [
-        "Exploration Methods",
-        "Value-Based Methods"
+        "Exploration Methods"
       ]
     },
     {
@@ -69,12 +66,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Value-Based Methods",
+      "category": "Exploration Methods",
       "framework": "PyTorch",
       "environment": "LunarLander",
       "categories": [
-        "Exploration Methods",
-        "Value-Based Methods"
+        "Exploration Methods"
       ]
     },
     {
@@ -88,12 +84,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Value-Based Methods",
+      "category": "Exploration Methods",
       "framework": "PyTorch",
       "environment": "Taxi",
       "categories": [
-        "Exploration Methods",
-        "Value-Based Methods"
+        "Exploration Methods"
       ]
     },
     {
@@ -107,12 +102,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Value-Based Methods",
+      "category": "Exploration Methods",
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
-        "Exploration Methods",
-        "Value-Based Methods"
+        "Exploration Methods"
       ]
     },
     {
@@ -126,12 +120,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Value-Based Methods",
+      "category": "Exploration Methods",
       "framework": "PyTorch",
       "environment": "Gymnasium",
       "categories": [
-        "Exploration Methods",
-        "Value-Based Methods"
+        "Exploration Methods"
       ]
     },
     {
@@ -145,12 +138,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Value-Based Methods",
+      "category": "Exploration Methods",
       "framework": "PyTorch",
       "environment": "Gymnasium",
       "categories": [
-        "Exploration Methods",
-        "Value-Based Methods"
+        "Exploration Methods"
       ]
     },
     {
@@ -164,13 +156,12 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Policy-Based Methods",
+      "category": "Actor-Critic Methods",
       "framework": "PyTorch",
       "environment": "Flappybird",
       "categories": [
         "Actor-Critic Methods",
-        "Exploration Methods",
-        "Policy-Based Methods"
+        "Exploration Methods"
       ]
     },
     {
@@ -188,8 +179,7 @@
       "framework": "PyTorch",
       "environment": "Frozenlake",
       "categories": [
-        "Exploration Methods",
-        "Value-Based Methods"
+        "Exploration Methods"
       ]
     },
     {
@@ -226,8 +216,7 @@
       "environment": "Atari",
       "categories": [
         "Exploration Methods",
-        "Multi-Agent",
-        "Policy-Based Methods"
+        "Multi-Agent"
       ]
     },
     {
@@ -241,13 +230,12 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Policy-Based Methods",
+      "category": "Multi-Agent",
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
         "Exploration Methods",
-        "Multi-Agent",
-        "Policy-Based Methods"
+        "Multi-Agent"
       ]
     },
     {
@@ -261,14 +249,13 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Policy-Based Methods",
+      "category": "Multi-Agent",
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
         "Actor-Critic Methods",
         "Exploration Methods",
-        "Multi-Agent",
-        "Policy-Based Methods"
+        "Multi-Agent"
       ]
     },
     {
@@ -287,8 +274,7 @@
       "environment": "Atari",
       "categories": [
         "Exploration Methods",
-        "Multi-Agent",
-        "Policy-Based Methods"
+        "Multi-Agent"
       ]
     },
     {
@@ -302,12 +288,11 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Policy-Based Methods",
+      "category": "Actor-Critic Methods",
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
-        "Actor-Critic Methods",
-        "Policy-Based Methods"
+        "Actor-Critic Methods"
       ]
     },
     {
@@ -324,9 +309,7 @@
       "category": "Other",
       "framework": "PyTorch",
       "environment": "Atari",
-      "categories": [
-        "Policy-Based Methods"
-      ]
+      "categories": []
     },
     {
       "name": "images",
@@ -342,9 +325,7 @@
       "category": "Other",
       "framework": "PyTorch",
       "environment": "Atari",
-      "categories": [
-        "Policy-Based Methods"
-      ]
+      "categories": []
     },
     {
       "name": "MuJoCo",
@@ -361,8 +342,7 @@
       "framework": "PyTorch",
       "environment": "MuJoCo",
       "categories": [
-        "Exploration Methods",
-        "Policy-Based Methods"
+        "Exploration Methods"
       ]
     },
     {
@@ -376,12 +356,10 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Policy-Based Methods",
+      "category": "Other",
       "framework": "PyTorch",
       "environment": "Gymnasium",
-      "categories": [
-        "Policy-Based Methods"
-      ]
+      "categories": []
     },
     {
       "name": "RND",
@@ -398,8 +376,7 @@
       "framework": "PyTorch",
       "environment": "LunarLander",
       "categories": [
-        "Exploration Methods",
-        "Policy-Based Methods"
+        "Exploration Methods"
       ]
     },
     {
@@ -437,9 +414,7 @@
       "environment": "MuJoCo",
       "categories": [
         "Actor-Critic Methods",
-        "Exploration Methods",
-        "Policy-Based Methods",
-        "Value-Based Methods"
+        "Exploration Methods"
       ]
     }
   ]

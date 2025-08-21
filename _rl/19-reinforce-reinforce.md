@@ -4,8 +4,8 @@ title: "REINFORCE"
 excerpt: "Implementation of REINFORCE reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Policy-Based Methods"
-categories: ["Policy-Based Methods"]
+category: "Other"
+categories: ["Other"]
 framework: "PyTorch"
 environment: "Gymnasium"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/REINFORCE"

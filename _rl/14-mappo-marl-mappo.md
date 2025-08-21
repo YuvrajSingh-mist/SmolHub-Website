@@ -4,8 +4,8 @@ title: "MAPPO"
 excerpt: "Implementation of MAPPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Policy-Based Methods"
-categories: ["Actor-Critic Methods", "Exploration Methods", "Multi-Agent", "Policy-Based Methods"]
+category: "Other"
+categories: ["Actor-Critic Methods", "Exploration Methods", "Multi-Agent"]
 framework: "PyTorch"
 environment: "Atari"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/MARL/MAPPO"

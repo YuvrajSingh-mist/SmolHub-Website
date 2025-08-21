@@ -4,8 +4,8 @@ title: "IPPO"
 excerpt: "Implementation of IPPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Policy-Based Methods"
-categories: ["Exploration Methods", "Multi-Agent", "Policy-Based Methods"]
+category: "Other"
+categories: ["Exploration Methods", "Multi-Agent"]
 framework: "PyTorch"
 environment: "Atari"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/MARL/IPPO"
