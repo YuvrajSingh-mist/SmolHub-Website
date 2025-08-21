@@ -5,7 +5,7 @@ excerpt: "Implementation of DQN-Lunar reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Exploration"
-categories: ["Exploration", "Value-Based"]
+categories: [ "Value-Based"]
 framework: "PyTorch"
 environment: "LunarLander"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DQN-Lunar"

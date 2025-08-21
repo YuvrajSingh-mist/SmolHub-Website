@@ -5,7 +5,7 @@ excerpt: "Implementation of Imitation Learning reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Imitation Learning"
-categories: ["Imitation Learning"]
+categories: ["Imitation Learning", "Policy-Based"]
 framework: "PyTorch"
 environment: "Custom Environment"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Imitation Learning"

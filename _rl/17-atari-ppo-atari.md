@@ -5,7 +5,7 @@ excerpt: "Implementation of Atari reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Actor-Critic"
-categories: ["Actor-Critic"]
+categories: ["Game Environments", "Actor-Critic", "Policy-Based"]
 framework: "PyTorch"
 environment: "Atari"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/PPO/Atari"

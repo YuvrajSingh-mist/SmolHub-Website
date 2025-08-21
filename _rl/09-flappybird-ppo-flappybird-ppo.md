@@ -5,7 +5,7 @@ excerpt: "Implementation of FlappyBird-PPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Actor-Critic"
-categories: ["Actor-Critic", "Exploration"]
+categories: ["Actor-Critic", "Policy-Based"]
 framework: "PyTorch"
 environment: "Flappybird"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/FlappyBird-PPO"

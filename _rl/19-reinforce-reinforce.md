@@ -5,7 +5,7 @@ excerpt: "Implementation of REINFORCE reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Actor-Critic"
-categories: ["Actor-Critic"]
+categories: ["Policy-Based"]
 framework: "PyTorch"
 environment: "Gymnasium"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/REINFORCE"

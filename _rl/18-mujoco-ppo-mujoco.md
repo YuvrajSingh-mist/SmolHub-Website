@@ -5,7 +5,7 @@ excerpt: "PPO on MuJoCo benchmark"
 collection: rl
 layout: rl-implementation
 category: "Actor-Critic"
-categories: ["Actor-Critic", "Exploration"]
+categories: ["Actor-Critic", "Policy-Based"]
 framework: "PyTorch"
 environment: "MuJoCo"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/PPO/MuJoCo"
