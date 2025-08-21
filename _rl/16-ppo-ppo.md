@@ -1,5 +1,5 @@
 ---
-title: "PPO (PPO)"
+title: "PPO"
 excerpt: "Implementation of PPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,7 +10,6 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
 Implementation of PPO reinforcement learning algorithm
 
 ## Technical Details
@@ -18,9 +17,7 @@ Implementation of PPO reinforcement learning algorithm
 - **Environment**: Atari
 - **Category**: Policy-Based Methods
 
-## Implementation Details
 
-# Proximal Policy Optimization (PPO)
 
 This directory contains implementations of the Proximal Policy Optimization (PPO) algorithm for various environments in PyTorch.
 

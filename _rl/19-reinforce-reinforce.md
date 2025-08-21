@@ -1,5 +1,5 @@
 ---
-title: "Reinforce (Reinforce)"
+title: "REINFORCE"
 excerpt: "Implementation of REINFORCE reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,7 +10,6 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
 Implementation of REINFORCE reinforcement learning algorithm
 
 ## Technical Details
@@ -18,9 +17,7 @@ Implementation of REINFORCE reinforcement learning algorithm
 - **Environment**: Gymnasium
 - **Category**: Policy-Based Methods
 
-## Implementation Details
 
-# REINFORCE Algorithm Implementation
 
 ## Overview
 

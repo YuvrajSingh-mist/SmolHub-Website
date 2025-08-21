@@ -1,5 +1,5 @@
 ---
-title: "Imitation Learning (Imitation Learning)"
+title: "Imitation Learning"
 excerpt: "Implementation of Imitation Learning reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,7 +10,7 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
+
 Implementation of Imitation Learning reinforcement learning algorithm
 
 ## Technical Details
@@ -18,10 +18,6 @@ Implementation of Imitation Learning reinforcement learning algorithm
 - **Environment**: Custom Environment
 - **Category**: Imitation Learning
 
-## Implementation Details
-
-
-# Imitation Learning for GridWorld
 
 This project implements core Imitation Learning algorithms—including Behavioral Cloning (BC) and Dataset Aggregation (DAgger)—for learning policies from expert demonstrations in a GridWorld environment. The agent learns to imitate expert behavior by training a neural network to predict actions given states, and can further improve using interactive data collection (DAgger).
 

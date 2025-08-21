@@ -1,5 +1,5 @@
 ---
-title: "Mappo (MARL Mappo)"
+title: "MAPPO"
 excerpt: "Implementation of MAPPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,17 +10,13 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
+
 Implementation of MAPPO reinforcement learning algorithm
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Atari
 - **Category**: Policy-Based Methods
-
-## Implementation Details
-
-# Multi-Agent Proximal Policy Optimization (MAPPO)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/YuvrajSingh-mist/Reinforcement-Learning/master/MARL/MAPPO/images/simple_spread.mp4" width="400" alt="MAPPO Simple Spread Demo"/>

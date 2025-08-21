@@ -1,5 +1,5 @@
 ---
-title: "Atari (PPO Atari)"
+title: "Atari"
 excerpt: "Implementation of Atari reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,7 +10,6 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
 Implementation of Atari reinforcement learning algorithm
 
 ## Technical Details
@@ -18,9 +17,6 @@ Implementation of Atari reinforcement learning algorithm
 - **Environment**: Atari
 - **Category**: Other
 
-## Implementation Details
-
-# PPO on Atari Games
 
 This directory contains **Proximal Policy Optimization (PPO)** implementations for training agents on classic Atari games using PyTorch and Gymnasium.
 

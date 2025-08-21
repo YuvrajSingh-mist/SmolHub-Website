@@ -1,5 +1,5 @@
 ---
-title: "Frozen Lake (Frozen Lake)"
+title: "Frozen Lake"
 excerpt: "Implementation of Frozen-Lake reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,7 +10,6 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
 Implementation of Frozen-Lake reinforcement learning algorithm
 
 ## Technical Details
@@ -18,9 +17,7 @@ Implementation of Frozen-Lake reinforcement learning algorithm
 - **Environment**: Frozenlake
 - **Category**: Other
 
-## Implementation Details
 
-# Frozen Lake Reinforcement Learning
 
 This project implements reinforcement learning algorithms for the Frozen Lake environment from OpenAI Gymnasium. The agent learns to navigate across a frozen lake from the start to a goal without falling into holes.
 

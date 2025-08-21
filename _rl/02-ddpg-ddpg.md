@@ -1,5 +1,5 @@
 ---
-title: "DDPG (DDPG)"
+title: "DDPG"
 excerpt: "Implementation of DDPG reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,7 +10,6 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
 Implementation of DDPG reinforcement learning algorithm
 
 ## Technical Details
@@ -18,9 +17,6 @@ Implementation of DDPG reinforcement learning algorithm
 - **Environment**: MuJoCo
 - **Category**: Actor-Critic Methods
 
-## Implementation Details
-
-# Deep Deterministic Policy Gradient (DDPG)
 
 This directory contains implementations of the Deep Deterministic Policy Gradient (DDPG) algorithm for various continuous control environments.
 

@@ -1,5 +1,5 @@
 ---
-title: "SAC (SAC)"
+title: "SAC"
 excerpt: "Implementation of SAC reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,17 +10,12 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
 Implementation of SAC reinforcement learning algorithm
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Gymnasium
 - **Category**: Actor-Critic Methods
-
-## Implementation Details
-
-# Soft Actor-Critic (SAC)
 
 This directory contains implementations of the Soft Actor-Critic (SAC) algorithm for various continuous control environments.
 

@@ -1,5 +1,5 @@
 ---
-title: "RND (RND)"
+title: "RND"
 excerpt: "Implementation of RND reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -9,18 +9,12 @@ environment: "LunarLander"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/RND"
 date: 2025-08-21
 ---
-
-## Overview
 Implementation of RND reinforcement learning algorithm
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: LunarLander
 - **Category**: Exploration Methods
-
-## Implementation Details
-
-# Random Network Distillation (RND)
 
 This directory contains implementations of Random Network Distillation (RND) combined with Proximal Policy Optimization (PPO) for cur### FrozenLake-v1 (8x8 Map)
 

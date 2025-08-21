@@ -1,5 +1,5 @@
 ---
-title: "Ippo (MARL Ippo)"
+title: "IPPO"
 excerpt: "Implementation of IPPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,7 +10,6 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
 Implementation of IPPO reinforcement learning algorithm
 
 ## Technical Details
@@ -18,9 +17,6 @@ Implementation of IPPO reinforcement learning algorithm
 - **Environment**: Atari
 - **Category**: Policy-Based Methods
 
-## Implementation Details
-
-# Independent Proximal Policy Optimization (IPPO)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/YuvrajSingh-mist/Reinforcement-Learning/master/MARL/IPPO/images/pong.gif" width="400" alt="IPPO Pong Demo"/>

@@ -1,5 +1,5 @@
 ---
-title: "MARL (MARL)"
+title: "MARL"
 excerpt: "Implementation of MARL reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,7 +10,6 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
 Implementation of MARL reinforcement learning algorithm
 
 ## Technical Details
@@ -18,9 +17,6 @@ Implementation of MARL reinforcement learning algorithm
 - **Environment**: Atari
 - **Category**: Multi-Agent RL
 
-## Implementation Details
-
-# Multi-Agent Reinforcement Learning (MARL) Research Project
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/YuvrajSingh-mist/Reinforcement-Learning/master/MARL/IPPO/images/pong.gif" width="300" alt="IPPO Pong Demo"/>

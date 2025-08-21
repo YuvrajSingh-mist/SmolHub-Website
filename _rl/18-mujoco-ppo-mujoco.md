@@ -1,5 +1,5 @@
 ---
-title: "Mujoco (PPO Mujoco)"
+title: "Mujoco"
 excerpt: "Implementation of MuJoCo reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,17 +10,12 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
 Implementation of MuJoCo reinforcement learning algorithm
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: MuJoCo
 - **Category**: Other
-
-## Implementation Details
-
-# PPO on MuJoCo Environments
 
 This directory contains PPO implementations specifically for MuJoCo continuous control environments. These environments represent some of the most challenging continuous control tasks in reinforcement learning, requiring sophisticated policy learning to coordinate multiple joints and maintain dynamic stability.
 

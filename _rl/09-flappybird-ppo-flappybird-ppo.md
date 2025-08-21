@@ -1,5 +1,5 @@
 ---
-title: "Flappybird PPO (Flappybird PPO)"
+title: "Flappybird PPO"
 excerpt: "Implementation of FlappyBird-PPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,17 +10,14 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
+
 Implementation of FlappyBird-PPO reinforcement learning algorithm
+
 
 ## Technical Details
 - **Framework**: PyTorch
 - **Environment**: Flappybird
 - **Category**: Policy-Based Methods
-
-## Implementation Details
-
-# Flappy Bird with Proximal Policy Optimization (PPO)
 
 This directory contains an implementation of the Proximal Policy Optimization (PPO) algorithm applied to the Flappy Bird environment.
 

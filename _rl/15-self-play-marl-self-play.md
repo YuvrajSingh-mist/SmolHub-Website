@@ -1,5 +1,5 @@
 ---
-title: "Self Play (MARL Self Play)"
+title: "Self Play"
 excerpt: "Implementation of Self Play reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,7 +10,6 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
 Implementation of Self Play reinforcement learning algorithm
 
 ## Technical Details
@@ -18,9 +17,6 @@ Implementation of Self Play reinforcement learning algorithm
 - **Environment**: Atari
 - **Category**: Other
 
-## Implementation Details
-
-# Self-Play Multi-Agent Reinforcement Learning
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/YuvrajSingh-mist/Reinforcement-Learning/master/MARL/IPPO/images/pong.gif" width="400" alt="Self-Play Pong Demo"/>

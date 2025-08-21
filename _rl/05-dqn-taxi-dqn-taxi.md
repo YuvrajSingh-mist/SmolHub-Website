@@ -1,5 +1,5 @@
 ---
-title: "DQN Taxi (DQN Taxi)"
+title: "DQN Taxi"
 excerpt: "Implementation of DQN-Taxi reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
@@ -10,7 +10,7 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-## Overview
+
 Implementation of DQN-Taxi reinforcement learning algorithm
 
 ## Technical Details
