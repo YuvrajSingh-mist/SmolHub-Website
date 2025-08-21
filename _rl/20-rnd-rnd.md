@@ -1,9 +1,11 @@
 ---
+
 title: "RND"
 excerpt: "Implementation of RND reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Exploration Methods"
+categories: ["Exploration Methods", "Policy-Based Methods"]
 framework: "PyTorch"
 environment: "LunarLander"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/RND"

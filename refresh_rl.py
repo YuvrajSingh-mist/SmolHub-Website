@@ -129,26 +129,28 @@ def absolutize_markdown_links(markdown_text, base_path):
     return updated
 
 def categorize_rl_algorithm(name, path, readme_content=""):
-    """Categorize RL algorithms based on name and content."""
+    """Categorize RL algorithms based on name and content (single primary category)."""
     name_lower = name.lower()
     path_lower = path.lower()
     content_lower = readme_content.lower()
     
+    # Prefer Multi-agent RL FIRST to avoid matching 'ppo' inside 'ippo' etc.
+    multi_agent_terms = ['marl', 'multi-agent', 'multi agent', 'ippo', 'mappo', 'self-play', 'self play']
+    if any(term in name_lower or term in path_lower or term in content_lower for term in multi_agent_terms):
+        return "Multi-Agent RL"
+
     # Value-based methods
     if any(term in name_lower for term in ['dqn', 'q-learning', 'duel']):
         return "Value-Based Methods"
     
-    # Policy-based methods  
-    if any(term in name_lower for term in ['ppo', 'reinforce', 'policy']):
+    # Policy-based methods (ensure we don't catch 'ippo'/'mappo' as 'ppo')
+    # Use regex word boundaries around 'ppo'
+    if re.search(r'(^|[^a-z0-9])ppo([^a-z0-9]|$)', name_lower) or 'reinforce' in name_lower or 'policy' in name_lower:
         return "Policy-Based Methods"
     
     # Actor-critic methods
-    if any(term in name_lower for term in ['a2c', 'a3c', 'sac', 'td3', 'ddpg', 'actor', 'critic']):
+    if any(term in name_lower for term in ['a2c', 'a3c', 'sac', 'td3', 'ddpg']) or ('actor' in name_lower or 'critic' in name_lower):
         return "Actor-Critic Methods"
-        
-    # Multi-agent RL
-    if any(term in name_lower for term in ['marl', 'multi-agent', 'ippo', 'mappo', 'self-play']):
-        return "Multi-Agent RL"
         
     # Exploration methods
     if any(term in name_lower for term in ['rnd', 'exploration', 'curiosity']):
@@ -167,6 +169,46 @@ def categorize_rl_algorithm(name, path, readme_content=""):
         return "Unity ML-Agents"
     
     return "Other"
+
+def collect_categories(name, path, readme_content=""):
+    """Collect all applicable categories for a project (multi-category support)."""
+    name_lower = name.lower()
+    path_lower = path.lower()
+    content_lower = readme_content.lower()
+
+    categories = set()
+
+    # Multi-Agent RL
+    if any(term in name_lower or term in path_lower or term in content_lower for term in ['marl', 'multi-agent', 'multi agent', 'ippo', 'mappo', 'self-play', 'self play']):
+        categories.add("Multi-Agent RL")
+
+    # Policy-Based Methods (protect from matching IPPO/MAPPO by boundary on ppo)
+    if (re.search(r'(^|[^a-z0-9])ppo([^a-z0-9]|$)', name_lower) or
+        re.search(r'(^|[^a-z0-9])ppo([^a-z0-9]|$)', content_lower) or
+        'reinforce' in name_lower or 'policy' in name_lower or 'policy gradient' in content_lower):
+        categories.add("Policy-Based Methods")
+
+    # Actor-Critic Methods
+    if any(term in name_lower for term in ['a2c', 'a3c', 'sac', 'td3', 'ddpg']) or ('actor' in name_lower or 'critic' in name_lower) or 'actor-critic' in content_lower:
+        categories.add("Actor-Critic Methods")
+
+    # Value-Based Methods
+    if any(term in name_lower for term in ['dqn', 'q-learning', 'duel']) or 'q-learning' in content_lower or 'q learning' in content_lower:
+        categories.add("Value-Based Methods")
+
+    # Exploration Methods
+    if any(term in name_lower for term in ['rnd']) or any(term in content_lower for term in ['exploration', 'curiosity']):
+        categories.add("Exploration Methods")
+
+    # Imitation Learning
+    if any(term in name_lower for term in ['imitation', 'behavioral', 'cloning']) or 'dagger' in content_lower:
+        categories.add("Imitation Learning")
+
+    # If none matched, default to Other
+    if not categories:
+        categories.add("Other")
+
+    return sorted(categories)
 
 def detect_environment(name, readme_content=""):
     """Detect the environment used by the RL algorithm."""
@@ -241,8 +283,9 @@ def process_directory_recursive(path="", parent_name="", max_depth=10):
             else:
                 display_name = clean_display_name(item_name)
             
-            # Determine category and environment
-            category = categorize_rl_algorithm(item_name, path, readme_content)
+            # Determine categories (multi) and primary category, plus environment
+            categories = collect_categories(item_name, path, readme_content)
+            category = categories[0] if categories else categorize_rl_algorithm(item_name, path, readme_content)
             environment = detect_environment(item_name, readme_content)
             
             # Create implementation entry
@@ -258,6 +301,7 @@ def process_directory_recursive(path="", parent_name="", max_depth=10):
                 "created_date": datetime.now().strftime('%Y-%m-%d'),
                 "github_date": datetime.now().strftime('%Y-%m-%d'),
                 "category": category,
+                "categories": categories,
                 "framework": "PyTorch",  # Default assumption
                 "environment": environment
             }
@@ -385,6 +429,7 @@ excerpt: "{impl['description']}"
 collection: rl
 layout: rl-implementation
 category: "{impl['category']}"
+categories: [{', '.join([f'\"{c}\"' for c in impl.get('categories', [impl['category']])])}]
 framework: "{impl['framework']}"
 environment: "{impl['environment']}"
 github_url: "{impl['github_url']}"

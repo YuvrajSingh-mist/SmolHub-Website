@@ -1,9 +1,11 @@
 ---
+
 title: "DQN Taxi"
 excerpt: "Implementation of DQN-Taxi reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Value-Based Methods"
+categories: ["Exploration Methods", "Value-Based Methods"]
 framework: "PyTorch"
 environment: "Taxi"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DQN-Taxi"

@@ -1,9 +1,11 @@
 ---
+
 title: "DQN Frozenlake"
 excerpt: "Implementation of DQN-FrozenLake reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Value-Based Methods"
+categories: ["Exploration Methods", "Value-Based Methods"]
 framework: "PyTorch"
 environment: "Frozenlake"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DQN-FrozenLake"

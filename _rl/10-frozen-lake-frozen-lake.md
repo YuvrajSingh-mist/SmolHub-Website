@@ -1,9 +1,11 @@
 ---
+
 title: "Frozen Lake"
 excerpt: "Implementation of Frozen-Lake reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Other"
+categories: ["Exploration Methods", "Value-Based Methods"]
 framework: "PyTorch"
 environment: "Frozenlake"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Frozen-Lake"

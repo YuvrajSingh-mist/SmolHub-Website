@@ -1,9 +1,11 @@
 ---
+
 title: "DQN"
 excerpt: "Implementation of DQN reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Value-Based Methods"
+categories: ["Exploration Methods", "Value-Based Methods"]
 framework: "PyTorch"
 environment: "Gymnasium"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DQN"

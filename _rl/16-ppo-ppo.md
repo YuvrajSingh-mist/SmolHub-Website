@@ -1,9 +1,11 @@
 ---
+
 title: "PPO"
 excerpt: "Implementation of PPO reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Policy-Based Methods"
+categories: ["Actor-Critic Methods", "Policy-Based Methods"]
 framework: "PyTorch"
 environment: "Atari"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/PPO"

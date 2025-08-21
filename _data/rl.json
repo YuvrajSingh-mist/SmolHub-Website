@@ -13,7 +13,11 @@
       "github_date": "2025-08-21",
       "category": "Actor-Critic Methods",
       "framework": "PyTorch",
-      "environment": "LunarLander"
+      "environment": "LunarLander",
+      "categories": [
+        "Actor-Critic Methods",
+        "Policy-Based Methods"
+      ]
     },
     {
       "name": "DDPG",
@@ -28,7 +32,12 @@
       "github_date": "2025-08-21",
       "category": "Actor-Critic Methods",
       "framework": "PyTorch",
-      "environment": "MuJoCo"
+      "environment": "MuJoCo",
+      "categories": [
+        "Actor-Critic Methods",
+        "Exploration Methods",
+        "Policy-Based Methods"
+      ]
     },
     {
       "name": "DQN-FrozenLake",
@@ -43,7 +52,11 @@
       "github_date": "2025-08-21",
       "category": "Value-Based Methods",
       "framework": "PyTorch",
-      "environment": "Frozenlake"
+      "environment": "Frozenlake",
+      "categories": [
+        "Exploration Methods",
+        "Value-Based Methods"
+      ]
     },
     {
       "name": "DQN-Lunar",
@@ -58,7 +71,11 @@
       "github_date": "2025-08-21",
       "category": "Value-Based Methods",
       "framework": "PyTorch",
-      "environment": "LunarLander"
+      "environment": "LunarLander",
+      "categories": [
+        "Exploration Methods",
+        "Value-Based Methods"
+      ]
     },
     {
       "name": "DQN-Taxi",
@@ -73,7 +90,11 @@
       "github_date": "2025-08-21",
       "category": "Value-Based Methods",
       "framework": "PyTorch",
-      "environment": "Taxi"
+      "environment": "Taxi",
+      "categories": [
+        "Exploration Methods",
+        "Value-Based Methods"
+      ]
     },
     {
       "name": "DQN-atari",
@@ -88,7 +109,11 @@
       "github_date": "2025-08-21",
       "category": "Value-Based Methods",
       "framework": "PyTorch",
-      "environment": "Atari"
+      "environment": "Atari",
+      "categories": [
+        "Exploration Methods",
+        "Value-Based Methods"
+      ]
     },
     {
       "name": "DQN",
@@ -103,7 +128,11 @@
       "github_date": "2025-08-21",
       "category": "Value-Based Methods",
       "framework": "PyTorch",
-      "environment": "Gymnasium"
+      "environment": "Gymnasium",
+      "categories": [
+        "Exploration Methods",
+        "Value-Based Methods"
+      ]
     },
     {
       "name": "Duel-DQN",
@@ -118,7 +147,11 @@
       "github_date": "2025-08-21",
       "category": "Value-Based Methods",
       "framework": "PyTorch",
-      "environment": "Gymnasium"
+      "environment": "Gymnasium",
+      "categories": [
+        "Exploration Methods",
+        "Value-Based Methods"
+      ]
     },
     {
       "name": "FlappyBird-PPO",
@@ -133,7 +166,12 @@
       "github_date": "2025-08-21",
       "category": "Policy-Based Methods",
       "framework": "PyTorch",
-      "environment": "Flappybird"
+      "environment": "Flappybird",
+      "categories": [
+        "Actor-Critic Methods",
+        "Exploration Methods",
+        "Policy-Based Methods"
+      ]
     },
     {
       "name": "Frozen-Lake",
@@ -148,7 +186,11 @@
       "github_date": "2025-08-21",
       "category": "Other",
       "framework": "PyTorch",
-      "environment": "Frozenlake"
+      "environment": "Frozenlake",
+      "categories": [
+        "Exploration Methods",
+        "Value-Based Methods"
+      ]
     },
     {
       "name": "Imitation Learning",
@@ -163,7 +205,10 @@
       "github_date": "2025-08-21",
       "category": "Imitation Learning",
       "framework": "PyTorch",
-      "environment": "Custom Environment"
+      "environment": "Custom Environment",
+      "categories": [
+        "Imitation Learning"
+      ]
     },
     {
       "name": "MARL",
@@ -178,7 +223,12 @@
       "github_date": "2025-08-21",
       "category": "Multi-Agent RL",
       "framework": "PyTorch",
-      "environment": "Atari"
+      "environment": "Atari",
+      "categories": [
+        "Exploration Methods",
+        "Multi-Agent RL",
+        "Policy-Based Methods"
+      ]
     },
     {
       "name": "IPPO",
@@ -193,7 +243,12 @@
       "github_date": "2025-08-21",
       "category": "Policy-Based Methods",
       "framework": "PyTorch",
-      "environment": "Atari"
+      "environment": "Atari",
+      "categories": [
+        "Exploration Methods",
+        "Multi-Agent RL",
+        "Policy-Based Methods"
+      ]
     },
     {
       "name": "MAPPO",
@@ -208,7 +263,13 @@
       "github_date": "2025-08-21",
       "category": "Policy-Based Methods",
       "framework": "PyTorch",
-      "environment": "Atari"
+      "environment": "Atari",
+      "categories": [
+        "Actor-Critic Methods",
+        "Exploration Methods",
+        "Multi-Agent RL",
+        "Policy-Based Methods"
+      ]
     },
     {
       "name": "Self Play",
@@ -223,7 +284,12 @@
       "github_date": "2025-08-21",
       "category": "Other",
       "framework": "PyTorch",
-      "environment": "Atari"
+      "environment": "Atari",
+      "categories": [
+        "Exploration Methods",
+        "Multi-Agent RL",
+        "Policy-Based Methods"
+      ]
     },
     {
       "name": "PPO",
@@ -238,7 +304,11 @@
       "github_date": "2025-08-21",
       "category": "Policy-Based Methods",
       "framework": "PyTorch",
-      "environment": "Atari"
+      "environment": "Atari",
+      "categories": [
+        "Actor-Critic Methods",
+        "Policy-Based Methods"
+      ]
     },
     {
       "name": "Atari",
@@ -253,7 +323,10 @@
       "github_date": "2025-08-21",
       "category": "Other",
       "framework": "PyTorch",
-      "environment": "Atari"
+      "environment": "Atari",
+      "categories": [
+        "Policy-Based Methods"
+      ]
     },
     {
       "name": "images",
@@ -268,7 +341,10 @@
       "github_date": "2025-08-21",
       "category": "Other",
       "framework": "PyTorch",
-      "environment": "Atari"
+      "environment": "Atari",
+      "categories": [
+        "Policy-Based Methods"
+      ]
     },
     {
       "name": "MuJoCo",
@@ -283,7 +359,11 @@
       "github_date": "2025-08-21",
       "category": "Other",
       "framework": "PyTorch",
-      "environment": "MuJoCo"
+      "environment": "MuJoCo",
+      "categories": [
+        "Exploration Methods",
+        "Policy-Based Methods"
+      ]
     },
     {
       "name": "REINFORCE",
@@ -298,7 +378,10 @@
       "github_date": "2025-08-21",
       "category": "Policy-Based Methods",
       "framework": "PyTorch",
-      "environment": "Gymnasium"
+      "environment": "Gymnasium",
+      "categories": [
+        "Policy-Based Methods"
+      ]
     },
     {
       "name": "RND",
@@ -313,7 +396,11 @@
       "github_date": "2025-08-21",
       "category": "Exploration Methods",
       "framework": "PyTorch",
-      "environment": "LunarLander"
+      "environment": "LunarLander",
+      "categories": [
+        "Exploration Methods",
+        "Policy-Based Methods"
+      ]
     },
     {
       "name": "SAC",
@@ -328,7 +415,11 @@
       "github_date": "2025-08-21",
       "category": "Actor-Critic Methods",
       "framework": "PyTorch",
-      "environment": "Gymnasium"
+      "environment": "Gymnasium",
+      "categories": [
+        "Actor-Critic Methods",
+        "Exploration Methods"
+      ]
     },
     {
       "name": "TD3",
@@ -343,7 +434,13 @@
       "github_date": "2025-08-21",
       "category": "Actor-Critic Methods",
       "framework": "PyTorch",
-      "environment": "MuJoCo"
+      "environment": "MuJoCo",
+      "categories": [
+        "Actor-Critic Methods",
+        "Exploration Methods",
+        "Policy-Based Methods",
+        "Value-Based Methods"
+      ]
     }
   ]
 }

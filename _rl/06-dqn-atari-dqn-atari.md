@@ -1,9 +1,11 @@
 ---
+
 title: "DQN Atari"
 excerpt: "Implementation of DQN-atari reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Value-Based Methods"
+categories: ["Exploration Methods", "Value-Based Methods"]
 framework: "PyTorch"
 environment: "Atari"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DQN-atari"
