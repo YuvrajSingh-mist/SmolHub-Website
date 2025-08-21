@@ -4,8 +4,8 @@ title: "MARL"
 excerpt: "Implementation of MARL reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
-category: "Multi-Agent RL"
-categories: ["Exploration Methods", "Multi-Agent RL", "Policy-Based Methods"]
+category: "Multi-Agent"
+categories: ["Exploration Methods", "Multi-Agent", "Policy-Based Methods"]
 framework: "PyTorch"
 environment: "Atari"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/MARL"

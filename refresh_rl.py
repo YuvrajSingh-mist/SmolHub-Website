@@ -137,7 +137,7 @@ def categorize_rl_algorithm(name, path, readme_content=""):
     # Prefer Multi-agent RL FIRST to avoid matching 'ppo' inside 'ippo' etc.
     multi_agent_terms = ['marl', 'multi-agent', 'multi agent', 'ippo', 'mappo', 'self-play', 'self play']
     if any(term in name_lower or term in path_lower or term in content_lower for term in multi_agent_terms):
-        return "Multi-Agent RL"
+        return "Multi-Agent"
 
     # Value-based methods
     if any(term in name_lower for term in ['dqn', 'q-learning', 'duel']):
@@ -180,7 +180,7 @@ def collect_categories(name, path, readme_content=""):
 
     # Multi-Agent RL
     if any(term in name_lower or term in path_lower or term in content_lower for term in ['marl', 'multi-agent', 'multi agent', 'ippo', 'mappo', 'self-play', 'self play']):
-        categories.add("Multi-Agent RL")
+        categories.add("Multi-Agent")
 
     # Policy-Based Methods (protect from matching IPPO/MAPPO by boundary on ppo)
     if (re.search(r'(^|[^a-z0-9])ppo([^a-z0-9]|$)', name_lower) or

@@ -221,12 +221,12 @@
       "download_url": null,
       "created_date": "2025-08-21",
       "github_date": "2025-08-21",
-      "category": "Multi-Agent RL",
+      "category": "Multi-Agent",
       "framework": "PyTorch",
       "environment": "Atari",
       "categories": [
         "Exploration Methods",
-        "Multi-Agent RL",
+        "Multi-Agent",
         "Policy-Based Methods"
       ]
     },
@@ -246,7 +246,7 @@
       "environment": "Atari",
       "categories": [
         "Exploration Methods",
-        "Multi-Agent RL",
+        "Multi-Agent",
         "Policy-Based Methods"
       ]
     },
@@ -267,7 +267,7 @@
       "categories": [
         "Actor-Critic Methods",
         "Exploration Methods",
-        "Multi-Agent RL",
+        "Multi-Agent",
         "Policy-Based Methods"
       ]
     },
@@ -287,7 +287,7 @@
       "environment": "Atari",
       "categories": [
         "Exploration Methods",
-        "Multi-Agent RL",
+        "Multi-Agent",
         "Policy-Based Methods"
       ]
     },
