@@ -25,6 +25,7 @@ author_profile: true
     <div class="search-filters">
       <span class="filter-label">Filter by category:</span>
       <button class="filter-btn active" data-tag="all">All</button>
+      <button class="filter-btn" data-tag="value-based">Value-Based</button>
       <button class="filter-btn" data-tag="actor-critic">Actor-Critic</button>
       <button class="filter-btn" data-tag="multi-agent">Multi-Agent</button>
       <button class="filter-btn" data-tag="exploration">Exploration</button>
@@ -42,6 +43,7 @@ author_profile: true
     {% for post in site.rl %}
       <div class="rl-wrapper" 
            data-category="{{ post.category | downcase | replace: '/', '-' | replace: ' ', '-' }}"
+           data-categories="{{ post.categories | join: ',' | downcase | replace: '/', '-' | replace: ' ', '-' }}"
            data-name="{{ post.title }}"
            data-framework="{{ post.framework }}"
            data-environment="{{ post.environment }}"
@@ -128,11 +130,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Store all RL algorithms for filtering
         const allAlgorithms = Array.from(document.querySelectorAll('.rl-wrapper')).map(wrapper => {
             const category = wrapper.getAttribute('data-category') || '';
+            const categoriesAttr = wrapper.getAttribute('data-categories') || '';
+            const categories = categoriesAttr ? categoriesAttr.split(',').filter(Boolean) : [];
             return {
                 element: wrapper,
                 name: wrapper.querySelector('.model-card__title')?.textContent.toLowerCase() || '',
                 description: wrapper.querySelector('.model-card__excerpt')?.textContent.toLowerCase() || '',
                 category: category,
+                categories: categories,
                 framework: wrapper.getAttribute('data-framework') || '',
                 environment: wrapper.getAttribute('data-environment') || ''
             };
@@ -194,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     algorithm.environment.toLowerCase().includes(currentQuery);
                 
                 // Category filter
-                const matchesCategory = currentTag === 'all' || algorithm.category === currentTag;
+                const matchesCategory = currentTag === 'all' || algorithm.category === currentTag || (algorithm.categories && algorithm.categories.includes(currentTag));
                 
                 return matchesSearch && matchesCategory;
             });

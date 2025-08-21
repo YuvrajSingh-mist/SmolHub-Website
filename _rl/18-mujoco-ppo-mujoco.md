@@ -1,7 +1,7 @@
 ---
 
-title: "Mujoco"
-excerpt: "Implementation of MuJoCo reinforcement learning algorithm"
+title: "MuJoCo"
+excerpt: "PPO on MuJoCo benchmark"
 collection: rl
 layout: rl-implementation
 category: "Actor-Critic"
@@ -12,7 +12,7 @@ github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/mas
 date: 2025-08-21
 ---
 
-Implementation of MuJoCo reinforcement learning algorithm
+Resulta of custom PPO from scratch on MuJoCo 
 
 ## Technical Details
 - **Framework**: PyTorch

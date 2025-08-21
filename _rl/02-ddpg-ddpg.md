@@ -5,7 +5,7 @@ excerpt: "Implementation of DDPG reinforcement learning algorithm"
 collection: rl
 layout: rl-implementation
 category: "Actor-Critic"
-categories: ["Actor-Critic", "Exploration"]
+categories: ["Actor-Critic"]
 framework: "PyTorch"
 environment: "MuJoCo"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DDPG"
