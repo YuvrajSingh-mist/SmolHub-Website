@@ -12,6 +12,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 import argparse
+import posixpath
 
 # Configuration
 REPO_OWNER = "YuvrajSingh-mist"
@@ -21,13 +22,22 @@ DATA_FILE = "_data/rl.json"
 MODELS_DIR = "_rl"
 BASE_PATH = Path(__file__).parent
 
+# GitHub Authentication
+GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
+if GITHUB_TOKEN:
+    HEADERS = {'Authorization': f'token {GITHUB_TOKEN}'}
+    print("🔑 Using GitHub token authentication")
+else:
+    HEADERS = {}
+    print("⚠️  No GitHub token found - using unauthenticated requests (rate limited)")
+
 def fetch_github_content(path=""):
     """Fetch repository content from GitHub API."""
     url = f"{BASE_URL}/contents/{path}"
     print(f"🔍 Fetching: {url}")
     
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers=HEADERS)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -36,21 +46,87 @@ def fetch_github_content(path=""):
 
 def fetch_readme_content(path):
     """Fetch README content from a specific folder."""
-    readme_files = ["README.md", "readme.md", "README.txt"]
+    readme_file = "README.md"  # Always README.md
     
-    for readme_file in readme_files:
-        readme_path = f"{path}/{readme_file}" if path else readme_file
-        content = fetch_github_content(readme_path)
-        
-        if content and isinstance(content, dict) and content.get('download_url'):
-            try:
-                readme_response = requests.get(content['download_url'])
-                readme_response.raise_for_status()
-                return readme_response.text
-            except requests.exceptions.RequestException:
-                continue
+    readme_path = f"{path}/{readme_file}" if path else readme_file
+    content = fetch_github_content(readme_path)
+    
+    if content and isinstance(content, dict) and content.get('download_url'):
+        try:
+            readme_response = requests.get(content['download_url'], headers=HEADERS)
+            readme_response.raise_for_status()
+            # Ensure we get the FULL content without any truncation
+            full_content = readme_response.text
+            print(f"✅ README fetched for {path}: {len(full_content)} characters")
+            return full_content
+        except requests.exceptions.RequestException as e:
+            print(f"❌ Error fetching README for {path}: {e}")
+            return ""
     
     return ""
+
+def absolutize_markdown_links(markdown_text, base_path):
+    """Convert relative markdown and HTML links/images to absolute raw.githubusercontent.com URLs.
+
+    - Handles markdown images ![alt](src) and links [text](href)
+    - Handles HTML <img src="..."> and <a href="..."> attributes
+    - Leaves http(s), mailto, and anchor (#) links unchanged
+    """
+    if not markdown_text:
+        return markdown_text
+
+    def to_absolute(url):
+        if not url:
+            return url
+        url = url.strip()
+        # Ignore absolute and anchor/mailto links
+        if re.match(r"^(?:https?:)?//", url) or url.startswith("http://") or url.startswith("https://") or url.startswith("mailto:") or url.startswith("#"):
+            return url
+        # Normalize path relative to repo
+        if url.startswith('/'):
+            resolved = url.lstrip('/')
+        else:
+            # Join with the folder that the README belongs to
+            joined = posixpath.join(base_path, url) if base_path else url
+            resolved = posixpath.normpath(joined)
+        return f"https://raw.githubusercontent.com/{REPO_OWNER}/{REPO_NAME}/master/{resolved}"
+
+    # Markdown images ![alt](...)
+    def repl_md_image(match):
+        alt = match.group(1)
+        url = match.group(2)
+        title = match.group(3) or ''
+        abs_url = to_absolute(url)
+        return f"![{alt}]({abs_url}{title})"
+
+    # Markdown links [text](...)
+    def repl_md_link(match):
+        text = match.group(1)
+        url = match.group(2)
+        title = match.group(3) or ''
+        abs_url = to_absolute(url)
+        return f"[{text}]({abs_url}{title})"
+
+    # HTML src and href attributes
+    def repl_html_src(match):
+        prefix = match.group(1)
+        url = match.group(2)
+        suffix = match.group(3)
+        abs_url = to_absolute(url)
+        return f"{prefix}{abs_url}{suffix}"
+
+    # Patterns (support optional title in markdown links/images: (url "title"))
+    md_image_pattern = re.compile(r"!\[([^\]]*)\]\(([^\)\s]+)(\s+\"[^\"]*\")?\)")
+    md_link_pattern = re.compile(r"(?<!\!)\[([^\]]+)\]\(([^\)\s]+)(\s+\"[^\"]*\")?\)")
+    html_src_pattern = re.compile(r"(src=\")([^\"]+)(\")", re.IGNORECASE)
+    html_href_pattern = re.compile(r"(href=\")([^\"]+)(\")", re.IGNORECASE)
+
+    # Apply replacements
+    updated = md_image_pattern.sub(repl_md_image, markdown_text)
+    updated = md_link_pattern.sub(repl_md_link, updated)
+    updated = html_src_pattern.sub(repl_html_src, updated)
+    updated = html_href_pattern.sub(repl_html_src, updated)
+    return updated
 
 def categorize_rl_algorithm(name, path, readme_content=""):
     """Categorize RL algorithms based on name and content."""
@@ -139,46 +215,46 @@ def clean_display_name(name):
     
     return ' '.join(cleaned_words)
 
-def process_directory(path="", parent_name=""):
-    """Process a directory and return RL implementations found."""
+def process_directory_recursive(path="", parent_name="", max_depth=10):
+    """Recursively process directories and find ALL folders with README files."""
     content = fetch_github_content(path)
     if not content:
         return []
     
     implementations = []
+    current_depth = path.count('/') if path else 0
     
-    for item in content:
-        if item['type'] == 'dir':
-            item_name = item['name']
-            item_path = item['path']
-            
-            # Skip common non-algorithm directories
-            if item_name.lower() in ['.git', '__pycache__', 'node_modules', '.vscode', 'images', 'assets']:
-                continue
-            
-            # Create display name
+    # Check if current directory has a README
+    readme_content = fetch_readme_content(path)
+    # Convert relative links/images to absolute raw URLs for site rendering
+    processed_readme_content = absolutize_markdown_links(readme_content, path)
+    
+    # If this directory has a README and it's not the root, add it as an implementation
+    if readme_content and path:  # Don't add root directory
+        item_name = path.split('/')[-1]  # Get last part of path
+        
+        # Skip common non-algorithm directories
+        if item_name.lower() not in ['.git', '__pycache__', 'node_modules', '.vscode']:
+            # Create display name with full hierarchy
             if parent_name:
                 display_name = f"{clean_display_name(item_name)} ({parent_name})"
             else:
                 display_name = clean_display_name(item_name)
             
-            # Fetch README content
-            readme_content = fetch_readme_content(item_path)
-            
             # Determine category and environment
-            category = categorize_rl_algorithm(item_name, item_path, readme_content)
+            category = categorize_rl_algorithm(item_name, path, readme_content)
             environment = detect_environment(item_name, readme_content)
             
             # Create implementation entry
             implementation = {
                 "name": item_name,
-                "path": item_path,
+                "path": path,
                 "display_name": display_name,
                 "description": f"Implementation of {item_name} reinforcement learning algorithm",
-                "readme_content": readme_content[:1000] if readme_content else "",  # Truncate for JSON size
-                "github_url": f"https://github.com/{REPO_OWNER}/{REPO_NAME}/tree/master/{item_path}",
-                "api_url": item['url'],
-                "download_url": item.get('download_url'),
+                "readme_content": processed_readme_content if processed_readme_content else "",
+                "github_url": f"https://github.com/{REPO_OWNER}/{REPO_NAME}/tree/master/{path}",
+                "api_url": f"{BASE_URL}/contents/{path}",
+                "download_url": None,
                 "created_date": datetime.now().strftime('%Y-%m-%d'),
                 "github_date": datetime.now().strftime('%Y-%m-%d'),
                 "category": category,
@@ -187,13 +263,34 @@ def process_directory(path="", parent_name=""):
             }
             
             implementations.append(implementation)
-            
-            # Recursively process subdirectories (but not too deep)
-            if path.count('/') < 2:  # Limit depth
-                sub_implementations = process_directory(item_path, clean_display_name(item_name))
+            print(f"📁 Found README in: {path} -> {display_name}")
+    
+    # Continue recursively processing subdirectories if not at max depth
+    if current_depth < max_depth:
+        for item in content:
+            if item['type'] == 'dir':
+                item_name = item['name']
+                item_path = item['path']
+                
+                # Skip common non-algorithm directories
+                if item_name.lower() in ['.git', '__pycache__', 'node_modules', '.vscode']:
+                    continue
+                
+                # Create parent name for nested items
+                if path:
+                    new_parent_name = f"{parent_name} {clean_display_name(item_name.split('/')[-1])}" if parent_name else clean_display_name(item_name)
+                else:
+                    new_parent_name = clean_display_name(item_name)
+                
+                # Recursively process this directory
+                sub_implementations = process_directory_recursive(item_path, new_parent_name, max_depth)
                 implementations.extend(sub_implementations)
     
     return implementations
+
+def process_directory(path="", parent_name=""):
+    """Wrapper function for backward compatibility."""
+    return process_directory_recursive(path, parent_name, max_depth=10)
 
 def generate_rl_json():
     """Generate the RL JSON data file."""
@@ -246,14 +343,29 @@ def generate_markdown_files():
         existing_file.unlink()
         print(f"🗑️  Removed old file: {existing_file.name}")
     
-    # Filter out image directories and other non-algorithm entries
+    # Filter out obvious non-algorithm directories but keep all with README content
     main_implementations = []
     for impl in implementations:
         name_lower = impl['name'].lower()
-        if not any(skip in name_lower for skip in ['images', 'assets', 'docs', '__pycache__']):
-            # Only include main algorithm directories, not sub-directories
-            if impl['path'].count('/') <= 1:  # Top-level or one level deep
-                main_implementations.append(impl)
+        path_lower = impl['path'].lower()
+        
+        # Skip obvious non-algorithm folders
+        skip_patterns = ['images', 'assets', 'docs', '__pycache__', 'node_modules', '.git']
+        
+        # Skip if it's clearly a non-algorithm folder
+        if any(skip in name_lower for skip in skip_patterns):
+            continue
+            
+        # Skip if path contains obvious non-algorithm patterns
+        if any(skip in path_lower for skip in skip_patterns):
+            continue
+            
+        # Include if it has substantial README content (likely an algorithm)
+        if impl['readme_content'] and len(impl['readme_content'].strip()) > 50:
+            main_implementations.append(impl)
+        # Also include top-level directories even without README
+        elif impl['path'].count('/') == 0:
+            main_implementations.append(impl)
     
     # Generate markdown files
     successful_count = 0
