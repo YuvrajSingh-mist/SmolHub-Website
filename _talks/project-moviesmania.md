@@ -3,9 +3,7 @@ title: "MoviesMania (Geek-o-thon) | A Reverse Search based Movies Recommendation
 collection: talks
 type: "Hackathon"
 permalink: 
-excerpt: "
-Step into the future of entertainment discovery with MoviesMania. The rpoduct aims to simplify your search for the perfect movie or web series. Using various AI/ML techniques and elements, we analyze uploaded video clips to predict movie titles and recommend similar content with an impressive accuracy. Experience flavoured recommendations tailored to your tastes, powered by Keras, Flask, and advanced face recognition algorithms with a full-fledged movie recommendation system.
-"
+excerpt: "Step into the future of entertainment discovery with MoviesMania. The rpoduct aims to simplify your search for the perfect movie or web series. Using various AI/ML techniques and elements, we analyze uploaded video clips to predict movie titles and recommend similar content with an impressive accuracy. Experience flavoured recommendations tailored to your tastes, powered by Keras, Flask, and advanced face recognition algorithms with a full-fledged movie recommendation system."
 venue: "IIIT"
 date: October 3 '23
 location: "Bhubaneswar"
@@ -17,14 +15,66 @@ location: "Bhubaneswar"
   </a>
 </div>
 
-* **Role**: Team Lead + Backend (AI/ML)
+# Movies Mania
 
-* **Vision/Goal**:To provide an interface to users to find similar movies/web-series recommendations based on an uploaded video clip/YT Short.
+- The project aims to provide an interface for people who want movie recommendations on the basis of some videos uploaded by the user such as a movie clip or YT Short.
 
-* **Solution**: To make use of the various faces of actors in the provided clip and the details provided(title, genre, plot) for the prediction of the movie’s title (if available in the dataset) or similar movies/web series.
+- Our project could also provide recommendatios based on any movie Title and on any movie Plot which could be of some other video from our databae of 5000+ movies or fruit of the user's creativity. 
 
-* **Results** Prediction of movie’s title(if available in the dataset) with 78% accuracy and similar movies with 85% accuracy.
 
-* **Tools**: Keras, Tensorflow, Word2Vec (Word Embeddings), MTCNN, NLTK, Spacy, VGGFace, OpenCV, Streamlit, Render
+## Authors
 
-[**Project Link**](https://github.com/YuvrajSingh-mist/MoviesMania)
+- [@Pritam Paul](https://www.github.com/paul-pritam)
+- [@Shlok Agrawal](https://www.github.com/agrawal-shlok)
+- [@Yuvraj Singh](https://www.github.com/YuvrajSingh-mist)
+
+
+## Features
+
+- Recommendation based on Videos
+- Recommendation based on Title
+- Recommendation based on Plot
+- Able to download YT Short dirctly on the WebApp through it's link
+- Able to get information about a particular movie on our WebApp 
+
+## Tech Stack
+
+**Backend(Logic):** Tensorflow, Keras, Word2Vec, MTCNN, VGGFace, OpenCV, Pickle
+
+**Frontend:** Streamlit (Build)
+
+
+## Run Locally
+
+```bash
+~ Download the required data files from project-files.zip
+~ Move the downloaded files from project-files.zip to the MoviesMania folder
+~ (REQUIRED) Download Microsoft Edge and its compatible Selenium driver if one wishes to use the Review System
+```
+
+Clone the project
+
+```bash
+  git clone https://github.com/YuvrajSingh-mist/MoviesMania
+```
+
+Go to the project directory
+
+```bash
+  cd MoviesMania
+```
+
+Install dependencies
+
+```bash
+  pip install -r requirements.txt
+```
+
+
+Start the WebApp
+
+```bash
+  streamlit run Home.py
+```
+
+
