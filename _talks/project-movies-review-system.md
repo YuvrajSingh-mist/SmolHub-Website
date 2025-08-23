@@ -11,6 +11,12 @@ date: September '23
 location: "Bhubaneswar"
 ---
 
+<div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
+  <a href="https://github.com/YuvrajSingh-mist/Movie_Review_System" target="_blank" rel="noopener" class="model-details-btn" style="background: linear-gradient(135deg, #111827, #374151); padding: 8px 12px; border-radius: 8px; color: #fff; text-decoration: none;">
+    🐙 GitHub
+  </a>
+</div>
+
 * **Role**: Team Lead + Backend (AI/ML)
 
 * **Vision/Goal**: To provide an interface to allow users to read spoiler-free reviews along with a touch of sentiment analysis (on reviews) for a better viewing experience

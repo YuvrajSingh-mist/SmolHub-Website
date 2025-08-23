@@ -9,6 +9,15 @@ date: Aug 23 '25
 location: Online
 ---
 
+<div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
+  <a href="https://rl-eval-leaderboard.onrender.com" target="_blank" rel="noopener" class="model-details-btn" style="background: linear-gradient(135deg, #16a34a, #22c55e); padding: 8px 12px; border-radius: 8px; color: #fff; text-decoration: none;">
+    🔗 Live Leaderboard
+  </a>
+  <a href="https://github.com/YuvrajSingh-mist/RL-Eval-Leaderboard" target="_blank" rel="noopener" class="model-details-btn" style="background: linear-gradient(135deg, #111827, #374151); padding: 8px 12px; border-radius: 8px; color: #fff; text-decoration: none;">
+    🐙 GitHub
+  </a>
+</div>
+
 # OpenRL Leaderboard
 
 A production-ready, containerized leaderboard system for evaluating Reinforcement Learning (RL) agents. It provides a FastAPI backend, a Celery worker that safely evaluates submissions inside a locked-down Docker container, real-time leaderboards powered by Redis, persistent results in PostgreSQL, and a Gradio-based frontend.

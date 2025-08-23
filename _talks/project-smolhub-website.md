@@ -9,6 +9,16 @@ date: Aug 23 '25
 location: Online
 ---
 
+<div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
+  <a href="/" target="_blank" rel="noopener" class="model-details-btn" style="background: linear-gradient(135deg, #16a34a, #22c55e); padding: 8px 12px; border-radius: 8px; color: #fff; text-decoration: none;">
+    🔗 Live Site
+  </a>
+  <a href="https://github.com/YuvrajSingh-mist/SmolHub-Website" target="_blank" rel="noopener" class="model-details-btn" style="background: linear-gradient(135deg, #111827, #374151); padding: 8px 12px; border-radius: 8px; color: #fff; text-decoration: none;">
+    🐙 GitHub
+  </a>
+  
+</div>
+
 # 🤖 Yuvraj Singh's AI Portfolio
 
 > 🎓 **Computer Science Engineering Student** at IIIT Bhubaneswar (2023-2027)  

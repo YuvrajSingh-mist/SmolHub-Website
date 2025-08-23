@@ -9,6 +9,12 @@ date: December '23 - March '24
 location: "Bhubaneswar"
 ---
 
+<div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
+  <a href="https://github.com/YuvrajSingh-mist/PlogPayouts" target="_blank" rel="noopener" class="model-details-btn" style="background: linear-gradient(135deg, #111827, #374151); padding: 8px 12px; border-radius: 8px; color: #fff; text-decoration: none;">
+    🐙 GitHub
+  </a>
+</div>
+
  Team Lead + Backend (AI/ML)
 
 * **Vision/Goal**: We aim to provide not only an idea but also a solution to bring about a small and effective change in the garbage collection process  and  also tacking the social stigma regarding the position and work of garbage collectors as perceived by the society, so as to harbour a more cleaner and greener environment while working together without any social differences.

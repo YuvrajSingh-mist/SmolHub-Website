@@ -15,6 +15,12 @@ date: July 19 '24
 location: Bhubaneswar
 ---
 
+<div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
+  <a href="https://github.com/YuvrajSingh-mist/FarmGenie/tree/main" target="_blank" rel="noopener" class="model-details-btn" style="background: linear-gradient(135deg, #111827, #374151); padding: 8px 12px; border-radius: 8px; color: #fff; text-decoration: none;">
+    🐙 GitHub
+  </a>
+</div>
+
 
 * **Role**: Backend (AI/ML Integration)
 

@@ -11,6 +11,12 @@ date: March 3 '24
 location: "Rourkela"
 ---
 
+<div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
+  <a href="https://github.com/YuvrajSingh-mist/Insight-Ed" target="_blank" rel="noopener" class="model-details-btn" style="background: linear-gradient(135deg, #111827, #374151); padding: 8px 12px; border-radius: 8px; color: #fff; text-decoration: none;">
+    🐙 GitHub
+  </a>
+</div>
+
 * **Role**: Backend (AI/ML+Server)
 
 * **Vision/Goal**: Our solution tries to bridge the knowledge gap between a teacher and a student in online classes by leveraging the power of AI to provide the teacher and student with insights to better prepare themselves for the course/lecture.

@@ -11,6 +11,12 @@ date: October 3 '23
 location: "Bhubaneswar"
 ---
 
+<div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
+  <a href="https://github.com/YuvrajSingh-mist/MoviesMania" target="_blank" rel="noopener" class="model-details-btn" style="background: linear-gradient(135deg, #111827, #374151); padding: 8px 12px; border-radius: 8px; color: #fff; text-decoration: none;">
+    🐙 GitHub
+  </a>
+</div>
+
 * **Role**: Team Lead + Backend (AI/ML)
 
 * **Vision/Goal**:To provide an interface to users to find similar movies/web-series recommendations based on an uploaded video clip/YT Short.
