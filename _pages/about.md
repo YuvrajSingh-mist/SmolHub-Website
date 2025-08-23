@@ -61,6 +61,36 @@ redirect_from:
 </div>
 
 
+## Projects
+
+<div class="projects-list">
+  <ul>
+  {% for post in site.talks reversed %}
+    <li>
+      <span>🚀</span> <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      {% assign meta = '' %}
+      {% if post.type %}{% assign meta = meta | append: post.type %}{% endif %}
+      {% if post.venue %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.venue %}{% endif %}
+      {% if post.location %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.location %}{% endif %}
+      {% if post.date %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.date %}{% endif %}
+      {% if meta != '' %}<br/><small>{{ meta }}</small>{% endif %}
+      {% assign bullets = post.excerpt | strip_html | strip_newlines | replace: '…', '.' | replace: ' .', '.' | replace: '  ', ' ' | split: '.' %}
+      {% assign shown = 0 %}
+      <ul>
+      {% for item in bullets %}
+        {% assign trimmed = item | strip %}
+        {% if trimmed != '' and shown < 4 %}
+          <li>{{ trimmed }}.</li>
+          {% assign shown = shown | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+      </ul>
+    </li>
+  {% endfor %}
+  </ul>
+</div>
+
+
 ## 🧑‍🎓 Education
 
 <div class="education-list">
@@ -150,36 +180,6 @@ redirect_from:
         <span class="chip">Google Cloud Platform</span>
       </div>
     </li>
-  </ul>
-</div>
-
-
-## Projects
-
-<div class="projects-list">
-  <ul>
-  {% for post in site.talks reversed %}
-    <li>
-      <span>🚀</span> <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      {% assign meta = '' %}
-      {% if post.type %}{% assign meta = meta | append: post.type %}{% endif %}
-      {% if post.venue %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.venue %}{% endif %}
-      {% if post.location %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.location %}{% endif %}
-      {% if post.date %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.date %}{% endif %}
-      {% if meta != '' %}<br/><small>{{ meta }}</small>{% endif %}
-      {% assign bullets = post.excerpt | strip_html | strip_newlines | replace: '…', '.' | replace: ' .', '.' | replace: '  ', ' ' | split: '.' %}
-      {% assign shown = 0 %}
-      <ul>
-      {% for item in bullets %}
-        {% assign trimmed = item | strip %}
-        {% if trimmed != '' and shown < 4 %}
-          <li>{{ trimmed }}.</li>
-          {% assign shown = shown | plus: 1 %}
-        {% endif %}
-      {% endfor %}
-      </ul>
-    </li>
-  {% endfor %}
   </ul>
 </div>
 
