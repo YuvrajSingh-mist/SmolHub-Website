@@ -229,15 +229,4 @@ This portfolio and associated code are released under the **MIT License**. Feel 
 
 ---
 
-<div align="center">
-
-### 💡 *"Building the future of AI, one model at a time"*
-
-**Yuvraj Singh** | Computer Science Engineering | IIIT Bhubaneswar
-
-[![Made with ❤️ for the AI Community](https://img.shields.io/badge/Made%20with%20❤️-for%20the%20AI%20Community-red?style=for-the-badge)](https://yuvraj-portfolio.onrender.com)
-
-</div>
-
-
 
