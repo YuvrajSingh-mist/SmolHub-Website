@@ -7,6 +7,7 @@ permalink:
 venue: "NIT"
 date: March 3 '24
 location: "Rourkela"
+date_iso: 2024-03-03
 ---
 
 <div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">

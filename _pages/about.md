@@ -65,7 +65,8 @@ redirect_from:
 
 <div class="projects-list">
   <ul>
-  {% for post in site.talks reversed %}
+  {% assign sorted_projects = site.talks | sort: 'date_iso' | reverse %}
+  {% for post in sorted_projects %}
     <li>
       <span>🚀</span> <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
       {% assign meta = '' %}

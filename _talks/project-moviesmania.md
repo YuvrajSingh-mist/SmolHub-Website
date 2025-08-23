@@ -7,6 +7,7 @@ excerpt: "Step into the future of entertainment discovery with MoviesMania. The 
 venue: "IIIT"
 date: October 3 '23
 location: "Bhubaneswar"
+date_iso: 2023-10-03
 ---
 
 <div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">

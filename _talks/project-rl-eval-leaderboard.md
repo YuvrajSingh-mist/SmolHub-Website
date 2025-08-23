@@ -7,6 +7,7 @@ permalink:
 venue: "Personal Project"
 date: Aug 23 '25
 location: Online
+date_iso: 2025-08-23
 ---
 
 <div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">

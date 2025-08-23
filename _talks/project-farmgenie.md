@@ -13,6 +13,7 @@ permalink:
 venue: "IIIT-BH"
 date: July 19 '24
 location: Bhubaneswar
+date_iso: 2024-07-19
 ---
 
 <div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
