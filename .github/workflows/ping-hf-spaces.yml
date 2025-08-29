@@ -35,23 +35,66 @@ jobs:
           count=$(wc -l < /tmp/urls.txt | tr -d ' ')
           echo "count=$count" >> $GITHUB_OUTPUT
 
-      - name: Ping Spaces (root and queue)
+      - name: Ping and Restart Spaces
         if: steps.collect.outputs.count != '0'
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           set -e
           while IFS= read -r url; do
-            echo "Pinging $url"
-            # Try HEAD first, then GET fallback
-            (curl -sS -I "$url" || curl -sS "$url" >/dev/null) || true
-            # Ping with a cache-busting param
-            (curl -sS -I "$url?noCache=$(date +%s)" || true)
-            # If it's a Gradio space, also hit the queue endpoint to warm it
-            proto_host=$(echo "$url" | awk -F/ '{print $1"//"$3}')
-            (curl -sS -I "$proto_host/queue/join" || true)
+            echo "Checking $url"
+            
+            # Extract owner and space name from URL
+            OWNER=$(echo "$url" | sed 's|https://huggingface.co/spaces/||' | cut -d'/' -f1)
+            SPACE=$(echo "$url" | sed 's|https://huggingface.co/spaces/||' | cut -d'/' -f2)
+            
+            echo "Owner: $OWNER, Space: $SPACE"
+            
+            # Try to ping the space with timeout
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "$url?cachebust=$(date +%s)" || echo "000")
+            echo "HTTP Code: $HTTP_CODE"
+            
+            # Check if space is down (5xx errors, connection timeouts, or specific error codes)
+            if [[ "$HTTP_CODE" == "000" || "$HTTP_CODE" == "502" || "$HTTP_CODE" == "503" || "$HTTP_CODE" == "504" || "$HTTP_CODE" == "520" || "$HTTP_CODE" == "521" || "$HTTP_CODE" == "522" || "$HTTP_CODE" == "523" || "$HTTP_CODE" == "524" ]]; then
+              echo "Space $SPACE appears to be down (HTTP $HTTP_CODE). Attempting restart..."
+              
+              # Restart the space using HF API
+              RESTART_RESPONSE=$(curl -s -w "%{http_code}" -X POST \
+                "https://huggingface.co/api/spaces/$OWNER/$SPACE/restart" \
+                -H "Authorization: Bearer $HF_TOKEN" \
+                -H "Content-Type: application/json" \
+                -d '{}' || echo "000")
+              
+              RESTART_CODE=$(echo "$RESTART_RESPONSE" | tail -c 4)
+              RESTART_BODY=$(echo "$RESTART_RESPONSE" | head -c -4)
+              
+              echo "Restart response code: $RESTART_CODE"
+              echo "Restart response body: $RESTART_BODY"
+              
+              if [[ "$RESTART_CODE" == "200" || "$RESTART_CODE" == "201" ]]; then
+                echo "Successfully initiated restart for $SPACE"
+                # Wait a bit for restart to begin
+                sleep 10
+                
+                # Try pinging again after restart
+                echo "Pinging $SPACE after restart..."
+                curl -s -o /dev/null -w "%{http_code}\n" --max-time 30 "$url?cachebust=$(date +%s)" || echo "Still down"
+              else
+                echo "Failed to restart $SPACE (HTTP $RESTART_CODE): $RESTART_BODY"
+              fi
+            else
+              echo "Space $SPACE is responding (HTTP $HTTP_CODE). Pinging to keep warm..."
+              # Ping both root and queue endpoints to keep it warm
+              curl -s -o /dev/null -w "%{http_code}\n" --max-time 15 "$url?cachebust=$(date +%s)" || true
+              curl -s -o /dev/null -w "%{http_code}\n" --max-time 15 "$url/queue/join?cachebust=$(date +%s)" || true
+            fi
+            
+            sleep 2 # Small delay between spaces
           done < /tmp/urls.txt
 
       - name: Summary
         run: |
-          echo "Pinged $(wc -l < /tmp/urls.txt | tr -d ' ') Hugging Face Spaces URLs."
+          echo "Processed $(wc -l < /tmp/urls.txt | tr -d ' ') Hugging Face Spaces URLs."
 
 
+?

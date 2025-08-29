@@ -12,10 +12,10 @@ minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "n
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Yuvraj's Portfolio"
+title                    : "SmolHub — Yuvraj Singh Portfolio & AI Projects"
 title_separator          : "-"
 name                     : &name "Yuvraj Singh"
-description              : &description "personal description"
+description              : &description "SmolHub: Yuvraj Singh's portfolio showcasing AI research, LLM tooling, RL reasoning experiments, models and datasets, and open-source projects."
 url                      : https://smolhub.com # Primary domain
 # Alternate domains: https://yuvrajsingh-portfoilo-website.vercel.app, https://smolhub.vercel.app
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
@@ -131,18 +131,21 @@ yandex_site_verification :
 
 # Social Sharing
 twitter:
-  username               : &twitter
+  username               : &twitter "YuvrajS9886"
 facebook:
   username               :
   app_id                 :
   publisher              :
-og_image                 :  # Open Graph/Twitter default site image
+og_image                 :  site-logo.png # Open Graph/Twitter default site image (under /images)
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
-  type                   : # Person or Organization (defaults to Person)
-  name                   : # If the user or organization name differs from the site's name
-  links: # An array of links to social media profiles
+  type                   : Person
+  name                   : "Yuvraj Singh"
+  links:
+    - https://github.com/YuvrajSingh-mist
+    - https://www.linkedin.com/in/yuvraj-singh9886/
+    - https://twitter.com/YuvrajS9886
 
 
 # Analytics
