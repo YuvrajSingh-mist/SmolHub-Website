@@ -9,7 +9,7 @@ author_profile: true
 
 <div class="models-page">
   <div class="models-intro">
-    <h1>🧠 Paper Replications</h1>
+    <h1>Paper Replications</h1>
     <p>Explore my collection of AI paper implementations built from scratch. Each implementation demonstrates deep understanding of algorithms and provides educational insights into modern ML techniques.</p>
     
     <div class="models-stats">
@@ -31,7 +31,7 @@ author_profile: true
   <!-- Search and Filter Section -->
   <div class="search-section">
     <div class="search-container">
-      <input type="text" id="model-search" placeholder="🔍 Search models (e.g., GPT, BERT, GAN, Transformer...)">
+      <input type="text" id="model-search" placeholder="Search models (e.g., GPT, BERT, GAN, Transformer...)">
       <div class="search-filters">
         <button class="filter-btn active" data-category="all">All Models ({{ site.paper_replications.size }})</button>
         {% assign categories = site.paper_replications | map: 'category' | uniq | sort %}
@@ -128,11 +128,12 @@ author_profile: true
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background: linear-gradient(135deg, #606060 0%, #404040 100%);
+  background: #ffffff;
   border-radius: 10px;
-  color: white;
+  color: #2c2c2c;
   min-width: 120px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e8e8e8;
 }
 
 .stat-number {
@@ -194,14 +195,15 @@ author_profile: true
 }
 
 .filter-btn.active {
-  background: #606060;
+  background: #2c3e50;
   color: white;
-  border-color: #505050;
+  border-color: #2c3e50;
 }
 
 .framework-filter.active {
-  background: #707070;
-  border-color: #606060;
+  background: #2c3e50;
+  color: white;
+  border-color: #2c3e50;
 }
 
 .models-grid {
@@ -302,22 +304,25 @@ author_profile: true
 }
 
 .btn-primary {
-  background: #606060;
+  background: #2c3e50;
   color: white;
 }
 
 .btn-primary:hover {
-  background: #404040;
+  background: #1a2332;
   transform: translateY(-1px);
 }
 
 .btn-secondary {
-  background: #6c757d;
-  color: white;
+  background: #ffffff;
+  color: #2c3e50;
+  border: 1px solid #d0d0d0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
 .btn-secondary:hover {
-  background: #5a6268;
+  background: #f8f8f8;
+  border-color: #b0b0b0;
   transform: translateY(-1px);
 }
 

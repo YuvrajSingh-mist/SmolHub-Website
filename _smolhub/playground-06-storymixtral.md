@@ -1,6 +1,6 @@
 ---
 title: "Story Mixtral"
-excerpt: "A PyTorch implementation of a Mixtral inspired transformer model with Mixture of Experts (MoE), Flash Attention, and other advanced features. 🎮<br/><img src='/images/500x300.png'>"
+excerpt: "A PyTorch implementation of a Mixtral inspired transformer model with Mixture of Experts (MoE), Flash Attention, and other advanced features. <br/><img src='/images/500x300.png'>"
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryMixtral"
 date: 2025-08-08
@@ -314,7 +314,7 @@ MIT License
 View the complete implementation, documentation, and examples on GitHub.
 
 ## Interactive Features
-🎮 **Web Interface**: This project includes a Gradio-based web interface for easy interaction and experimentation.
+ **Web Interface**: This project includes a Gradio-based web interface for easy interaction and experimentation.
 
 📱 **User-Friendly**: Simple, intuitive interface perfect for testing and learning.
 

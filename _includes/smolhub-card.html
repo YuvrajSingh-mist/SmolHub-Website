@@ -21,8 +21,8 @@
 {% endfor %}
 
 <div class="model-card smolhub-card" data-tags="{{ project_tags }}">
-  <div class="model-card__image" style="background: linear-gradient(135deg, #505050 0%, #303030 100%);">
-    <span>{{ title }} 🎮</span>
+  <div class="model-card__image">
+    <span>{{ title }}</span>
   </div>
   
   <div class="model-card__content">
@@ -47,17 +47,17 @@
     {% endif %}
     
     <div class="model-card__footer" style="display: flex; gap: 8px; align-items: center;">
-      <a href="{{ base_path }}{{ post.url }}" class="model-details-btn" rel="permalink" style="background: linear-gradient(135deg, #606060, #404040); flex: 1;">
+      <a href="{{ base_path }}{{ post.url }}" class="model-details-btn" rel="permalink" style="background: #ffffff; color: #2c3e50; border: 1px solid #d0d0d0; box-shadow: 0 1px 3px rgba(0,0,0,0.08); flex: 1;">
         Explore Project
       </a>
       {% if title == "Story Kimi" %}
-      <a href="https://huggingface.co/spaces/YuvrajSingh9886/StoryKimi-Zero" target="_blank" rel="noopener" class="model-details-btn huggingface-btn" style="background: linear-gradient(135deg, #707070, #505050); flex: 1;">
-        🤗 Try it
+      <a href="https://huggingface.co/spaces/YuvrajSingh9886/StoryKimi-Zero" target="_blank" rel="noopener" class="model-details-btn huggingface-btn" style="background: #ffffff; color: #2c3e50; border: 1px solid #d0d0d0; box-shadow: 0 1px 3px rgba(0,0,0,0.08); flex: 1;">
+        Try on HuggingFace
       </a>
       {% endif %}
       {% if title == "Smol Transformer" %}
-      <a href="https://huggingface.co/spaces/YuvrajSingh9886/SmolTransformer-Zero" target="_blank" rel="noopener" class="model-details-btn huggingface-btn" style="background: linear-gradient(135deg, #707070, #505050); flex: 1;">
-        Try the Model: 🤗 Try it on HuggingFace Spaces
+      <a href="https://huggingface.co/spaces/YuvrajSingh9886/SmolTransformer-Zero" target="_blank" rel="noopener" class="model-details-btn huggingface-btn" style="background: #ffffff; color: #2c3e50; border: 1px solid #d0d0d0; box-shadow: 0 1px 3px rgba(0,0,0,0.08); flex: 1;">
+        Try the Model on HuggingFace Spaces
       </a>
       {% endif %}
     </div>

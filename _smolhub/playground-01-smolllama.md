@@ -1,6 +1,6 @@
 ---
 title: "Smol Llama"
-excerpt: "So, I trained a Llama a 130M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scratch. 🎮<br/><img src='/images/500x300.png'>"
+excerpt: "So, I trained a Llama a 130M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scratch. <br/><img src='/images/500x300.png'>"
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolLlama"
 date: 2025-08-09
@@ -319,7 +319,7 @@ python inference_sft.py --prompt "Follow the given instruction carefully. What w
 View the complete implementation, documentation, and examples on GitHub.
 
 ## Interactive Features
-🎮 **Web Interface**: This project includes a Gradio-based web interface for easy interaction and experimentation.
+ **Web Interface**: This project includes a Gradio-based web interface for easy interaction and experimentation.
 
 📱 **User-Friendly**: Simple, intuitive interface perfect for testing and learning.
 

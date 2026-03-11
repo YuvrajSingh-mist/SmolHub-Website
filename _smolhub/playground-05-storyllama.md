@@ -1,6 +1,6 @@
 ---
 title: "Story Llama"
-excerpt: "So, I trained a Llama a 88M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scratch. 🎮<br/><img src='/images/500x300.png'>"
+excerpt: "So, I trained a Llama a 88M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scratch. <br/><img src='/images/500x300.png'>"
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryLlama"
 date: 2025-08-08
@@ -228,7 +228,7 @@ python inference.py --prompt "Once upon a time" --max_length 100 --temperature 0
 View the complete implementation, documentation, and examples on GitHub.
 
 ## Interactive Features
-🎮 **Web Interface**: This project includes a Gradio-based web interface for easy interaction and experimentation.
+ **Web Interface**: This project includes a Gradio-based web interface for easy interaction and experimentation.
 
 📱 **User-Friendly**: Simple, intuitive interface perfect for testing and learning.
 

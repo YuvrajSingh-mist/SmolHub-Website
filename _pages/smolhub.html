@@ -21,7 +21,7 @@ author_profile: true
   <!-- Search and Filter Section -->
   <div class="search-section">
     <div class="search-container">
-      <input type="text" id="smolhub-search" placeholder="🔍 Search projects (e.g., Mixtral, Transformer, PyTorch...)">
+      <input type="text" id="smolhub-search" placeholder="Search projects (e.g., Mixtral, Transformer, PyTorch...)">
     </div>
     
     <!-- Tag Filters -->
@@ -220,7 +220,7 @@ function showSmolhubDetail(smolhubId) {
                 <button class="back-btn" onclick="goBackToSmolhub()">
                     <i class="fa fa-arrow-left"></i> Back to Playground
                 </button>
-                <h1 class="model-detail-title">${smolhubData.title} 🎮</h1>
+                <h1 class="model-detail-title">${smolhubData.title}</h1>
                 <div class="model-detail-info">
                     <span class="detail-badge">SmolHub Playground</span>
                     <span class="detail-badge">Experimental Project</span>
@@ -231,14 +231,14 @@ function showSmolhubDetail(smolhubId) {
                     </a>
                     ${smolhubData.title === 'Story Kimi' ? 
                         `<a href="https://huggingface.co/spaces/YuvrajSingh9886/StoryKimi-Zero" target="_blank" rel="noopener" class="action-btn huggingface-btn">
-                            🤗 Try it
+                            Try on HuggingFace
                         </a>` : 
                     smolhubData.title === 'Smol Transformer' ? 
                         `<a href="https://huggingface.co/spaces/YuvrajSingh9886/SmolTransformer-Zero" target="_blank" rel="noopener" class="action-btn huggingface-btn">
-                            🤗 Try it
+                            Try on HuggingFace
                         </a>` : 
                         `<a href="https://huggingface.co/YuvrajSingh9886" target="_blank" rel="noopener" class="action-btn huggingface-btn">
-                            🤗 HuggingFace Profile
+                            HuggingFace Profile
                         </a>`
                     }
                 </div>

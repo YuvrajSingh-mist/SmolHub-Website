@@ -1,6 +1,6 @@
 ---
 title: "Smol Transformer"
-excerpt: "A compact implementation of an Encoder-Decoder Transformer for sequence-to-sequence translation tasks. This project implements a translation model from English to Hindi using the Samanantar dataset. 🎮<br/><img src='/images/500x300.png'>"
+excerpt: "A compact implementation of an Encoder-Decoder Transformer for sequence-to-sequence translation tasks. This project implements a translation model from English to Hindi using the Samanantar dataset. <br/><img src='/images/500x300.png'>"
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolTransformer"
 date: 2025-08-08
@@ -243,7 +243,7 @@ Feel free to submit issues, fork the repository, and create pull requests for an
 View the complete implementation, documentation, and examples on GitHub.
 
 ## Interactive Features
-🎮 **Web Interface**: This project includes a Gradio-based web interface for easy interaction and experimentation.
+ **Web Interface**: This project includes a Gradio-based web interface for easy interaction and experimentation.
 
 📱 **User-Friendly**: Simple, intuitive interface perfect for testing and learning.
 

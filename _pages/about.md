@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "👋 Hi there, I am Yuvraj!"  
+title: "Hi there, I am Yuvraj!"  
 
 author_profile: true
 redirect_from: 
@@ -10,32 +10,32 @@ redirect_from:
 
 
 
-- 🧠 Build and fine-tune LLMs; re-implement classic AI/ML papers from scratch
-- 🧩 Focus areas: Multimodal LLMs (vision, language and audio) and RL for pre/post treaining paradigms.
-- 🎯 Looking for: Research Internship (academia / industrial) positions in my areas of interest. Open to AI Engineer roles for development of pipelines, RAGs, Fine Tuning and other AI/ML related projects.
-- 🤝 Community: Mentor newcomers and collaborate on open‑source projects
+• Build and fine-tune LLMs; re-implement classic AI/ML papers from scratch
+• Focus areas: Multimodal LLMs (vision, language and audio) and RL for pre/post treaining paradigms.
+• Looking for: Research Internship (academia / industrial) positions in my areas of interest. Open to AI Engineer roles for development of pipelines, RAGs, Fine Tuning and other AI/ML related projects.
+• Community: Mentor newcomers and collaborate on open‑source projects
 
 
-## 👨🏻‍🔬 Professional Experience
+## Professional Experience
 
 <div class="experience-list">
   <ul>
       <li>
-      <span>🏛️</span> <strong>TurboML— AI Engineer</strong> <small>· May 2025 – June 2025</small>
+      <strong>TurboML— AI Engineer</strong> <small>· May 2025 – June 2025</small>
       <ul>
         <li>Worked on development of various tools for LLM, enhancing tool-calling capabilities.</li>
         <li>Developed pipeline for smooth integration of tools developed for YouTube QnA, summarization of videos and fact check features with the platform.</li>
       </ul>
     </li>
     <li>
-      <span>🏛️</span> <strong>University of Maryland — Research Intern</strong> <small>· Dec 2024 – Feb 2025</small>
+      <strong>University of Maryland — Research Intern</strong> <small>· Dec 2024 – Feb 2025</small>
       <ul>
         <li>UI/UX→Code dataset creation for VLM fine‑tuning</li>
         <li>Scraped 100+ static sites; curated 200+ layout/commit records</li>
       </ul>
     </li>
     <li>
-      <span>🧪</span> <strong>IISER Kolkata — Summer Research Intern</strong> <small>· May 2024 – May 2025</small>
+      <strong>IISER Kolkata — Summer Research Intern</strong> <small>· May 2024 – May 2025</small>
       <ul>
         <li>Built 40k human‑verified stance‑analysis dataset (sports controversies)</li>
         <li>Labels via Llama‑3.1/3.2, Mistral‑7B, Qwen‑2.5 with human verification</li>
@@ -43,7 +43,7 @@ redirect_from:
       </ul>
     </li>
     <li>
-      <span>🔬</span> <strong>AIISC — Research Intern</strong> <small>· Mar 2024 – Jul 2024</small>
+      <strong>AIISC — Research Intern</strong> <small>· Mar 2024 – Jul 2024</small>
       <ul>
         <li>Worked with Prof. Amitava Das on hallucination prevention</li>
         <li>Web‑scraped news/posts; generated synthetic data with open‑source LLMs</li>
@@ -51,7 +51,7 @@ redirect_from:
       </ul>
     </li>
     <li>
-      <span>🏥</span> <strong>Clinical AI Assistance — Research Intern</strong> <small>· Dec 2023 – Mar 2024</small>
+      <strong>Clinical AI Assistance — Research Intern</strong> <small>· Dec 2023 – Mar 2024</small>
       <ul>
         <li>Dataset creation and model evaluation with HuggingFace‑hosted LLMs</li>
         <li>Data gathering, cleaning, and efficiency analysis</li>
@@ -68,7 +68,7 @@ redirect_from:
   {% assign sorted_projects = site.talks | sort: 'date_iso' | reverse %}
   {% for post in sorted_projects %}
     <li>
-      <span>🚀</span> <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
       {% assign meta = '' %}
       {% if post.type %}{% assign meta = meta | append: post.type %}{% endif %}
       {% if post.venue %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.venue %}{% endif %}
@@ -92,24 +92,24 @@ redirect_from:
 </div>
 
 
-## 🧑‍🎓 Education
+## Education
 
 <div class="education-list">
   <ul>
     <li>
-      <span>🎓</span> <strong>International Institute of Information Technology, Bhubaneswar</strong> <small>· 2023–2027</small>
+      <strong>International Institute of Information Technology, Bhubaneswar</strong> <small>· 2023–2027</small>
       <ul>
         <li>BTech, Computer Science Engineering</li>
       </ul>
     </li>
     <li>
-      <span>🏫</span> <strong>Delhi Public School</strong> <small>· 2022–2023</small>
+      <strong>Delhi Public School</strong> <small>· 2022–2023</small>
       <ul>
         <li>CBSE Grade 12 — 91%</li>
       </ul>
     </li>
     <li>
-      <span>🏫</span> <strong>Amity International School</strong> <small>· 2021–2022</small>
+      <strong>Amity International School</strong> <small>· 2021–2022</small>
       <ul>
         <li>CBSE Grade 10 — 96%</li>
       </ul>
@@ -118,18 +118,18 @@ redirect_from:
 </div>
 
 
-## 🧰 Skills
+## Skills
 
 <div class="skills-list">
   <ul>
     <li>
-      <strong>🧠 Languages</strong>
+      <strong>Languages</strong>
       <div class="skill-chips">
         <span class="chip">Python</span>
       </div>
     </li>
     <li>
-      <strong>🧩 Frameworks</strong>
+      <strong>Frameworks</strong>
       <div class="skill-chips">
         <span class="chip">PyTorch</span>
         <span class="chip">Keras</span>
@@ -138,7 +138,7 @@ redirect_from:
       </div>
     </li>
     <li>
-      <strong>🤖 GenAI Tools</strong>
+      <strong>GenAI Tools</strong>
       <div class="skill-chips">
         <span class="chip">LangChain</span>
         <span class="chip">LlamaIndex</span>
@@ -149,7 +149,7 @@ redirect_from:
       </div>
     </li>
     <li>
-      <strong>📝 NLP</strong>
+      <strong>NLP</strong>
       <div class="skill-chips">
         <span class="chip">GRU</span>
         <span class="chip">RNN</span>
@@ -160,7 +160,7 @@ redirect_from:
       </div>
     </li>
     <li>
-      <strong>🖼️ Computer Vision</strong>
+      <strong>Computer Vision</strong>
       <div class="skill-chips">
         <span class="chip">CNN</span>
         <span class="chip">OpenCV</span>
@@ -171,7 +171,7 @@ redirect_from:
       </div>
     </li>
     <li>
-      <strong>🛠️ Tools & Platforms</strong>
+      <strong>Tools & Platforms</strong>
       <div class="skill-chips">
         <span class="chip">Streamlit</span>
         <span class="chip">Git</span>
@@ -185,20 +185,20 @@ redirect_from:
 </div>
 
 
-## 🎖️ Achievements
+## Achievements
 
 <div class="achievements-list">
   <ul>
     <li>
-      <span class="achv-title">🏆 GeoHack ’24 Finale — 2nd place</span><br/>
+      <span class="achv-title">GeoHack '24 Finale — 2nd place</span>
       <small>Project: FarmGenie · IEEE GRSS Kolkata and SAADRI · 2024</small>
     </li>
     <li>
-      <span class="achv-title">🥈 YESIST12 ’24 (Special Track) — Finalist</span><br/>
+      <span class="achv-title">YESIST12 '24 (Special Track) — Finalist</span>
       <small>Project: PlogPayouts · Led the project · 2024</small>
     </li>
     <li>
-      <span class="achv-title">🥇 Geek‑o‑thon (D3 @ IIIT‑BH) — Winner</span><br/>
+      <span class="achv-title">Geek‑o‑thon (D3 @ IIIT‑BH) — Winner</span><br/>
       <small>Project: MovieMania · Inter‑college hackathon (AI/ML) · 2023</small>
     </li>
   </ul>
