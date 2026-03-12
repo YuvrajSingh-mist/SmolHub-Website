@@ -62,10 +62,8 @@ redirect_from:
 
 <div class="projects-list">
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin: 20px 0;">
-  {% assign all_dates = site.talks | map: 'date_iso' | uniq | sort | reverse %}
-  {% for date_iso in all_dates %}
-    {% assign date_projects = site.talks | where: 'date_iso', date_iso | sort: 'title' %}
-    {% for post in date_projects %}
+  {% assign sorted_talks = site.talks | sort: 'date_iso' | reverse %}
+  {% for post in sorted_talks %}
     <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.3s ease; display: flex; flex-direction: column;">
       <div style="margin-bottom: 12px;">
         <a href="{{ post.url | relative_url }}" style="font-size: 1.1em; font-weight: 700; color: #2c3e50; text-decoration: none; line-height: 1.3;">{{ post.title | split: '|' | first | strip }}</a>
@@ -101,7 +99,6 @@ redirect_from:
         </div>
       {% endif %}
     </div>
-    {% endfor %}
   {% endfor %}
   </div>
 </div>
