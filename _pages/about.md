@@ -63,10 +63,19 @@ redirect_from:
 <div class="projects-list">
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin: 20px 0;">
   {% assign sorted_talks = site.talks | sort: 'date_iso' | reverse %}
-  {% for post in sorted_talks %}
+  {% assign sorted_by_stars = sorted_talks | sort: 'stars' | reverse %}
+  {% for post in sorted_by_stars %}
     <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.3s ease; display: flex; flex-direction: column;">
       <div style="margin-bottom: 12px;">
-        <a href="{{ post.url | relative_url }}" style="font-size: 1.1em; font-weight: 700; color: #2c3e50; text-decoration: none; line-height: 1.3;">{{ post.title | split: '|' | first | strip }}</a>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <a href="{{ post.url | relative_url }}" style="font-size: 1.1em; font-weight: 700; color: #2c3e50; text-decoration: none; line-height: 1.3;">{{ post.title | split: '|' | first | strip }}</a>
+          {% if post.stars %}
+            <span style="background: #f5f5f5; color: #2c3e50; padding: 3px 8px; border-radius: 4px; font-size: 0.75em; font-weight: 600; white-space: nowrap; border: 1px solid #e0e0e0; display: inline-flex; align-items: center; gap: 4px;">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="#fbbf24" style="flex-shrink: 0;"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
+              {{ post.stars }}
+            </span>
+          {% endif %}
+        </div>
         {% if post.title contains '|' %}
           <div style="color: #666; font-size: 0.9em; margin-top: 4px;">{{ post.title | split: '|' | last | strip }}</div>
         {% endif %}
@@ -112,18 +121,6 @@ redirect_from:
       <strong>International Institute of Information Technology, Bhubaneswar</strong> <small>· 2023–2027</small>
       <ul>
         <li>BTech, Computer Science Engineering</li>
-      </ul>
-    </li>
-    <li>
-      <strong>Delhi Public School</strong> <small>· 2022–2023</small>
-      <ul>
-        <li>CBSE Grade 12 — 91%</li>
-      </ul>
-    </li>
-    <li>
-      <strong>Amity International School</strong> <small>· 2021–2022</small>
-      <ul>
-        <li>CBSE Grade 10 — 96%</li>
       </ul>
     </li>
   </ul>

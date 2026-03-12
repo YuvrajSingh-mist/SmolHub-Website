@@ -9,6 +9,7 @@ date: Feb '25
 location: Online
 date_iso: 2025-02-01
 github_url: https://github.com/YuvrajSingh-mist/NeatRL
+stars: 230
 ---
 
 <div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">

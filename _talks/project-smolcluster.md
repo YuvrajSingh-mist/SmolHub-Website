@@ -9,6 +9,7 @@ date: Jan '26
 location: Online
 date_iso: 2026-01-01
 github_url: https://github.com/YuvrajSingh-mist/smolcluster
+stars: 40
 ---
 
 <div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
