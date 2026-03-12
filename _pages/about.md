@@ -61,52 +61,49 @@ redirect_from:
 ## Projects
 
 <div class="projects-list">
-  <ul>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin: 20px 0;">
   {% assign all_dates = site.talks | map: 'date_iso' | uniq | sort | reverse %}
-  {% assign final_projects = "" | split: "" %}
   {% for date_iso in all_dates %}
     {% assign date_projects = site.talks | where: 'date_iso', date_iso | sort: 'title' %}
     {% for post in date_projects %}
-      {% assign final_projects = final_projects | push: post %}
-    {% endfor %}
-  {% endfor %}
-  {% for post in final_projects %}
-    <li>
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px;">
-        <div style="flex: 1;">
-          <a href="{{ post.url | relative_url }}" style="font-size: 1.15em; font-weight: 700; color: #2c3e50; text-decoration: none;">{{ post.title | split: '|' | first | strip }}</a>
-          {% if post.title contains '|' %}
-            <br/><span style="color: #666; font-size: 0.9em;">{{ post.title | split: '|' | last | strip }}</span>
-          {% endif %}
-        </div>
-        <div style="display: flex; gap: 8px; align-items: center; flex-shrink: 0;">
-          {% if post.github_url %}
-            <a href="{{ post.github_url }}" target="_blank" rel="noopener" style="background: #ffffff; color: #2c3e50; border: 1px solid #d0d0d0; padding: 6px 14px; border-radius: 6px; font-size: 0.85em; font-weight: 500; text-decoration: none; white-space: nowrap; box-shadow: 0 1px 3px rgba(0,0,0,0.08); transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px;">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink: 0;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-              GitHub
-            </a>
-          {% endif %}
-        </div>
+    <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.3s ease; display: flex; flex-direction: column;">
+      <div style="margin-bottom: 12px;">
+        <a href="{{ post.url | relative_url }}" style="font-size: 1.1em; font-weight: 700; color: #2c3e50; text-decoration: none; line-height: 1.3;">{{ post.title | split: '|' | first | strip }}</a>
+        {% if post.title contains '|' %}
+          <div style="color: #666; font-size: 0.9em; margin-top: 4px;">{{ post.title | split: '|' | last | strip }}</div>
+        {% endif %}
       </div>
+      
       {% assign meta = '' %}
       {% if post.type %}{% assign meta = meta | append: post.type %}{% endif %}
       {% if post.venue %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.venue %}{% endif %}
       {% if post.location %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.location %}{% endif %}
-      {% if meta != '' %}<div style="margin-bottom: 10px;"><small style="color: #666;">{{ meta }}</small></div>{% endif %}
+      {% if meta != '' %}<div style="margin-bottom: 12px;"><small style="color: #666;">{{ meta }}</small></div>{% endif %}
+      
       {% assign bullets = post.excerpt | strip_html | strip_newlines | replace: '…', '.' | replace: ' .', '.' | replace: '  ', ' ' | split: '.' %}
       {% assign shown = 0 %}
-      <ul>
+      <ul style="margin: 0 0 16px 0; padding-left: 20px; flex-grow: 1;">
       {% for item in bullets %}
         {% assign trimmed = item | strip %}
         {% if trimmed != '' and shown < 3 %}
-          <li>{{ trimmed }}.</li>
+          <li style="margin-bottom: 6px; font-size: 0.9em; color: #555;">{{ trimmed }}.</li>
           {% assign shown = shown | plus: 1 %}
         {% endif %}
       {% endfor %}
       </ul>
-    </li>
+      
+      {% if post.github_url %}
+        <div style="margin-top: auto;">
+          <a href="{{ post.github_url }}" target="_blank" rel="noopener" style="background: #ffffff; color: #2c3e50; border: 1px solid #d0d0d0; padding: 8px 16px; border-radius: 6px; font-size: 0.85em; font-weight: 500; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px; width: 100%; justify-content: center;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink: 0;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            View on GitHub
+          </a>
+        </div>
+      {% endif %}
+    </div>
+    {% endfor %}
   {% endfor %}
-  </ul>
+  </div>
 </div>
 
 
