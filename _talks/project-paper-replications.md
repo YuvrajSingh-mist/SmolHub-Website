@@ -6,7 +6,7 @@ type: "Research Repository"
 venue: "Personal Project"
 date: 2025-01-01
 location: "Online"
-date_iso: "2025-01-01"
+date_iso: 2025-01-01
 ---
 
 <div style="margin-bottom: 15px;">
