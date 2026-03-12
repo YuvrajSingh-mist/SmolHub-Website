@@ -23,13 +23,6 @@ date_iso: 2023-10-03
 - Our project could also provide recommendatios based on any movie Title and on any movie Plot which could be of some other video from our databae of 5000+ movies or fruit of the user's creativity. 
 
 
-## Authors
-
-- [@Pritam Paul](https://www.github.com/paul-pritam)
-- [@Shlok Agrawal](https://www.github.com/agrawal-shlok)
-- [@Yuvraj Singh](https://www.github.com/YuvrajSingh-mist)
-
-
 ## Features
 
 - Recommendation based on Videos
@@ -78,4 +71,11 @@ Start the WebApp
   streamlit run Home.py
 ```
 
+
+
+## Authors
+
+- [@Pritam Paul](https://www.github.com/paul-pritam)
+- [@Shlok Agrawal](https://www.github.com/agrawal-shlok)
+- [@Yuvraj Singh](https://www.github.com/YuvrajSingh-mist)
 

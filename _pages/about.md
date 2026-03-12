@@ -63,21 +63,45 @@ redirect_from:
 <div class="projects-list">
   <ul>
   {% assign sorted_projects = site.talks | sort: 'date_iso' | reverse %}
+  {% assign projects_by_date = "" | split: "" %}
   {% for post in sorted_projects %}
+    {% assign projects_by_date = projects_by_date | push: post %}
+  {% endfor %}
+  {% assign sorted_projects = projects_by_date | sort: 'title' %}
+  {% assign final_projects = "" | split: "" %}
+  {% for date_iso in sorted_projects | map: 'date_iso' | uniq | sort | reverse %}
+    {% for post in sorted_projects %}
+      {% if post.date_iso == date_iso %}
+        {% assign final_projects = final_projects | push: post %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+  {% for post in final_projects %}
     <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px;">
+        <div style="flex: 1;">
+          <a href="{{ post.url | relative_url }}" style="font-size: 1.15em; font-weight: 700;">{{ post.title | split: '|' | first | strip }}</a>
+          {% if post.title contains '|' %}
+            <br/><span style="color: #666; font-size: 0.9em;">{{ post.title | split: '|' | last | strip }}</span>
+          {% endif %}
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center; flex-shrink: 0;">
+          {% if post.date %}
+            <span style="background: #f5f5f5; color: #2c3e50; padding: 4px 10px; border-radius: 4px; font-size: 0.85em; font-weight: 500; white-space: nowrap; border: 1px solid #e0e0e0;">{{ post.date }}</span>
+          {% endif %}
+        </div>
+      </div>
       {% assign meta = '' %}
       {% if post.type %}{% assign meta = meta | append: post.type %}{% endif %}
       {% if post.venue %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.venue %}{% endif %}
       {% if post.location %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.location %}{% endif %}
-      {% if post.date %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.date %}{% endif %}
-      {% if meta != '' %}<br/><small>{{ meta }}</small>{% endif %}
+      {% if meta != '' %}<div style="margin-bottom: 10px;"><small style="color: #666;">{{ meta }}</small></div>{% endif %}
       {% assign bullets = post.excerpt | strip_html | strip_newlines | replace: '…', '.' | replace: ' .', '.' | replace: '  ', ' ' | split: '.' %}
       {% assign shown = 0 %}
       <ul>
       {% for item in bullets %}
         {% assign trimmed = item | strip %}
-        {% if trimmed != '' and shown < 4 %}
+        {% if trimmed != '' and shown < 3 %}
           <li>{{ trimmed }}.</li>
           {% assign shown = shown | plus: 1 %}
         {% endif %}

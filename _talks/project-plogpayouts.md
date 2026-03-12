@@ -4,7 +4,7 @@ collection: talks
 type: "Google's Solution Challenge '24"
 excerpt: "Transform your daily jog into a mission for a cleaner world with PlogPayouts. Our innovative website + app rewards you for collecting litter, promoting fitness and environmental cleanliness. Utilizing AI for trash categorization and optimized routes, and fostering community through shared stories, PlogPayouts turns every step into a step towards a greener, more inclusive society. Join us and make a difference today! "
 permalink: 
-venue: "IIIT"
+venue: ""
 date: December '23 - March '24
 location: "Bhubaneswar"
 date_iso: 2023-12-01
