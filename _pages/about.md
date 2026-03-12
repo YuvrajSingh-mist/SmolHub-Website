@@ -61,7 +61,19 @@ redirect_from:
 ## Projects
 
 <div class="projects-list">
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin: 20px 0;">
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 20px 0;">
+  <style>
+    @media (max-width: 1024px) {
+      .projects-list > div {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+    @media (max-width: 640px) {
+      .projects-list > div {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
   {% assign sorted_talks = site.talks | sort: 'date_iso' | reverse %}
   {% for post in sorted_talks %}
     <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.3s ease; display: flex; flex-direction: column;">
@@ -112,18 +124,6 @@ redirect_from:
       <strong>International Institute of Information Technology, Bhubaneswar</strong> <small>· 2023–2027</small>
       <ul>
         <li>BTech, Computer Science Engineering</li>
-      </ul>
-    </li>
-    <li>
-      <strong>Delhi Public School</strong> <small>· 2022–2023</small>
-      <ul>
-        <li>CBSE Grade 12 — 91%</li>
-      </ul>
-    </li>
-    <li>
-      <strong>Amity International School</strong> <small>· 2021–2022</small>
-      <ul>
-        <li>CBSE Grade 10 — 96%</li>
       </ul>
     </li>
   </ul>
