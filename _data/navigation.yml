@@ -5,18 +5,18 @@ main:
   #   url: /talks/
 
   - title: "CV"
-    url: /files/Resume-Yuvraj Singh-2025.pdf
+    url: /files/Resume-Yuvraj-Singh-2025.pdf
 
-  - title: "Paper Replications"
+  - title: "SmolHub"
     url: /models/
 
   - title: "Datasets"
     url: /datasets/
 
-  - title: "SmolHub Playground!"
+  - title: "Playground"
     url: /smolhub/
 
-  - title: "RL From Scratch"
+  - title: "NeatRL"
     url: /rl/
 
 #Add your CV here for Research Purposes when you have blog/talks/publications

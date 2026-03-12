@@ -8,13 +8,10 @@ redirect_from:
   - /about.html
 ---
 
-
-
-• Build and fine-tune LLMs; re-implement classic AI/ML papers from scratch
-• Focus areas: Multimodal LLMs (vision, language and audio) and RL for pre/post treaining paradigms.
-• Looking for: Research Internship (academia / industrial) positions in my areas of interest. Open to AI Engineer roles for development of pipelines, RAGs, Fine Tuning and other AI/ML related projects.
-• Community: Mentor newcomers and collaborate on open‑source projects
-
+- Build and fine-tune LLMs; re-implement classic AI/ML papers from scratch
+- Focus areas: Multimodal LLMs (vision, language and audio) and RL for pre/post training paradigms
+- Looking for: Research Internship (academia / industrial) positions in my areas of interest. Open to AI Engineer roles for development of pipelines, RAGs, Fine Tuning and other AI/ML related projects
+- Community: Mentor newcomers and collaborate on open-source projects
 
 ## Professional Experience
 
@@ -118,7 +115,7 @@ redirect_from:
 </div>
 
 
-## Skills
+<!-- ## Skills
 
 <div class="skills-list">
   <ul>
@@ -182,7 +179,7 @@ redirect_from:
       </div>
     </li>
   </ul>
-</div>
+</div> -->
 
 
 ## Achievements

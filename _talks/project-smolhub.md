@@ -1,5 +1,5 @@
 ---
-title: "Paper/Architecture Replication from Scratch using PyTorch | Github Repository"
+title: "SmolHub - Paper/Architecture Replication from Scratch using PyTorch | Github Repository"
 collection: talks
 excerpt: "
 A repository consisting of paper/architecture replications of classic/SOTA AI/ML papers.
