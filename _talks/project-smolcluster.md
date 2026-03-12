@@ -8,6 +8,7 @@ venue: "Personal Project"
 date: Jan '26
 location: Online
 date_iso: 2026-01-01
+github_url: https://github.com/YuvrajSingh-mist/smolcluster
 ---
 
 <div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
@@ -52,7 +53,7 @@ bash scripts/launch_edp_train_gpt.sh
 
 ## Cluster Topology
 
-<img src="images/architecture.png" alt="Cluster Topology" width="100%">
+<img src="https://raw.githubusercontent.com/YuvrajSingh-mist/smolcluster/main/images/architecture.png" alt="Cluster Topology" width="100%">
 
 ## Documentation
 

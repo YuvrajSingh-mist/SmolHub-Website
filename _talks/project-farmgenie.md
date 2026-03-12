@@ -14,6 +14,7 @@ venue: "IIIT-BH"
 date: July 19 '24
 location: Bhubaneswar
 date_iso: 2024-07-19
+github_url: https://github.com/YuvrajSingh-mist/FarmGenie
 ---
 
 <div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
@@ -29,7 +30,12 @@ date_iso: 2024-07-19
 - FarmGenie Official Website: http://64.227.135.219:3000/  (Production removed: test locally using docker or setting up locally)
 - FarmGenie Community Forum: https://farmgenie-rho.vercel.app/
 - FarmGenie Agri-Schemes Website: https://farmgenie-agrischemes.vercel.app/
-- Please refer to 'MoE-Framework.png' for our proposed framework
+---
+
+### Architecture
+
+<img src="https://raw.githubusercontent.com/YuvrajSingh-mist/FarmGenie/main/MoE-Framework.png" alt="MoE Framework" width="100%">
+
 ---
 
 ### Vision

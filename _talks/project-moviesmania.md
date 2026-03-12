@@ -8,6 +8,7 @@ venue: "IIIT"
 date: October 3 '23
 location: "Bhubaneswar"
 date_iso: 2023-10-03
+github_url: https://github.com/YuvrajSingh-mist/MoviesMania
 ---
 
 <div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">

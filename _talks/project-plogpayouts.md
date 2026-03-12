@@ -8,6 +8,7 @@ venue: ""
 date: December '23 - March '24
 location: "Bhubaneswar"
 date_iso: 2023-12-01
+github_url: https://github.com/YuvrajSingh-mist/PlogPayouts
 ---
 
 <div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
