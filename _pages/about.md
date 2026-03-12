@@ -8,10 +8,10 @@ redirect_from:
   - /about.html
 ---
 
-- Build and fine-tune LLMs; re-implement classic AI/ML papers from scratch
-- Focus areas: Multimodal LLMs (vision, language and audio) and RL for pre/post training paradigms
-- Looking for: Research Internship (academia / industrial) positions in my areas of interest. Open to AI Engineer roles for development of pipelines, RAGs, Fine Tuning and other AI/ML related projects
-- Community: Mentor newcomers and collaborate on open-source projects
+- Everything transformers!; love to re-implement classic and seminal AI/ML papers from in a clean, beginner-friendly manner. 
+- Focus areas: Distributed Systems for large scale training/inference alongwith RL for pre/post training paradigms
+- Looking for: Research (academia / industrial) positions in my areas of interest.
+- Community: Mentor newcomers and collaborate on open-source projects. Built educational libraries demystifying core AI/ML concepts for all people.
 
 ## Professional Experience
 
