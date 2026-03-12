@@ -62,25 +62,19 @@ redirect_from:
 
 <div class="projects-list">
   <ul>
-  {% assign sorted_projects = site.talks | sort: 'date_iso' | reverse %}
-  {% assign projects_by_date = "" | split: "" %}
-  {% for post in sorted_projects %}
-    {% assign projects_by_date = projects_by_date | push: post %}
-  {% endfor %}
-  {% assign sorted_projects = projects_by_date | sort: 'title' %}
+  {% assign all_dates = site.talks | map: 'date_iso' | uniq | sort | reverse %}
   {% assign final_projects = "" | split: "" %}
-  {% for date_iso in sorted_projects | map: 'date_iso' | uniq | sort | reverse %}
-    {% for post in sorted_projects %}
-      {% if post.date_iso == date_iso %}
-        {% assign final_projects = final_projects | push: post %}
-      {% endif %}
+  {% for date_iso in all_dates %}
+    {% assign date_projects = site.talks | where: 'date_iso', date_iso | sort: 'title' %}
+    {% for post in date_projects %}
+      {% assign final_projects = final_projects | push: post %}
     {% endfor %}
   {% endfor %}
   {% for post in final_projects %}
     <li>
       <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px;">
         <div style="flex: 1;">
-          <a href="{{ post.url | relative_url }}" style="font-size: 1.15em; font-weight: 700;">{{ post.title | split: '|' | first | strip }}</a>
+          <a href="{{ post.url | relative_url }}" style="font-size: 1.15em; font-weight: 700; color: #2c3e50; text-decoration: none;">{{ post.title | split: '|' | first | strip }}</a>
           {% if post.title contains '|' %}
             <br/><span style="color: #666; font-size: 0.9em;">{{ post.title | split: '|' | last | strip }}</span>
           {% endif %}
