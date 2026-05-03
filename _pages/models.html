@@ -10,33 +10,6 @@ author_profile: true
 <link rel="stylesheet" href="{{ '/assets/css/models.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 
 <div class="models-page">
-  <div class="models-intro">
-    <h1>Paper Replication Collection</h1>
-    <p>Collection of my re-implementation of seminal AI/ML papers from scratch in PyTorch.</p>
-  </div>
-
-  <div class="search-section">
-    <div class="search-container">
-      <input type="text" id="model-search" placeholder="Search models (e.g., GPT, BERT, GAN, Transformer...)">
-    </div>
-    <div class="search-filters">
-      <span class="filter-label">Filter:</span>
-      <button class="filter-btn active" data-tag="all">All</button>
-      <button class="filter-btn" data-tag="language-models">Language Models</button>
-      <button class="filter-btn" data-tag="computer-vision">Computer Vision</button>
-      <button class="filter-btn" data-tag="generative-models">Generative Models</button>
-      <button class="filter-btn" data-tag="audio-speech">Audio/Speech</button>
-      <button class="filter-btn" data-tag="fine-tuning">Fine-tuning</button>
-      <button class="filter-btn" data-tag="sequential-models">Sequential Models</button>
-      <button class="filter-btn" data-tag="attention-mechanisms">Attention Mechanisms</button>
-      <button class="filter-btn" data-tag="training-methods">Training Methods</button>
-    </div>
-    <div class="search-results-info">
-      <span id="search-results-count"></span>
-      <button id="clear-search" style="display: none;">Clear</button>
-    </div>
-  </div>
-
   <ul class="content-list" id="models-container">
     {% for post in site.models %}
       <li class="list-item model-wrapper"
@@ -48,86 +21,11 @@ author_profile: true
       </li>
     {% endfor %}
   </ul>
-
-  <script type="application/json" id="models-github-data">
-    {{ site.data.models | jsonify }}
-  </script>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(initializeModelFiltering, 100);
-
-  function initializeModelFiltering() {
-    const searchInput = document.getElementById('model-search');
-    const clearButton = document.getElementById('clear-search');
-    const resultsCount = document.getElementById('search-results-count');
-    const tagButtons = document.querySelectorAll('.filter-btn[data-tag]');
-
-    const allModels = Array.from(document.querySelectorAll('.model-wrapper')).map(wrapper => ({
-      element: wrapper,
-      name: wrapper.querySelector('.model-card__title')?.textContent.toLowerCase() || '',
-      description: wrapper.querySelector('.model-card__excerpt')?.textContent.toLowerCase() || '',
-      category: wrapper.getAttribute('data-category') || ''
-    }));
-
-    let currentQuery = '';
-    let currentTag = 'all';
-
-    updateResultsCount(allModels.length);
-
-    if (searchInput) {
-      searchInput.addEventListener('input', function() {
-        currentQuery = this.value.toLowerCase().trim();
-        filterModels();
-        updateClearButton();
-      });
-    }
-
-    tagButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        tagButtons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        currentTag = this.getAttribute('data-tag');
-        filterModels();
-        updateClearButton();
-      });
-    });
-
-    if (clearButton) {
-      clearButton.addEventListener('click', function() {
-        searchInput.value = '';
-        currentQuery = '';
-        currentTag = 'all';
-        tagButtons.forEach(btn => btn.classList.remove('active'));
-        document.querySelector('.filter-btn[data-tag="all"]')?.classList.add('active');
-        filterModels();
-        updateClearButton();
-      });
-    }
-
-    function filterModels() {
-      const filtered = allModels.filter(m =>
-        (!currentQuery || m.name.includes(currentQuery) || m.description.includes(currentQuery)) &&
-        (currentTag === 'all' || m.category === currentTag)
-      );
-      allModels.forEach(m => {
-        m.element.style.display = filtered.includes(m) ? '' : 'none';
-        m.element.classList.toggle('hidden', !filtered.includes(m));
-      });
-      updateResultsCount(filtered.length);
-    }
-
-    function updateClearButton() {
-      if (clearButton) clearButton.style.display = (currentQuery || currentTag !== 'all') ? 'inline-block' : 'none';
-    }
-
-    function updateResultsCount(count) {
-      if (resultsCount) resultsCount.textContent = count === allModels.length ? `Showing all ${count} models` : `Found ${count} model${count !== 1 ? 's' : ''}`;
-    }
-  }
-
-  // View counter — updates only the count span, icon is separate
+  // View counter - updates only the count span, icon is separate
   document.querySelectorAll('.views-counter').forEach(function(el) {
     var slug = el.closest('.list-item') && el.closest('.list-item').dataset.slug;
     if (!slug) return;

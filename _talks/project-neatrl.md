@@ -13,175 +13,55 @@ website_url: https://smolhub.com/rl
 stars: 230
 ---
 
-# Deep Reinforcement Learning Projects
+One-file implementations of deep RL algorithms in PyTorch. Each algorithm is self-contained — readable, runnable, and stripped of unnecessary abstraction.
 
-This repository contains various ONE-FILE implementations of deep reinforcement learning algorithms.
+## NeatRL Library
 
-
-## 🚀 Primary Use: Training with NeatRL Library
-
-**NeatRL** is the main training library in this repository. It provides high-quality implementations of popular RL algorithms with a focus on simplicity, performance, and ease of use.
-
-### Quick Training with NeatRL
+The `neatrl/` package provides reusable training utilities built on top of the individual implementations. Install via pip:
 
 ```bash
-# Install NeatRL
 pip install neatrl"[classic,box2d,atari]"
-
-# Train DQN on CartPole in 3 lines
-from neatrl import train_dqn
-
-model = train_dqn(
-    env_id="CartPole-v1",
-    total_timesteps=10000,
-    seed=42
-)
 ```
 
-### Advanced Training Features
+```python
+from neatrl import train_dqn
 
-- **Experiment Tracking**: Built-in Weights & Biases integration
-- **Video Recording**: Automatic training progress videos
-- **Hyperparameter Tuning**: Easy configuration of all training parameters
-- **Multiple Environments**: Support for Gymnasium environments
+model = train_dqn(env_id="CartPole-v1", total_timesteps=10000, seed=42)
+```
 
-📖 **[Complete NeatRL Documentation](./neatrl/README.md)**
+Full source: [github.com/YuvrajSingh-mist/NeatRL/tree/master/neatrl](https://github.com/YuvrajSingh-mist/NeatRL/tree/master/neatrl)
 
-## Project Structure
+## Implementations
 
-### NeatRL Library (Primary Training Tool)
-- **[neatrl/](./neatrl)**: Main NeatRL library with DQN implementation and training utilities
+### Value-Based
+- [DQN](/rl/07-dqn-dqn/) — Deep Q-Network for CartPole and LunarLander
+- [DQN Atari](/rl/06-dqn-atari-dqn-atari/) — DQN with conv nets on Breakout
+- [DQN Flappy](/rl/26-dqn-flappy-dqn-flappy/) — DQN on Flappy Bird
+- [DQN Lunar](/rl/04-dqn-lunar-dqn-lunar/) — DQN tuned for Lunar Lander
+- [DQN Taxi](/rl/05-dqn-taxi-dqn-taxi/) — DQN for discrete Taxi-v3
+- [DQN FrozenLake](/rl/03-dqn-frozenlake-dqn-frozenlake/) — DQN on FrozenLake
+- [Dueling DQN](/rl/08-duel-dqn-duel-dqn/) — Separate value and advantage streams
+- [Q-Learning](/rl/24-q-learning-q-learning/) — Tabular Q-Learning and Value Iteration
+- [VizDoom RL](/rl/25-vizdoom-rl-vizdoom-rl/) — DQN in a 3D first-person environment
 
-### Additional Algorithm Implementations
-- **[DQN](/rl/07-dqn-dqn/)**: Deep Q-Network implementation for CartPole and LunarLander environments
-- **[DQN-atari](/rl/06-dqn-atari-dqn-atari/)**: DQN adapted for Atari games with convolutional networks
-- **[DQN-flappy](/rl/09-flappybird-ppo-flappybird-ppo/)**: DQN implementation for FlappyBird environment
-- **[DQN-Lunar](/rl/04-dqn-lunar-dqn-lunar/)**: DQN specifically tuned for the Lunar Lander environment
-- **[DQN-Taxi](/rl/05-dqn-taxi-dqn-taxi/)**: DQN for the discrete Taxi-v3 environment
-- **[DQN-FrozenLake](/rl/03-dqn-frozenlake-dqn-frozenlake/)**: DQN implementation for the FrozenLake environment
-- **[Duel-DQN](/rl/08-duel-dqn-duel-dqn/)**: Dueling DQN with separate value and advantage streams for CliffWalking
-- **[Q-Learning](/rl/10-frozen-lake-frozen-lake/)**: Classic tabular Q-learning implementations
-
-### Policy-Based Methods
-- **[REINFORCE](/rl/19-reinforce-reinforce/)**: Monte Carlo policy gradient method for CartPole environment
-- **[A2C](/rl/01-a2c-a2c/)**: Advantage Actor-Critic implementation for multiple environments (CartPole, FrozenLake, LunarLander)
-- **[PPO](/rl/16-ppo-ppo/)**: Proximal Policy Optimization with clipped surrogate objective for LunarLander
-- **[FlappyBird-PPO](/rl/09-flappybird-ppo-flappybird-ppo/)**: PPO implementation specifically for FlappyBird environment
-
-### Actor-Critic Methods (Continuous Control)
-- **[DDPG](/rl/02-ddpg-ddpg/)**: Deep Deterministic Policy Gradient for continuous action spaces (Pendulum, BipedalWalker)
-- **[TD3](/rl/22-td3-td3/)**: Twin Delayed DDPG with twin critics and delayed policy updates
-- **[SAC](/rl/21-sac-sac/)**: Soft Actor-Critic with maximum entropy reinforcement learning
-
-### Exploration & Advanced Methods
-- **[RND](/rl/20-rnd-rnd/)**: Random Network Distillation combined with PPO for curiosity-driven exploration
-- **[NeatRL](/rl/)**: NEAT (NeuroEvolution of Augmenting Topologies) reinforcement learning implementations
-
-### Game-Specific Implementations
-- **[Pong](/rl/)**: Classic Pong environment implementations
-- **[VizDoom-RL](/rl/)**: Reinforcement learning in VizDoom 3D environments
-- **[Frozen-Lake](/rl/10-frozen-lake-frozen-lake/)**: Specialized implementations for FrozenLake environment
-- **[SimpleRLGames](/rl/)**: Collection of simple RL game implementations
-
-### Unity ML-Agents
-- **[ml-agents](/rl/)**: Unity ML-Agents toolkit for training intelligent agents in Unity environments
-- **[ml-agents-train](/rl/)**: Training scripts and utilities for Unity ML-Agents
-
-## Key Features
-
-- **Comprehensive Algorithm Coverage**: Implementations spanning value-based (DQN variants), policy-based (REINFORCE, A2C, PPO), and actor-critic methods (DDPG, TD3, SAC)
-- **Multiple Environment Support**: Code for various Gymnasium/OpenAI Gym environments including discrete and continuous action spaces
-- **Advanced Techniques**: Experience replay, target networks, dueling architectures, curiosity-driven exploration (RND)
-- **Continuous Control**: Specialized implementations for continuous action spaces with advanced algorithms
-- **Visualization & Logging**: Integration with TensorBoard and Weights & Biases (WandB) for comprehensive experiment tracking
-- **Game-Specific Optimizations**: Tailored implementations for specific games and environments
-- **Unity Integration**: ML-Agents support for training in Unity environments
-- **Trained Models**: Saved model weights and training logs for reproducible results
-- **Comprehensive Logging**: Track metrics like Q-values, advantage, episode returns, and exploration statistics
-
-## Reinforcement Learning Concepts
-
-This repository explores comprehensive RL concepts across different paradigms:
-
-### Value-Based Methods
-- **Deep Q-Networks (DQN)**: Neural network function approximation for Q-values
-- **Experience Replay**: Store and reuse past experiences for stable learning
-- **Target Networks**: Stabilize training by reducing correlation between updates
-- **Dueling Networks**: Separate value and advantage estimation for better learning
-
-### Policy-Based Methods
-- **Policy Gradient (REINFORCE)**: Direct policy optimization using Monte Carlo returns
-- **Actor-Critic Methods**: Combine policy gradients with value function estimation
-- **Advantage Functions**: Reduce variance in policy gradient estimates
-- **Proximal Policy Optimization**: Stable policy updates with clipped objectives
+### Policy-Based
+- [REINFORCE](/rl/19-reinforce-reinforce/) — Monte Carlo policy gradient
+- [A2C](/rl/01-a2c-a2c/) — Advantage Actor-Critic
+- [PPO](/rl/16-ppo-ppo/) — Proximal Policy Optimization
+- [FlappyBird PPO](/rl/09-flappybird-ppo-flappybird-ppo/) — PPO on Flappy Bird
+- [GRPO](/rl/23-grpo-grpo/) — Group Relative Policy Optimization (DeepSeek-R1)
 
 ### Continuous Control
-- **Deterministic Policy Gradients**: Handle continuous action spaces efficiently
-- **Twin Critics**: Reduce overestimation bias in Q-value estimation
-- **Soft Actor-Critic**: Maximum entropy reinforcement learning for robust policies
-- **Noise Injection**: Exploration strategies for continuous action spaces
+- [DDPG](/rl/02-ddpg-ddpg/) — Deep Deterministic Policy Gradient
+- [TD3](/rl/22-td3-td3/) — Twin Delayed DDPG
+- [SAC](/rl/21-sac-sac/) — Soft Actor-Critic
 
-### Advanced Techniques
-- **Curiosity-Driven Learning**: Intrinsic motivation through prediction error (RND)
-- **Multi-Environment Training**: Consistent algorithms across different domains
-- **Exploration vs. Exploitation**: Various strategies including epsilon-greedy and entropy bonuses
-- **Unity Integration**: Real-time training in complex 3D environments
-
-## Results
-
-Each implementation includes trained models and performance visualizations. Check the individual project READMEs for specific results.
-
-## Extending the Projects
-
-Ideas for extensions and improvements:
-
-### Algorithm Enhancements
-- Implement Rainbow DQN with all improvements (prioritized replay, noisy nets, etc.)
-- Add Double DQN and other DQN variants
-- Implement advanced policy gradient methods (TRPO, IMPALA)
-- Add multi-agent reinforcement learning (MADDPG, QMIX)
-
-### Architecture Improvements
-- Experiment with different neural network architectures (CNNs, RNNs, Transformers)
-- Implement attention mechanisms for partially observable environments
-- Add hierarchical reinforcement learning approaches
-- Explore meta-learning and few-shot adaptation
-
-### Environment Extensions
-- Apply algorithms to custom environments and real-world problems
-- Implement curriculum learning for complex environments
-- Add support for partial observability and memory-based agents
-- Create multi-task learning setups
-
-### Training Enhancements
-- Implement distributed training across multiple GPUs/machines
-- Add hyperparameter optimization and automated tuning
-- Implement model-based reinforcement learning approaches
-- Add imitation learning and learning from human feedback
+### Exploration & Multi-Agent
+- [RND](/rl/20-rnd-rnd/) — Random Network Distillation + PPO
+- [Imitation Learning](/rl/11-imitation-learning-imitation-learning/) — Behavioral cloning
+- [MARL](/rl/12-marl-marl/) — Multi-Agent RL (IPPO, MAPPO, Self-Play)
 
 ## References
 
-- [Sutton & Barto RL Book](http://incompleteideas.net/book/the-book-2nd.html)
-- [DQN Paper (Mnih et al.)](https://www.nature.com/articles/nature14236)
-- [Gymnasium Documentation](https://gymnasium.farama.org/)
-- [PyTorch Documentation](https://pytorch.org/docs/stable/index.html)
-- [Stable Baselines3](https://stable-baselines3.readthedocs.io/)
-
-## Citation
-
-If you use this repository in your research, please cite it as:
-
-```bibtex
-@misc{singh2025deep-rl-projects,
-  author       = {YuvrajSingh-mist},
-  title        = {Deep Reinforcement Learning Algorithms Implementations},
-  year         = {2025},
-  howpublished = {GitHub repository},
-  url          = {https://github.com/YuvrajSingh-mist/NeatRL},
-  note         = {commit 477ff21}
-}
-```
-
-## License
-
-MIT License
+- [Sutton & Barto — Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book-2nd.html)
+- [CleanRL](https://github.com/vwxyzjn/cleanrl) — primary inspiration for the one-file style

@@ -10,32 +10,6 @@ author_profile: true
 <link rel="stylesheet" href="{{ base_path }}/assets/css/models.css">
 
 <div class="models-page">
-  <div class="models-intro">
-    <h1>SmolHub Playground</h1>
-    <p>Small-scale models, proof-of-concepts, and fun AI experiments. Perfect for learning, testing ideas, and rapid prototyping.</p>
-  </div>
-
-  <div class="search-section">
-    <div class="search-container">
-      <input type="text" id="smolhub-search" placeholder="Search projects (e.g., Mixtral, Transformer, PyTorch...)">
-    </div>
-    <div class="search-filters">
-      <span class="filter-label">Filter:</span>
-      <button class="filter-btn active" data-tag="all">All</button>
-      <button class="filter-btn" data-tag="language-model">Language Models</button>
-      <button class="filter-btn" data-tag="transformer">Transformers</button>
-      <button class="filter-btn" data-tag="translation">Translation</button>
-      <button class="filter-btn" data-tag="storytelling">Storytelling</button>
-      <button class="filter-btn" data-tag="mixture-of-experts">MoE</button>
-      <button class="filter-btn" data-tag="compact">Compact</button>
-      <button class="filter-btn" data-tag="educational">Educational</button>
-    </div>
-    <div class="search-results-info">
-      <span id="search-results-count"></span>
-      <button id="clear-search" style="display: none;">Clear</button>
-    </div>
-  </div>
-
   <ul class="content-list" id="smolhub-container">
     {% for post in site.smolhub %}
       <li class="list-item smolhub-wrapper"
@@ -47,100 +21,11 @@ author_profile: true
       </li>
     {% endfor %}
   </ul>
-
-  <div id="no-results" class="no-results-message" style="display: none;">
-    <h3>No projects found</h3>
-    <p>Try adjusting your search terms or filters.</p>
-  </div>
-
-  <script type="application/json" id="smolhub-github-data">
-    {{ site.data.smolhub_playground | jsonify }}
-  </script>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(initializeSmolHubFiltering, 100);
-
-  function initializeSmolHubFiltering() {
-    const searchInput = document.getElementById('smolhub-search');
-    const clearButton = document.getElementById('clear-search');
-    const resultsCount = document.getElementById('search-results-count');
-    const tagButtons = document.querySelectorAll('.filter-btn[data-tag]');
-    const noResults = document.getElementById('no-results');
-    const smolhubContainer = document.getElementById('smolhub-container');
-
-    const allProjects = Array.from(document.querySelectorAll('.smolhub-wrapper')).map(wrapper => ({
-      element: wrapper,
-      name: wrapper.querySelector('.model-card__title')?.textContent.toLowerCase() || '',
-      description: wrapper.querySelector('.model-card__excerpt')?.textContent.toLowerCase() || '',
-      tags: wrapper.getAttribute('data-tags') || ''
-    }));
-
-    let currentQuery = '';
-    let currentTag = 'all';
-
-    updateResultsCount(allProjects.length);
-
-    if (searchInput) {
-      searchInput.addEventListener('input', function() {
-        currentQuery = this.value.toLowerCase().trim();
-        filterProjects();
-        updateClearButton();
-      });
-    }
-
-    tagButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        tagButtons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        currentTag = this.getAttribute('data-tag');
-        filterProjects();
-        updateClearButton();
-      });
-    });
-
-    if (clearButton) {
-      clearButton.addEventListener('click', function() {
-        searchInput.value = '';
-        currentQuery = '';
-        currentTag = 'all';
-        tagButtons.forEach(btn => btn.classList.remove('active'));
-        document.querySelector('.filter-btn[data-tag="all"]')?.classList.add('active');
-        filterProjects();
-        updateClearButton();
-      });
-    }
-
-    function filterProjects() {
-      const filtered = allProjects.filter(p =>
-        (!currentQuery || p.name.includes(currentQuery) || p.description.includes(currentQuery)) &&
-        (currentTag === 'all' || p.tags.toLowerCase().includes(currentTag.toLowerCase()))
-      );
-      allProjects.forEach(p => {
-        p.element.style.display = filtered.includes(p) ? '' : 'none';
-        p.element.classList.toggle('hidden', !filtered.includes(p));
-      });
-      if (filtered.length === 0) {
-        noResults.style.display = 'block';
-        smolhubContainer.style.display = 'none';
-      } else {
-        noResults.style.display = 'none';
-        smolhubContainer.style.display = 'block';
-      }
-      updateResultsCount(filtered.length);
-    }
-
-    function updateClearButton() {
-      if (clearButton) clearButton.style.display = (currentQuery || currentTag !== 'all') ? 'inline-block' : 'none';
-    }
-
-    function updateResultsCount(count) {
-      if (resultsCount) resultsCount.textContent = count === allProjects.length ? `Showing all ${count} projects` : `Found ${count} project${count !== 1 ? 's' : ''}`;
-    }
-  }
-
-  // View counter — updates only the count span, icon is separate
+  // View counter - updates only the count span, icon is separate
   document.querySelectorAll('.views-counter').forEach(function(el) {
     var slug = el.closest('.list-item') && el.closest('.list-item').dataset.slug;
     if (!slug) return;
@@ -150,69 +35,4 @@ document.addEventListener('DOMContentLoaded', function() {
       .catch(function() { el.textContent = ''; });
   });
 });
-
-function showSmolhubDetail(smolhubId) {
-  const smolhubData = window.smolhubData && window.smolhubData[smolhubId];
-  if (!smolhubData) { alert('SmolHub data not found'); return; }
-
-  const detailPageHTML = `
-    <div class="model-detail-page">
-      <div class="model-detail-header">
-        <button class="back-btn" onclick="goBackToSmolhub()">← Back to Playground</button>
-        <h1 class="model-detail-title">${smolhubData.title}</h1>
-        <div class="model-action-buttons">
-          <a href="${smolhubData.repoUrl}" target="_blank" rel="noopener" class="action-btn github-btn">View on GitHub</a>
-          ${smolhubData.title === 'Story Kimi' ?
-            `<a href="https://huggingface.co/spaces/YuvrajSingh9886/StoryKimi-Zero" target="_blank" rel="noopener" class="action-btn huggingface-btn">Try on HuggingFace</a>` :
-          smolhubData.title === 'Smol Transformer' ?
-            `<a href="https://huggingface.co/spaces/YuvrajSingh9886/SmolTransformer-Zero" target="_blank" rel="noopener" class="action-btn huggingface-btn">Try on HuggingFace</a>` :
-            `<a href="https://huggingface.co/YuvrajSingh9886" target="_blank" rel="noopener" class="action-btn huggingface-btn">HuggingFace Profile</a>`
-          }
-        </div>
-      </div>
-      <div class="model-detail-content">
-        <div class="readme-content">${markdownToHTML(smolhubData.readmeContent || `# ${smolhubData.title}\n\n${smolhubData.description}`)}</div>
-      </div>
-    </div>
-  `;
-
-  document.querySelector('.models-intro').style.display = 'none';
-  document.getElementById('smolhub-container').style.display = 'none';
-
-  let detailContainer = document.getElementById('smolhub-detail-container');
-  if (!detailContainer) {
-    detailContainer = document.createElement('div');
-    detailContainer.id = 'smolhub-detail-container';
-    document.querySelector('.models-page').appendChild(detailContainer);
-  }
-  detailContainer.innerHTML = detailPageHTML;
-  detailContainer.style.display = 'block';
-  window.scrollTo(0, 0);
-}
-
-function goBackToSmolhub() {
-  document.querySelector('.models-intro').style.display = 'block';
-  document.getElementById('smolhub-container').style.display = 'block';
-  const detailContainer = document.getElementById('smolhub-detail-container');
-  if (detailContainer) detailContainer.style.display = 'none';
-  window.scrollTo(0, 0);
-}
-
-function markdownToHTML(markdown) {
-  let html = markdown;
-  html = html.replace(/^### (.*$)/gm, '<h3>$1</h3>');
-  html = html.replace(/^## (.*$)/gm, '<h2>$1</h2>');
-  html = html.replace(/^# (.*$)/gm, '<h1>$1</h1>');
-  html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
-  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-  html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-  html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-  html = html.replace(/`(.*?)`/g, '<code>$1</code>');
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-  html = html.replace(/\n\n/g, '</p><p>');
-  html = html.replace(/\n/g, '<br>');
-  html = '<p>' + html + '</p>';
-  html = html.replace(/<p><\/p>/g, '').replace(/<p><h/g, '<h').replace(/<\/h([1-6])><\/p>/g, '</h$1>').replace(/<p><pre>/g, '<pre>').replace(/<\/pre><\/p>/g, '</pre>');
-  return html;
-}
 </script>
