@@ -90,12 +90,21 @@ a {
 }
 
 /* Job title & institution */
-.experience-list li strong,
-.education-list li strong {
+.experience-list li strong {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-weight: 500;
   color: var(--text-primary);
   font-size: 1.15rem;
+  letter-spacing: 0.01em;
+  display: block;
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+}
+.education-list li strong {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 0.97rem;
   letter-spacing: 0.01em;
   display: block;
   margin-bottom: 0.3rem;
@@ -172,8 +181,8 @@ a {
 
 .achv-title {
   font-family: 'Crimson Pro', Georgia, serif;
-  font-weight: 400;
-  color: var(--text-secondary);
+  font-weight: 500;
+  color: var(--text-primary);
   font-size: 0.97rem;
   letter-spacing: 0.01em;
   line-height: 1.4;
