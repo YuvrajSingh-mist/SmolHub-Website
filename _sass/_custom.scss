@@ -616,13 +616,15 @@ a.site-title {
 
 /* Code blocks - override _syntax.scss nested box + </> icon */
 div.highlighter-rouge,
-figure.highlight {
-  background: var(--bg-subtle) !important;
+figure.highlight,
+div.highlighter-rouge {
+  background: var(--bg-primary) !important;
   border: 1px solid var(--border-light) !important;
   border-radius: 2px !important;
   box-shadow: none !important;
   padding: 0 !important;
   margin: 1.1rem 0 !important;
+  position: relative;
 
   &:before {
     display: none !important;
@@ -643,6 +645,33 @@ figure.highlight {
     font-size: 0.87rem !important;
     line-height: 1.65 !important;
   }
+}
+
+.copy-btn {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 3px 5px;
+  color: var(--text-tertiary);
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s;
+  line-height: 1;
+
+  &:hover { color: var(--accent); }
+}
+
+figure.highlight:hover .copy-btn,
+div.highlighter-rouge:hover .copy-btn {
+  opacity: 1;
+}
+
+.copy-btn.copied {
+  color: #6e8c6a;
+  opacity: 1;
 }
 
 /* Inline code */
