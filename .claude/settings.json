@@ -42,7 +42,11 @@
       "Bash(grep -n \"masthead-height\\\\|\\\\$\" /Users/yuvrajsingh9886/Desktop/SmolHub-Website/_sass/_custom.scss)",
       "Bash(grep -n '$masthead-height' /Users/yuvrajsingh9886/Desktop/SmolHub-Website/_sass/_custom.scss)",
       "Bash(grep -n '$masthead-height' /Users/yuvrajsingh9886/Desktop/SmolHub-Website/_sass/_masthead.scss)",
-      "Bash(grep -rn '$masthead-height' /Users/yuvrajsingh9886/Desktop/SmolHub-Website/_sass/)"
+      "Bash(grep -rn '$masthead-height' /Users/yuvrajsingh9886/Desktop/SmolHub-Website/_sass/)",
+      "Bash(python3 -c ' *)",
+      "Bash(sed -n '145,150p' /Users/yuvrajsingh9886/Desktop/SmolHub-Website/_sass/_custom.scss)",
+      "Bash(sed -n '190,195p' /Users/yuvrajsingh9886/Desktop/SmolHub-Website/_sass/_custom.scss)",
+      "Bash(sed -n '708,715p' /Users/yuvrajsingh9886/Desktop/SmolHub-Website/_sass/_custom.scss)"
     ],
     "additionalDirectories": [
       "/Users/yuvrajsingh9886/Desktop/SmolHub-Website/_talks",

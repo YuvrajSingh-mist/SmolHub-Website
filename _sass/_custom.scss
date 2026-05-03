@@ -1,5 +1,6 @@
+@charset "UTF-8";
 /* ==========================================================================
-   k-a.in theme — exact color/font match
+   k-a.in theme - exact color/font match
    ========================================================================== */
 
 :root {
@@ -143,7 +144,7 @@ a {
   background: transparent !important;
   
   &::before {
-    content: "·";
+    content: "\00B7";
     position: absolute;
     left: 0;
     color: var(--accent);
@@ -188,7 +189,7 @@ a {
   line-height: 1.4;
 }
 
-/* Talk / project page title — golden accent */
+/* Talk / project page title - golden accent */
 h1.page__title {
   color: var(--accent) !important;
 }
@@ -439,7 +440,7 @@ a.site-title {
   margin-top: 0.2rem;
 }
 
-/* Right: metrics (icon stacked above count) — k-a.in style */
+/* Right: metrics (icon stacked above count) - k-a.in style */
 .list-item__metrics {
   display: flex;
   gap: 1rem;
@@ -613,7 +614,7 @@ a.site-title {
   &:hover { color: var(--link-hover); text-decoration: underline; }
 }
 
-/* Code blocks — override _syntax.scss nested box + </> icon */
+/* Code blocks - override _syntax.scss nested box + </> icon */
 div.highlighter-rouge,
 figure.highlight {
   background: var(--bg-subtle) !important;
@@ -705,22 +706,22 @@ code.highlighter-rouge,
   margin-right: 3px;
 }
 
-/* Warm golden syntax highlighting — matches k-a.in palette */
-.highlight .c,  .highlight .cm, .highlight .c1, .highlight .cs  { color: #b0a28e !important; font-style: italic; }  /* comments — warm gray */
+/* Warm golden syntax highlighting - matches k-a.in palette */
+.highlight .c,  .highlight .cm, .highlight .c1, .highlight .cs  { color: #b0a28e !important; font-style: italic; }  /* comments - warm gray */
 .highlight .k,  .highlight .kc, .highlight .kn, .highlight .kp,
-.highlight .kr, .highlight .kt                                   { color: #8a7355 !important; }  /* keywords — accent gold */
+.highlight .kr, .highlight .kt                                   { color: #8a7355 !important; }  /* keywords - accent gold */
 .highlight .kd                                                   { color: #7a6045 !important; }  /* keyword.declaration */
-.highlight .nb                                                   { color: #8a7355 !important; }  /* builtins — accent gold */
+.highlight .nb                                                   { color: #8a7355 !important; }  /* builtins - accent gold */
 .highlight .nf, .highlight .nc, .highlight .nd, .highlight .nt,
-.highlight .nv, .highlight .nx                                   { color: #a07855 !important; }  /* names/functions — warm amber */
+.highlight .nv, .highlight .nx                                   { color: #a07855 !important; }  /* names/functions - warm amber */
 .highlight .s,  .highlight .s1, .highlight .s2, .highlight .se,
-.highlight .si, .highlight .sx, .highlight .sr, .highlight .ss  { color: #6e8c6a !important; }  /* strings — soft sage */
+.highlight .si, .highlight .sx, .highlight .sr, .highlight .ss  { color: #6e8c6a !important; }  /* strings - soft sage */
 .highlight .m,  .highlight .mi, .highlight .mf, .highlight .mh,
-.highlight .mo, .highlight .il                                   { color: #a07855 !important; }  /* numbers — warm amber */
-.highlight .o,  .highlight .ow                                   { color: #737373 !important; }  /* operators — neutral */
+.highlight .mo, .highlight .il                                   { color: #a07855 !important; }  /* numbers - warm amber */
+.highlight .o,  .highlight .ow                                   { color: #737373 !important; }  /* operators - neutral */
 .highlight .err                                                  { color: #9a5050 !important; background: transparent !important; }
 .highlight .p,  .highlight .n,  .highlight .na, .highlight .nn,
-.highlight .nl, .highlight .py, .highlight .go, .highlight .gp  { color: #2c2c2c !important; }  /* punctuation/base — text-primary */
+.highlight .nl, .highlight .py, .highlight .go, .highlight .gp  { color: #2c2c2c !important; }  /* punctuation/base - text-primary */
 .highlight .gh, .highlight .gu                                   { color: #a07855 !important; font-weight: 600; }
 .highlight .gi                                                   { color: #6e8c6a !important; }
 .highlight .gd                                                   { color: #9a5050 !important; }
