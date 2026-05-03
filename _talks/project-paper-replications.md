@@ -8,129 +8,77 @@ date: 2025-01-01
 location: "Online"
 date_iso: 2025-01-01
 github_url: https://github.com/YuvrajSingh-mist/Paper-Replications
+website_url: https://smolhub.com
 stars: 400
 ---
 
-<div style="margin-bottom: 15px;">
-  <a href="https://smolhub.com" target="_blank" style="display: inline-block; padding: 8px 16px; background: #ffffff; color: #2c3e50; border: 1px solid #d0d0d0; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: all 0.2s ease;">
-    🌐 Visit Website
-  </a>
-  <a href="https://github.com/YuvrajSingh-mist/Paper-Replications" target="_blank" style="display: inline-block; padding: 8px 16px; background: #ffffff; color: #2c3e50; border: 1px solid #d0d0d0; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 14px; margin-left: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); transition: all 0.2s ease;">
-    💻 View on GitHub
-  </a>
-</div>
-
 ## Overview
 
-This repository contains a collection of code implementations and experiments replicating results from a wide range of influential machine learning and deep learning research papers. Each subfolder corresponds to a specific paper, model, or technique, with code, notes, and sometimes pretrained weights or results.
+A collection of clean, from-scratch implementations of influential ML/DL research papers in PyTorch. Each subfolder contains code, notes, and sometimes pretrained weights.
 
 ## Deployed Models
 
-Visit [SmolHub](https://smolhub.com) to view the deployed models and interactive demos.
+Visit [SmolHub](/models/) to view the individual model pages and implementations.
 
 ## Repository Structure
 
 ### Language Models & Transformers
-- **BERT/**: Bidirectional Encoder Representations from Transformers
-- **GPT/**: Generative Pretrained Transformer models
-- **Llama/**, **Llama4/**: Meta's Llama model replications and experiments
-- **Gemma/**, **Gemma3/**: Google's Gemma models
-- **Mixtral/**: Mixture-of-Experts Transformer models
-- **DeepSeekV3/**: DeepSeek model replications and experiments
-- **Kimi-K2/**: Kimi-K2 model replications and training scripts
-- **Moonshine/**: Moonshine model experiments
-- **Transformer/**: Original Transformer model and variants
-- **Differential Transformer/**: Novel differential attention architectures
+- **[BERT](/models/02-bert/)**: Bidirectional Encoder Representations from Transformers
+- **[GPT](/models/14-gpt/)**: Generative Pretrained Transformer models
+- **[Llama](/models/19-llama/)**, **[Llama4](/models/20-llama4/)**: Meta's Llama model replications
+- **[Gemma](/models/16-gemma/)**, **[Gemma3](/models/17-gemma3/)**: Google's Gemma models
+- **[Mixtral](/models/23-mixtral/)**: Mixture-of-Experts Transformer models
+- **[DeepSeekV3](/models/10-deepseekv3/)**: DeepSeek model replications
+- **[Kimi-K2](/models/18-kimi-k2/)**: Kimi-K2 model replications and training scripts
+- **[Moonshine](/models/24-moonshine/)**: Moonshine model experiments
+- **[Transformer](/models/33-transformer/)**: Original Transformer model and variants
+- **[Differential Transformer](/models/11-differential-transformer/)**: Novel differential attention architectures
 
 ### Vision & Multimodal Models
-- **ViT/**: Vision Transformer models
-- **CLiP/**: CLIP vision-language models
-- **SigLip/**: Sigmoid Loss for Language-Image Pretraining
-- **Llava/**: Large Language and Vision Assistant models
-- **PaliGemma/**: PaliGemma multimodal model replications
+- **[ViT](/models/35-vit/)**: Vision Transformer models
+- **[CLiP](/models/05-clip/)**: CLIP vision-language models
+- **[SigLip](/models/30-siglip/)**: Sigmoid Loss for Language-Image Pretraining
+- **[Llava](/models/21-llava/)**: Large Language and Vision Assistant models
+- **[PaliGemma](/models/26-paligemma/)**: PaliGemma multimodal model replications
 
 ### Generative Adversarial Networks
-- **DCGANs/**: Deep Convolutional GANs
-- **WGANs/**: Wasserstein GANs
-- **CGANs/**: Conditional Generative Adversarial Networks
-- **CycleGANs/**: Cycle-consistent GANs for image translation
-- **Pix2Pix/**: Image-to-image translation with conditional GANs
+- **[DCGANs](/models/07-dcgans/)**: Deep Convolutional GANs
+- **[WGANs](/models/36-wgans/)**: Wasserstein GANs
+- **[CGANs](/models/03-cgans/)**: Conditional Generative Adversarial Networks
+- **[CycleGANs](/models/06-cyclegans/)**: Cycle-consistent GANs for image translation
+- **[Pix2Pix](/models/27-pix2pix/)**: Image-to-image translation with conditional GANs
 
 ### Recurrent & Sequence Models
-- **RNNs/**: Recurrent Neural Networks
-- **LSTM/**: Long Short-Term Memory models
-- **GRU/**: Gated Recurrent Unit models
-- **Seq2Seq/**: Sequence-to-sequence models
-- **Encoder-Decoder/**: Encoder-decoder architectures
+- **[RNNs](/models/28-rnns/)**: Recurrent Neural Networks
+- **[LSTM](/models/38-lstm/)**: Long Short-Term Memory models
+- **[GRU](/models/15-gru/)**: Gated Recurrent Unit models
+- **[Seq2Seq](/models/29-seq2seq/)**: Sequence-to-sequence models
+- **[Encoder-Decoder](/models/12-encoder-decoder/)**: Encoder-decoder architectures
 
 ### RLHF & Fine-Tuning Techniques
-- **DPO/**: Direct Preference Optimization
-- **ORPO/**: Online RLHF Preference Optimization
-- **SimplePO/**: Simple Preference Optimization
-- **LoRA/**: Low-Rank Adaptation for efficient fine-tuning
-- **Fine Tuning using PEFT/**: Parameter-Efficient Fine-Tuning methods
+- **[DPO](/models/09-dpo/)**: Direct Preference Optimization
+- **[ORPO](/models/25-orpo/)**: Online RLHF Preference Optimization
+- **[SimplePO](/models/31-simplepo/)**: Simple Preference Optimization
+- **[LoRA](/models/22-lora/)**: Low-Rank Adaptation for efficient fine-tuning
+- **[Fine Tuning using PEFT](/models/13-fine-tuning-using-peft/)**: Parameter-Efficient Fine-Tuning methods
 
 ### Audio & Speech Models
-- **Whisper/**: OpenAI's Whisper speech recognition model
-- **TTS/**: Text-to-Speech models
-- **CLAP/**: Contrastive Language-Audio Pretraining
+- **[Whisper](/models/37-whisper/)**: OpenAI's Whisper speech recognition model
+- **[TTS](/models/32-tts/)**: Text-to-Speech models
+- **[CLAP](/models/04-clap/)**: Contrastive Language-Audio Pretraining
 
 ### Other Architectures
-- **Attention Mechanisms/**: Various attention mechanisms and patterns
-- **VAE/**: Variational Autoencoders
-- **DDP/**: Distributed Data Parallel training experiments
-
-## Usage
-
-Each folder is self-contained and includes:
-- Implementation code in PyTorch
-- Training and inference scripts
-- Configuration files
-- Documentation and notes
-- Sometimes pretrained weights or results
-
-Please refer to the README or notes within each subfolder for specific instructions on running the code.
+- **[Attention Mechanisms](/models/01-attention-mechanisms/)**: Various attention mechanisms and patterns
+- **[VAE](/models/34-vae/)**: Variational Autoencoders
+- **[DDP](/models/08-ddp/)**: Distributed Data Parallel training experiments
 
 ## Key Features
 
-- **30+ Model Implementations**: From classic RNNs to modern LLMs and diffusion models
+- **30+ Model Implementations**: From classic RNNs to modern LLMs
 - **Production-Ready Code**: Clean, documented, and tested implementations
 - **Training Scripts**: End-to-end training pipelines with distributed training support
-- **Deployed Demos**: Interactive demos available at [smolhub.com](https://smolhub.com)
-- **Research Citations**: Proper attribution and links to original papers
-
-## Contributing
-
-Feel free to open issues or pull requests if you have suggestions, improvements, or additional replications to add!
 
 ## Sponsors
 
-Thank you to everyone for their support and love for this project!
 - [abstrait](https://github.com/abstrait)
 - [Itz-Antaripa](https://github.com/Itz-Antaripa)
-
-## Links
-
-- [HuggingFace Account](https://huggingface.co/YuvrajSingh9886)
-- [SmolHub Website](https://smolhub.com)
-- [GitHub Repository](https://github.com/YuvrajSingh-mist/Paper-Replications)
-
-## Author
-
-[@YuvrajSingh](https://www.github.com/YuvrajSingh-mist)
-
-## Citation
-
-If you find this repository useful in your research, please cite it:
-
-```bibtex
-@misc{singh_paper_replications_2025,
-  author       = {Yuvraj Singh},
-  title        = {Paper-Replications: Replication from Scratch Repository using PyTorch},
-  year         = {2025},
-  publisher    = {GitHub},
-  journal      = {GitHub repository},
-  howpublished = {\url{https://github.com/YuvrajSingh-mist/Paper-Replications}},
-  commit       = {1d7a1b37a82e441cde884f591c9c41fa4e47ddbb}
-}
-```

@@ -1,35 +1,30 @@
 ---
 title: "Attention Mechanisms"
-excerpt: "From scratch implementation of Attention Mechanisms"
+excerpt: "From-scratch implementations of Bahdanau and Luong attention in PyTorch."
 collection: models
 layout: model-implementation
-category: "Attention Mechanisms"
+category: "Attention"
 framework: "PyTorch"
 dataset: "Custom"
-github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Attention Mechanisms"
+github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Attention%20Mechanisms"
 date: 2025-03-07
 ---
 
 ## Overview
-From scratch implementation of Attention Mechanisms
 
-## Key Features
-- Attention Mechanism
+Standalone implementations of the two seminal additive and multiplicative attention mechanisms that preceded the Transformer. These form the conceptual foundation for all modern attention: Bahdanau's additive scoring and Luong's dot-product / general scoring.
 
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: Custom
-- **Category**: Attention Mechanisms
+## Implemented
 
-## Implementation Details
+**Bahdanau Attention** (*Neural Machine Translation by Jointly Learning to Align and Translate*, Bahdanau et al., 2015)
+- Additive (MLP) scoring function: score(s, h) = vᵀ tanh(Ws·s + Wh·h)
+- Enables encoder-decoder alignment without fixed-length bottleneck
 
+**Luong Attention** (*Effective Approaches to Attention-based Neural Machine Translation*, Luong et al., 2015)
+- Three scoring variants: dot, general, concat
+- Global and local attention modes
 
+## Papers
 
-[Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/abs/1409.0473)
-
-[Effective Approaches to Attention-based Neural Machine Translation](https://arxiv.org/abs/1508.04025)
-
-## Source Code
-📁 **GitHub Repository**: [Attention Mechanisms](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Attention Mechanisms)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+- [Bahdanau et al., 2015](https://arxiv.org/abs/1409.0473)
+- [Luong et al., 2015](https://arxiv.org/abs/1508.04025)

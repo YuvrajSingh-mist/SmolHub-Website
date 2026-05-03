@@ -9,17 +9,9 @@ date: Feb '25
 location: Online
 date_iso: 2025-02-01
 github_url: https://github.com/YuvrajSingh-mist/NeatRL
+website_url: https://smolhub.com/rl
 stars: 230
 ---
-
-<div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
-  <a href="https://smolhub.com/rl" target="_blank" rel="noopener" class="model-details-btn" style="background: #ffffff; color: #2c3e50; border: 1px solid #d0d0d0; box-shadow: 0 1px 3px rgba(0,0,0,0.08); padding: 8px 12px; border-radius: 8px; text-decoration: none;">
-    🌐 Website
-  </a>
-  <a href="https://github.com/YuvrajSingh-mist/NeatRL" target="_blank" rel="noopener" class="model-details-btn" style="background: #ffffff; color: #2c3e50; border: 1px solid #d0d0d0; box-shadow: 0 1px 3px rgba(0,0,0,0.08); padding: 8px 12px; border-radius: 8px; text-decoration: none;">
-    🐙 GitHub
-  </a>
-</div>
 
 # Deep Reinforcement Learning Projects
 
@@ -61,39 +53,39 @@ model = train_dqn(
 - **[neatrl/](./neatrl)**: Main NeatRL library with DQN implementation and training utilities
 
 ### Additional Algorithm Implementations
-- **[DQN](/DQN)**: Deep Q-Network implementation for CartPole and LunarLander environments
-- **[DQN-atari](/DQN-atari)**: DQN adapted for Atari games with convolutional networks
-- **[DQN-flappy](/DQN-flappy)**: DQN implementation for FlappyBird environment
-- **[DQN-Lunar](/DQN-Lunar)**: DQN specifically tuned for the Lunar Lander environment
-- **[DQN-Taxi](/DQN-Taxi)**: DQN for the discrete Taxi-v3 environment
-- **[DQN-FrozenLake](/DQN-FrozenLake)**: DQN implementation for the FrozenLake environment
-- **[Duel-DQN](/Duel-DQN)**: Dueling DQN with separate value and advantage streams for CliffWalking
-- **[Q-Learning](/Q-Learning)**: Classic tabular Q-learning implementations
+- **[DQN](/rl/07-dqn-dqn/)**: Deep Q-Network implementation for CartPole and LunarLander environments
+- **[DQN-atari](/rl/06-dqn-atari-dqn-atari/)**: DQN adapted for Atari games with convolutional networks
+- **[DQN-flappy](/rl/09-flappybird-ppo-flappybird-ppo/)**: DQN implementation for FlappyBird environment
+- **[DQN-Lunar](/rl/04-dqn-lunar-dqn-lunar/)**: DQN specifically tuned for the Lunar Lander environment
+- **[DQN-Taxi](/rl/05-dqn-taxi-dqn-taxi/)**: DQN for the discrete Taxi-v3 environment
+- **[DQN-FrozenLake](/rl/03-dqn-frozenlake-dqn-frozenlake/)**: DQN implementation for the FrozenLake environment
+- **[Duel-DQN](/rl/08-duel-dqn-duel-dqn/)**: Dueling DQN with separate value and advantage streams for CliffWalking
+- **[Q-Learning](/rl/10-frozen-lake-frozen-lake/)**: Classic tabular Q-learning implementations
 
 ### Policy-Based Methods
-- **[REINFORCE](/REINFORCE)**: Monte Carlo policy gradient method for CartPole environment
-- **[A2C](/A2C)**: Advantage Actor-Critic implementation for multiple environments (CartPole, FrozenLake, LunarLander)
-- **[PPO](/PPO)**: Proximal Policy Optimization with clipped surrogate objective for LunarLander
-- **[FlappyBird-PPO](/FlappyBird-PPO)**: PPO implementation specifically for FlappyBird environment
+- **[REINFORCE](/rl/19-reinforce-reinforce/)**: Monte Carlo policy gradient method for CartPole environment
+- **[A2C](/rl/01-a2c-a2c/)**: Advantage Actor-Critic implementation for multiple environments (CartPole, FrozenLake, LunarLander)
+- **[PPO](/rl/16-ppo-ppo/)**: Proximal Policy Optimization with clipped surrogate objective for LunarLander
+- **[FlappyBird-PPO](/rl/09-flappybird-ppo-flappybird-ppo/)**: PPO implementation specifically for FlappyBird environment
 
 ### Actor-Critic Methods (Continuous Control)
-- **[DDPG](/DDPG)**: Deep Deterministic Policy Gradient for continuous action spaces (Pendulum, BipedalWalker)
-- **[TD3](/TD3)**: Twin Delayed DDPG with twin critics and delayed policy updates
-- **[SAC](/SAC)**: Soft Actor-Critic with maximum entropy reinforcement learning
+- **[DDPG](/rl/02-ddpg-ddpg/)**: Deep Deterministic Policy Gradient for continuous action spaces (Pendulum, BipedalWalker)
+- **[TD3](/rl/22-td3-td3/)**: Twin Delayed DDPG with twin critics and delayed policy updates
+- **[SAC](/rl/21-sac-sac/)**: Soft Actor-Critic with maximum entropy reinforcement learning
 
 ### Exploration & Advanced Methods
-- **[RND](/RND)**: Random Network Distillation combined with PPO for curiosity-driven exploration
-- **[NeatRL](/NeatRL)**: NEAT (NeuroEvolution of Augmenting Topologies) reinforcement learning implementations
+- **[RND](/rl/20-rnd-rnd/)**: Random Network Distillation combined with PPO for curiosity-driven exploration
+- **[NeatRL](/rl/)**: NEAT (NeuroEvolution of Augmenting Topologies) reinforcement learning implementations
 
 ### Game-Specific Implementations
-- **[Pong](/Pong)**: Classic Pong environment implementations
-- **[VizDoom-RL](/VizDoom-RL)**: Reinforcement learning in VizDoom 3D environments
-- **[Frozen-Lake](/Frozen-Lake)**: Specialized implementations for FrozenLake environment
-- **[SimpleRLGames](/SimpleRLGames)**: Collection of simple RL game implementations
+- **[Pong](/rl/)**: Classic Pong environment implementations
+- **[VizDoom-RL](/rl/)**: Reinforcement learning in VizDoom 3D environments
+- **[Frozen-Lake](/rl/10-frozen-lake-frozen-lake/)**: Specialized implementations for FrozenLake environment
+- **[SimpleRLGames](/rl/)**: Collection of simple RL game implementations
 
 ### Unity ML-Agents
-- **[ml-agents](/ml-agents)**: Unity ML-Agents toolkit for training intelligent agents in Unity environments
-- **[ml-agents-train](/ml-agents-train)**: Training scripts and utilities for Unity ML-Agents
+- **[ml-agents](/rl/)**: Unity ML-Agents toolkit for training intelligent agents in Unity environments
+- **[ml-agents-train](/rl/)**: Training scripts and utilities for Unity ML-Agents
 
 ## Key Features
 

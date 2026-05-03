@@ -1,6 +1,6 @@
 ---
 title: "LoRA"
-excerpt: "From scratch implementation of LoRA"
+excerpt: "Low-rank adaptation implemented from scratch in PyTorch. Train/val loss ~3.5 in 1,000 steps on A100."
 collection: models
 layout: model-implementation
 category: "Fine-tuning"
@@ -11,35 +11,30 @@ date: 2025-04-05
 ---
 
 ## Overview
-From scratch implementation of LoRA
 
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: TinyShakespeare
-- **Category**: Fine-tuning
+From-scratch PyTorch implementation of LoRA (Low-Rank Adaptation). Rather than fine-tuning all parameters, LoRA freezes the pre-trained weights and injects trainable low-rank decomposition matrices (A and B) into each attention projection. The update ΔW = BA where B ∈ Rᵈˣʳ and A ∈ Rʳˣᵏ, with rank r ≪ d. Based on *LoRA: Low-Rank Adaptation of Large Language Models* (Hu et al., 2022).
 
-## Implementation Details
+## Architecture
 
-I implemented the LoRA framework using Pytorch on Tinyshakespeare dataset.
+- LoRA adapters injected into Q, V projections
+- Rank r configurable; original weights frozen
+- Zero-initialised B, random Gaussian A — ensures ΔW=0 at start
 
-[LORA: LOW-RANK ADAPTATION OF LARGE LANGUAGE MODELS](https://arxiv.org/pdf/2106.09685)
+## Training
 
-### Datasets
+| Hyperparameter | Value |
+|---|---|
+| Dataset | TinyShakespeare |
+| Steps | 1,000 (val every 100) |
+| Hardware | A100 GPU |
 
-**Tineshakespeare**: in the /data folder
+## Results
 
-### Frameworks:
-**Pytorch**
+| Split | Loss |
+|---|---|
+| Train | 3.51 |
+| Validation | 3.50 |
 
-### Results (on A100 GPU Single)
+## Paper
 
-**Training steps:** 1000
-**Validation steps:** per 100 training steps
-
-**Train loss:**  3.51
-**Val loss:** 3.50
-
-## Source Code
-📁 **GitHub Repository**: [LoRA](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/LoRA)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+[LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685) — Hu et al., 2022

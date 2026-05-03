@@ -1,6 +1,6 @@
 ---
 title: "SimplePO"
-excerpt: "From scratch implementation of SimplePO"
+excerpt: "Reference-free preference optimization (SimplePO) on OPT-330M. Batch size 128, lr=2e-5, beta=2 on UltraFeedback."
 collection: models
 layout: model-implementation
 category: "Fine-tuning"
@@ -11,39 +11,24 @@ date: 2025-04-04
 ---
 
 ## Overview
-From scratch implementation of SimplePO
 
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: UltraFeedback
-- **Category**: Fine-tuning
+From-scratch implementation of SimplePO applied to OPT-330M. SimplePO is a reference-free preference optimisation method that directly maximises the log-likelihood ratio between chosen and rejected responses without a KL penalty or reward model. Based on *SimPO: Simple Preference Optimization with a Reference-Free Reward* (Meng et al., 2024).
 
-## Implementation Details
+## Setup
 
+- **Base model**: OPT-330M
+- **Dataset**: UltraFeedback binarized preferences
+- **Loss**: Length-normalised log-ratio reward + margin γ
 
-Trained OPT-330M model using SimplePO in Pytorch for Instruction Following
+## Training
 
-[SimplePO: Simple Preference Optimization with a Reference-Free Reward](https://arxiv.org/abs/2405.14734)
+| Hyperparameter | Value |
+|---|---|
+| Batch size | 128 |
+| Optimizer | Adam, lr=2e-5 |
+| Beta (reward scaling) | 2 |
+| Gamma (margin) | 1.6 |
 
-## ModelArgs Hyperparameters
+## Paper
 
-| Parameter    | Value    | Description                                                                 
-|--------------|----------|-----------------------------------------------------------------------------|
-| `batch_size` | 128        | The number of samples processed before the model is updated.                |
-| `max_lr`     | 2e-5     | Maximum learning rate.                                                      |
-| `device`     | 'cuda:0' | The device to run the model on (e.g., 'cuda:0' for GPU).                    |
-| `beta`      | 2 | Beta values                                                                 |           
-| `gamma`| 1.6     | Gamma values for the optimizer                                       |
-
-### Datasets
-
-[UltraFeedback](https://huggingface.co/datasets/argilla/ultrafeedback-binarized-preferences-cleaned)
-
-### Frameworks:
-**Pytorch**
-
-
-## Source Code
-📁 **GitHub Repository**: [SimplePO](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/SimplePO)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+[SimPO: Simple Preference Optimization with a Reference-Free Reward](https://arxiv.org/abs/2405.14734) — Meng et al., 2024

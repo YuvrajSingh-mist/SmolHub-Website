@@ -1,0 +1,718 @@
+/* ==========================================================================
+   k-a.in theme — exact color/font match
+   ========================================================================== */
+
+:root {
+  --bg-primary:    #faf8f5;
+  --bg-subtle:     #f5f3ef;
+  --text-primary:  #2c2c2c;
+  --text-secondary:#737373;
+  --text-tertiary: #9a9a9a;
+  --accent:        #8a7355;
+  --accent-light:  #a99478;
+  --accent-muted:  rgba(138, 115, 85, 0.08);
+  --border:        #e5e0d8;
+  --border-light:  #ebe7e0;
+  --link:          #6b8a94;
+  --link-hover:    #4a6a74;
+}
+
+/* Body & global */
+body {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Crimson Pro', Georgia, serif !important;
+  font-size: 18px !important;
+  line-height: 1.7 !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+
+a {
+  color: var(--link);
+  &:hover { color: var(--link-hover); }
+}
+
+/* Ensure page backgrounds are warm */
+.page,
+.page__content,
+.archive,
+.initial-content,
+.page__inner-wrap,
+.sidebar.sticky {
+  background-color: var(--bg-primary);
+}
+
+/* Strip white-card appearance from about.md sections */
+.experience-list,
+.education-list,
+.achievements-list {
+  margin: 2rem 0;
+}
+
+.experience-list ul,
+.education-list ul,
+.achievements-list ul {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  list-style: none;
+}
+
+/* Experience & Education Items - Elegant card-like styling */
+.experience-list > ul > li,
+.education-list > ul > li {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 2px;
+  padding: 0.75rem 1.1rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.25s ease;
+  position: relative;
+  
+  &:hover {
+    background: var(--bg-primary);
+    border-left-color: var(--accent-light);
+    box-shadow: 0 2px 8px rgba(138, 115, 85, 0.08);
+    transform: translateX(2px);
+  }
+}
+
+/* Job title & institution */
+.experience-list li strong,
+.education-list li strong {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+  display: block;
+  margin-bottom: 0.3rem;
+  line-height: 1.4;
+}
+
+/* Date */
+.experience-list li small,
+.education-list li small {
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-family: 'Crimson Pro', serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* Nested bullet points */
+.experience-list li ul,
+.education-list li ul {
+  margin-top: 0.85rem;
+  padding-left: 1.5rem !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.experience-list li ul li,
+.education-list li ul li {
+  border: none !important;
+  padding: 0.35rem 0;
+  font-size: 0.93rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  list-style: none;
+  position: relative;
+  padding-left: 1.2rem;
+  background: transparent !important;
+  
+  &::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1.4;
+  }
+}
+
+/* Achievements - Elegant card styling */
+.achievements-list ul {
+  margin: 0;
+  padding: 0;
+}
+
+.achievements-list > ul > li {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 2px;
+  padding: 0.65rem 1.1rem;
+  margin-bottom: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: all 0.25s ease;
+  
+  &:hover {
+    background: var(--bg-primary);
+    border-left-color: var(--accent-light);
+    box-shadow: 0 2px 8px rgba(138, 115, 85, 0.08);
+    transform: translateX(2px);
+  }
+}
+
+.achv-title {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-weight: 400;
+  color: var(--text-secondary);
+  font-size: 0.97rem;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+/* Talk / project page title — golden accent */
+h1.page__title {
+  color: var(--accent) !important;
+}
+
+.page__title-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1.8rem;
+  margin-bottom: 0;
+}
+
+.page__header-links {
+  display: flex;
+  gap: 1.1rem;
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 0.15rem;
+
+  a {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+    &:hover { color: var(--accent); }
+  }
+
+  .fa-github {
+    font-size: 0.9em;
+    vertical-align: -1px;
+    margin-right: 2px;
+  }
+}
+
+.page__subtitle {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin: 0.1rem 0 1.4rem;
+  letter-spacing: 0.01em;
+}
+
+.achievements-list small {
+  color: var(--text-secondary);
+  font-size: 0.87rem;
+  font-family: 'Crimson Pro', serif;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* General page list items (outside .content-list) should also be transparent */
+.page__content ul:not(.content-list):not(.social-icons):not(.author__urls):not(.visible-links) li {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Sidebar */
+img.hf-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  margin-right: 0.4em;
+  display: inline-block;
+  filter: grayscale(1) opacity(0.75);
+}
+
+.sidebar .author__bio {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar .author__urls a {
+  color: var(--text-secondary);
+  font-family: 'Crimson Pro', Georgia, serif;
+}
+.sidebar .author__name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  color: var(--text-primary);
+}
+
+/* --- Masthead: title-only --- */
+.masthead {
+  background-color: var(--bg-primary) !important;
+  border-bottom: 1px solid var(--border-light);
+  height: $masthead-height;
+  display: flex;
+  align-items: center;
+}
+
+.masthead__inner-wrap {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.masthead__nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  a {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    transition: color 0.2s;
+    &:hover { color: var(--accent); }
+  }
+}
+
+a.site-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+  &:hover { color: var(--accent); }
+}
+
+/* --- Footer --- */
+.page__footer {
+  background-color: var(--bg-primary) !important;
+  border-top: 1px solid var(--border-light);
+  color: var(--text-tertiary);
+}
+
+.page__footer-nav {
+  text-align: center;
+  padding: 1.75rem 2rem 0.4rem;
+  line-height: 2.5;
+
+  a {
+    color: var(--text-tertiary);
+    text-decoration: none;
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.88em;
+    letter-spacing: 0.02em;
+    &:hover { color: var(--accent); }
+  }
+}
+
+.page__footer-copyright--minimal {
+  text-align: center;
+  padding: 0.25rem 2rem 1.75rem;
+  font-size: 0.78em;
+  color: var(--text-tertiary);
+  font-family: 'Crimson Pro', serif;
+}
+
+/* --- Section headers: k-a.in .section-title style --- */
+.page__content h2,
+.archive__content h2,
+.archive h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  font-size: 0.82rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-align: center;
+  margin: 3rem 0 1.5rem;
+}
+
+/* --- Content list: k-a.in writing-list style --- */
+.content-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-item {
+  position: relative;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  &:first-child { border-top: 1px solid var(--border-light); }
+
+  &.hidden { display: none !important; }
+
+  &:hover .model-card__title { color: var(--accent) !important; }
+  &:hover .metric-icon { opacity: 0.85; }
+}
+
+/* Left: title + excerpt */
+.list-item__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.list-item__title {
+  a.model-card__title {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    display: block;
+    margin-bottom: 0.3rem;
+    transition: color 0.3s ease;
+    &:hover {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: var(--accent-light);
+      text-underline-offset: 3px;
+    }
+  }
+}
+
+.list-item__tag {
+  font-size: 0.68em;
+  color: var(--text-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1px 6px;
+  margin-left: 8px;
+  vertical-align: middle;
+  font-weight: 300;
+  font-family: 'Crimson Pro', serif;
+}
+
+.list-item__excerpt,
+.list-item .model-card__excerpt {
+  font-size: 0.92rem;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+  font-weight: 300;
+  letter-spacing: 0.005em;
+  margin-top: 0.2rem;
+}
+
+/* Right: metrics (icon stacked above count) — k-a.in style */
+.list-item__metrics {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+  align-items: center;
+  padding-top: 0.2rem;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.metric-icon {
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  opacity: 0.6;
+  line-height: 1;
+  transition: opacity 0.3s ease;
+}
+
+.metric-count {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+/* Tags in smolhub items */
+.list-item__tags {
+  margin-top: 5px;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.list-item__tags .tag {
+  font-size: 0.68em;
+  color: var(--text-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1px 5px;
+  font-weight: 300;
+  font-family: 'Crimson Pro', serif;
+}
+
+/* Action links */
+.list-item__actions {
+  margin-top: 6px;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.list-item__actions a {
+  font-size: 0.82em;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: 'Crimson Pro', serif;
+  &:hover { color: var(--link-hover); text-decoration: underline; }
+}
+
+/* --- Search section --- */
+.search-section {
+  margin: 1.5rem 0;
+  padding: 0.75rem 0 1rem;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border-light) !important;
+  border-radius: 0 !important;
+}
+
+.search-container input {
+  border: 1px solid var(--border) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  background: var(--bg-subtle) !important;
+  color: var(--text-primary) !important;
+  font-family: 'Crimson Pro', serif;
+  font-size: 1rem;
+
+  &:focus {
+    border-color: var(--accent-light) !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: var(--bg-primary) !important;
+  }
+}
+
+.filter-btn {
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  font-size: 0.82em !important;
+  padding: 4px 10px !important;
+  transition: background 0.15s, color 0.15s !important;
+  border-color: var(--border) !important;
+  color: var(--text-secondary) !important;
+  background: transparent !important;
+  font-family: 'Crimson Pro', serif;
+
+  &:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    background: var(--accent-muted) !important;
+    border-color: var(--accent-light) !important;
+    color: var(--accent) !important;
+  }
+
+  &.active {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: white !important;
+    box-shadow: none !important;
+  }
+}
+
+#clear-search {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  box-shadow: none !important;
+  border-radius: 2px !important;
+  color: white !important;
+  font-family: 'Crimson Pro', serif;
+
+  &:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    background: var(--accent-light) !important;
+  }
+}
+
+/* --- Implementation detail pages (model/rl) --- */
+.impl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 1.1rem;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.impl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.impl-tag {
+  font-size: 0.72em;
+  color: var(--text-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 2px 8px;
+  font-family: 'Crimson Pro', serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.impl-link {
+  font-size: 0.85em;
+  color: var(--link);
+  text-decoration: none;
+  font-family: 'Crimson Pro', serif;
+  flex-shrink: 0;
+  &:hover { color: var(--link-hover); text-decoration: underline; }
+}
+
+/* Code blocks — override _syntax.scss nested box + </> icon */
+div.highlighter-rouge,
+figure.highlight {
+  background: var(--bg-subtle) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 1.1rem 0 !important;
+
+  &:before {
+    display: none !important;
+  }
+
+  .highlight {
+    background: transparent !important;
+    padding: 0.85rem 1.1rem !important;
+    margin: 0 !important;
+  }
+
+  pre {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 0.87rem !important;
+    line-height: 1.65 !important;
+  }
+}
+
+/* Inline code */
+code.highlighter-rouge,
+.page__content p code,
+.page__content li code,
+.page__content td code {
+  background: var(--bg-subtle) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: 2px !important;
+  padding: 1px 5px !important;
+  font-size: 0.87em !important;
+  box-shadow: none !important;
+}
+
+.page__content blockquote {
+  border-left: 2px solid var(--accent-light);
+  padding-left: 1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 1.5rem 0;
+}
+
+/* --- Project talk page link buttons --- */
+.project-links {
+  display: flex !important;
+  gap: 0.75rem !important;
+  flex-wrap: wrap;
+  margin: 0.75rem 0 1.75rem !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.project-links a,
+.model-details-btn {
+  font-size: 0.82em !important;
+  color: var(--text-primary) !important;
+  text-decoration: none !important;
+  font-family: 'Crimson Pro', serif !important;
+  background: transparent !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 2px !important;
+  padding: 4px 12px !important;
+  box-shadow: none !important;
+  transition: color 0.2s, border-color 0.2s !important;
+}
+
+.project-links a:hover,
+.model-details-btn:hover {
+  color: var(--accent) !important;
+  border-color: var(--accent-light) !important;
+  background: var(--accent-muted) !important;
+}
+
+/* GitHub icon in action links */
+.list-item__actions a .fa-github,
+.project-links .fa-github {
+  font-size: 0.9em;
+  vertical-align: -1px;
+  margin-right: 3px;
+}
+
+/* Warm golden syntax highlighting — matches k-a.in palette */
+.highlight .c,  .highlight .cm, .highlight .c1, .highlight .cs  { color: #b0a28e !important; font-style: italic; }  /* comments — warm gray */
+.highlight .k,  .highlight .kc, .highlight .kn, .highlight .kp,
+.highlight .kr, .highlight .kt                                   { color: #8a7355 !important; }  /* keywords — accent gold */
+.highlight .kd                                                   { color: #7a6045 !important; }  /* keyword.declaration */
+.highlight .nb                                                   { color: #8a7355 !important; }  /* builtins — accent gold */
+.highlight .nf, .highlight .nc, .highlight .nd, .highlight .nt,
+.highlight .nv, .highlight .nx                                   { color: #a07855 !important; }  /* names/functions — warm amber */
+.highlight .s,  .highlight .s1, .highlight .s2, .highlight .se,
+.highlight .si, .highlight .sx, .highlight .sr, .highlight .ss  { color: #6e8c6a !important; }  /* strings — soft sage */
+.highlight .m,  .highlight .mi, .highlight .mf, .highlight .mh,
+.highlight .mo, .highlight .il                                   { color: #a07855 !important; }  /* numbers — warm amber */
+.highlight .o,  .highlight .ow                                   { color: #737373 !important; }  /* operators — neutral */
+.highlight .err                                                  { color: #9a5050 !important; background: transparent !important; }
+.highlight .p,  .highlight .n,  .highlight .na, .highlight .nn,
+.highlight .nl, .highlight .py, .highlight .go, .highlight .gp  { color: #2c2c2c !important; }  /* punctuation/base — text-primary */
+.highlight .gh, .highlight .gu                                   { color: #a07855 !important; font-weight: 600; }
+.highlight .gi                                                   { color: #6e8c6a !important; }
+.highlight .gd                                                   { color: #9a5050 !important; }
+.highlight .cp                                                   { color: #8a7355 !important; }

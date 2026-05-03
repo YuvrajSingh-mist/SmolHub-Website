@@ -1,6 +1,6 @@
 ---
 title: "LSTM"
-excerpt: "From scratch implementation of lstm"
+excerpt: "LSTM from scratch (~128K params). 128 hidden units, 50 epochs. Train loss 0.49 / val loss 0.48."
 collection: models
 layout: model-implementation
 category: "Sequential Models"
@@ -11,48 +11,32 @@ date: 2025-04-25
 ---
 
 ## Overview
-From scratch implementation of lstm
 
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: Custom
-- **Category**: Sequential Models
+From-scratch LSTM implementation, manually implementing all four gates (input, forget, output, cell) without using `nn.LSTM`. LSTMs solve the vanishing gradient problem of vanilla RNNs by introducing a cell state that can carry information over long sequences. Based on *Long Short-Term Memory* (Hochreiter & Schmidhuber, 1997).
 
-## Implementation Details
+## Architecture
 
+- Manual gate implementations: i, f, g, o
+- 128 hidden units per layer
+- Sequence length: 64
+- ~128K parameters
 
-Trained 128K LSTM model coded from scratch in Pytorch 
+## Training
 
-## ModelArgs Hyperparameters
+| Hyperparameter | Value |
+|---|---|
+| Epochs | 50 |
+| Optimizer | Adam, lr=1e-4 |
+| Batch size | 32 |
+| Dropout | 0.1 |
 
-| Parameter    | Value    | Description                                                                 
-|--------------|----------|-----------------------------------------------------------------------------|
-| `batch_size` | 32       | The number of samples processed before the model is updated.                |
-| `max_lr`     | 1e-4     | Maximum learning rate.                                                      |
-| `dropout`    | 0.1      | Dropout.                                                                    |
-| `epochs`     | 50       | Epochs                                                                      |           
-| `block_size` | 64       | Sequence length                                                             |
-| `No of neurons`     | 128       | Epochs                                                               |   
+## Results
 
-### Frameworks:
-**Pytorch**
+| Split | Loss |
+|---|---|
+| Train | 0.49 |
+| Validation | **0.48** |
 
-### Epochs/Steps
-Epochs (train) = 50
+## Paper
 
-Val iterations = every epoch
-
-### Losses
-
-Train loss - 0.49 
-
-Val loss - 0.48
-
-### Loss Curves
-
-[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/lstm/img/loss_curves.jpg)
-
-## Source Code
-📁 **GitHub Repository**: [lstm](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/lstm)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+[Long Short-Term Memory](https://www.bioinf.jku.at/publications/older/2604.pdf) — Hochreiter & Schmidhuber, 1997

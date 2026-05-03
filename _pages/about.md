@@ -17,100 +17,67 @@ redirect_from:
 
 <div class="experience-list">
   <ul>
-      <li>
-      <strong>TurboML— AI Engineer</strong> <small>· May 2025 – June 2025</small>
+    <li>
+      <strong>alphaXiv — Research Intern</strong> <small>· Oct 2025 – April 2026</small>
       <ul>
-        <li>Worked on development of various tools for LLM, enhancing tool-calling capabilities.</li>
-        <li>Developed pipeline for smooth integration of tools developed for YouTube QnA, summarization of videos and fact check features with the platform.</li>
+        <li>Reimplemented and reproduced results from seminal and recent ML papers (e.g., Attention Is Not All You Need, TRM/HRM) from scratch in PyTorch under the alphaXiv paper-implementations repository.</li>
+        <li>Built evaluation pipelines and benchmarking infrastructure for LLM/VLM systems; evaluated models such as DeepSeek-OCR and OlmOCR2 on OmniDocBench and related OCR benchmarks.</li>
+        <li>Deployed large models (e.g., DeepSeek-OCR, OCR2, LLMs like Ouro) using vLLM and Modal/Baseten, and generated a 100k-document OCR dataset from arXiv PDFs for large-scale document understanding research.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>IISER, Kolkata — Summer Research Intern</strong> <small>· May 2024 – May 2025</small>
+      <ul>
+        <li>Co-authored (first author) with Prof. Kripabandhu Ghosh, for creating a dataset of 40k scraped YouTube comments, humanely-verified, stance-analysed famous sports controversies (cricket and football) with applied stance detection.</li>
+        <li>Utilized LLMs like Llama-3.1/3.2, Mistral-7b, Qwen-2.5 under zero/few-shot prompt to create the dataset. Benchmarked and fine-tuned existing open-sourced LLMs Reasoning (distilled) and Non-Reasoning LLMs on the humanely verified dataset. Submitted to COLM 2025.</li>
       </ul>
     </li>
     <li>
       <strong>University of Maryland — Research Intern</strong> <small>· Dec 2024 – Feb 2025</small>
       <ul>
-        <li>UI/UX→Code dataset creation for VLM fine‑tuning</li>
-        <li>Scraped 100+ static sites; curated 200+ layout/commit records</li>
+        <li>Worked on UI/UX2Code generation with primary focus on creation of a robust dataset for the VLM models to be fine-tuned upon.</li>
+        <li>Scraped 100+ websites of static web pages and collected their commit history and corresponding webpage layouts to create a dataset of 200+ records.</li>
       </ul>
     </li>
-    <li>
-      <strong>IISER Kolkata — Summer Research Intern</strong> <small>· May 2024 – May 2025</small>
-      <ul>
-        <li>Built 40k human‑verified stance‑analysis dataset (sports controversies)</li>
-        <li>Labels via Llama‑3.1/3.2, Mistral‑7B, Qwen‑2.5 with human verification</li>
-        <li>Fine‑tuned reasoning and non‑reasoning LLMs; ~30% improvement</li>
-      </ul>
-    </li>
-    <li>
-      <strong>AIISC — Research Intern</strong> <small>· Mar 2024 – Jul 2024</small>
-      <ul>
-        <li>Worked with Prof. Amitava Das on hallucination prevention</li>
-        <li>Web‑scraped news/posts; generated synthetic data with open‑source LLMs</li>
-        <li>Entity tagging using GLiNER and related models</li>
-      </ul>
-    </li>
-    <li>
-      <strong>Clinical AI Assistance — Research Intern</strong> <small>· Dec 2023 – Mar 2024</small>
-      <ul>
-        <li>Dataset creation and model evaluation with HuggingFace‑hosted LLMs</li>
-        <li>Data gathering, cleaning, and efficiency analysis</li>
-      </ul>
-    </li>
+
   </ul>
 </div>
 
 
 ## Projects
 
-<div class="projects-list">
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin: 20px 0;">
-  {% assign sorted_talks = site.talks | sort: 'date_iso' | reverse %}
-  {% assign sorted_by_stars = sorted_talks | sort: 'stars' | reverse %}
-  {% for post in sorted_by_stars %}
-    <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.3s ease; display: flex; flex-direction: column;">
-      <div style="margin-bottom: 12px;">
-        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-          <a href="{{ post.url | relative_url }}" style="font-size: 1.1em; font-weight: 700; color: #2c3e50; text-decoration: none; line-height: 1.3;">{{ post.title | split: '|' | first | strip }}</a>
-          {% if post.stars %}
-            <span style="background: #f5f5f5; color: #2c3e50; padding: 3px 8px; border-radius: 4px; font-size: 0.75em; font-weight: 600; white-space: nowrap; border: 1px solid #e0e0e0; display: inline-flex; align-items: center; gap: 4px;">
-              <svg width="12" height="12" viewBox="0 0 16 16" fill="#fbbf24" style="flex-shrink: 0;"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"/></svg>
-              {{ post.stars }}
-            </span>
-          {% endif %}
-        </div>
-        {% if post.title contains '|' %}
-          <div style="color: #666; font-size: 0.9em; margin-top: 4px;">{{ post.title | split: '|' | last | strip }}</div>
-        {% endif %}
+{% assign sorted_talks = site.talks | sort: 'date_iso' | reverse %}
+{% assign sorted_by_stars = sorted_talks | sort: 'stars' | reverse %}
+<ul class="content-list">
+{% for post in sorted_by_stars %}
+  <li class="list-item">
+    <div class="list-item__body">
+      <div class="list-item__title">
+        <a href="{{ post.url | relative_url }}" class="model-card__title">{{ post.title | split: '|' | first | strip }}</a>
+        {% if post.type %}<span class="list-item__tag">{{ post.type }}</span>{% endif %}
       </div>
-      
-      {% assign meta = '' %}
-      {% if post.type %}{% assign meta = meta | append: post.type %}{% endif %}
-      {% if post.venue %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.venue %}{% endif %}
-      {% if post.location %}{% if meta != '' %}{% assign meta = meta | append: ' · ' %}{% endif %}{% assign meta = meta | append: post.location %}{% endif %}
-      {% if meta != '' %}<div style="margin-bottom: 12px;"><small style="color: #666;">{{ meta }}</small></div>{% endif %}
-      
-      {% assign bullets = post.excerpt | strip_html | strip_newlines | replace: '…', '.' | replace: ' .', '.' | replace: '  ', ' ' | split: '.' %}
-      {% assign shown = 0 %}
-      <ul style="margin: 0 0 16px 0; padding-left: 20px; flex-grow: 1;">
-      {% for item in bullets %}
-        {% assign trimmed = item | strip %}
-        {% if trimmed != '' and shown < 3 %}
-          <li style="margin-bottom: 6px; font-size: 0.9em; color: #555;">{{ trimmed }}.</li>
-          {% assign shown = shown | plus: 1 %}
-        {% endif %}
-      {% endfor %}
-      </ul>
-      
+      {% if post.excerpt %}
+      <div class="list-item__excerpt">{{ post.excerpt | strip_html | truncatewords: 22 }}</div>
+      {% elsif post.title contains '|' %}
+      <div class="list-item__excerpt">{{ post.title | split: '|' | last | strip }}</div>
+      {% endif %}
       {% if post.github_url %}
-        <div style="margin-top: auto;">
-          <a href="{{ post.github_url }}" target="_blank" rel="noopener" style="background: #ffffff; color: #2c3e50; border: 1px solid #d0d0d0; padding: 8px 16px; border-radius: 6px; font-size: 0.85em; font-weight: 500; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px; width: 100%; justify-content: center;">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="flex-shrink: 0;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-            View on GitHub
-          </a>
-        </div>
+      <div class="list-item__actions">
+        <a href="{{ post.github_url }}" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+      </div>
       {% endif %}
     </div>
-  {% endfor %}
-  </div>
-</div>
+    <div class="list-item__metrics">
+      {% if post.stars %}
+      <div class="metric">
+        <span class="metric-icon">★</span>
+        <span class="metric-count">{{ post.stars }}</span>
+      </div>
+      {% endif %}
+    </div>
+  </li>
+{% endfor %}
+</ul>
 
 
 ## Education

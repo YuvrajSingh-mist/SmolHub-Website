@@ -1,62 +1,42 @@
 ---
 title: "ORPO"
-excerpt: "From scratch implementation of ORPO"
+excerpt: "Odds Ratio Preference Optimization on OPT-330M. Reference-free alignment reaching train loss 1.70 in 3,000 iterations."
 collection: models
 layout: model-implementation
 category: "Fine-tuning"
 framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ORPO"
-date: 2025-03-01
+date: 2025-04-10
 ---
 
 ## Overview
-From scratch implementation of ORPO
 
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: UltraFeedback
-- **Category**: Fine-tuning
+From-scratch implementation of ORPO (Odds Ratio Preference Optimization), applied to OPT-330M for instruction following. ORPO unifies SFT and alignment into a single stage by penalising rejected responses via an odds-ratio term added to the NLL loss — no reference model required. Based on *ORPO: Monolithic Preference Optimization without Reference Model* (Hong et al., 2024).
 
-## Implementation Details
+## Setup
 
+- **Base model**: OPT-330M
+- **Dataset**: UltraFeedback binarized (argilla cleaned version)
+- **Loss**: NLL + log odds-ratio penalty on rejected responses
 
-Trained OPT-330M model using ORPO in Pytorch for Instruction Following
+## Training
 
-## ModelArgs Hyperparameters
+| Hyperparameter | Value |
+|---|---|
+| Iterations | 3,000 |
+| Optimizer | Adam, lr=8e-6, betas=(0.95, 0.99) |
+| Weight decay | 0.1 |
+| Batch size | 2 |
+| Val frequency | Every 20 steps |
 
-| Parameter    | Value    | Description                                                                 
-|--------------|----------|-----------------------------------------------------------------------------|
-| `batch_size` | 2        | The number of samples processed before the model is updated.                |
-| `max_lr`     | 8e-6     | Maximum learning rate.                                                      |
-| `device`     | 'cuda:0' | The device to run the model on (e.g., 'cuda:0' for GPU).                    |
-| `betas`      | 0.95,0.99| Beta values                                                                 |           
-| `weight_decay`| 0.1     | Weight decay values for the optimizer                                       |
+## Results
 
-### Datasets
+| Split | Loss (at 2.5k steps) |
+|---|---|
+| Train | 1.70 |
+| Validation | 1.98 |
 
-[UltraFeedback](https://huggingface.co/datasets/argilla/ultrafeedback-binarized-preferences-cleaned)
+## Paper
 
-### Frameworks:
-**Pytorch**
-
-### Epochs/Steps
-Iterations (train) = 3k
-
-Val iterations = every 20
-
-### Losses
-
-Train loss - 1.70 
-
-Val loss - 1.98
-(at 2.5k steps)
-
-### Loss Curves
-
-[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/ORPO/img/curves.jpg)
-
-## Source Code
-📁 **GitHub Repository**: [ORPO](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ORPO)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+[ORPO: Monolithic Preference Optimization without Reference Model](https://arxiv.org/abs/2403.07691) — Hong et al., 2024

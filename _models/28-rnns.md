@@ -1,6 +1,6 @@
 ---
 title: "RNNs"
-excerpt: "From scratch implementation of RNNs"
+excerpt: "Vanilla RNN from scratch. 16 neurons, 50 epochs. Train loss 0.51 / val loss 0.50."
 collection: models
 layout: model-implementation
 category: "Sequential Models"
@@ -11,48 +11,27 @@ date: 2025-03-07
 ---
 
 ## Overview
-From scratch implementation of RNNs
 
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: Custom
-- **Category**: Sequential Models
+From-scratch vanilla RNN implementation in PyTorch, establishing the baseline for the sequential model series. Implements the basic recurrent computation hₜ = tanh(Wₓxₜ + Wₕhₜ₋₁ + b) from scratch without using `nn.RNN`, for pedagogical clarity.
 
-## Implementation Details
+## Architecture
 
-Trained a RNN model coded from scratch in Pytorch 
+- Vanilla RNN cell implemented manually
+- 16 hidden units per layer
+- Sequence length: 16
 
-## ModelArgs Hyperparameters
+## Training
 
-| Parameter    | Value    | Description                                                                 
-|--------------|----------|-----------------------------------------------------------------------------|
-| `batch_size` | 16       | The number of samples processed before the model is updated.                |
-| `max_lr`     | 1e-4     | Maximum learning rate.                                                      |
-| `dropout`    | 0.2      | Dropout.                                                                    |
-| `epochs`     | 50       | Epochs                                                                      |           
-| `block_size` | 16      | Sequence Length                                       |
-| `No of neurons`| 16      | No of neurons in an RNN per layer                                          |    
+| Hyperparameter | Value |
+|---|---|
+| Epochs | 50 |
+| Optimizer | Adam, lr=1e-4 |
+| Batch size | 16 |
+| Dropout | 0.2 |
 
-### Frameworks:
-**Pytorch**
+## Results
 
-### Epochs/Steps
-Epochs (train) = 50
-
-Val iterations = every epoch
-
-### Losses
-
-Train loss - 0.51 
-
-Val loss - 0.50
-
-### Loss Curves
-
-[📊 View Training Loss Curves](https://github.com/YuvrajSingh-mist/Paper-Replications/raw/master/RNNs/https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/RNNs/img/loss_curves.jpg)
-
-
-## Source Code
-📁 **GitHub Repository**: [RNNs](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/RNNs)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+| Split | Loss |
+|---|---|
+| Train | 0.51 |
+| Validation | 0.50 |

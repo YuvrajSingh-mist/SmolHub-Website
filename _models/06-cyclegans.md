@@ -1,9 +1,9 @@
 ---
 title: "CycleGANs"
-excerpt: "From scratch implementation of CycleGANs"
+excerpt: "Cycle-consistent unpaired image translation on Cityscapes — two generators, two discriminators, cycle + identity losses."
 collection: models
 layout: model-implementation
-category: "Computer Vision"
+category: "Generative Models"
 framework: "PyTorch"
 dataset: "Cityscapes"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CycleGANs"
@@ -11,29 +11,22 @@ date: 2025-02-09
 ---
 
 ## Overview
-From scratch implementation of CycleGANs
 
-## Technical Details
+From-scratch replication of CycleGAN for unpaired image-to-image translation. CycleGAN trains two generators (A→B and B→A) and two discriminators simultaneously, with a cycle consistency loss enforcing that translating an image and translating back recovers the original. This enables translation without paired training data. Based on *Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks* (Zhu et al., 2017).
+
+## Architecture
+
+- **Generator G**: Domain A → Domain B (ResNet-based)
+- **Generator F**: Domain B → Domain A (ResNet-based)
+- **Discriminators D_A, D_B**: PatchGAN discriminators
+- **Losses**: Adversarial + cycle consistency (L1) + identity loss
+
+## Training
+
+- **Dataset**: Cityscapes (semantic segmentation maps ↔ street photos)
 - **Framework**: PyTorch
-- **Dataset**: Cityscapes
-- **Category**: Computer Vision
+- Generated images stored in `output_images_val/`
 
-## Implementation Details
+## Paper
 
-
-[CycleGAN](https://arxiv.org/abs/1703.10593)
-
-### Datasets
-
-**Cityscapes**: [Link](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)
-
-### Frameworks:
-**Pytorch**
-
-### Generated Images
-Please see the **output_images_val** directory
-
-## Source Code
-📁 **GitHub Repository**: [CycleGANs](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CycleGANs)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+[Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/abs/1703.10593) — Zhu et al., 2017

@@ -1,52 +1,38 @@
 ---
 title: "Transformer"
-excerpt: "From scratch implementation of Transformer"
+excerpt: "Encoder-decoder transformer for English→Hindi translation on Samanantar (~25M params). Published on HuggingFace."
 collection: models
 layout: model-implementation
 category: "Language Models"
 framework: "PyTorch"
-dataset: "Custom"
+dataset: "Samanantar"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Transformer"
 date: 2025-03-10
 ---
 
 ## Overview
-From scratch implementation of Transformer
 
-## Key Features
-- Attention Mechanism
-- Transformer Architecture
+Full encoder-decoder transformer for English-to-Hindi neural machine translation, dubbed **SmolTransformer**. Replicates *Attention Is All You Need* (Vaswani et al., 2017) and is published on HuggingFace.
 
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: Custom
-- **Category**: Language Models
+## Architecture
 
-## Implementation Details
+- 6-layer encoder + 6-layer decoder
+- Multi-head self-attention + cross-attention
+- Sinusoidal positional embeddings
+- ~25M parameters, 512-token context window
+- IndicBARTSS tokenizer (~30K vocab)
+- Supports top-K sampling and beam search at inference
 
+## Training
 
-I implemented the Vanilla Transformers using Pytorch on the German-English dataset.
+- **Dataset**: Samanantar (large-scale English–Hindi parallel corpus)
+- **Techniques**: Automatic mixed precision, gradient accumulation
+- **Tracking**: WandB (loss, perplexity, gradient norms)
 
-[Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+## Published Model
 
-### Datasets
+[HuggingFace — YuvrajSingh9886/SmolTransformer](https://huggingface.co/YuvrajSingh9886/SmolTransformer)
 
-**Multi30k de-en**: [Link](https://raw.githubusercontent.com/multi30k/dataset/master/data/task1/raw/)
+## Paper
 
-### Frameworks:
-**Pytorch**
-
-### Results (on T4 GPU Single)
-
-**Training epochs:** 3
-**Val epochs:** 5
-
-**Train loss:** 0.02  (mean)
-**Val loss:** 0.03 (mean)
-
-[NOTE]: The train and val loss seems to be off. Please submit a PR or open a discussion if you find the issue and would really appreciate your help!
-
-## Source Code
-📁 **GitHub Repository**: [Transformer](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Transformer)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+[Attention Is All You Need](https://arxiv.org/abs/1706.03762) — Vaswani et al., 2017

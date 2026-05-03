@@ -1,45 +1,41 @@
 ---
 title: "Llava"
-excerpt: "From scratch implementation of Llava"
+excerpt: "Visual instruction tuning replicated from scratch on Flickr8K. Train loss 0.23 / val loss 0.22 in 5 epochs on T4."
 collection: models
 layout: model-implementation
-category: "Computer Vision"
+category: "Vision-Language"
 framework: "PyTorch"
-dataset: "Flickr"
+dataset: "Flickr8K"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llava"
 date: 2025-04-25
 ---
 
 ## Overview
-From scratch implementation of Llava
 
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: Flickr
-- **Category**: Computer Vision
+From-scratch replication of LLaVA (Large Language and Vision Assistant). LLaVA connects a vision encoder to a language model decoder via a trainable projection layer, enabling visual instruction following. The projection maps image patch embeddings into the LLM's token embedding space. Based on *Visual Instruction Tuning* (Liu et al., 2023).
 
-## Implementation Details
+## Architecture
 
+- **Vision encoder**: CLIP ViT (image patch embeddings)
+- **Projection**: Linear layer mapping image embeddings → LLM input space
+- **Language decoder**: LLM (instruction-following)
+- Two-stage training: (1) train projection with frozen encoders; (2) fine-tune full model
 
-I implemented the Llava using Pytorch on the flickr8000 dataset.
+## Training
 
-[Visual Instruction Tuning](https://arxiv.org/abs/2304.08485)
+| Hyperparameter | Value |
+|---|---|
+| Dataset | Flickr8K (image-caption pairs as instruction-following data) |
+| Epochs | 5 |
+| Hardware | T4 GPU |
 
-### Datasets
+## Results
 
-**flickr 8000**: [Link](https://www.kaggle.com/datasets/adityajn105/flickr8k)
+| Split | Loss |
+|---|---|
+| Train | **0.23** |
+| Validation | **0.22** |
 
-### Frameworks:
-**Pytorch**
+## Paper
 
-### Results (on T4 GPU Single)
-
-**Training epochs:** 5
-
-**Train loss:** 0.23
-**Val loss:** 0.22
-
-## Source Code
-📁 **GitHub Repository**: [Llava](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llava)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+[Visual Instruction Tuning](https://arxiv.org/abs/2304.08485) — Liu et al., 2023

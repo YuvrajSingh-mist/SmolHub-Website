@@ -1,6 +1,6 @@
 ---
 title: "GPT"
-excerpt: "From scratch implementation of GPT"
+excerpt: "Decoder-only transformer trained on TinyShakespeare, replicating the original OpenAI GPT architecture from scratch."
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,28 +11,19 @@ date: 2025-02-08
 ---
 
 ## Overview
-From scratch implementation of GPT
 
-## Technical Details
+From-scratch PyTorch replication of the original GPT architecture — a decoder-only transformer trained autoregressively on the TinyShakespeare character dataset. Based on the paper *Improving Language Understanding by Generative Pre-Training* (Radford et al., OpenAI 2018).
+
+## Architecture
+
+Standard decoder-only transformer stack: causal self-attention, feed-forward sublayers, layer norm, and learned positional embeddings. Trained autoregressively with a cross-entropy language modelling objective on character-level tokens.
+
+## Training
+
+- **Dataset**: TinyShakespeare (`/data` folder)
+- **Objective**: Next-token prediction (causal LM)
 - **Framework**: PyTorch
-- **Dataset**: TinyShakespeare
-- **Category**: Language Models
 
-## Implementation Details
+## Paper
 
-I implemented the GPT from scratch using Pytorch on Tinyshakespeare dataset.
-
-[Improving Language Understanding
-by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf)
-
-### Datasets
-
-**Tineshakespeare**: in the /data folder
-
-### Frameworks:
-**Pytorch**
-
-## Source Code
-📁 **GitHub Repository**: [GPT](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/GPT)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+[Improving Language Understanding by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf) — Radford et al., OpenAI 2018

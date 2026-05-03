@@ -1,6 +1,6 @@
 ---
 title: "DPO"
-excerpt: "From scratch implementation of DPO"
+excerpt: "Direct Preference Optimization applied to Qwen0.5B-Instruct on UltraFeedback. Train loss 0.67 in 3,000 iterations."
 collection: models
 layout: model-implementation
 category: "Fine-tuning"
@@ -11,45 +11,31 @@ date: 2025-04-04
 ---
 
 ## Overview
-From scratch implementation of DPO
 
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: UltraFeedback
-- **Category**: Fine-tuning
+From-scratch implementation of Direct Preference Optimization (DPO), applied to Qwen0.5B-Instruct. DPO eliminates the need for a separate reward model by directly optimising the policy from preference pairs using a closed-form loss derived from RLHF. Based on *Direct Preference Optimization: Your Language Model is Secretly a Reward Model* (Rafailov et al., 2023).
 
-## Implementation Details
+## Setup
 
+- **Base model**: Qwen0.5B-Instruct
+- **Dataset**: UltraFeedback binarized (chosen / rejected pairs from HuggingFace)
+- **Loss**: DPO contrastive loss with reference model KL penalty (β parameter)
 
-I Trained Qwen0.5B-Instruct using Direct Preference Optimization in Pytorch
+## Training
 
-## ModelArgs Hyperparameters
+| Hyperparameter | Value |
+|---|---|
+| Iterations | 3,000 |
+| Optimizer | Adam, lr=1e-6 |
+| Batch size | 2 |
+| Val frequency | Every 20 steps |
 
-| Parameter    | Value    | Description                                                                 |
-|--------------|----------|-----------------------------------------------------------------------------|
-| `batch_size` | 2        | The number of samples processed before the model is updated.                |
-| `max_lr`     | 1e-6     | Maximum learning rate.                                                     |
-| `device`     | 'cuda:0' | The device to run the model on (e.g., 'cuda:0' for GPU).   
+## Results
 
-### Datasets
+| Split | Loss |
+|---|---|
+| Train | 0.67 |
+| Validation | 0.68 |
 
-[UltraFeedback](https://huggingface.co/datasets/trl-lib/ultrafeedback_binarized)
+## Paper
 
-### Frameworks:
-**Pytorch**
-
-### Epochs/Steps
-Iterations (train) = 3000
-
-Val iterations = every 20
-
-### Losses
-Train loss - 0.67
-
-Val loss - 0.68
-
-
-## Source Code
-📁 **GitHub Repository**: [DPO](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DPO)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+[Direct Preference Optimization](https://arxiv.org/abs/2305.18290) — Rafailov et al., Stanford 2023

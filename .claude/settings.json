@@ -1,0 +1,48 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.k-a.in)",
+      "Bash(ruby --version)",
+      "Bash(rbenv versions *)",
+      "Bash(brew --version)",
+      "Bash(brew install *)",
+      "Bash(rbenv --version)",
+      "Read(//Users/yuvrajsingh9886/.rbenv/versions/3.2.0/lib/ruby/gems/3.2.0/gems/minimal-mistakes-jekyll-4.28.0/_sass/minimal-mistakes/**)",
+      "Bash(grep -rn '$background-color\\\\|$body-color\\\\|$footer-background' '/Users/yuvrajsingh9886/.rbenv/versions/3.2.0/lib/ruby/gems/3.2.0/gems/minimal-mistakes-jekyll-4.28.0/_sass/minimal-mistakes/*.scss')",
+      "Bash(perl -i -0pe 's/class=\"project-links\" style=\"[^\"]*\"/class=\"project-links\"/g' *.md)",
+      "Bash(perl -i -0pe 's/ style=\"background: #ffffff[^\"]*\"//g' *.md)",
+      "Bash(pkill -f \"jekyll serve\")",
+      "Bash(rbenv exec *)",
+      "Bash(echo \"Jekyll restarting, PID: $!\")",
+      "Read(//private/tmp/**)",
+      "Bash(pkill -f \"jekyll\")",
+      "Bash(echo \"Started PID: $!\")",
+      "Bash(perl -i -pe 's/🐙 GitHub/<i class=\"fab fa-github\"><\\\\/i> GitHub/g' *.md)",
+      "Bash(grep -v \"\\\\.md$\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4000/rl/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4000/rl/16-ppo-ppo/)",
+      "Bash(pkill -9 -f \"jekyll\")",
+      "Bash(pkill -9 -f \"ruby\")",
+      "Bash(lsof -ti:4000)",
+      "Bash(xargs kill *)",
+      "Bash(lsof -ti:35729)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(perl -i -pe ' *)",
+      "Bash(python3)",
+      "Bash(curl -s \"https://huggingface.co/front/assets/huggingface_logo-noborder.svg\" -o /Users/yuvrajsingh9886/Desktop/SmolHub-Website/assets/images/huggingface-logo.svg)",
+      "Bash(curl -A \"Mozilla/5.0\" -L \"https://huggingface.co/front/assets/huggingface_logo-noborder.svg\" -o /tmp/hf-logo.svg)",
+      "Read(//tmp/**)",
+      "Bash(gh api *)",
+      "Bash(curl -s http://localhost:4000/)",
+      "Bash(curl -s http://localhost:4000/models/llama4/)",
+      "Bash(curl -s http://localhost:4000/models/)",
+      "Bash(curl -s http://localhost:4000/models/20-llama4/)",
+      "Bash(bundle exec *)",
+      "Bash(git checkout *)"
+    ],
+    "additionalDirectories": [
+      "/Users/yuvrajsingh9886/Desktop/SmolHub-Website/_talks",
+      "/private/tmp"
+    ]
+  }
+}

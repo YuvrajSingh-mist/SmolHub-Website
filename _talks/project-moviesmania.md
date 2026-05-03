@@ -11,12 +11,6 @@ date_iso: 2023-10-03
 github_url: https://github.com/YuvrajSingh-mist/MoviesMania
 ---
 
-<div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
-  <a href="https://github.com/YuvrajSingh-mist/MoviesMania" target="_blank" rel="noopener" class="model-details-btn" style="background: #ffffff; color: #2c3e50; border: 1px solid #d0d0d0; box-shadow: 0 1px 3px rgba(0,0,0,0.08); padding: 8px 12px; border-radius: 8px; text-decoration: none;">
-    🐙 GitHub
-  </a>
-</div>
-
 # Movies Mania
 
 - The project aims to provide an interface for people who want movie recommendations on the basis of some videos uploaded by the user such as a movie clip or YT Short.

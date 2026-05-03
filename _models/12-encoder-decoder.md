@@ -1,60 +1,43 @@
 ---
 title: "Encoder-Decoder"
-excerpt: "From scratch implementation of Encoder-Decoder"
+excerpt: "LSTM-based Seq2Seq encoder-decoder for German→English translation. Train/val loss ~1.38 in 10 epochs."
 collection: models
 layout: model-implementation
 category: "Sequential Models"
 framework: "PyTorch"
-dataset: "Custom"
+dataset: "Multi30k (German–English)"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Encoder-Decoder"
-date: 2025-03-07
+date: 2025-03-01
 ---
 
 ## Overview
-From scratch implementation of Encoder-Decoder
 
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: Custom
-- **Category**: Sequential Models
+From-scratch LSTM-based encoder-decoder (Seq2Seq) for German-to-English translation, replicating the architecture from *Sequence to Sequence Learning with Neural Networks* (Sutskever et al., 2014). This predates attention — the full encoder hidden state is compressed into a single context vector passed to the decoder.
 
-## Implementation Details
+## Architecture
 
-Trained on the on German (de) to English (en) dataset
+- Deep LSTM encoder and decoder (4 layers each)
+- 128 hidden units per layer
+- 32-token block size
+- No attention — fixed-length context vector bottleneck
 
-[Sequence to Sequence Learning with Neural Networks](https://arxiv.org/pdf/1409.3215)
+## Training
 
-## ModelArgs Hyperparameters
+| Hyperparameter | Value |
+|---|---|
+| Dataset | Multi30k-style German–English |
+| Epochs | 10 |
+| Optimizer | Adam, lr=1e-4 |
+| Batch size | 32 |
+| Dropout | 0.2 |
 
-| Parameter    | Value    | Description                                                                 
-|--------------|----------|-----------------------------------------------------------------------------|
-| `batch_size` | 32       | The number of samples processed before the model is updated.                |
-| `max_lr`     | 1e-4     | Maximum learning rate.                                                      |
-| `dropout`    | 0.2      | Dropout.                                                                    |
-| `epochs`     | 10       | Epochs                                                                      |           
-| `block_size` | 32      | Seq Len                                                                     |
-| `num_layers` | 4      | Layers for deep lstms                                                                |
-| `No of neurons`| 128      | No of neurons in an GRU per layer                                          |    
+## Results
 
-### Frameworks:
-**Pytorch**
+| Split | Loss |
+|---|---|
+| Train | 1.38 |
+| Validation | 1.39 |
 
-### Epochs/Steps
-Epochs (train) = 10
+## Paper
 
-Val iterations = every epoch
-
-### Losses
-
-Train loss - 1.38
-
-Val loss - 1.39
-
-### Loss Curves
-
-[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/Encoder-Decoder/img/loss.jpg)
-
-## Source Code
-📁 **GitHub Repository**: [Encoder-Decoder](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Encoder-Decoder)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+[Sequence to Sequence Learning with Neural Networks](https://arxiv.org/abs/1409.3215) — Sutskever et al., 2014

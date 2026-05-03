@@ -7,7 +7,8 @@
 # server process.
 
 # Theme
-remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+theme: minimal-mistakes-jekyll
+# remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Basic Site Settings
@@ -20,7 +21,7 @@ url                      : https://smolhub.com # Primary domain
 # Alternate domains: https://yuvrajsingh-portfoilo-website.vercel.app, https://smolhub.vercel.app
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "YuvrajSingh-mist/SmolHub-Website"
-portfolio_home           : https://yuvrajsingh-portfolio-website.vercel.app/
+portfolio_home           : https://yuvrajsingh.io/
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
@@ -30,9 +31,9 @@ author:
   avatar           : "unnamed.png"
   name             : "Yuvraj Singh"
   pronouns         : # example: "she/her"  
-  bio              : "NLP | Interested in RL and Distributed Systems | Exploring the intersection of Research and Engineering"
+  bio              : "LLM · RL · Distributed Systems"
   location         : "India"
-  employer         : "None"
+  employer         : "Ex- alphaXiv | UMD | IISER Kolkata"
   uri              : # URL
   email            : "yuvraj.mist@gmail.com" 
 

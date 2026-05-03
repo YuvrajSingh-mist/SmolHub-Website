@@ -1,6 +1,6 @@
 ---
 title: "GRU"
-excerpt: "From scratch implementation of GRU"
+excerpt: "GRU from scratch. 16 hidden units, 50 epochs. Train loss 0.51 / val loss 0.48."
 collection: models
 layout: model-implementation
 category: "Sequential Models"
@@ -11,47 +11,32 @@ date: 2025-03-05
 ---
 
 ## Overview
-From scratch implementation of GRU
 
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: Custom
-- **Category**: Sequential Models
+From-scratch GRU (Gated Recurrent Unit) implementation. GRU simplifies the LSTM by merging the cell and hidden state into one and using just two gates (reset and update), achieving comparable performance with fewer parameters. Based on *Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation* (Cho et al., 2014).
 
-## Implementation Details
+## Architecture
 
-Trained a GRU model coded from scratch in Pytorch 
+- Manual gate implementations: reset gate r, update gate z
+- New hidden state: h̃ = tanh(Wx + r ⊙ Uh_{t-1})
+- 16 hidden units per layer
+- Sequence length: 16
 
-## ModelArgs Hyperparameters
+## Training
 
-| Parameter    | Value    | Description                                                                 
-|--------------|----------|-----------------------------------------------------------------------------|
-| `batch_size` | 16       | The number of samples processed before the model is updated.                |
-| `max_lr`     | 1e-4     | Maximum learning rate.                                                      |
-| `dropout`    | 0.2      | Dropout.                                                                    |
-| `epochs`     | 50       | Epochs                                                                      |           
-| `block_size` | 16      | Seq Len                                     |
-| `No of neurons`| 16      | No of neurons in an GRU per layer                                          |    
+| Hyperparameter | Value |
+|---|---|
+| Epochs | 50 |
+| Optimizer | Adam, lr=1e-4 |
+| Batch size | 16 |
+| Dropout | 0.2 |
 
-### Frameworks:
-**Pytorch**
+## Results
 
-### Epochs/Steps
-Epochs (train) = 50
+| Split | Loss |
+|---|---|
+| Train | 0.51 |
+| Validation | 0.48 |
 
-Val iterations = every epoch
+## Paper
 
-### Losses
-
-Train loss - 0.51 
-
-Val loss - 0.48
-
-### Loss Curves
-
-[📊 View Training Loss Curves](https://raw.githubusercontent.com/YuvrajSingh-mist/Paper-Replications/master/GRU/img/loss_curves.jpg)
-
-## Source Code
-📁 **GitHub Repository**: [GRU](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/GRU)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+[Learning Phrase Representations using RNN Encoder-Decoder](https://arxiv.org/abs/1406.1078) — Cho et al., 2014

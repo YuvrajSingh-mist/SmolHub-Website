@@ -1,6 +1,6 @@
 ---
 title: "Mixtral"
-excerpt: "From scratch implementation of Mixtral"
+excerpt: "Sparse MoE transformer replicated from scratch on TinyShakespeare. Train loss 2.04 / val loss 2.09 in 1,000 steps on T4."
 collection: models
 layout: model-implementation
 category: "Language Models"
@@ -11,35 +11,31 @@ date: 2025-03-20
 ---
 
 ## Overview
-From scratch implementation of Mixtral
 
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: TinyShakespeare
-- **Category**: Language Models
+From-scratch replication of Mixtral's Sparse Mixture-of-Experts architecture. Each transformer layer contains multiple expert FFN sub-networks; a learned router selects the top-K experts per token, enabling a larger total parameter count without proportionally increasing compute. Based on *Mixtral of Experts* (Mistral AI, 2024).
 
-## Implementation Details
+## Architecture
 
-I implemented the Mixtral architecture from scratch using Pytorch on Tinyshakespeare dataset.
+- Sparse MoE feed-forward layers with top-K token routing
+- Auxiliary load-balancing loss to prevent expert collapse
+- Standard multi-head causal self-attention
+- RMSNorm, SwiGLU activations
 
-[Mixtral of Experts](https://arxiv.org/pdf/2401.04088)
+## Training
 
-### Datasets
+| Hyperparameter | Value |
+|---|---|
+| Dataset | TinyShakespeare |
+| Steps | 1,000 (val every 50) |
+| Hardware | T4 GPU |
 
-**Tineshakespeare**: in the /data folder
+## Results
 
-### Frameworks:
-**Pytorch**
+| Split | Loss |
+|---|---|
+| Train | 2.04 |
+| Validation | 2.09 |
 
-### Results (on T4 GPU Single)
+## Paper
 
-**Training steps:** 1000
-**IValidation steps:** per 50 training steps
-
-**Train loss:** 2.0422 
-**Val loss:** 2.0898
-
-## Source Code
-📁 **GitHub Repository**: [Mixtral](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Mixtral)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+[Mixtral of Experts](https://arxiv.org/abs/2401.04088) — Mistral AI, 2024

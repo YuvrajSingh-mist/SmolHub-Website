@@ -1,55 +1,37 @@
 ---
 title: "DCGANs"
-excerpt: "From scratch implementation of DCGANs"
+excerpt: "Deep Convolutional GAN trained on CelebA and CIFAR-10. ~7,800 steps (CelebA) and ~11,700 steps (CIFAR-10)."
 collection: models
 layout: model-implementation
 category: "Generative Models"
 framework: "PyTorch"
-dataset: "CIFAR"
+dataset: "CelebA / CIFAR-10"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DCGANs"
 date: 2025-08-06
 ---
 
 ## Overview
-From scratch implementation of DCGANs
 
-## Technical Details
-- **Framework**: PyTorch
-- **Dataset**: CIFAR
-- **Category**: Generative Models
+From-scratch replication of DCGAN (Deep Convolutional GAN). DCGANs introduced convolutional architectures for both generator and discriminator, replacing fully-connected layers and enabling stable GAN training on natural images. Trained on both CelebA (faces) and CIFAR-10 (objects). Based on *Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks* (Radford et al., 2016).
 
-## Implementation Details
+## Architecture
 
-# DCGAN from Scratch
+**Generator**: Random noise → ConvTranspose2d upsampling layers → generated image
+**Discriminator**: Image → Conv2d downsampling layers → real/fake logit
 
+- BatchNorm in generator, no pooling
+- LeakyReLU in discriminator, ReLU in generator
+- Tanh output activation
 
-[Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks](https://arxiv.org/abs/2010.11929)
+## Training
 
-### Datasets
+| Dataset | Steps |
+|---|---|
+| CelebA (faces) | ~7,800 |
+| CIFAR-10 | ~11,700 |
 
-**CIFAR10**: Used torchvision to download the train part of the CIFAR10 dataset directly \
-**CelebA**: [Link](https://drive.google.com/drive/folders/0B7EVK8r0v71pTUZsaXdaSnZBZzg?resourcekey=0-rJlzl934LzC-Xp28GeIBzQ)
+Pretrained weights available on Google Drive.
 
-### Frameworks:
-**Pytorch**
+## Paper
 
-### Results
-
-**Training steps:** 7800
-
-**CelebA**
-
-![fake_images_steps_11700](https://github.com/YuvrajSingh-mist/Paper-Replications/assets/141050962/0e0c42ff-3f07-40a3-9a68-60d432461186)
-
-**Training steps:** 11700
-
-**CIFAR10**
-
-![fake_images_steps_7500](https://github.com/YuvrajSingh-mist/Paper-Replications/assets/141050962/09ce91e1-45d5-4929-ba25-50f4ef874490)
-
-#### Model weights Download Link: [link](https://drive.google.com/drive/folders/1BzSxP1k-6BIhgYSodi0rMsmzITP07YVS?usp=sharing)
-
-## Source Code
-📁 **GitHub Repository**: [DCGANs](https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DCGANs)
-
-View the complete implementation, training scripts, and documentation on GitHub.
+[Unsupervised Representation Learning with DCGANs](https://arxiv.org/abs/1511.06434) — Radford et al., 2016

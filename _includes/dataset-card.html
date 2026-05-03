@@ -6,29 +6,18 @@
   {% assign title = post.title %}
 {% endif %}
 
-{% assign dataset_id = post.title | slugify %}
-{% assign repo_url = post.github_url | default: "https://github.com/YuvrajSingh-mist/Datasets" %}
-
-<div class="model-card">
-  <div class="model-card__image">
-    <span>{{ title }}</span>
+<div class="list-item__body">
+  <div class="list-item__title">
+    <a href="{{ base_path }}{{ post.url }}" class="model-card__title" rel="permalink">{{ title }}</a>
   </div>
-  
-  <div class="model-card__content">
-    <h3 class="model-card__title">
-      {{ title }}
-    </h3>
-    
-    {% if post.excerpt %}
-    <div class="model-card__excerpt">
-      {{ post.excerpt | markdownify | strip_html | truncatewords: 15 }}
-    </div>
-    {% endif %}
-    
-    <div class="model-card__footer">
-      <a href="{{ base_path }}{{ post.url }}" class="model-details-btn" rel="permalink">
-        Dataset Details
-      </a>
-    </div>
+  {% if post.excerpt %}
+  <div class="model-card__excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</div>
+  {% endif %}
+</div>
+
+<div class="list-item__metrics">
+  <div class="metric">
+    <span class="metric-icon">◉</span>
+    <span class="metric-count views-counter">—</span>
   </div>
 </div>

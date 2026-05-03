@@ -17,12 +17,6 @@ date_iso: 2024-07-19
 github_url: https://github.com/YuvrajSingh-mist/FarmGenie
 ---
 
-<div class="project-links" style="display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 24px;">
-  <a href="https://github.com/YuvrajSingh-mist/FarmGenie/tree/main" target="_blank" rel="noopener" class="model-details-btn" style="background: #ffffff; color: #2c3e50; border: 1px solid #d0d0d0; box-shadow: 0 1px 3px rgba(0,0,0,0.08); padding: 8px 12px; border-radius: 8px; text-decoration: none;">
-    🐙 GitHub
-  </a>
-</div>
-
 # FarmGenie 
 
 --- 
