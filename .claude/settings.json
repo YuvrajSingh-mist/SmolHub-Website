@@ -38,7 +38,11 @@
       "Bash(curl -s http://localhost:4000/models/)",
       "Bash(curl -s http://localhost:4000/models/20-llama4/)",
       "Bash(bundle exec *)",
-      "Bash(git checkout *)"
+      "Bash(git checkout *)",
+      "Bash(grep -n \"masthead-height\\\\|\\\\$\" /Users/yuvrajsingh9886/Desktop/SmolHub-Website/_sass/_custom.scss)",
+      "Bash(grep -n '$masthead-height' /Users/yuvrajsingh9886/Desktop/SmolHub-Website/_sass/_custom.scss)",
+      "Bash(grep -n '$masthead-height' /Users/yuvrajsingh9886/Desktop/SmolHub-Website/_sass/_masthead.scss)",
+      "Bash(grep -rn '$masthead-height' /Users/yuvrajsingh9886/Desktop/SmolHub-Website/_sass/)"
     ],
     "additionalDirectories": [
       "/Users/yuvrajsingh9886/Desktop/SmolHub-Website/_talks",
