@@ -269,8 +269,19 @@ img.hf-icon {
 }
 
 .sidebar .author__urls a {
-  color: var(--text-secondary);
+  color: var(--text-secondary) !important;
   font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 0.9rem;
+}
+
+.sidebar .author__desktop {
+  display: none;
+  color: var(--text-secondary) !important;
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 0.9rem;
+  @media screen and (min-width: 1024px) {
+    display: block;
+  }
 }
 .sidebar .author__name {
   font-family: 'Cormorant Garamond', Georgia, serif;

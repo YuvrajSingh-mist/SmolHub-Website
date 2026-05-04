@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "SmolHub Playground!"
+title: ""
 permalink: /smolhub/
 author_profile: true
 ---
@@ -8,6 +8,35 @@ author_profile: true
 {% include base_path %}
 
 <link rel="stylesheet" href="{{ base_path }}/assets/css/models.css">
+
+<style>
+  /* hide the empty page__title space */
+  h1.page__title:empty { display: none; }
+
+  .smolhub-header {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-lt, #ebe7e0);
+  }
+  .smolhub-header h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    font-size: 2rem;
+    color: var(--accent, #8a7355);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.25rem;
+  }
+  .smolhub-header p {
+    font-size: 0.9rem;
+    color: var(--text-secondary, #737373);
+    margin: 0;
+  }
+</style>
+
+<div class="smolhub-header">
+  <h1>SmolHub Playground</h1>
+  <p>Small-scale models, proof-of-concepts, and AI experiments.</p>
+</div>
 
 <div class="models-page">
   <ul class="content-list" id="smolhub-container">
@@ -25,7 +54,6 @@ author_profile: true
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // View counter - updates only the count span, icon is separate
   document.querySelectorAll('.views-counter').forEach(function(el) {
     var slug = el.closest('.list-item') && el.closest('.list-item').dataset.slug;
     if (!slug) return;
