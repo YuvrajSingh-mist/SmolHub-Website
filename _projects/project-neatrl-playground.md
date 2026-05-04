@@ -1,6 +1,6 @@
 ---
 title: "NeatRL Playground | AI Games Showcase powered by Reinforcement Learning"
-collection: talks
+collection: projects
 excerpt: "Beautiful, interactive website showcasing AI-powered games with reinforcement learning agents. Features Pong AI with Deep Q-Learning, real-time WebSocket communication, and smooth animations. Deployed on Vercel (frontend) and Render (game server) with production-ready health checks and headless mode."
 type: "Interactive Platform"
 permalink: 

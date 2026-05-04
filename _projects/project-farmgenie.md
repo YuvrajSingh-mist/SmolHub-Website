@@ -1,6 +1,6 @@
 ---
 title: "FarmGenie (GeoHack 2024) | Empowering farmers with real-time insights and expert guidance via AI-driven space"
-collection: talks
+collection: projects
 excerpt: "
 Our platform utilizes LLMs and a Mixture of Expert (MoE) approaches to provide precise guidance on
 soil management, plant disease identification, and irrigation techniques. Built as a scalable web application with a

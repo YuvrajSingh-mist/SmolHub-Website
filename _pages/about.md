@@ -47,14 +47,14 @@ redirect_from:
 
 ## Projects
 
-{% assign sorted_talks = site.talks | sort: 'date_iso' | reverse %}
+{% assign sorted_talks = site.projects | sort: 'date_iso' | reverse %}
 {% assign sorted_by_stars = sorted_talks | sort: 'stars' | reverse %}
 <ul class="content-list">
 {% for post in sorted_by_stars %}
   <li class="list-item">
     <div class="list-item__body">
       <div class="list-item__title">
-        <a href="{{ post.url | relative_url }}" class="model-card__title">{{ post.title | split: '|' | first | strip }}</a>
+        <a href="{{ post.website_url | default: post.url | relative_url }}" class="model-card__title">{{ post.title | split: '|' | first | strip }}</a>
         {% if post.type %}<span class="list-item__tag">{{ post.type }}</span>{% endif %}
       </div>
       {% if post.excerpt %}

@@ -1,6 +1,6 @@
 ---
 title: "MoviesMania (Geek-o-thon) | A Reverse Search based Movies Recommendation System"
-collection: talks
+collection: projects
 type: "Hackathon"
 permalink: 
 excerpt: "Step into the future of entertainment discovery with MoviesMania. The rpoduct aims to simplify your search for the perfect movie or web series. Using various AI/ML techniques and elements, we analyze uploaded video clips to predict movie titles and recommend similar content with an impressive accuracy. Experience flavoured recommendations tailored to your tastes, powered by Keras, Flask, and advanced face recognition algorithms with a full-fledged movie recommendation system."

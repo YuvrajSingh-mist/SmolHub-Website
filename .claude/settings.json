@@ -80,12 +80,15 @@
       "Bash(git -C /Users/yuvrajsingh9886/Desktop/SmolHub-Website/smolcluster-web commit -m ' *)",
       "Bash(git -C /Users/yuvrajsingh9886/Desktop/SmolHub-Website/smolcluster-web status --short)",
       "Bash(git -C /Users/yuvrajsingh9886/Desktop/SmolHub-Website/smolcluster-web log --oneline -3)",
-      "Bash(kill 42559)"
+      "Bash(kill 42559)",
+      "Bash(echo \"Started PID $!\")",
+      "Bash(echo \"PID $!\")"
     ],
     "additionalDirectories": [
       "/Users/yuvrajsingh9886/Desktop/SmolHub-Website/_talks",
       "/private/tmp",
-      "/Users/yuvrajsingh9886/Desktop/cluster/smolcluster-web"
+      "/Users/yuvrajsingh9886/Desktop/cluster/smolcluster-web",
+      "/Users/yuvrajsingh9886/Desktop/SmolHub-Website/_projects"
     ]
   }
 }

@@ -1,6 +1,6 @@
 ---
 title: "Insight-Ed (HackNITR 5.0) | EdTech Platform for Student and Teacher"
-collection: talks
+collection: projects
 excerpt: "Imagine an online classroom where teachers instantly know when and why students lose focus. Our AI-powered solution bridges the knowledge gap by detecting student emotions and attentiveness, highlighting problem areas, makes the teacher aware of each student's progress. With features like reverse video search, dynamic questionnaires, and advanced Q&A bots, we transform the learning experience, making it more interactive and insightful. Redefining online education with our model, ensuring every student gets the attention they need, right when they need it."
 type: "Hackathon"
 permalink: 

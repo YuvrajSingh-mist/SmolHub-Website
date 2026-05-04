@@ -1,6 +1,6 @@
 ---
 title: "Paper Replications | ML/DL Research Paper Implementations"
-collection: talks
+collection: projects
 excerpt: 'A comprehensive collection of code implementations replicating results from influential machine learning and deep learning research papers. Features 30+ models including Transformers, GANs, Vision models, and RLHF techniques.'
 type: "Research Repository"
 venue: "Personal Project"

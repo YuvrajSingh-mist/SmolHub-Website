@@ -1,6 +1,6 @@
 ---
 title: "PlogPayouts | AI-driven Plogging System"
-collection: talks
+collection: projects
 type: "Google's Solution Challenge '24"
 excerpt: "Transform your daily jog into a mission for a cleaner world with PlogPayouts. Our innovative website + app rewards you for collecting litter, promoting fitness and environmental cleanliness. Utilizing AI for trash categorization and optimized routes, and fostering community through shared stories, PlogPayouts turns every step into a step towards a greener, more inclusive society. Join us and make a difference today! "
 permalink: 
