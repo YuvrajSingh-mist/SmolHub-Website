@@ -42,6 +42,21 @@ a {
   &:hover { color: var(--link-hover); }
 }
 
+/* Global no-image mode: hide all inline images and decorative image containers. */
+img,
+picture,
+figure img,
+.archive__item-teaser,
+.page__hero-image,
+.author__avatar,
+.comment__avatar-wrapper {
+  display: none !important;
+}
+
+.page__hero--overlay {
+  background-image: none !important;
+}
+
 /* Ensure page backgrounds are warm */
 .page,
 .page__content,

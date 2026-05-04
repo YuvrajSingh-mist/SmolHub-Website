@@ -65,11 +65,27 @@
       "Bash(grep '^$gray\\\\b\\\\|^$gray ' /Users/yuvrajsingh9886/Desktop/SmolHub-Website/_sass/_variables.scss)",
       "Read(//Users/yuvrajsingh9886/.rbenv/versions/**)",
       "Read(//Users/yuvrajsingh9886/.rbenv/**)",
-      "Bash(grep '^$gray\\\\b' /Users/yuvrajsingh9886/.rbenv/versions/3.2.0/lib/ruby/gems/3.2.0/gems/minimal-mistakes-jekyll-4.28.0/_sass/minimal-mistakes/_variables.scss)"
+      "Bash(grep '^$gray\\\\b' /Users/yuvrajsingh9886/.rbenv/versions/3.2.0/lib/ruby/gems/3.2.0/gems/minimal-mistakes-jekyll-4.28.0/_sass/minimal-mistakes/_variables.scss)",
+      "Read(//Users/yuvrajsingh9886/Desktop/**)",
+      "Bash(git -C /Users/yuvrajsingh9886/Desktop/cluster/smolcluster-web status)",
+      "Bash(git -C /Users/yuvrajsingh9886/Desktop/cluster/smolcluster-web log --oneline -5)",
+      "WebFetch(domain:smolcluster.com)",
+      "WebFetch(domain:smolhub.com)",
+      "Bash(curl -s https://smolcluster.com)",
+      "Bash(curl -s https://smolhub.com)",
+      "Bash(curl -sL https://smolhub.com)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git -C /Users/yuvrajsingh9886/Desktop/SmolHub-Website/smolcluster-web add index.html quickstart.html)",
+      "Bash(git -C /Users/yuvrajsingh9886/Desktop/SmolHub-Website/smolcluster-web commit -m ' *)",
+      "Bash(git -C /Users/yuvrajsingh9886/Desktop/SmolHub-Website/smolcluster-web status --short)",
+      "Bash(git -C /Users/yuvrajsingh9886/Desktop/SmolHub-Website/smolcluster-web log --oneline -3)",
+      "Bash(kill 42559)"
     ],
     "additionalDirectories": [
       "/Users/yuvrajsingh9886/Desktop/SmolHub-Website/_talks",
-      "/private/tmp"
+      "/private/tmp",
+      "/Users/yuvrajsingh9886/Desktop/cluster/smolcluster-web"
     ]
   }
 }
