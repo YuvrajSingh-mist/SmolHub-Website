@@ -42,13 +42,10 @@ a {
   &:hover { color: var(--link-hover); }
 }
 
-/* Global no-image mode: hide all inline images and decorative image containers. */
-img,
+/* Hide only decorative/hero images, not profile photo or inline icons */
 picture,
-figure img,
 .archive__item-teaser,
 .page__hero-image,
-.author__avatar,
 .comment__avatar-wrapper {
   display: none !important;
 }
