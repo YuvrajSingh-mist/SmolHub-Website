@@ -20,7 +20,8 @@ redirect_from:
     <li>
       <strong>alphaXiv — Research Intern</strong> <small>· Oct 2025 – April 2026</small>
       <ul>
-        <li>Reimplemented and reproduced results from seminal and recent ML papers (e.g., Attention Is Not All You Need, TRM/HRM) from scratch in PyTorch under the alphaXiv paper-implementations repository.</li>
+        <li>Reimplemented and reproduced results from seminal and recent ML papers (e.g., Attention Is Not All You Need, TRM/HRM) from scratch in PyTorch under the <a href="https://github.com/alphaXiv/paper-implementations/tree/raj-es" target="_blank">alphaXiv paper-implementations repository</a>.</li>
+        <li>Co-authored an article on applying <a href="https://www.alphaxiv.org/blog/es-for-fine-tuning-llms" target="_blank">Evolutionary Strategies for fine-tuning LLMs</a>.</li>
         <li>Built evaluation pipelines and benchmarking infrastructure for LLM/VLM systems; evaluated models such as DeepSeek-OCR and OlmOCR2 on OmniDocBench and related OCR benchmarks.</li>
         <li>Deployed large models (e.g., DeepSeek-OCR, OCR2, LLMs like Ouro) using vLLM and Modal/Baseten, and generated a 100k-document OCR dataset from arXiv PDFs for large-scale document understanding research.</li>
       </ul>

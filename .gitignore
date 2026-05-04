@@ -40,3 +40,6 @@ Thumbs.db
 *.tmp
 *.bak
 *.log
+
+# Nested smolcluster-web repo (separate git repo, commit separately)
+smolcluster-web/
