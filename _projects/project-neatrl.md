@@ -2,7 +2,7 @@
 title: "NeatRL | Deep Reinforcement Learning Algorithms Library"
 collection: projects
 excerpt: "Comprehensive implementations of deep RL algorithms including DQN, A2C, PPO, DDPG, TD3, and SAC. Features one-file implementations, experiment tracking with W&B, automatic video recording, and support for Gymnasium environments. Main NeatRL library provides high-quality training utilities with focus on simplicity and performance."
-type: "Research Library"
+type: "RL Library"
 permalink: 
 venue: "Personal Project"
 date: Feb '25
