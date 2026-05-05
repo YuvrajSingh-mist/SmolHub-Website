@@ -546,14 +546,14 @@ a.site-title-home-mobile {
   color: var(--text-tertiary);
   text-decoration: none;
   transition: color 0.2s;
-  &:hover { color: var(--accent); }
+  &:hover { color: var(--text-secondary); text-decoration: underline; }
 }
 
 .hf-card-icon {
   display: block;
-  filter: grayscale(1) opacity(0.65);
+  filter: grayscale(1) opacity(0.55);
   transition: filter 0.2s;
-  .hf-try-link:hover & { filter: grayscale(0) opacity(1); }
+  .hf-try-link:hover & { filter: grayscale(1) opacity(0.85); }
 }
 
 /* Tags in smolhub items */

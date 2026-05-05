@@ -88,7 +88,16 @@
       "Bash(curl -s http://127.0.0.1:4000/smolhub/)",
       "Bash(curl -s http://127.0.0.1:4000/datasets/)",
       "Bash(curl -s http://127.0.0.1:4000/rl-list/)",
-      "Bash(curl -s http://127.0.0.1:4000/rl/)"
+      "Bash(curl -s http://127.0.0.1:4000/rl/)",
+      "Bash(curl -s \"https://api.counterapi.dev/v1/smolhub-yuvraj/qna-irrigation-diseases-dataset\")",
+      "Bash(curl -s \"https://api.counterapi.dev/v1/smolhub-yuvraj/qna-irrigation-diseases-dataset/up\")",
+      "Bash(curl -s \"https://api.counterapi.dev/v1/smolhub-yuvraj/qna-irrigation-diseases-dataset/\")",
+      "Bash(python3 -c \"import sys,re; t=sys.stdin.read\\(\\).strip\\(\\).lower\\(\\); print\\(re.sub\\(r'[^a-z0-9]+','-',t\\).strip\\('-'\\)\\)\")",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s http://127.0.0.1:4000/datasets/qna-irrigation-diseases/)",
+      "Bash(git reset *)",
+      "Bash(curl -s http://127.0.0.1:4000/)",
+      "Bash(xargs ls)"
     ],
     "additionalDirectories": [
       "/Users/yuvrajsingh9886/Desktop/SmolHub-Website/_talks",
