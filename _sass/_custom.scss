@@ -272,6 +272,45 @@ img.hf-icon {
   filter: grayscale(1) opacity(0.75);
 }
 
+/* HuggingFace button in smolhub pages */
+.header-with-action {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1.8rem;
+  margin-bottom: 0.5rem;
+  h2 { margin: 0; }
+}
+
+.btn.btn--hf {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 0.82rem;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  &:hover { color: var(--text-secondary); text-decoration: underline; }
+}
+
+img.hf-logo {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.1em;
+  display: inline-block;
+  filter: grayscale(1) opacity(0.65);
+  transition: filter 0.2s;
+  .btn.btn--hf:hover & { filter: grayscale(1) opacity(0.9); }
+}
+
 .sidebar .author__bio {
   font-size: 0.82rem;
   color: var(--text-secondary);
