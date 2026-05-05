@@ -22,8 +22,6 @@ stars: 2
 hf_url: https://huggingface.co/datasets/YuvrajSingh9886/QnA-Plant-Diseases
 ---
 
----
-
 ## Overview
 
 This dataset contains a comprehensive Question & Answer collection focused on plant diseases, their management, treatment protocols, and diagnostic techniques. The dataset provides detailed information about various plant pathologies, fungicide applications, and disease identification methods for agricultural and horticultural applications.

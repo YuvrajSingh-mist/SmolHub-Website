@@ -21,8 +21,6 @@ stars: 2
 hf_url: https://huggingface.co/datasets/YuvrajSingh9886/QnA-Irrigation-Diseases
 ---
 
----
-
 ## Overview
 
 This dataset contains a comprehensive Question & Answer collection focused on water management technologies, irrigation systems, and related agricultural practices for sustainable farming. The dataset is derived from technical documentation and research publications related to water management in agriculture, with emphasis on modern irrigation techniques and water conservation strategies.

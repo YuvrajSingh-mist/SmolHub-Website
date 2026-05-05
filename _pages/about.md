@@ -51,7 +51,7 @@ redirect_from:
 {% assign sorted_by_stars = sorted_talks | sort: 'stars' | reverse %}
 <ul class="content-list">
 {% for post in sorted_by_stars %}
-  <li class="list-item">
+  <li class="list-item" data-slug="{{ post.title | split: '|' | first | strip | slugify }}">
     <div class="list-item__body">
       <div class="list-item__title">
         <a href="{{ post.website_url | default: post.url | relative_url }}" class="model-card__title">{{ post.title | split: '|' | first | strip }}</a>
@@ -75,10 +75,27 @@ redirect_from:
         <span class="metric-count">{{ post.stars }}</span>
       </div>
       {% endif %}
+      <div class="metric">
+        <span class="metric-icon">◉</span>
+        <span class="metric-count views-counter">—</span>
+      </div>
     </div>
   </li>
 {% endfor %}
 </ul>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.views-counter').forEach(function(el) {
+    var slug = el.closest('.list-item') && el.closest('.list-item').dataset.slug;
+    if (!slug) return;
+    fetch('https://api.counterapi.dev/v1/smolhub-yuvraj/' + slug + '/')
+      .then(function(r) { return r.json(); })
+      .then(function(d) { if (d && d.count != null) el.textContent = Number(d.count).toLocaleString(); })
+      .catch(function() { el.textContent = ''; });
+  });
+});
+</script>
 
 
 ## Education

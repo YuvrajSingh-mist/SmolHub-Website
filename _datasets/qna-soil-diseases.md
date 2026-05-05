@@ -20,8 +20,6 @@ stars: 2
 hf_url: https://huggingface.co/datasets/YuvrajSingh9886/QnA-Soil-Diseases
 ---
 
----
-
 ## Overview
 
 This dataset contains a comprehensive Question & Answer collection focused on soil management, soil health, organic farming practices, and soil-related agricultural techniques. The dataset is derived from technical guides and documentation related to sustainable soil management practices, with emphasis on organic farming methodologies and soil fertility management.

@@ -18,7 +18,7 @@ layout: single
 
 <script>
 (function() {
-  var slug = {{ page.title | slugify | jsonify }};
+  var slug = {{ page.title | split: '|' | first | strip | slugify | jsonify }};
   fetch('https://api.counterapi.dev/v1/smolhub-yuvraj/' + slug + '/up').catch(function(){});
 })();
 </script>

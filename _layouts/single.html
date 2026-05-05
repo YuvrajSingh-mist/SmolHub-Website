@@ -108,10 +108,10 @@ layout: default
   </article>
 
   {% comment %}<!-- only show related on a post page when not disabled -->{% endcomment %}
-  {% if page.collection == 'smolhub' or page.collection == 'datasets' %}
+  {% if page.collection == 'smolhub' or page.collection == 'datasets' or page.collection == 'projects' %}
   <script>
   (function() {
-    var slug = {{ page.title | slugify | jsonify }};
+    var slug = {{ page.title | split: '|' | first | strip | slugify | jsonify }};
     fetch('https://api.counterapi.dev/v1/smolhub-yuvraj/' + slug + '/up').catch(function(){});
   })();
   </script>
