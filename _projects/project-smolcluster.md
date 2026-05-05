@@ -2,7 +2,7 @@
 title: "SmolCluster | Distributed Deep Learning Library for Heterogeneous Hardware"
 collection: projects
 excerpt: "Educational Library for training/inference of neural networks across heterogenous compute like Mac minis, Raspberry Pi, and GPUs, written using only socket library in Python. Supports FSDP, Classic Data Parallelism, Elastic DP, Synchronous Parameter Server, and Model Parallelism."
-type: "Research Library"
+type: "Distributed Computing Library"
 permalink: 
 venue: "Personal Project"
 date: Jan '26
