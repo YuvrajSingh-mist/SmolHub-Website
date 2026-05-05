@@ -795,61 +795,54 @@
 
 /* Dataset metadata styling */
 .dataset-meta {
-    margin-top: 20px;
-    padding: 15px 0;
-    border-bottom: 1px solid #e9ecef;
+    padding: 0 0 1.1rem;
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 2rem;
 }
 
 .dataset-meta-container {
     display: flex;
-    gap: 20px;
+    gap: 0.4rem;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .dataset-meta-item {
-    background-color: #f8f9fa;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 0.9em;
-    color: #495057;
-    border: 1px solid #dee2e6;
-    transition: all 0.3s ease;
-}
-
-.dataset-meta-item:hover {
-    background-color: #e9ecef;
-    transform: translateY(-1px);
+    font-size: 0.72em;
+    color: var(--text-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 2px 8px;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    background: none;
 }
 
 .dataset-meta-item strong {
-    color: #2c3e50;
-    font-weight: 600;
+    font-weight: 400;
+    color: var(--text-tertiary);
 }
 
 .dataset-meta-item a {
-    color: #606060;
+    color: var(--text-tertiary);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.2s;
 }
 
 .dataset-meta-item a:hover {
-    color: #404040;
-    text-decoration: underline;
+    color: var(--accent);
+    text-decoration: none;
 }
 
 .dataset-meta-item .fab {
-    margin-right: 5px;
+    margin-right: 4px;
+    font-size: 0.95em;
 }
 
-/* Responsive dataset metadata */
 @media (max-width: 768px) {
     .dataset-meta-container {
-        gap: 10px;
-    }
-    
-    .dataset-meta-item {
-        font-size: 0.8em;
-        padding: 6px 10px;
+        gap: 0.3rem;
     }
 }
 
@@ -988,28 +981,6 @@
     border: 1px solid #4a5568;
 }
 
-/* Dark mode for dataset metadata */
-[data-theme="dark"] .dataset-meta-item {
-    background-color: #2d3748;
-    color: #e2e8f0;
-    border-color: #4a5568;
-}
-
-[data-theme="dark"] .dataset-meta-item:hover {
-    background-color: #4a5568;
-}
-
-[data-theme="dark"] .dataset-meta-item strong {
-    color: #f7fafc;
-}
-
-[data-theme="dark"] .dataset-meta-item a {
-    color: #63b3ed;
-}
-
-[data-theme="dark"] .dataset-meta-item a:hover {
-    color: #90cdf4;
-}
 
 /* Dark mode for tables */
 [data-theme="dark"] .table-responsive {

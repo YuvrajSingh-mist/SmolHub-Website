@@ -17,6 +17,7 @@ tasks:
   - Classification
   - Machine Learning
 stars: 2
+hf_url: https://huggingface.co/datasets/YuvrajSingh9886/QnA-Soil-Diseases
 ---
 
 ---

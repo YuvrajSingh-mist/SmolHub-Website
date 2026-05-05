@@ -15,9 +15,11 @@
   {% endif %}
 </div>
 
-<div class="list-item__metrics">
-  <div class="metric">
-    <span class="metric-icon">◉</span>
-    <span class="metric-count views-counter">—</span>
-  </div>
+{% if post.hf_url %}
+<div class="dataset-hf-link">
+  <a href="{{ post.hf_url }}" target="_blank" rel="noopener" class="hf-try-link">
+    <img src="{{ base_path }}/images/huggingface-logo.svg" width="15" height="15" alt="HuggingFace" class="hf-card-icon">
+    Try it out
+  </a>
 </div>
+{% endif %}

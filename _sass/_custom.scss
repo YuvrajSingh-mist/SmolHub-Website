@@ -365,10 +365,17 @@ a.site-title-home-mobile {
     color: var(--text-tertiary);
     text-decoration: none;
     transition: color 0.2s;
-    border: 1px solid var(--border-light);
-    padding: 0.3rem 0.7rem;
-    border-radius: 3px;
-    &:hover { color: var(--accent); border-color: var(--accent); }
+    &:hover { color: var(--accent); }
+  }
+  .masthead__nav a[href$="/smolhub/"]::after {
+    content: none;
+  }
+  .masthead__nav a[href$="/smolhub/"] {
+    font-size: 0;
+  }
+  .masthead__nav a[href$="/smolhub/"]::before {
+    content: "SmolHub";
+    font-size: 0.82rem;
   }
 }
 
@@ -518,6 +525,35 @@ a.site-title-home-mobile {
   color: var(--text-tertiary);
   letter-spacing: 0.02em;
   line-height: 1;
+}
+
+/* Dataset HuggingFace link */
+.dataset-hf-link {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding-top: 0.15rem;
+}
+
+.hf-try-link {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color 0.2s;
+  &:hover { color: var(--accent); }
+}
+
+.hf-card-icon {
+  opacity: 0.55;
+  transition: opacity 0.2s;
+  display: block;
+  .hf-try-link:hover & { opacity: 0.85; }
 }
 
 /* Tags in smolhub items */

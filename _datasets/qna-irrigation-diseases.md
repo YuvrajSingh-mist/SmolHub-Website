@@ -18,6 +18,7 @@ tasks:
   - Nlp
   - Machine Learning
 stars: 2
+hf_url: https://huggingface.co/datasets/YuvrajSingh9886/QnA-Irrigation-Diseases
 ---
 
 ---
