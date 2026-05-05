@@ -9,9 +9,14 @@ layout: single
     {% if page.environment %}<span class="impl-tag">{{ page.environment }}</span>{% endif %}
     {% if page.stars %}<span class="impl-tag">★ {{ page.stars }}</span>{% endif %}
   </div>
-  {% if page.github_url %}
-  <a href="{{ page.github_url }}" target="_blank" rel="noopener" class="impl-link">GitHub →</a>
-  {% endif %}
+  <div class="impl-header-links">
+    {% if page.website_url %}
+    <a href="{{ page.website_url }}" target="_blank" rel="noopener" class="impl-link">↗ Website</a>
+    {% endif %}
+    {% if page.github_url %}
+    <a href="{{ page.github_url }}" target="_blank" rel="noopener" class="impl-link"><i class="fab fa-github"></i> GitHub</a>
+    {% endif %}
+  </div>
 </div>
 
 {{ content }}

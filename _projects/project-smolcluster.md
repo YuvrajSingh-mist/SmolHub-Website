@@ -21,6 +21,7 @@ A distributed deep learning library for training neural networks across heteroge
 
 ## Features
 
+
 - **Distributed Training Algorithms**: FSDP (ZeRO-optimized), Classic Data Parallelism (All-Reduce), Elastic Distributed Parallelism (EDP), Synchronous Parameter Server (SyncPS), and Model Parallelism
 - **Heterogeneous Hardware**: Mac minis, Raspberry Pis, MacBooks, and Windows machines
 - **Model Support**: MNIST, GPT-2, and custom neural networks

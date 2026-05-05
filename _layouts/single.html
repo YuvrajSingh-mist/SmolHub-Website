@@ -51,10 +51,7 @@ layout: default
             <div class="dataset-meta-container">
               {% if page.github_url %}
               <div class="dataset-meta-item">
-                <strong>GitHub:</strong> 
-                <a href="{{ page.github_url }}" target="_blank">
-                  <i class="fab fa-github"></i>View Dataset
-                </a>
+                <a href="{{ page.github_url }}" target="_blank" rel="noopener" class="impl-link"><i class="fab fa-github"></i> GitHub</a>
               </div>
               {% endif %}
               

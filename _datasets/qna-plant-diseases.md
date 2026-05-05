@@ -19,7 +19,7 @@ tasks:
   - Ner
   - Nlp
 stars: 2
-hf_url: https://huggingface.co/datasets/YuvrajSingh9886/QnA-Plant-Diseases
+hf_url: https://huggingface.co/datasets/YuvrajSingh9886/qna-plant-diseases
 ---
 
 ## Overview

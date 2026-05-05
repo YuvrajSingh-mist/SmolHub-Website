@@ -550,10 +550,10 @@ a.site-title-home-mobile {
 }
 
 .hf-card-icon {
-  opacity: 0.55;
-  transition: opacity 0.2s;
   display: block;
-  .hf-try-link:hover & { opacity: 0.85; }
+  filter: grayscale(1) opacity(0.65);
+  transition: filter 0.2s;
+  .hf-try-link:hover & { filter: grayscale(0) opacity(1); }
 }
 
 /* Tags in smolhub items */
@@ -689,13 +689,27 @@ a.site-title-home-mobile {
   letter-spacing: 0.01em;
 }
 
-.impl-link {
-  font-size: 0.85em;
-  color: var(--link);
-  text-decoration: none;
-  font-family: 'Crimson Pro', serif;
+.impl-header-links {
+  display: flex;
+  gap: 1.1rem;
+  align-items: center;
   flex-shrink: 0;
-  &:hover { color: var(--link-hover); text-decoration: underline; }
+}
+
+.impl-link {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 0.82rem;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+  flex-shrink: 0;
+  &:hover { color: var(--accent); }
+  .fa-github {
+    font-size: 0.9em;
+    vertical-align: -1px;
+    margin-right: 2px;
+  }
 }
 
 /* Code blocks - override _syntax.scss nested box + </> icon */
