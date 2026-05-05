@@ -9,6 +9,7 @@ date: March 3 '24
 location: "Rourkela"
 date_iso: 2024-03-03
 github_url: https://github.com/YuvrajSingh-mist/Insight-Ed
+stars: 0
 ---
 
 # Insight-Ed

@@ -9,6 +9,7 @@ date: October 3 '23
 location: "Bhubaneswar"
 date_iso: 2023-10-03
 github_url: https://github.com/YuvrajSingh-mist/MoviesMania
+stars: 0
 ---
 
 # Movies Mania

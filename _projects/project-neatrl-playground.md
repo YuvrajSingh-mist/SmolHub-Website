@@ -10,6 +10,7 @@ location: Online
 date_iso: 2025-01-15
 github_url: https://github.com/YuvrajSingh-mist/NeatRL-Website
 website_url: https://neatrl.com
+stars: 0
 ---
 
 # 🎮 AI Games Showcase

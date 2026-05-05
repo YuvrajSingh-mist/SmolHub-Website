@@ -347,6 +347,31 @@ a.site-title {
   &:hover { color: var(--accent); }
 }
 
+a.site-title-home-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  a.site-title {
+    display: none;
+  }
+  a.site-title-home-mobile {
+    display: inline-block;
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    transition: color 0.2s;
+    border: 1px solid var(--border-light);
+    padding: 0.3rem 0.7rem;
+    border-radius: 3px;
+    &:hover { color: var(--accent); border-color: var(--accent); }
+  }
+}
+
 /* --- Footer --- */
 .page__footer {
   background-color: var(--bg-primary) !important;

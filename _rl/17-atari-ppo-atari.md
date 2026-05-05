@@ -10,6 +10,7 @@ framework: "PyTorch"
 environment: "Atari"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/PPO/Atari"
 date: 2025-08-21
+stars: 223
 ---
 
 Implementation of Atari reinforcement learning algorithm

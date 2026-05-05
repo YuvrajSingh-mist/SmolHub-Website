@@ -18,6 +18,7 @@ tasks:
   - Machine Learning
   - Ner
   - Nlp
+stars: 2
 ---
 
 ---

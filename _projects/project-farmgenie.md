@@ -15,6 +15,7 @@ date: July 19 '24
 location: Bhubaneswar
 date_iso: 2024-07-19
 github_url: https://github.com/YuvrajSingh-mist/FarmGenie
+stars: 1
 ---
 
 # FarmGenie 

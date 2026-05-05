@@ -8,6 +8,7 @@ framework: "PyTorch"
 dataset: "Cornell Movie Dialogs"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/BERT"
 date: 2025-02-09
+stars: 416
 ---
 
 ## Overview

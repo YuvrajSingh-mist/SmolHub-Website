@@ -17,7 +17,7 @@ main:
     url: /smolhub/
 
   - title: "NeatRL"
-    url: /project-neatrl/
+    url: /rl/
 
   - title: "SmolCluster"
     url: https://smolcluster.com

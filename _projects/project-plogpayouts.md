@@ -9,6 +9,7 @@ date: December '23 - March '24
 location: "Bhubaneswar"
 date_iso: 2023-12-01
 github_url: https://github.com/YuvrajSingh-mist/PlogPayouts
+stars: 1
 ---
 
 # PlogPayouts  

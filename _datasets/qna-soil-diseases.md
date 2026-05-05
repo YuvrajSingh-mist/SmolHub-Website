@@ -16,6 +16,7 @@ tasks:
   - Ner
   - Classification
   - Machine Learning
+stars: 2
 ---
 
 ---

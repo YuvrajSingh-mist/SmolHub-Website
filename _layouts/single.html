@@ -108,6 +108,15 @@ layout: default
   </article>
 
   {% comment %}<!-- only show related on a post page when not disabled -->{% endcomment %}
+  {% if page.collection == 'smolhub' or page.collection == 'datasets' %}
+  <script>
+  (function() {
+    var slug = {{ page.title | slugify | jsonify }};
+    fetch('https://api.counterapi.dev/v1/smolhub-yuvraj/' + slug + '/up').catch(function(){});
+  })();
+  </script>
+  {% endif %}
+
   {% if page.id and page.related and site.related_posts.size > 0 %}
     <div class="page__related">
       {% if site.data.ui-text[site.locale].related_label %}

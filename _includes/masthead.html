@@ -7,6 +7,9 @@
     {% else %}
       <a href="{{ base_path }}/" class="site-title">{{ site.title }}</a>
     {% endif %}
+    {% unless page.url == "/" %}
+      <a href="{{ base_path }}/" class="site-title-home-mobile">Home</a>
+    {% endunless %}
     <nav class="masthead__nav">
       <a href="{{ base_path }}/smolhub/">SmolHub Playground</a>
       <a href="{{ base_path }}/datasets/">Datasets</a>

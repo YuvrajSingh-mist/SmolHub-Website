@@ -8,6 +8,7 @@ framework: "PyTorch"
 dataset: "TinyStories"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma3"
 date: 2025-05-01
+stars: 416
 ---
 
 ## Overview

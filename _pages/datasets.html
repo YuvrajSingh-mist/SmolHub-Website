@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.views-counter').forEach(function(el) {
     var slug = el.closest('.list-item') && el.closest('.list-item').dataset.slug;
     if (!slug) return;
-    fetch('https://api.counterapi.dev/v1/smolhub-yuvraj/' + slug + '/up')
+    fetch('https://api.counterapi.dev/v1/smolhub-yuvraj/' + slug)
       .then(function(r) { return r.json(); })
       .then(function(d) { if (d && d.count != null) el.textContent = Number(d.count).toLocaleString(); })
       .catch(function() { el.textContent = ''; });

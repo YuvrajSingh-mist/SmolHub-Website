@@ -3,14 +3,14 @@ title: "NeatRL | Deep Reinforcement Learning Algorithms Library"
 collection: projects
 excerpt: "Comprehensive implementations of deep RL algorithms including DQN, A2C, PPO, DDPG, TD3, and SAC. Features one-file implementations, experiment tracking with W&B, automatic video recording, and support for Gymnasium environments. Main NeatRL library provides high-quality training utilities with focus on simplicity and performance."
 type: "RL Library"
-permalink: 
+permalink: /rl/
 venue: "Personal Project"
 date: Feb '25
 location: Online
 date_iso: 2025-02-01
 github_url: https://github.com/YuvrajSingh-mist/NeatRL
 website_url: /rl/
-stars: 230
+stars: 223
 ---
 
 One-file implementations of deep RL algorithms in PyTorch. Each algorithm is self-contained — readable, runnable, and stripped of unnecessary abstraction.

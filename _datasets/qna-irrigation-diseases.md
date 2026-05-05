@@ -17,6 +17,7 @@ tasks:
   - Classification
   - Nlp
   - Machine Learning
+stars: 2
 ---
 
 ---

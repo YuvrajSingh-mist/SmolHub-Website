@@ -16,7 +16,6 @@ author_profile: true
   .smolhub-header {
     margin-bottom: 1.75rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border-lt, #ebe7e0);
   }
   .smolhub-header h1 {
     font-family: 'Cormorant Garamond', Georgia, serif;
@@ -57,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.views-counter').forEach(function(el) {
     var slug = el.closest('.list-item') && el.closest('.list-item').dataset.slug;
     if (!slug) return;
-    fetch('https://api.counterapi.dev/v1/smolhub-yuvraj/' + slug + '/up')
+    fetch('https://api.counterapi.dev/v1/smolhub-yuvraj/' + slug)
       .then(function(r) { return r.json(); })
       .then(function(d) { if (d && d.count != null) el.textContent = Number(d.count).toLocaleString(); })
       .catch(function() { el.textContent = ''; });

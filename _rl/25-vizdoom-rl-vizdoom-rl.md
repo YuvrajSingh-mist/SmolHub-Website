@@ -9,6 +9,7 @@ framework: "PyTorch"
 environment: "VizDoom"
 github_url: "https://github.com/YuvrajSingh-mist/NeatRL/tree/master/VizDoom-RL"
 date: 2025-04-01
+stars: 223
 ---
 
 ## Overview

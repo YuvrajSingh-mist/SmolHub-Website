@@ -82,7 +82,13 @@
       "Bash(git -C /Users/yuvrajsingh9886/Desktop/SmolHub-Website/smolcluster-web log --oneline -3)",
       "Bash(kill 42559)",
       "Bash(echo \"Started PID $!\")",
-      "Bash(echo \"PID $!\")"
+      "Bash(echo \"PID $!\")",
+      "Bash(python3 .github/scripts/update_stars.py)",
+      "Bash(curl -s http://127.0.0.1:4000/models/)",
+      "Bash(curl -s http://127.0.0.1:4000/smolhub/)",
+      "Bash(curl -s http://127.0.0.1:4000/datasets/)",
+      "Bash(curl -s http://127.0.0.1:4000/rl-list/)",
+      "Bash(curl -s http://127.0.0.1:4000/rl/)"
     ],
     "additionalDirectories": [
       "/Users/yuvrajsingh9886/Desktop/SmolHub-Website/_talks",

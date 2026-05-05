@@ -8,6 +8,7 @@ framework: "PyTorch"
 dataset: "TinyShakespeare"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Differential%20Transformer"
 date: 2025-02-09
+stars: 416
 ---
 
 ## Overview
