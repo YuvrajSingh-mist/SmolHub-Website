@@ -1,8 +1,8 @@
 # main links links
 main:
 
-  # - title: "Projects"
-  #   url: /talks/
+  - title: "Talks"
+    url: /talks/
 
   - title: "CV"
     url: /files/Resume-Yuvraj-Singh-2025.pdf
@@ -15,6 +15,9 @@ main:
 
   - title: "SmolHub Playground"
     url: /smolhub/
+
+  - title: "BLOGS"
+    url: /year-archive/
 
   - title: "NeatRL"
     url: /rl/
@@ -37,9 +40,5 @@ main:
   # - title: "Achievements"
   #   url: /portfolio/
         
-  # - title: "Blog Posts"
-  #   url: /year-archive/
-
-    
   # - title: "Guide"
   #   url: /markdown/
