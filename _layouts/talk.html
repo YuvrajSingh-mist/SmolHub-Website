@@ -30,9 +30,6 @@ layout: default
           <div class="page__title-row">
             <h1 class="page__title" itemprop="headline">{{ page.title | split: '|' | first | strip }}</h1>
             <div class="page__header-links">
-              {% if page.website_url %}
-                <a href="{{ page.website_url }}" target="_blank" rel="noopener">↗ Website</a>
-              {% endif %}
               {% if page.github_url %}
                 <a href="{{ page.github_url }}" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
               {% endif %}
