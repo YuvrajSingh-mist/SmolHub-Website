@@ -11,6 +11,8 @@ tags:
   - Guide
 ---
 
+ > **Tested on:** macOS 26.2 (both coordinator and worker nodes)
+
 You want to train models. You have Mac minis. You don't want to rent GPU clouds. So you **wire them together** and make a cluster.
 
 This guide walks you through setting up a solid distributed training cluster using Thunderbolt networking for ~10-20 Gbps of pure local bandwidth, zero egress costs, and full control over every packet.
@@ -42,7 +44,7 @@ This keeps your training traffic on its own dedicated highway while your laptop 
 What it looks like:
 
 <figure>
-  <img src="../images/blogs/thunderbolt-cluster-guide/architecture.png" alt="Thunderbolt cluster architecture - star topology with Thunderbolt Bridge connecting minis">
+  <img src="/images/blogs/thunderbolt-cluster-guide/architecture.png" alt="Thunderbolt cluster architecture - star topology with Thunderbolt Bridge connecting minis">
   <figcaption>Figure 1. Thunderbolt cluster architecture with a central coordinator in star topology.</figcaption>
 </figure>
 
@@ -63,8 +65,8 @@ Before opening settings, decide your coordinator machine first.
 
 > **IMPORTANT:** Little ⚡ check!
 
-<figure>
-  <img src="../images/blogs/thunderbolt-cluster-guide/thunderbolt-sign.jpeg" alt="Thunderbolt sign check">
+<figure style="width: fit-content; max-width: 100%; margin: 0 auto 1rem auto; display: flex; flex-direction: column; align-items: center;">
+  <img src="/images/blogs/thunderbolt-cluster-guide/thunderbolt-sign.jpeg" alt="Thunderbolt sign check" style="max-height: 260px; width: auto; max-width: 100%; display: block;">
   <figcaption>Figure 2. Use only USB-C ports marked with the Thunderbolt symbol.</figcaption>
 </figure>
 
@@ -80,11 +82,11 @@ If you don't see it, it should appear after you plug in the Thunderbolt cables l
 
 <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
   <figure style="flex: 1 1 320px; margin: 0;">
-    <img src="../images/blogs/thunderbolt-cluster-guide/thunderbolt-not-connected.png" alt="Thunderbolt bridge not connected">
+    <img src="/images/blogs/thunderbolt-cluster-guide/thunderbolt-not-connected.png" alt="Thunderbolt bridge not connected">
     <figcaption>Figure 3. Thunderbolt Bridge not yet connected.</figcaption>
   </figure>
   <figure style="flex: 1 1 320px; margin: 0;">
-    <img src="../images/blogs/thunderbolt-cluster-guide/thunderbolt-connected.png" alt="Thunderbolt bridge connected">
+    <img src="/images/blogs/thunderbolt-cluster-guide/thudnerbolt-connected.png" alt="Thunderbolt bridge connected">
     <figcaption>Figure 4. Thunderbolt Bridge connected and active.</figcaption>
   </figure>
 </div>
@@ -111,7 +113,7 @@ On each mini:
 Here's how's mine look like:
 
 <figure>
-  <img src="../images/blogs/thunderbolt-cluster-guide/thunderbolt-settings.png" alt="Thunderbolt cluster TCP IP settings panel">
+  <img src="/images/blogs/thunderbolt-cluster-guide/thunderbolt-settings.png" alt="Thunderbolt cluster TCP IP settings panel">
   <figcaption>Figure 5. Manual TCP/IP settings for a Thunderbolt Bridge interface.</figcaption>
 </figure>
 Verify from Terminal:
