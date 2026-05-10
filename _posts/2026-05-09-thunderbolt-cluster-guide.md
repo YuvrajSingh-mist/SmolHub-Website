@@ -3,7 +3,7 @@ title: 'Thunderbolt Cluster Setup Guide'
 date: 2026-05-09
 permalink: /posts/2026/05/thunderbolt-cluster-setup-guide/
 author_profile: false
-excerpt: "Wire Mac minis into a high-bandwidth local Thunderbolt cluster for distributed training and inference with zero cloud egress cost."
+excerpt: "Wire Mac minis into a high-bandwidth local Thunderbolt cluster for distributed training and inference with zero cloud egress cost, low latency, and direct control over cluster networking."
 tags:
   - Distributed Setup
   - Cluster Setup
@@ -41,9 +41,10 @@ This keeps your training traffic on its own dedicated highway while your laptop 
 
 What it looks like:
 
-
-#TODO
-add arch.png here
+<figure>
+  <img src="../images/blogs/thunderbolt-cluster-guide/architecture.png" alt="Thunderbolt cluster architecture - star topology with Thunderbolt Bridge connecting minis">
+  <figcaption>Figure 1. Thunderbolt cluster architecture with a central coordinator in star topology.</figcaption>
+</figure>
 
 Clean separation. No Wi-Fi congestion. Just throughput where it matters.
 
@@ -61,16 +62,32 @@ Before opening settings, decide your coordinator machine first.
 
 
 > **IMPORTANT:** Little ⚡ check!
-> - Connect cluster cables only to ports that support **Thunderbolt** (look for the ⚡ symbol).
+
+<figure>
+  <img src="../images/blogs/thunderbolt-cluster-guide/thunderbolt-sign.jpeg" alt="Thunderbolt sign check">
+  <figcaption>Figure 2. Use only USB-C ports marked with the Thunderbolt symbol.</figcaption>
+</figure>
+
+> - Connect cluster cables only to ports that 
+support **Thunderbolt** (look for the ⚡ symbol).
 > - Using a non-Thunderbolt USB-C port is a common mistake and can cause link failures or unstable connectivity.
 > - On Mac minis especially, double-check the exact port before plugging in. On newer MacBooks, many USB-C ports are Thunderbolt-capable, but you should still confirm your specific model.
 
 
-
-
 Once the cabling is done, on **each Mac mini or MacBook**, open System Settings and navigate to the Thunderbolt Bridge.
 
-If you don't see it, it should appear after you plug in the Thunderbolt cables.
+If you don't see it, it should appear after you plug in the Thunderbolt cables like in the following image: 
+
+<div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
+  <figure style="flex: 1 1 320px; margin: 0;">
+    <img src="../images/blogs/thunderbolt-cluster-guide/thunderbolt-not-connected.png" alt="Thunderbolt bridge not connected">
+    <figcaption>Figure 3. Thunderbolt Bridge not yet connected.</figcaption>
+  </figure>
+  <figure style="flex: 1 1 320px; margin: 0;">
+    <img src="../images/blogs/thunderbolt-cluster-guide/thunderbolt-connected.png" alt="Thunderbolt bridge connected">
+    <figcaption>Figure 4. Thunderbolt Bridge connected and active.</figcaption>
+  </figure>
+</div>
 
 ### 2. Assign Static IPs
 
@@ -90,6 +107,13 @@ On each mini:
 7. Leave **Router/Gateway** empty for this direct local link.
 8. Click **OK**, then **Apply**.
 
+
+Here's how's mine look like:
+
+<figure>
+  <img src="../images/blogs/thunderbolt-cluster-guide/thunderbolt-settings.png" alt="Thunderbolt cluster TCP IP settings panel">
+  <figcaption>Figure 5. Manual TCP/IP settings for a Thunderbolt Bridge interface.</figcaption>
+</figure>
 Verify from Terminal:
 
 ```bash
@@ -109,8 +133,8 @@ ping 10.10.0.1
 You should see:
 
 ```
-64 bytes from 10.10.0.1: icmp_seq=0 ttl=64 time=0.123 ms
-64 bytes from 10.10.0.1: icmp_seq=1 ttl=64 time=0.089 ms
+64 bytes from 10.10.0.1: icmp_seq=0 ttl=64 time=0.423 ms
+64 bytes from 10.10.0.1: icmp_seq=1 ttl=64 time=0.422 ms
 ```
 
 **This should be ultra-fast** (<1ms). If ping is slow or times out, check:
@@ -165,29 +189,131 @@ If it works, the `nc` command will just hang (no error output). Ctrl+C to exit.
 
 ### 6. Set Up SSH Keys
 
-Generate a key on your laptop:
+SSH keys let you authenticate without typing passwords — essential for scripts and distributed work.
+
+#### Step 6a: Generate the Key Pair
+
+On your laptop, generate an ed25519 key (modern, fast, secure):
 
 ```bash
 ssh-keygen -t ed25519 -f ~/.ssh/macmini_cluster
 ```
 
-Copy it to each node:
+You'll see:
+
+```
+Generating public/private ed25519 key pair.
+Enter passphrase (empty for no passphrase):
+```
+
+**Passphrase choice:**
+- **With passphrase:** Adds a password layer. Recommended for security, but you'll need to type it or use `ssh-agent` each session.
+- **Empty passphrase (just press Enter):** No password. Convenient for scripts, but the key file itself is your only protection. Use this if your laptop is trusted and well-protected.
+
+For a cluster setup where you'll run lots of jobs, **empty passphrase is typical**. Your laptop's disk encryption is your security layer.
+
+After pressing Enter (or entering a passphrase), you'll see:
+
+```
+Your identification has been saved in /Users/your_user/.ssh/macmini_cluster
+Your public key has been saved in /Users/your_user/.ssh/macmini_cluster.pub
+The key fingerprint is:
+SHA256:... (your fingerprint)
+```
+
+#### Step 6b: Verify the Keys Were Created
 
 ```bash
-ssh-copy-id -i ~/.ssh/macmini_cluster.pub user@<IP_ADDRESS>
+ls -la ~/.ssh/macmini_cluster*
 ```
-Replace `user` and `<IP_ADDRESS>` with your actual username and IP address on the minis.
 
-> You can get your username by running `whoami` on the nodes (here `node` is your machine).
+You should see:
 
-Eg: 
+```
+-rw-------  1 your_user  staff  464 May 10 12:00 macmini_cluster
+-rw-r--r--  1 your_user  staff  103 May 10 12:00 macmini_cluster.pub
+```
+
+**Permissions matter:**
+- `macmini_cluster` (private key): `600` (owner read/write only) ✓
+- `macmini_cluster.pub` (public key): `644` (readable by all) ✓
+
+If permissions are wrong, SSH will refuse to use the key. Fix it:
 
 ```bash
-ssh-copy-id -i ~/.ssh/macmini_cluster.pub user@10.10.0.1
-ssh-copy-id -i ~/.ssh/macmini_cluster.pub user@10.10.0.2
-ssh-copy-id -i ~/.ssh/macmini_cluster.pub user@10.10.0.3
+chmod 600 ~/.ssh/macmini_cluster
+chmod 644 ~/.ssh/macmini_cluster.pub
 ```
-This allows you to SSH into the minis without typing a password, which is essential for smooth cluster management.
+
+#### Step 6c: Get Your Username on the Minis
+
+Before copying keys, find your username on each mini. SSH into one and run:
+
+```bash
+whoami
+```
+
+You'll see something like `yuvraj` or something like this for your username. **Use this exact username** in the next steps.
+
+#### Step 6d: Copy the Public Key to Each Node
+
+This authorizes your laptop to log in without a password:
+
+```bash
+ssh-copy-id -i ~/.ssh/macmini_cluster.pub your_username@10.10.0.1
+ssh-copy-id -i ~/.ssh/macmini_cluster.pub your_username@10.10.0.2
+ssh-copy-id -i ~/.ssh/macmini_cluster.pub your_username@10.10.0.3
+```
+
+Replace `your_username` with the actual username (e.g., `yuvraj`).
+
+For each command, you'll be prompted for a password — this is the **login password on that mini**, not the key passphrase. Enter it to authorize the key copy.
+
+**Full example flow:**
+
+```bash
+$ ssh-copy-id -i ~/.ssh/macmini_cluster.pub yuvraj@10.10.0.1
+```
+
+You'll see:
+
+```
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/Users/your_user/.ssh/macmini_cluster.pub"
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the key(s) from "/Users/your_user/.ssh/macmini_cluster.pub" to see if they work
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+yuvraj@10.10.0.1's password:
+```
+
+**Type your login password** (not visible as you type), then press Enter:
+
+```
+Number of key(s) added: 1
+
+Now try logging in with:
+  "ssh -i /Users/your_user/.ssh/macmini_cluster 'yuvraj@10.10.0.1'"
+
+and check to make sure that only the key(s) you wanted were added.
+```
+
+✓ **Success!** Your public key is now authorized on mini1. Repeat for mini2 and mini3.
+
+#### Step 6e: Test Passwordless SSH
+
+Try logging in without a password:
+
+```bash
+ssh -i ~/.ssh/macmini_cluster your_username@10.10.0.1
+```
+
+If it works, you'll be logged in with **no password prompt**. Type `exit` to disconnect.
+
+If it fails with "Permission denied (publickey)", check:
+- Is the private key readable? (`ls -la ~/.ssh/macmini_cluster` should show `600`)
+- Did `ssh-copy-id` succeed? (Check for error messages from Step 6d)
+- Is the username correct? (Run `whoami` on the mini to verify)
+
+**What just happened:** Passwordless authentication is now set up for all three minis.
+
 
 ### 7. Create SSH Config
 
@@ -265,20 +391,20 @@ Usually a firewall or socket binding issue:
 
 ## Final Checklist
 
-- [ ] Thunderbolt Bridge enabled on all minis
-- [ ] Static IPs assigned (10.10.0.x)
-- [ ] Ping works between all nodes (<1ms)
-- [ ] macOS firewall disabled on all nodes
-- [ ] TCP connectivity verified with `nc`
-- [ ] SSH keys set up from your laptop
-- [ ] SSH config created for easy access
-- [ ] Wi-Fi still works for control traffic
+- Thunderbolt Bridge enabled on all minis
+- Static IPs assigned (10.10.0.x)
+- Ping works between all nodes (<1ms)
+- macOS firewall disabled on all nodes
+- TCP connectivity verified with `nc`
+- SSH keys set up from your laptop
+- SSH config created for easy access
+- Wi-Fi still works for control traffic
 
 ---
 
 You're ready. Spin up your PyTorch code, bind to `0.0.0.0`, initialize your cluster, and train. Your gradient syncs will be faster than anything in the cloud.
 
-**Built for [smolcluster](https://smolcluster.com)** — distributed ML from scratch, on your own hardware.
+**Built for [smolcluster](https://smolcluster.com)** — distributed training and inference library from scratch, on your own hardware.
 
 Eg:
 
@@ -357,4 +483,4 @@ Usually a firewall or socket binding issue:
 
 You're ready. Spin up your PyTorch code, bind to `0.0.0.0`, initialize your cluster, and train. Your gradient syncs will be faster than anything in the cloud.
 
-**Built for [smolcluster](https://smolcluster.com)** — distributed ML from scratch, on your own hardware.
+**Built for [smolcluster](https://smolcluster.com)** — distributed training and inference library from scratch, for local compute, on your own hardware.

@@ -872,6 +872,129 @@ code.highlighter-rouge,
   margin-right: 3px;
 }
 
+/* Blog listing: no underline, theme-matched title and excerpt */
+.archive__item-title a,
+.archive__item-title a:hover,
+.archive__item:hover .archive__item-title a {
+  color: var(--accent) !important;
+  text-decoration: none !important;
+}
+
+.archive__item:hover .archive__item-title {
+  text-decoration: none !important;
+}
+
+.archive a {
+  text-decoration: none !important;
+}
+
+.archive__item-excerpt {
+  font-family: 'Crimson Pro', Georgia, serif !important;
+  font-size: 1rem !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.65 !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.01em !important;
+}
+
+.archive__item-excerpt a {
+  color: var(--text-secondary) !important;
+  text-decoration: none !important;
+  font-weight: 400 !important;
+  &:hover { color: var(--accent) !important; }
+}
+
+/* Clean centered reading layout for posts/pages without sidebar */
+#main.no-sidebar {
+  .page {
+    float: none !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 740px;
+  }
+
+  /* Centered post header with spacious padding */
+  .page__inner-wrap > header {
+    text-align: center;
+    padding: 3rem 0 2.25rem;
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 3rem;
+  }
+
+  /* Large, light serif title */
+  h1.page__title {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    font-size: 2.7rem !important;
+    font-weight: 300 !important;
+    color: var(--text-primary) !important;
+    letter-spacing: 0.02em !important;
+    line-height: 1.15 !important;
+    margin-bottom: 1rem !important;
+    text-transform: none !important;
+  }
+
+  /* Italic subtitle/deck */
+  .post__subtitle {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-secondary);
+    max-width: 580px;
+    margin: 0 auto 1rem;
+    line-height: 1.6;
+  }
+
+  /* Byline: name ✦ date · read time */
+  .post__byline {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+
+    time { font-variant-numeric: tabular-nums; }
+
+    .post__sep {
+      margin: 0 0.5rem;
+      opacity: 0.6;
+      font-style: normal;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    /* hide the read-time clock icon */
+    .fa { display: none !important; }
+  }
+
+  /* More breathing room between content paragraphs */
+  .page__content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+
+    p { margin-bottom: 1.4em; }
+
+    h2 {
+      margin-top: 3.5rem;
+      margin-bottom: 1.75rem;
+    }
+
+    h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+      margin-top: 2.5rem;
+      margin-bottom: 0.75rem;
+    }
+  }
+}
+
 /* Warm golden syntax highlighting - matches k-a.in palette */
 .highlight .c,  .highlight .cm, .highlight .c1, .highlight .cs  { color: #b0a28e !important; font-style: italic; }  /* comments - warm gray */
 .highlight .k,  .highlight .kc, .highlight .kn, .highlight .kp,

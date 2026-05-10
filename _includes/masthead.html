@@ -3,9 +3,9 @@
 <div class="masthead">
   <div class="masthead__inner-wrap">
     {% if site.portfolio_home %}
-      <a href="{{ site.portfolio_home }}" class="site-title">{{ site.title }}</a>
+      <a href="{{ site.portfolio_home }}" class="site-title">{{ site.name }}</a>
     {% else %}
-      <a href="{{ base_path }}/" class="site-title">{{ site.title }}</a>
+      <a href="{{ base_path }}/" class="site-title">{{ site.name }}</a>
     {% endif %}
     {% unless page.url == "/" %}
       <a href="{{ base_path }}/" class="site-title-home-mobile">Home</a>

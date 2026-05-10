@@ -18,7 +18,7 @@ layout: default
   {% endunless %}
 {% endif %}
 
-<div id="main" role="main">
+<div id="main" role="main"{% unless page.author_profile or layout.author_profile or page.sidebar %} class="no-sidebar"{% endunless %}>
   {% include sidebar.html %}
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
@@ -30,20 +30,23 @@ layout: default
     <div class="page__inner-wrap">
       {% unless page.header.overlay_color or page.header.overlay_image %}
         <header>
-          {% if page.title %}<h1 class="page__title" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>{% endif %}
-          {% if page.read_time %}
+            {% if page.title %}<h1 class="page__title" itemprop="headline" style="text-decoration: none !important; border-bottom: none !important;">{{ page.title | strip_html | escape_once }}</h1>{% endif %}
+          {% if page.collection == 'posts' %}
+            {% if page.excerpt %}<p class="post__subtitle">{{ page.excerpt | markdownify | strip_html }}</p>{% endif %}
+            <p class="post__byline">{{ site.name }} <span class="post__sep">✦</span> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>{% if page.read_time %} <span class="post__sep">·</span> {% include read-time.html %}{% endif %}</p>
+          {% elsif page.read_time %}
             <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
           {% endif %}
-        {% if page.modified %}
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.modified | date: "%Y-%m-%d" }}">{{ page.modified | date: "%B %d, %Y" }}</time></p>
+          {% if page.modified and page.collection != 'posts' %}
+          <p class="page__meta"><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="{{ page.modified | date: "%Y-%m-%d" }}">{{ page.modified | date: "%B %d, %Y" }}</time></p>
         {% endif %}
         
         {% if page.collection == 'teaching' %}
           <p> {{ page.type }}, <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.venue and page.date %}
           <p>Published in <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
-        {% elsif page.date and page.collection != 'models' and page.collection != 'rl' and page.collection != 'smolhub' and page.collection != 'talks' and page.collection != 'datasets' %}
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
+          {% elsif page.date and page.collection != 'posts' and page.collection != 'models' and page.collection != 'rl' and page.collection != 'smolhub' and page.collection != 'talks' and page.collection != 'datasets' %}
+          <p class="page__meta"><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
         {% endif %}
         
         {% if page.collection == 'datasets' %}
