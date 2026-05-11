@@ -1,7 +1,7 @@
 ---
 title: 'Thunderbolt Cluster Setup Guide'
 date: 2026-05-09
-permalink: /posts/2026/05/thunderbolt-cluster-setup-guide/
+permalink: /posts/mac-cluster-setup-guide/
 author_profile: false
 excerpt: "Wire Mac minis into a high-bandwidth local Thunderbolt cluster for distributed training and inference with zero cloud egress cost, low latency, and direct control over cluster networking."
 tags:
