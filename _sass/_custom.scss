@@ -872,6 +872,35 @@ code.highlighter-rouge,
   margin-right: 3px;
 }
 
+/* Blog listing inline view + like counters */
+.archive__item-metrics {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.6rem;
+}
+
+.archive-metric {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.archive-metric__icon {
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+  opacity: 0.55;
+  line-height: 1;
+}
+
+.archive-metric__count {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
 /* Blog listing: no underline, theme-matched title and excerpt */
 .archive__item-title a,
 .archive__item-title a:hover,

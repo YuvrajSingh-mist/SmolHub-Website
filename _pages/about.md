@@ -86,14 +86,22 @@ redirect_from:
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.views-counter').forEach(function(el) {
-    var slug = el.closest('.list-item') && el.closest('.list-item').dataset.slug;
-    if (!slug) return;
-    fetch('https://api.counterapi.dev/v1/smolhub-yuvraj/' + slug + '/')
-      .then(function(r) { return r.json(); })
-      .then(function(d) { if (d && d.count != null) el.textContent = Number(d.count).toLocaleString(); })
-      .catch(function() { el.textContent = ''; });
+  var els = document.querySelectorAll('.views-counter');
+  var slugs = [];
+  els.forEach(function(el) {
+    var s = el.closest('.list-item') && el.closest('.list-item').dataset.slug;
+    if (s) slugs.push(s);
   });
+  if (!slugs.length) return;
+  fetch('/api/views?slugs=' + slugs.map(encodeURIComponent).join(','))
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      els.forEach(function(el) {
+        var s = el.closest('.list-item') && el.closest('.list-item').dataset.slug;
+        if (s && data[s] != null) el.textContent = Number(data[s]).toLocaleString();
+      });
+    })
+    .catch(function() {});
 });
 </script>
 

@@ -50,6 +50,17 @@ module.exports = async function handler(req, res) {
     slug = new URL(req.url, 'http://localhost').searchParams.get('slug');
   }
 
+  // Batch GET: ?slugs=slug1,slug2 → { slug1: N, slug2: N, ... }
+  if (req.method === 'GET' && !slug) {
+    const raw = new URL(req.url, 'http://localhost').searchParams.get('slugs') || '';
+    const slugs = raw.split(',').map(s => s.trim()).filter(Boolean).slice(0, 50);
+    if (!slugs.length) return res.status(400).json({ error: 'slug or slugs required' });
+    const counts = await Promise.all(slugs.map(s => redis(['SCARD', `likes:${s}`])));
+    const result = {};
+    slugs.forEach((s, i) => { result[s] = parseInt(counts[i]) || 0; });
+    return res.status(200).json(result);
+  }
+
   if (!slug) return res.status(400).json({ error: 'slug required' });
 
   const likesKey = `likes:${slug}`;

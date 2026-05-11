@@ -12,7 +12,7 @@
   {% assign title = post.title %}
 {% endif %}
 
-<div class="{{ include.type | default: "list" }}__item">
+<div class="{{ include.type | default: "list" }}__item" {% if post.collection == 'posts' %}data-slug="{{ post.title | slugify }}"{% endif %}>
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
 
     <h2 class="archive__item-title" itemprop="headline">
@@ -44,6 +44,19 @@
       </p>
     {% endif %}
     
+    {% if post.collection == 'posts' %}
+    <div class="archive__item-metrics">
+      <span class="archive-metric">
+        <span class="archive-metric__icon">◉</span>
+        <span class="archive-metric__count views-counter">—</span>
+      </span>
+      <span class="archive-metric">
+        <span class="archive-metric__icon">♡</span>
+        <span class="archive-metric__count likes-counter">—</span>
+      </span>
+    </div>
+    {% endif %}
+
     {% if post.citation and post.paperurl %}
       <p>Recommended citation: {{ post.citation }} <a href="{{ post.paperurl }}">{{ post.paperurl }}</a></p>
     {% elsif post.citation %}

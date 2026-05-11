@@ -1,9 +1,10 @@
-// Local dev server: handles /api/* routes, proxies everything else to Jekyll (port 4000)
+// Local dev server — single command, starts Jekyll internally, exposes only port 3000
 // Usage: node dev-server.js
 const http = require('http');
 const fs = require('fs');
+const { spawn } = require('child_process');
 
-// Load .env.local without any external deps
+// Load .env.local
 try {
   fs.readFileSync('.env.local', 'utf8').split('\n').forEach(line => {
     const eq = line.indexOf('=');
@@ -17,9 +18,26 @@ try {
 const viewsHandler = require('./api/views');
 const likesHandler = require('./api/likes');
 
-const JEKYLL_PORT = 4000;
+const JEKYLL_PORT = 14000; // internal only — never visit this directly
+const PUBLIC_PORT = 3000;
 
-// Add Express-style .status().json() to plain Node res so Vercel handlers work locally
+// Start Jekyll as a child process on the internal port
+const jekyll = spawn('bundle', ['exec', 'jekyll', 'serve', '--port', String(JEKYLL_PORT)], {
+  stdio: ['ignore', 'pipe', 'pipe'],
+});
+
+jekyll.stdout.on('data', d => {
+  const line = d.toString();
+  if (line.includes('Server running') || line.includes('done in')) {
+    console.log('  Jekyll ready');
+  }
+});
+jekyll.stderr.on('data', () => {});
+jekyll.on('exit', code => { if (code) console.error('Jekyll exited', code); });
+process.on('exit', () => jekyll.kill());
+process.on('SIGINT', () => { jekyll.kill(); process.exit(); });
+
+// Add Express-style .status().json() to plain Node res
 function wrap(res) {
   res.status = (code) => { res.statusCode = code; return res; };
   res.json = (obj) => { res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify(obj)); };
@@ -32,7 +50,7 @@ const server = http.createServer((req, res) => {
   if (path === '/api/views') return viewsHandler(req, wrap(res));
   if (path === '/api/likes') return likesHandler(req, wrap(res));
 
-  // Proxy everything else to Jekyll
+  // Proxy to Jekyll
   const opts = {
     hostname: 'localhost',
     port: JEKYLL_PORT,
@@ -46,13 +64,12 @@ const server = http.createServer((req, res) => {
   });
   proxy.on('error', () => {
     res.writeHead(502);
-    res.end('Jekyll not running. Start it with: bundle exec jekyll serve');
+    res.end('Jekyll is still starting up, refresh in a few seconds...');
   });
   req.pipe(proxy, { end: true });
 });
 
-server.listen(3000, () => {
-  console.log('\n  Dev server ready at http://localhost:3000');
-  console.log('  API routes: /api/views  /api/likes');
-  console.log('  Proxying everything else to Jekyll on port 4000\n');
+server.listen(PUBLIC_PORT, () => {
+  console.log(`\n  Starting Jekyll (takes ~10s)...`);
+  console.log(`  Dev server will be ready at http://localhost:${PUBLIC_PORT}\n`);
 });
