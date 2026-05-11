@@ -483,6 +483,12 @@ Usually a firewall or socket binding issue:
 
 ---
 
-You're ready. Spin up your PyTorch code, bind to `0.0.0.0`, initialize your cluster, and train. Your gradient syncs will be faster than anything in the cloud.
+You're ready! Congratualtions! Now, in the next few posts we'll spin up a training/inference job to see it in action!
 
 **Built for [smolcluster](https://smolcluster.com)** — distributed training and inference library from scratch, for local compute, on your own hardware.
+
+<figure>
+  <img src="/images/blogs/thunderbolt-cluster-guide/my-mac-mini-cluster.jpeg" alt="My Mac Minis Cluster">
+  <figcaption>My Mac mini cluster (3x M4 16 gig each) — three nodes wired together over Thunderbolt.</figcaption>
+</figure>
+
