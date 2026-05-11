@@ -1,3 +1,7 @@
+# Environment variables — never commit these
+.env.local
+.env*.local
+
 # Ignore the contents of the _site directory
 _site/
 
@@ -43,3 +47,4 @@ Thumbs.db
 
 # Nested smolcluster-web repo (separate git repo, commit separately)
 smolcluster-web/
+.vercel

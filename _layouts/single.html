@@ -33,7 +33,7 @@ layout: default
             {% if page.title %}<h1 class="page__title" itemprop="headline" style="text-decoration: none !important; border-bottom: none !important;">{{ page.title | strip_html | escape_once }}</h1>{% endif %}
           {% if page.collection == 'posts' %}
             {% if page.excerpt %}<p class="post__subtitle">{{ page.excerpt | markdownify | strip_html }}</p>{% endif %}
-            <p class="post__byline">{{ site.name }} <span class="post__sep">✦</span> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>{% if page.read_time %} <span class="post__sep">·</span> {% include read-time.html %}{% endif %}</p>
+            <p class="post__byline">{{ site.name }} <span class="post__sep">✦</span> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>{% if page.read_time %} <span class="post__sep">·</span> {% include read-time.html %}{% endif %} <span id="post-views-sep" class="post__sep" style="display:none;">·</span> <span id="post-views" style="display:none;"></span></p>
           {% elsif page.read_time %}
             <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
           {% endif %}
@@ -98,6 +98,21 @@ layout: default
           <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>
         {% endif %}
         {% include page__taxonomy.html %}
+        {% if page.collection == 'posts' %}
+        <style>
+          .post__like-btn { background: none; border: none; padding: 0; cursor: pointer; color: #b0a898; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 0.3rem; font-family: inherit; transition: color 0.18s; margin-top: 0.6rem; }
+          .post__like-btn:hover { color: #8a7355; }
+          .post__like-btn.liked { color: #8a7355; }
+          .post__like-heart { font-size: 0.95rem; display: inline-block; transition: transform 0.15s; }
+          .post__like-btn:hover .post__like-heart { transform: scale(1.2); }
+          .post__like-btn.liked .post__like-heart { animation: heartPop 0.3s ease; }
+          @keyframes heartPop { 0%{transform:scale(1)} 45%{transform:scale(1.6)} 100%{transform:scale(1)} }
+        </style>
+        <button class="post__like-btn" id="like-btn" onclick="handleLike()" title="Like this post">
+          <span class="post__like-heart" id="like-icon">♡</span>
+          <span id="like-label">·</span>
+        </button>
+        {% endif %}
       </footer>
 
     </div>
@@ -108,11 +123,82 @@ layout: default
   </article>
 
   {% comment %}<!-- only show related on a post page when not disabled -->{% endcomment %}
+
   {% if page.collection == 'smolhub' or page.collection == 'datasets' or page.collection == 'projects' %}
   <script>
   (function() {
     var slug = {{ page.title | split: '|' | first | strip | slugify | jsonify }};
     fetch('https://api.counterapi.dev/v1/smolhub-yuvraj/' + slug + '/up').catch(function(){});
+  })();
+  </script>
+  {% endif %}
+
+  {% if page.collection == 'posts' %}
+  <script>
+  (function() {
+    var slug = {{ page.title | split: '|' | first | strip | slugify | jsonify }};
+    var likedKey = 'liked-' + slug;
+
+    // --- VIEWS ---
+    // POST to /api/views \u2014 server deduplicates by IP hash (24h window)
+    fetch('/api/views', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug: slug })
+    })
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d && d.count) {
+          var el = document.getElementById('post-views');
+          var sep = document.getElementById('post-views-sep');
+          if (el) { el.textContent = d.count.toLocaleString() + ' views'; el.style.display = 'inline'; }
+          if (sep) { sep.style.display = 'inline'; }
+        }
+      }).catch(function() {});
+
+    // --- LIKES ---
+    function updateLikeUI(count, isLiked) {
+      var btn = document.getElementById('like-btn');
+      var icon = document.getElementById('like-icon');
+      var labelEl = document.getElementById('like-label');
+      var n = parseInt(count) || 0;
+      if (btn) btn.classList.toggle('liked', isLiked);
+      if (icon) icon.textContent = isLiked ? '\u2665' : '\u2661';
+      if (labelEl) {
+        if (n === 0) labelEl.textContent = 'Be the first to like this';
+        else if (n === 1) labelEl.textContent = '1 person found this helpful';
+        else labelEl.textContent = n.toLocaleString() + ' people found this helpful';
+      }
+    }
+
+    var isLiked = !!localStorage.getItem(likedKey);
+
+    // GET current like count on load (no increment)
+    fetch('/api/likes?slug=' + encodeURIComponent(slug))
+      .then(function(r) { return r.json(); })
+      .then(function(d) { updateLikeUI(d && d.count, isLiked); })
+      .catch(function() { updateLikeUI(0, isLiked); });
+
+    window.handleLike = function() {
+      var labelText = (document.getElementById('like-label') || {}).textContent || '';
+      var current = parseInt(labelText) || 0;
+      if (localStorage.getItem(likedKey)) {
+        // Toggle off: remove local state only (Redis Set keeps the IP, real count unchanged)
+        localStorage.removeItem(likedKey);
+        updateLikeUI(current, false);
+        return;
+      }
+      updateLikeUI(current + 1, true);
+      localStorage.setItem(likedKey, '1');
+      fetch('/api/likes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: slug })
+      })
+        .then(function(r) { return r.json(); })
+        .then(function(d) { updateLikeUI(d && d.count, true); })
+        .catch(function() {});
+    };
   })();
   </script>
   {% endif %}

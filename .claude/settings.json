@@ -104,7 +104,14 @@
       "Bash(git -C /Users/yuvrajsingh9886/Desktop/SmolHub-Website log --oneline -5)",
       "Bash(git -C /Users/yuvrajsingh9886/Desktop/SmolHub-Website diff --staged)",
       "Bash(git -C /Users/yuvrajsingh9886/Desktop/SmolHub-Website diff HEAD)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4000/datasets/)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4000/datasets/)",
+      "Bash(vercel dev *)",
+      "Bash(npm install *)",
+      "Bash(curl -s -X POST http://localhost:3000/api/views -H 'Content-Type: application/json' -d '{\"slug\":\"thunderbolt-cluster-setup-guide\"}')",
+      "Bash(curl -s \"http://localhost:3000/api/likes?slug=thunderbolt-cluster-setup-guide\")",
+      "Bash(vercel env *)",
+      "Bash(curl -s -X POST http://localhost:3000/api/views -H \"Content-Type: application/json\" -d '{\"slug\":\"thunderbolt-cluster-setup-guide\"}')",
+      "Bash(node /Users/yuvrajsingh9886/Desktop/SmolHub-Website/dev-server.js)"
     ],
     "additionalDirectories": [
       "/Users/yuvrajsingh9886/Desktop/SmolHub-Website/_talks",
