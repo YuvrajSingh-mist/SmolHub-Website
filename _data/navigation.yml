@@ -17,7 +17,7 @@ main:
     url: /smolhub/
 
   - title: "BLOGS"
-    url: /year-archive/
+    url: /posts/
 
   - title: "NeatRL"
     url: /rl/
