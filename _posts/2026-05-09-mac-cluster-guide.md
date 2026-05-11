@@ -54,7 +54,7 @@ Clean separation. No Wi-Fi congestion. Just throughput where it matters.
 
 ## Step-by-Step Setup
 
-### 1. Enable Thunderbolt Bridge
+## 1. Enable Thunderbolt Bridge
 
 Before opening settings, decide your coordinator machine first.
 
@@ -91,7 +91,7 @@ If you don't see it, it should appear after you plug in the Thunderbolt cables l
   </figure>
 </div>
 
-### 2. Assign Static IPs
+## 2. Assign Static IPs
 
 Give each node a unique static IP on the Thunderbolt network using the macOS UI.
 
@@ -124,7 +124,7 @@ ifconfig bridge0
 
 You should see something like `inet 10.10.0.1 netmask 0xffffff00` in the output.
 
-### 3. Test Connectivity with Ping
+## 3. Test Connectivity with Ping
 
 From your coordinator node (e.g., mini1), ping the other nodes:
 
@@ -145,7 +145,7 @@ You should see:
 - Does the bridge interface exist? (`ifconfig bridge0`)
 - Are the IPs actually assigned?
 
-### 4. Disable the macOS Firewall (Optional )
+## 4. Disable the macOS Firewall (Optional )
 
 This is the #1 gotcha. The macOS packet filter (PF) can silently block Thunderbolt TCP traffic. Your ping will work fine, but TCP connections will hang or fail with "No route to host" errors.
 
@@ -171,7 +171,7 @@ Status: Disabled
 
 **When to use:** When you start seeing "Errno 65: No route to host" in your training code later, 90% of the time it's this and its not your routing or cabling fault. Disabling PF is a critical step in validating your cluster setup.
 
-### 5. Test TCP Connectivity
+## 5. Test TCP Connectivity
 
 Test actual TCP (not just ICMP ping). On coordinator node (e.g., mini1), listen on a port:
 
@@ -189,7 +189,7 @@ If it works, the `nc` command will just hang (no error output). Ctrl+C to exit.
 
 **What just happened:** Routing works. TCP is flowing. Firewall isn't blocking. You're ready for training code.
 
-### 6. Set Up SSH Keys
+## 6. Set Up SSH Keys
 
 SSH keys let you authenticate without typing passwords — essential for scripts and distributed work.
 
@@ -317,7 +317,7 @@ If it fails with "Permission denied (publickey)", check:
 **What just happened:** Passwordless authentication is now set up for all three minis.
 
 
-### 7. Create SSH Config
+## 7. Create SSH Config
 
 Edit `~/.ssh/config` on your laptop:
 
