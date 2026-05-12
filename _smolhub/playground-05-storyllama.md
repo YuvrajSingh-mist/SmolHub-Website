@@ -3,19 +3,10 @@ title: "Story Llama"
 excerpt: "So, I trained a Llama a 88M architecture I coded from ground up to build a small instruct model, going through the below-mentioned stages from scratch. <br/><img src='/images/500x300.png'>"
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryLlama"
+hf_url: "https://huggingface.co/spaces/YuvrajSingh9886/StoryLlama-Zero"
 date: 2025-08-08
 tags: ["llama", "transformer", "pytorch", "storytelling", "compact", "interactive", "educational"]
 ---
-
-
-
-<div class="header-with-action">
-  <h2>Project Overview</h2>
-  <a class="btn btn--primary btn--hf" href="https://huggingface.co/spaces/YuvrajSingh9886/StoryLlama-Zero" target="_blank" rel="noopener">
-    <img class="hf-logo" alt="Hugging Face" src="/images/huggingface-logo.svg" />
-    Try it!
-  </a>
-</div>
 
 
 ## Project Overview

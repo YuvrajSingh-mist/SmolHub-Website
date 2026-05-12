@@ -3,17 +3,10 @@ title: "Story Mixtral"
 excerpt: "A PyTorch implementation of a Mixtral inspired transformer model with Mixture of Experts (MoE), Flash Attention, and other advanced features. <br/><img src='/images/500x300.png'>"
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/StoryMixtral"
+hf_url: "https://huggingface.co/spaces/YuvrajSingh9886/StoryMixtral-Zero"
 date: 2025-08-08
 tags: ["mixtral", "llama", "transformer", "pytorch", "storytelling", "generation", "compact", "vision", "distributed", "interactive", "optimized", "educational"]
 ---
-
-<div class="header-with-action">
-  <h2>Project Overview</h2>
-  <a class="btn btn--primary btn--hf" href="https://huggingface.co/spaces/YuvrajSingh9886/StoryMixtral-Zero" target="_blank" rel="noopener">
-    <img class="hf-logo" alt="Hugging Face" src="/images/huggingface-logo.svg" />
-    Try it!
-  </a>
-</div>
 
 A PyTorch implementation of a Mixtral inspired transformer model with Mixture of Experts (MoE), Flash Attention, and other advanced features.
 

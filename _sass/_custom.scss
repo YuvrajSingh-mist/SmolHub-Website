@@ -272,52 +272,40 @@ img.hf-icon {
   filter: grayscale(1) opacity(0.75);
 }
 
-/* HuggingFace button in smolhub pages */
-.header-with-action {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.2rem;
-  padding-bottom: 0.5em;
-  border-bottom: 1px solid var(--border-light);
-  margin-bottom: 1.5rem;
-  h2 {
-    margin: 0 !important;
-    text-align: left !important;
-    padding-bottom: 0 !important;
-    border-bottom: none !important;
-  }
+/* HuggingFace "Try it!" inline with page title */
+.page__title-hf-sep {
+  display: inline-block;
+  margin: 0 0.4em;
+  font-weight: 300;
+  color: var(--text-tertiary);
+  vertical-align: middle;
+  line-height: 1;
 }
 
-.btn.btn--hf {
-  all: unset;
+.page__title-hf-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.3em;
   font-family: 'Crimson Pro', Georgia, serif;
-  font-size: 0.82rem;
+  font-size: 0.48em;
+  font-weight: 400;
+  letter-spacing: 0.03em;
   color: var(--text-secondary) !important;
-  text-decoration: none;
-  letter-spacing: 0.01em;
+  text-decoration: none !important;
+  vertical-align: middle;
   transition: color 0.2s;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-  &:hover { color: var(--accent) !important; text-decoration: underline; }
+  &:hover { color: var(--accent) !important; }
 }
 
-img.hf-logo {
-  width: 1.4em;
-  height: 1.4em;
-  display: block;
-  filter: grayscale(1) opacity(0.65);
+img.hf-logo-title {
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-block;
+  vertical-align: middle;
+  filter: grayscale(1) opacity(0.6);
   transition: filter 0.2s;
-  .btn.btn--hf:hover & { filter: grayscale(1) opacity(0.9); }
+  .page__title-hf-link:hover & { filter: grayscale(0) opacity(0.85); }
 }
-
-.btn.btn--hf:hover { color: var(--text-primary); }
 
 
 .sidebar .author__bio {

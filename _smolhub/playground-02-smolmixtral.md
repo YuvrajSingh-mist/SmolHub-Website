@@ -3,19 +3,10 @@ title: "Smol Mixtral"
 excerpt: "A PyTorch implementation of a Mixtral inspired transformer model with Mixture of Experts (MoE), designed for text generation and understanding tasks. This model is built on the Mixtral architecture wi... <br/><img src='/images/500x300.png'>"
 collection: smolhub
 github_url: "https://github.com/YuvrajSingh-mist/SmolHub/tree/main/SmolMixtral"
+hf_url: "https://huggingface.co/spaces/YuvrajSingh9886/SmolMixtral-Zero"
 date: 2025-08-08
 tags: ["mixtral", "llama", "transformer", "pytorch", "generation", "compact", "vision", "distributed", "interactive", "optimized", "educational"]
 ---
-
-
-
-<div class="header-with-action">
-  <h2>Project Overview</h2>
-  <a class="btn btn--primary btn--hf" href="https://huggingface.co/spaces/YuvrajSingh9886/SmolMixtral-Zero" target="_blank" rel="noopener">
-    <img class="hf-logo" alt="Hugging Face" src="/images/huggingface-logo.svg" />
-    Try it!
-  </a>
-</div>
 
 
 

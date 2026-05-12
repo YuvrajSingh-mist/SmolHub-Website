@@ -1,7 +1,8 @@
-// Local dev server — single command, starts Jekyll internally, exposes only port 3000
+// Local dev server — single command, starts Jekyll watch build, serves _site on port 3000
 // Usage: node dev-server.js
 const http = require('http');
 const fs = require('fs');
+const path = require('path');
 const { spawn } = require('child_process');
 
 // Load .env.local
@@ -18,26 +19,86 @@ try {
 const viewsHandler = require('./api/views');
 const likesHandler = require('./api/likes');
 
-const JEKYLL_PORT = 14000; // internal only — never visit this directly
 const PUBLIC_PORT = 3000;
+const SITE_DIR = path.join(__dirname, '_site');
 
-// Start Jekyll as a child process on the internal port
-// Prepend rbenv shims so the correct Ruby/bundler is used instead of /usr/bin/bundle
+// MIME types for static file serving
+const MIME = {
+  '.html': 'text/html; charset=utf-8',
+  '.css':  'text/css',
+  '.js':   'application/javascript',
+  '.json': 'application/json',
+  '.png':  'image/png',
+  '.jpg':  'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif':  'image/gif',
+  '.svg':  'image/svg+xml',
+  '.ico':  'image/x-icon',
+  '.woff': 'font/woff',
+  '.woff2':'font/woff2',
+  '.ttf':  'font/ttf',
+  '.webp': 'image/webp',
+  '.xml':  'application/xml',
+  '.txt':  'text/plain',
+  '.webmanifest': 'application/manifest+json',
+};
+
+function serveFile(filePath, res) {
+  const ext = path.extname(filePath).toLowerCase();
+  const ct = MIME[ext] || 'application/octet-stream';
+  const stream = fs.createReadStream(filePath);
+  res.writeHead(200, { 'Content-Type': ct });
+  stream.pipe(res);
+  stream.on('error', () => { res.end(); });
+}
+
+function serveStatic(reqUrl, res) {
+  const urlPath = decodeURIComponent(reqUrl.split('?')[0]);
+  let candidate = path.join(SITE_DIR, urlPath);
+
+  // Security: stay inside _site
+  if (!candidate.startsWith(SITE_DIR)) {
+    res.writeHead(403); res.end('Forbidden'); return;
+  }
+
+  try {
+    const stat = fs.statSync(candidate);
+    if (stat.isFile()) { serveFile(candidate, res); return; }
+    if (stat.isDirectory()) {
+      const idx = path.join(candidate, 'index.html');
+      if (fs.existsSync(idx)) { serveFile(idx, res); return; }
+    }
+  } catch {}
+
+  const notFound = path.join(SITE_DIR, '404.html');
+  if (fs.existsSync(notFound)) {
+    res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+    fs.createReadStream(notFound).pipe(res);
+  } else {
+    res.writeHead(404); res.end('Not Found');
+  }
+}
+
+// Start Jekyll in --watch mode (build only, no Jekyll serve)
+// Prepend rbenv shims so the correct Ruby/bundler is used
 const rbenvShims = (process.env.HOME || '') + '/.rbenv/shims';
 const spawnEnv = { ...process.env, PATH: rbenvShims + ':' + process.env.PATH };
-const jekyll = spawn('bundle', ['exec', 'jekyll', 'serve', '--port', String(JEKYLL_PORT)], {
+const jekyll = spawn('bundle', ['exec', 'jekyll', 'build', '--watch', '--incremental'], {
   stdio: ['ignore', 'pipe', 'pipe'],
   env: spawnEnv,
 });
 
 jekyll.stdout.on('data', d => {
-  const line = d.toString();
-  if (line.includes('Server running') || line.includes('done in')) {
-    console.log('  Jekyll ready');
+  const line = d.toString().trim();
+  if (line.includes('done in') || line.includes('Regenerating')) {
+    console.log('  Jekyll:', line);
   }
 });
-jekyll.stderr.on('data', () => {});
-jekyll.on('exit', code => { if (code) console.error('Jekyll exited', code); });
+jekyll.stderr.on('data', d => {
+  const line = d.toString().trim();
+  if (line && !line.includes('GitHub Metadata')) console.error('  Jekyll err:', line);
+});
+jekyll.on('exit', code => { if (code) console.error('Jekyll exited with code', code); });
 process.on('exit', () => jekyll.kill());
 process.on('SIGINT', () => { jekyll.kill(); process.exit(); });
 
@@ -49,31 +110,15 @@ function wrap(res) {
 }
 
 const server = http.createServer((req, res) => {
-  const path = req.url.split('?')[0];
+  const urlPath = req.url.split('?')[0];
 
-  if (path === '/api/views') return viewsHandler(req, wrap(res));
-  if (path === '/api/likes') return likesHandler(req, wrap(res));
+  if (urlPath === '/api/views') return viewsHandler(req, wrap(res));
+  if (urlPath === '/api/likes') return likesHandler(req, wrap(res));
 
-  // Proxy to Jekyll
-  const opts = {
-    hostname: 'localhost',
-    port: JEKYLL_PORT,
-    path: req.url,
-    method: req.method,
-    headers: { ...req.headers, host: `localhost:${JEKYLL_PORT}` },
-  };
-  const proxy = http.request(opts, proxyRes => {
-    res.writeHead(proxyRes.statusCode, proxyRes.headers);
-    proxyRes.pipe(res, { end: true });
-  });
-  proxy.on('error', () => {
-    res.writeHead(502);
-    res.end('Jekyll is still starting up, refresh in a few seconds...');
-  });
-  req.pipe(proxy, { end: true });
+  serveStatic(req.url, res);
 });
 
 server.listen(PUBLIC_PORT, () => {
-  console.log(`\n  Starting Jekyll (takes ~10s)...`);
-  console.log(`  Dev server will be ready at http://localhost:${PUBLIC_PORT}\n`);
+  console.log(`\n  Dev server: http://localhost:${PUBLIC_PORT}`);
+  console.log('  Jekyll is watching for changes...\n');
 });

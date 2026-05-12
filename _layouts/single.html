@@ -30,7 +30,7 @@ layout: default
     <div class="page__inner-wrap">
       {% unless page.header.overlay_color or page.header.overlay_image %}
         <header>
-            {% if page.title %}<h1 class="page__title" itemprop="headline" style="text-decoration: none !important; border-bottom: none !important;">{{ page.title | strip_html | escape_once }}</h1>{% endif %}
+            {% if page.title %}<h1 class="page__title" itemprop="headline" style="text-decoration: none !important; border-bottom: none !important;">{{ page.title | strip_html | escape_once }}{% if page.hf_url %}<span class="page__title-hf-sep">·</span><a class="page__title-hf-link" href="{{ page.hf_url }}" target="_blank" rel="noopener"><img class="hf-logo-title" alt="Hugging Face" src="/images/huggingface-logo.svg" />Try it!</a>{% endif %}</h1>{% endif %}
           {% if page.collection == 'posts' %}
             {% if page.excerpt %}<p class="post__subtitle">{{ page.excerpt | markdownify | strip_html }}</p>{% endif %}
             <p class="post__byline">{{ site.name }} <span class="post__sep">✦</span> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>{% if page.read_time %} <span class="post__sep">·</span> {% include read-time.html %}{% endif %} <span id="post-views-sep" class="post__sep" style="display:none;">·</span> <span id="post-views" style="display:none;"></span></p>
@@ -140,28 +140,31 @@ layout: default
     var likedKey = 'liked-' + slug;
 
     // --- VIEWS ---
-    // POST to /api/views \u2014 server deduplicates by IP hash (24h window)
     fetch('/api/views', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ slug: slug })
     })
-      .then(function(r) { return r.json(); })
+      .then(function(r) {
+        if (!r.ok) throw new Error('views HTTP ' + r.status);
+        return r.json();
+      })
       .then(function(d) {
-        if (d && d.count) {
+        var n = d && typeof d.count === 'number' ? d.count : 0;
+        if (n > 0) {
           var el = document.getElementById('post-views');
           var sep = document.getElementById('post-views-sep');
-          if (el) { el.textContent = d.count.toLocaleString() + ' views'; el.style.display = 'inline'; }
+          if (el) { el.textContent = n.toLocaleString() + ' views'; el.style.display = 'inline'; }
           if (sep) { sep.style.display = 'inline'; }
         }
-      }).catch(function() {});
+      }).catch(function(e) { console.error('[views]', e); });
 
     // --- LIKES ---
     function updateLikeUI(count, isLiked) {
       var btn = document.getElementById('like-btn');
       var icon = document.getElementById('like-icon');
       var labelEl = document.getElementById('like-label');
-      var n = parseInt(count) || 0;
+      var n = typeof count === 'number' ? count : (parseInt(count) || 0);
       if (btn) btn.classList.toggle('liked', isLiked);
       if (icon) icon.textContent = isLiked ? '\u2665' : '\u2661';
       if (labelEl) {
@@ -173,31 +176,34 @@ layout: default
 
     var isLiked = !!localStorage.getItem(likedKey);
 
-    // GET current like count on load (no increment)
     fetch('/api/likes?slug=' + encodeURIComponent(slug))
-      .then(function(r) { return r.json(); })
-      .then(function(d) { updateLikeUI(d && d.count, isLiked); })
-      .catch(function() { updateLikeUI(0, isLiked); });
+      .then(function(r) {
+        if (!r.ok) throw new Error('likes HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function(d) { updateLikeUI(d && typeof d.count === 'number' ? d.count : 0, isLiked); })
+      .catch(function(e) { console.error('[likes]', e); updateLikeUI(0, isLiked); });
 
     window.handleLike = function() {
-      var labelText = (document.getElementById('like-label') || {}).textContent || '';
-      var current = parseInt(labelText) || 0;
+      var n = parseInt((document.getElementById('like-label') || {}).textContent) || 0;
       if (localStorage.getItem(likedKey)) {
-        // Toggle off: remove local state only (Redis Set keeps the IP, real count unchanged)
         localStorage.removeItem(likedKey);
-        updateLikeUI(current, false);
+        updateLikeUI(n, false);
         return;
       }
-      updateLikeUI(current + 1, true);
+      updateLikeUI(n + 1, true);
       localStorage.setItem(likedKey, '1');
       fetch('/api/likes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ slug: slug })
       })
-        .then(function(r) { return r.json(); })
-        .then(function(d) { updateLikeUI(d && d.count, true); })
-        .catch(function() {});
+        .then(function(r) {
+          if (!r.ok) throw new Error('like-post HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function(d) { updateLikeUI(d && typeof d.count === 'number' ? d.count : n + 1, true); })
+        .catch(function(e) { console.error('[like-post]', e); });
     };
   })();
   </script>
