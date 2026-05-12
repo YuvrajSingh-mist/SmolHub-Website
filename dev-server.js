@@ -22,8 +22,12 @@ const JEKYLL_PORT = 14000; // internal only — never visit this directly
 const PUBLIC_PORT = 3000;
 
 // Start Jekyll as a child process on the internal port
+// Prepend rbenv shims so the correct Ruby/bundler is used instead of /usr/bin/bundle
+const rbenvShims = (process.env.HOME || '') + '/.rbenv/shims';
+const spawnEnv = { ...process.env, PATH: rbenvShims + ':' + process.env.PATH };
 const jekyll = spawn('bundle', ['exec', 'jekyll', 'serve', '--port', String(JEKYLL_PORT)], {
   stdio: ['ignore', 'pipe', 'pipe'],
+  env: spawnEnv,
 });
 
 jekyll.stdout.on('data', d => {

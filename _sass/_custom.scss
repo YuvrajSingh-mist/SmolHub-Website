@@ -278,8 +278,15 @@ img.hf-icon {
   align-items: center;
   flex-wrap: wrap;
   gap: 1.2rem;
-  margin-bottom: 0.5rem;
-  h2 { margin: 0; line-height: 1; }
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 1.5rem;
+  h2 {
+    margin: 0 !important;
+    text-align: left !important;
+    padding-bottom: 0 !important;
+    border-bottom: none !important;
+  }
 }
 
 .btn.btn--hf {
@@ -288,12 +295,17 @@ img.hf-icon {
   align-items: center;
   gap: 0.35rem;
   font-family: 'Crimson Pro', Georgia, serif;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
+  font-size: 0.82rem;
+  color: var(--text-secondary) !important;
   text-decoration: none;
   letter-spacing: 0.01em;
   transition: color 0.2s;
   cursor: pointer;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  &:hover { color: var(--accent) !important; text-decoration: underline; }
 }
 
 img.hf-logo {
