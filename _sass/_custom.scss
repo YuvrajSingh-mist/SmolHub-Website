@@ -279,37 +279,33 @@ img.hf-icon {
   flex-wrap: wrap;
   gap: 1.2rem;
   margin-bottom: 0.5rem;
-  h2 { margin: 0; }
+  h2 { margin: 0; line-height: 1; }
 }
 
 .btn.btn--hf {
   all: unset;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   font-family: 'Crimson Pro', Georgia, serif;
-  font-size: 0.82rem;
-  color: var(--text-tertiary);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
   text-decoration: none;
   letter-spacing: 0.01em;
   transition: color 0.2s;
   cursor: pointer;
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-  &:hover { color: var(--text-secondary); text-decoration: underline; }
 }
 
 img.hf-logo {
   width: 1.4em;
   height: 1.4em;
-  vertical-align: -0.25em;
-  display: inline-block;
+  display: block;
   filter: grayscale(1) opacity(0.65);
   transition: filter 0.2s;
   .btn.btn--hf:hover & { filter: grayscale(1) opacity(0.9); }
 }
+
+.btn.btn--hf:hover { color: var(--text-primary); }
 
 
 .sidebar .author__bio {

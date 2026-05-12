@@ -13,7 +13,7 @@ tags: ["llama", "transformer", "pytorch", "compact", "vision", "interactive", "e
   <h2>Project Overview</h2>
   <a class="btn btn--primary btn--hf" href="https://huggingface.co/spaces/YuvrajSingh9886/SmolLlama-Zero" target="_blank" rel="noopener">
     <img class="hf-logo" alt="Hugging Face" src="/images/huggingface-logo.svg" />
-    Try it on Hugging Face
+    Try it!
   </a>
 </div>
 

@@ -8,7 +8,7 @@ date: 2025-01-01
 location: "Online"
 date_iso: 2025-01-01
 github_url: https://github.com/YuvrajSingh-mist/Paper-Replications
-website_url: https://smolhub.com
+website_url: /paper-replications/
 stars: 416
 ---
 

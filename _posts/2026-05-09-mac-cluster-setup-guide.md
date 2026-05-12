@@ -19,13 +19,6 @@ This guide walks you through setting up a solid distributed training cluster usi
 
 By the end, your minis will be talking to each other over dedicated Thunderbolt links while your laptop SSHes in over Wi-Fi. PyTorch FSDP, DDP, pipeline parallelism — all waiting to be explored.
 
-
-
-<figure style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-  <img src="/images/blogs/thunderbolt-cluster-guide/my-mac-mini-cluster.jpeg" alt="My Mac Minis Cluster">
-  <figcaption>My Mac mini cluster (3x M4 16 gig each) — three nodes wired together over Thunderbolt.</figcaption>
-</figure>
-
 ---
 
 ## Why This Approach?
