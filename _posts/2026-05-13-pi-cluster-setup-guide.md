@@ -14,6 +14,7 @@ tags:
 ---
 
 > **Tested on:** Raspberry Pi 4B 4GB (Rev 1.5), Debian GNU/Linux 13 (trixie) — kernel 6.12.62+rpt-rpi-v8, UCTRONICS U6260 enclosure, Official PoE+ HAT, TP-Link LS110P PoE switch
+> **Firmware:** Raspberry Pi 4 Model B Rev 1.5 — `6.12.62+rpt-rpi-v8` — Aug 20 2025 17:02:31 — `cd866525580337c0aee4b25880e1f5f9f674fb24`
 
 You have four Raspberry Pi 4Bs. You built the proper setup: UCTRONICS enclosure, PoE+ hats, TP-Link unmanaged switch. One power cable. Everything stacked, cooled, and networked.
 
@@ -56,7 +57,7 @@ By the end, your Pis will boot via PoE, talk to each other with <5ms latency, an
 
 - **Throughput:** ~9.5 Mbps sustained per link. The TP-Link LS110P is a **10/100 Mbps switch** — 100 Mbps is its hard ceiling per port. 
 
-> PS: Mine eth0 (my ethernet adapter) is currently negotiating at just 10 Mbps for some unknown reason even when my router says max is 100 Mbps. Highly recommend getting a switch with a 1 Gbps port if you want higher inter node bandwidth.
+> **Update:** Mine was stuck at 10 Mbps because the TP-Link LS110P's **Extend Mode** (PoE Long-Range) was enabled — it hard-caps ports to 10 Mbps to extend cable range to 250m. Flipping the DIP switch on the bottom of the switch from EXTEND → NORMAL fixed it instantly. See the [Bandwidth troubleshooting](#bandwidth-is-only-95-mbps) section.
 - **Latency:** <5ms between nodes. Good enough for inference batching.
 - **Thermals:** Idle 45–49°C. Single core load peaks at ~54°C. All 4 cores sustained: 60–62°C. Full 16-core cluster sustained 10 min: **62.3°C max, zero throttling**. Clock holds at 1800 MHz throughout.
 - **Power draw:** ~15-20W per Pi under load. Total ~60-80W cluster. Well within PoE+ limits (30W per port).
@@ -661,7 +662,20 @@ Should work now.
 
 ### "Bandwidth is only ~9.5 Mbps"
 
-This is a cable/port auto-negotiation issue, not a Pi limitation. The TP-Link LS110P is a **10/100 Mbps switch** — your link fell back to 10 Mbps instead of 100 Mbps. The Pi 4 NIC supports gigabit. Try: reseat both Cat 6 cable ends, try a different switch port, or swap to a known-good cable. That should get you to ~95 Mbps. To exceed 100 Mbps you'd need to replace the switch with a gigabit model.
+> ⚠️ **Gotcha: TP-Link Extend Mode is probably the culprit**
+>
+> A normal 10/100 switch advertises `100baseTx-FD 100baseTx-HD 10baseT-FD 10baseT-HD`. If your switch is advertising **only `10baseT`**, it has deliberately capped itself to 10 Mbps.
+>
+> This is almost certainly **TP-Link's "Extend Mode"** (also called PoE Long-Range mode). Many TP-Link PoE switches have a physical DIP switch that forces ports to 10 Mbps to extend PoE cable range from 100m to 250m. When enabled, it hard-caps the port at 10 Mbps regardless of cable or NIC quality.
+>
+> **Fix it:**
+> 1. Check the bottom/side of your TP-Link switch for a DIP switch or buttons labeled `250m / VLAN / QoS` or `EXTEND / NORMAL`.
+> 2. If the **EXTEND** switch is ON — flip it to **NORMAL/OFF**.
+> 3. If there's no physical switch, log into the TP-Link web UI → **Port Settings** → look for "Extend", "Long Range", or "PoE Mode" per port and disable it.
+>
+> That single toggle will take you from **10 Mbps → 100 Mbps instantly** — no cable changes, no Pi config, nothing else.
+
+If Extend Mode is already off, then it's a cable/port issue. Try: reseat both Cat 6 cable ends, swap to a different switch port, or try a known-good cable. The Pi 4 NIC supports gigabit — if you want above 100 Mbps you'd need to replace the switch with a gigabit model.
 
 ### "Can't SSH from pi4-1 to pi4-2"
 
