@@ -1,5 +1,5 @@
 ---
-title: 'Thunderbolt Cluster Setup Guide'
+title: 'Mac Minis Thunderbolt Cluster Setup Guide'
 date: 2026-05-09
 permalink: /posts/mac-cluster-setup-guide/
 author_profile: false

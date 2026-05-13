@@ -220,5 +220,26 @@ layout: default
         {% endfor %}
       </div>
     </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var items = Array.from(document.querySelectorAll('.page__related [data-slug]'));
+      var slugs = items.map(function(el) { return el.dataset.slug; }).filter(Boolean);
+      if (!slugs.length) return;
+      var q = slugs.map(encodeURIComponent).join(',');
+      Promise.all([
+        fetch('/api/views?slugs=' + q).then(function(r) { return r.json(); }),
+        fetch('/api/likes?slugs=' + q).then(function(r) { return r.json(); })
+      ]).then(function(results) {
+        var views = results[0], likes = results[1];
+        items.forEach(function(item) {
+          var s = item.dataset.slug;
+          var v = item.querySelector('.views-counter');
+          var l = item.querySelector('.likes-counter');
+          if (v) v.textContent = views[s] > 0 ? Number(views[s]).toLocaleString() : '0';
+          if (l) l.textContent = likes[s] > 0 ? Number(likes[s]).toLocaleString() : '0';
+        });
+      }).catch(function() {});
+    });
+    </script>
   {% endif %}
 </div>

@@ -1,5 +1,5 @@
 ---
-title: 'Clustering 4 Raspberry Pi 4B: Real Setup'
+title: 'Clustering 4 Raspberry Pis 4B'
 date: 2026-05-10
 permalink: /posts/raspberry-pi-cluster-setup-guide/
 author_profile: false
@@ -135,7 +135,7 @@ Follow the video here if you need a visual:
 
 <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; max-width:480px;">
   <iframe
-    src="https://youtu.be/_d-qvHJ7EwU"
+    src="https://www.youtube.com/embed/_d-qvHJ7EwU"
     title="Raspberry Pi Imager Tutorial"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
