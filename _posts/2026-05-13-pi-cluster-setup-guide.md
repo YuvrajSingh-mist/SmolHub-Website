@@ -133,7 +133,7 @@ Repeat for all 4 cards.
 
 Follow the video here if you need a visual:
 
-<div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; max-width:480px;">
+<div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; max-width:680px;">
   <iframe
     src="https://www.youtube.com/embed/_d-qvHJ7EwU"
     title="Raspberry Pi Imager Tutorial"
