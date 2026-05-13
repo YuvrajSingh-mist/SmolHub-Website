@@ -3,7 +3,7 @@ title: 'Clustering 4 Raspberry Pis 4B'
 date: 2026-05-10
 permalink: /posts/raspberry-pi-cluster-setup-guide/
 author_profile: false
-excerpt: "Build a 4-node Raspberry Pi 4B cluster with UCTRONICS enclosure, PoE+ hats, and TP-Link LS110P PoE switch. Real numbers: ~9.5 Mbps throughput (10 Mbps link cap), 60–62°C under full load, zero throttling at 1800 MHz throughout."
+excerpt: "Build a 4-node Raspberry Pi 4B cluster with UCTRONICS enclosure, PoE+ hats, and TP-Link LS110P PoE switch. Real numbers: 94.4 Mbps per link (100 Mbps switch ceiling), 62.3°C under full 16-core load, zero throttling at 1800 MHz throughout."
 tags:
   - Distributed Setup
   - Cluster Setup
@@ -18,13 +18,13 @@ tags:
 
 You have four Raspberry Pi 4Bs. You built the proper setup: UCTRONICS enclosure, PoE+ hats, TP-Link unmanaged switch. One power cable. Everything stacked, cooled, and networked.
 
-This guide walks you through setting up a real 4-node Raspberry Pi cluster. Not marketing hype — actual ~9.5 Mbps throughput because the TP-Link LS110P negotiates at 10 Mbps, but stable, thermally managed, and perfect for distributed inference.
+This guide walks you through setting up a real 4-node Raspberry Pi cluster. Not marketing hype — real measured numbers: **94.4 Mbps** per link (100 Mbps switch ceiling), **62.3°C** peak under full 16-core sustained load, zero throttling at 1800 MHz throughout. Stable, thermally managed, and ready for distributed inference.
 
 By the end, your Pis will boot via PoE, talk to each other with <5ms latency, and be ready for inference workloads across all 4 nodes.
 
 <figure>
   <img src="/images/blogs/pi-cluster-setup-guide/my-pi-cluster.jpeg" alt="My Raspberry Pi cluster setup with UCTRONICS enclosure, PoE+ HATs, and TP-Link LS110P switch" />
-  <figcaption>Figure 1. Manual TCP/IP settings for a Raspberry Pi cluster.</figcaption>
+  <figcaption>Figure 1. My Raspberry Pi cluster setup with UCTRONICS enclosure, PoE+ HATs, and TP-Link LS110P switch.</figcaption>
 </figure>
 
 ---
@@ -33,7 +33,7 @@ By the end, your Pis will boot via PoE, talk to each other with <5ms latency, an
 
 - **No separate power cables.** PoE powers each Pi over the same Ethernet cable. Cleaner.
 - **Thermal managed.** UCTRONICS fans keep temps 45-62°C under full 16-core load. No throttling.
-- **Real performance.** ~9.5 Mbps actual throughput — hard-capped by the TP-Link LS110P negotiating eth0 at 10 Mbps. CPU never touches it.
+- **Real performance.** 94.4 Mbps per link — the TP-Link LS110P's 100 Mbps ceiling. CPU has zero impact on throughput. A gigabit switch would give another 10×.
 - **Simple network.** One switch. Star topology. All nodes see each other at <5ms latency.
 
 ---
@@ -55,9 +55,9 @@ By the end, your Pis will boot via PoE, talk to each other with <5ms latency, an
 
 **Be real with yourself:**
 
-- **Throughput:** ~9.5 Mbps sustained per link. The TP-Link LS110P is a **10/100 Mbps switch** — 100 Mbps is its hard ceiling per port. 
+- **Throughput:** **94.4 Mbps** per link after fixing cables (Cat6/Cat8). Original cables negotiated at 10 Mbps → cable swap was a 10× improvement. Switch ceiling is 100 Mbps. Gigabit switch (e.g. TL-SG108PE) would give another 10×.
 
-> **Update:** Mine was stuck at 10 Mbps because the TP-Link LS110P's **Extend Mode** (PoE Long-Range) was enabled — it hard-caps ports to 10 Mbps to extend cable range to 250m. Flipping the DIP switch on the bottom of the switch from EXTEND → NORMAL fixed it instantly. See the [Bandwidth troubleshooting](#bandwidth-is-only-95-mbps) section.
+> **Update:** Mine was stuck at 10 Mbps because the TP-Link LS110P's **Extend Mode** (PoE Long-Range) was enabled — it hard-caps ports to 10 Mbps to extend cable range to 250m. Flipping the DIP switch on the bottom of the switch from EXTEND → NORMAL fixed it instantly. Then swapping to proper Cat6/Cat8 cables got it to 94.4 Mbps. See the [Bandwidth troubleshooting](#bandwidth-is-only-95-mbps) section.
 - **Latency:** <5ms between nodes. Good enough for inference batching.
 - **Thermals:** Idle 45–49°C. Single core load peaks at ~54°C. All 4 cores sustained: 60–62°C. Full 16-core cluster sustained 10 min: **62.3°C max, zero throttling**. Clock holds at 1800 MHz throughout.
 - **Power draw:** ~15-20W per Pi under load. Total ~60-80W cluster. Well within PoE+ limits (30W per port).
@@ -497,7 +497,7 @@ Repeat on all 4 Pis.
 
 ## Step 9: Test Bandwidth
 
-Real throughput test between pi4-1 and pi4-2 using `iperf3`.
+Real throughput test between nodes using `iperf3`.
 
 First, install iperf3 on all Pis:
 
@@ -524,20 +524,37 @@ On pi4-2, run the client:
 
 ```bash
 ssh pi4-2
-iperf3 -c 10.0.1.1 -t 20 -f m
+iperf3 -c 10.0.0.1 -t 20 -f m
 ```
 
 Output:
 
-Connecting to host 10.0.1.1, port 5201
-[  5] local 10.0.1.2 port 54321 connected to 10.0.1.1 port 5201
+```
+Connecting to host 10.0.0.1, port 5201
+[  5] local 10.0.0.2 port 54321 connected to 10.0.0.1 port 5201
 [ ID] Interval           Transfer     Bitrate         Retr  Cwnd
-[  5]  0.00-20.00  sec  22.8 MBytes  9.54 Mbits/sec  0   28.3 KBytes       sender
-[  5]  0.00-20.35  sec  22.8 MBytes  9.38 Mbits/sec                  receiver
+[  5]  0.00-20.00  sec  225 MBytes   94.4 Mbits/sec  0   112 KBytes       sender
+[  5]  0.00-20.01  sec  225 MBytes   94.3 Mbits/sec                        receiver
 ```
 
+**94.4 Mbps — the switch's 100 Mbps ceiling.** The Pi 4 NIC is gigabit-capable; the TP-Link LS110P is the bottleneck.
+
+> **Note:** If you see ~9.5 Mbps instead of ~94 Mbps, the switch's Extend Mode is probably still enabled. See [Bandwidth troubleshooting](#bandwidth-is-only-95-mbps).
 
 Test again between different pairs (pi4-1↔pi4-3, pi4-2↔pi4-4) to confirm consistency across all links.
+
+### What the real numbers look like across all test scenarios
+
+| Scenario | Throughput | Notes |
+|---|---|---|
+| Single link, idle (pi4-2 → pi4-1) | **94.4 Mbps** | Switch 100 Mbps ceiling |
+| Bidirectional (pi4-2 → pi4-1 AND pi4-3 → pi4-1) | **~47 Mbps each** | Receiver's rx port saturated — bandwidth split ~50/50 |
+| Single link under full 4-core CPU load | **94.4 Mbps** | Zero throughput degradation — NIC doesn't compete with CPU |
+| 3 nodes → pi4-1 simultaneously | **~47 Mbps (2 of 3 flows)** | Third sender starved — unmanaged switch, no QoS |
+| Original cables (Extend Mode off, bad cables) | **9.54 Mbps** | 10 Mbps negotiation fallback |
+| With gigabit switch (TL-SG108PE) | **~940 Mbps** (expected) | Pi 4 NIC is gigabit-capable |
+
+**Key finding:** CPU load has zero impact on throughput at these speeds. Tested with pi4-1 receiver running `stress-ng --cpu 4` — still 94.4 Mbps, temp 60.3°C, clock 1800 MHz. The NIC operates independently.
 
 ---
 
@@ -563,29 +580,58 @@ temp=48.7'C
 
 Idle range across all 4 nodes: **45–49°C**.
 
-Now run all 4 cores at 100% on all Pis simultaneously (SSH into each and fire it):
+### Test 1 — Single Core at 100% (5 min)
 
 ```bash
-stress-ng --cpu 4 --timeout 600s
+stress-ng --cpu 1 --timeout 300s
 ```
 
-On a separate terminal, watch the temperature every 5 seconds:
+Watch temp + frequency on another terminal:
 
 ```bash
 watch -n 5 'vcgencmd measure_temp && cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq'
 ```
 
-Output at plateau (~2–3 minutes in):
+| Time (s) | Temp (°C) | Freq (MHz) |
+|---|---|---|
+| 0 | 49.1 | 1800 |
+| 30 | 53.5 | 1800 |
+| 60–300 | 53–54 | 1800 |
 
-```
-temp=61.8'C
-1800000
+**Result:** Peaks at ~54°C, stabilises within 30s. Zero throttling. 1800 MHz throughout.
+
+### Test 2 — All 4 Cores at 100% (5 min)
+
+```bash
+stress-ng --cpu 4 --timeout 300s
 ```
 
-Expected under full 16-core cluster load:
-- **Peak temp:** 60–62°C (pi4-1 ran hottest at 62.3°C)
-- **Clock:** 1800 MHz throughout — no throttling
-- **Thermal headroom:** ~8–10°C before the 70°C soft-throttle kicks in
+| Time (s) | Temp (°C) | Freq (MHz) |
+|---|---|---|
+| 0 | 51.1 | 1800 |
+| 30 | 60.3 | 1800 |
+| 60–300 | 60–62 | 1800 |
+
+**Result:** Ramp is steeper (+9°C in first 30s vs +4°C for single-core), but cooling catches up within 60s. Plateaus at 60–62°C. Zero throttling.
+
+### Test 3 — Full Cluster 16 Cores at 100% (10 min)
+
+Run on all 4 Pis simultaneously:
+
+```bash
+stress-ng --cpu 4 --timeout 600s
+```
+
+| Min | pi4-1 (°C) | pi4-2 (°C) | pi4-3 (°C) | pi4-4 (°C) | Avg (°C) |
+|---|---|---|---|---|---|
+| 0 | 54.5 | 52.1 | 53.0 | 48.2 | 52.0 |
+| 1 | 60.3 | 59.4 | 59.9 | 55.0 | 58.6 |
+| 2 | 61.8 | 60.8 | 60.3 | 56.0 | 59.7 |
+| 3 | 62.3 | 61.8 | 59.9 | 56.0 | 60.0 |
+| 4–9 | ~62 | ~61 | ~61 | ~56 | ~60 |
+| 10 | 53.0 | 50.6 | 50.1 | 48.7 | 50.6 |
+
+**Result:** Cluster avg plateaus at ~60°C, peak 62.3°C on pi4-1. pi4-4 ran 5–6°C cooler throughout (better airflow position in enclosure). All 4 nodes held 1800 MHz for the full 10 minutes.
 
 After the test, verify no throttling events occurred:
 
@@ -601,7 +647,16 @@ throttled=0x0
 
 `0x0` means clean — no throttling, no undervoltage, nothing. If you see anything other than `0x0`, check the UCTRONICS fans are spinning and the PoE+ HAT power rail is stable.
 
-> **Note:** pi4-4 ran 5–6°C cooler than the others throughout — likely better airflow position in the enclosure or slight heatsink contact variance. Normal.
+### Thermal Summary
+
+| Scenario | Peak Temp | Throttled? | Clock |
+|---|---|---|---|
+| Idle (all nodes) | 49.1°C | No | 1800 MHz |
+| Single core, 5 min | 54.0°C | No | 1800 MHz |
+| All 4 cores, 5 min | 61.8°C | No | 1800 MHz |
+| Full cluster 16 cores, 10 min | **62.3°C** | **No** | **1800 MHz** |
+
+**~8–10°C of headroom** before the 70°C soft-throttle threshold. This cluster will not throttle under normal workloads.
 
 ---
 
@@ -715,7 +770,7 @@ If Extend Mode is already off, then it's a cable/port issue. Try: reseat both Ca
 - [ ] Passwordless SSH works to all Pis
 - [ ] SSH config created on your laptop
 - [ ] Python 3 and PyTorch installed on all Pis
-- [ ] Bandwidth test shows ~9.5 Mbps per link (10 Mbps link cap)
+- [ ] Bandwidth test shows ~94 Mbps per link (switch's 100 Mbps ceiling — disable Extend Mode if stuck at 9.5 Mbps)
 - [ ] Temperatures stable 50-60°C with fans
 
 ---
