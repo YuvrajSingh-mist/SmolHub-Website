@@ -98,15 +98,16 @@ Plug each Pi into the switch via Cat 6 Ethernet cables. One end of the Cat 6 cab
 
 5. Watch for the red LED to light up on each Pi—that's PoE power being detected. Its just for verification that power is flowing. The green LED will start blinking as the Pi boots (after following [Step 2](#step-2-flash-raspberry-pi-os)).
 
-<figure>
-  <img src="/images/blogs/pi-cluster-setup-guide/pi-poe-hat.jpeg" alt="Pi PoE+ hat on Raspberry Pi" />
-  <figcaption>Figure 3. Pi PoE+ hat on Raspberry Pi.</figcaption>
-</figure>
-
-<figure>
-  <img src="/images/blogs/pi-cluster-setup-guide/picluster-case-with-ethernet-cables.jpeg" alt="Complete Pi Cluster" />
-  <figcaption>Figure 4. Complete Pi Cluster.</figcaption>
-</figure>
+<div style="display:flex; gap:1rem; align-items:flex-start; flex-wrap:wrap;">
+  <figure style="flex:1; min-width:240px; margin:0;">
+    <img src="/images/blogs/pi-cluster-setup-guide/pi-poe-hat.jpeg" alt="Pi PoE+ hat on Raspberry Pi" style="width:100%;" />
+    <figcaption>Figure 3. Pi PoE+ hat on Raspberry Pi.</figcaption>
+  </figure>
+  <figure style="flex:1; min-width:240px; margin:0;">
+    <img src="/images/blogs/pi-cluster-setup-guide/picluster-case-with-ethernet-cables.jpeg" alt="Complete Pi Cluster" style="width:100%;" />
+    <figcaption>Figure 4. Complete Pi Cluster.</figcaption>
+  </figure>
+</div>
 
 ---
 
@@ -130,9 +131,18 @@ Click **Save**, then **Write**. Wait ~2 minutes per card.
 
 Repeat for all 4 cards.
 
-> **Screenshot Placeholder:** Raspberry Pi Imager settings dialog showing hostname, SSH enabled, and locale settings
-> 
-> [Paste screenshot from your Imager setup]
+Follow the video here if you need a visual:
+
+<div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; max-width:480px;">
+  <iframe
+    src="https://youtu.be/_d-qvHJ7EwU"
+    title="Raspberry Pi Imager Tutorial"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    style="position:absolute; top:0; left:0; width:100%; height:100%;">
+  </iframe>
+</div>
 
 ---
 
@@ -182,7 +192,7 @@ Password: whatever you set in Imager (e.g., `raspberry`).
 Once logged in, find the IP:
 
 ```bash
-hostname -I
+hostname -I (gives you all IPs assigned to the Pi)
 ```
 
 Output (example):
@@ -208,9 +218,9 @@ Before moving on, note these DHCP IPs — you'll need them for the next step to 
 
 ## Step 4b: Assign Private Subnet IPs (Recommended)
 
-> **Why?** Your current IPs are assigned by your router's DHCP and can change on reboot. A private subnet gives each Pi a stable, predictable address that you control, isolates all cluster traffic to a known range, and makes SSH config, scripts, and inter-node communication unambiguous.
+> **Why?** A private subnet gives each Pi a stable, predictable address that you control, isolates all cluster traffic to a known range, and makes SSH config, scripts, and inter-node communication unambiguous.
 
-We'll add a static secondary IP on `10.0.0.x/24` to each Pi's eth0 alongside the existing DHCP address. The Pi keeps internet access via DHCP; cluster jobs use `10.0.0.x`.
+We'll add a static secondary IP on `10.0.1.x/24` to each Pi's eth0 alongside the existing DHCP address. The Pi keeps internet access via DHCP; cluster jobs use `10.0.1.x`.
 
 Do this on each Pi one at a time. SSH in using its DHCP IP from Step 4:
 
@@ -235,7 +245,7 @@ Note the name in the first column. Then add the static private IP — use the ma
 
 ```bash
 # On pi4-1:
-sudo nmcli connection modify "Wired connection 1" +ipv4.addresses "10.0.0.1/24"
+sudo nmcli connection modify "Wired connection 1" +ipv4.addresses "10.0.1.1/24"
 sudo nmcli connection up "Wired connection 1"
 ```
 
@@ -250,19 +260,19 @@ Expected:
 ```
 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> ...
     inet 192.168.1.7/24 brd 192.168.1.255 scope global dynamic noprefixroute eth0
-    inet 10.0.0.1/24 brd 10.0.0.255 scope global noprefixroute eth0
+    inet 10.0.1.1/24 brd 10.0.1.255 scope global noprefixroute eth0
 ```
 
 Repeat on all 4 Pis:
 
 | Node | DHCP IP (Step 4) | Private IP to assign |
 |---|---|---|
-| pi4-1 | 192.168.1.7 | `10.0.0.1` |
-| pi4-2 | 192.168.1.5 | `10.0.0.2` |
-| pi4-3 | 192.168.1.3 | `10.0.0.3` |
-| pi4-4 | 192.168.1.6 | `10.0.0.4` |
+| pi4-1 | 192.168.1.7 | `10.0.1.1` |
+| pi4-2 | 192.168.1.5 | `10.0.1.2` |
+| pi4-3 | 192.168.1.3 | `10.0.1.3` |
+| pi4-4 | 192.168.1.6 | `10.0.1.4` |
 
-**From here on, all steps use `10.0.0.x` IPs.** The DHCP IPs are still active if you need them, but everything cluster-related — SSH keys, config, inter-node traffic — goes through `10.0.0.x`.
+**From here on, all steps use `10.0.1.x` IPs.** The DHCP IPs are still active if you need them, but everything cluster-related — SSH keys, config, inter-node traffic — goes through `10.0.1.x`.
 
 ---
 
@@ -271,10 +281,10 @@ Repeat on all 4 Pis:
 From your laptop, ping all 4 Pis using the private subnet IPs assigned in Step 4b:
 
 ```bash
-ping 10.0.0.1
-ping 10.0.0.2
-ping 10.0.0.3
-ping 10.0.0.4
+ping 10.0.1.1
+ping 10.0.1.2
+ping 10.0.1.3
+ping 10.0.1.4
 ```
 
 (If private IPs aren't responding yet, you can use the DHCP IPs from Step 4 temporarily.)
@@ -284,13 +294,13 @@ ping 10.0.0.4
 SSH into pi4-1:
 
 ```bash
-ssh pi@10.0.0.1
+ssh pi@10.0.1.1
 ```
 
 It'll ask you to verify the host fingerprint the first time:
 
 ```
-The authenticity of host '10.0.0.1 (10.0.0.1)' can't be established.
+The authenticity of host '10.0.1.1 (10.0.1.1)' can't be established.
 ED25519 key fingerprint is SHA256:abc123xyz...
 Are you sure you want to continue connecting (yes/no/[fingerprint])?
 ```
@@ -298,8 +308,8 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])?
 Type `yes` and press Enter:
 
 ```
-Warning: Permanently added '10.0.0.1' (ED25519) to the list of known hosts.
-pi@10.0.0.1's password:
+Warning: Permanently added '10.0.1.1' (ED25519) to the list of known hosts.
+pi@10.0.1.1's password:
 ```
 
 Enter the password you set in Imager. You won't see anything typed—that's normal. Press Enter:
@@ -316,17 +326,17 @@ You're in.
 From there, ping the others:
 
 ```bash
-ping 10.0.0.2
-ping 10.0.0.3
-ping 10.0.0.4
+ping 10.0.1.2
+ping 10.0.1.3
+ping 10.0.1.4
 ```
 
 Expected output for each:
 
 ```
-PING 10.0.0.2 (10.0.0.2): 56 data bytes
-64 bytes from 10.0.0.2: icmp_seq=0 ttl=64 time=2.341 ms
-64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=2.215 ms
+PING 10.0.1.2 (10.0.1.2): 56 data bytes
+64 bytes from 10.0.1.2: icmp_seq=0 ttl=64 time=2.341 ms
+64 bytes from 10.0.1.2: icmp_seq=1 ttl=64 time=2.215 ms
 ```
 
 All working? Good. Move on.
@@ -368,10 +378,10 @@ Key generated. Two files created: `pi_cluster` (private, never share) and `pi_cl
 Copy the key to all 4 Pis using the private subnet IPs from Step 4b:
 
 ```bash
-ssh-copy-id -i ~/.ssh/pi_cluster.pub pi@10.0.0.1
-ssh-copy-id -i ~/.ssh/pi_cluster.pub pi@10.0.0.2
-ssh-copy-id -i ~/.ssh/pi_cluster.pub pi@10.0.0.3
-ssh-copy-id -i ~/.ssh/pi_cluster.pub pi@10.0.0.4
+ssh-copy-id -i ~/.ssh/pi_cluster.pub pi@10.0.1.1
+ssh-copy-id -i ~/.ssh/pi_cluster.pub pi@10.0.1.2
+ssh-copy-id -i ~/.ssh/pi_cluster.pub pi@10.0.1.3
+ssh-copy-id -i ~/.ssh/pi_cluster.pub pi@10.0.1.4
 ```
 
 For each, you'll see:
@@ -379,7 +389,7 @@ For each, you'll see:
 ```
 /usr/bin/ssh-copy-id: INFO: attempting to log in with the key(s) from "/Users/your_user/.ssh/pi_cluster.pub" to see if they work
 /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
-pi@10.0.0.1's password:
+pi@10.0.1.1's password:
 ```
 
 Enter the Pi's password. After success:
@@ -388,7 +398,7 @@ Enter the Pi's password. After success:
 Number of key(s) added: 1
 
 Now try logging in with:
-  "ssh -i /Users/your_user/.ssh/pi_cluster 'pi@10.0.0.1'"
+  "ssh -i /Users/your_user/.ssh/pi_cluster 'pi@10.0.1.1'"
 
 and check to make sure that only the key(s) you wanted were added.
 ```
@@ -396,7 +406,7 @@ and check to make sure that only the key(s) you wanted were added.
 Test passwordless login:
 
 ```bash
-ssh -i ~/.ssh/pi_cluster pi@10.0.0.1
+ssh -i ~/.ssh/pi_cluster pi@10.0.1.1
 ```
 
 Should connect without a password. Type `exit` to disconnect.
@@ -415,25 +425,25 @@ Add (using the private subnet IPs from Step 4b):
 
 ```
 Host pi4-1
-    HostName 10.0.0.1
+    HostName 10.0.1.1
     User pi
     IdentityFile ~/.ssh/pi_cluster
     IdentitiesOnly yes
 
 Host pi4-2
-    HostName 10.0.0.2
+    HostName 10.0.1.2
     User pi
     IdentityFile ~/.ssh/pi_cluster
     IdentitiesOnly yes
 
 Host pi4-3
-    HostName 10.0.0.3
+    HostName 10.0.1.3
     User pi
     IdentityFile ~/.ssh/pi_cluster
     IdentitiesOnly yes
 
 Host pi4-4
-    HostName 10.0.0.4
+    HostName 10.0.1.4
     User pi
     IdentityFile ~/.ssh/pi_cluster
     IdentitiesOnly yes
@@ -484,9 +494,9 @@ Repeat on all 4 Pis.
 
 ---
 
-## Step 10: Test Bandwidth
+## Step 9: Test Bandwidth
 
-Real throughput test between pi-1 and pi-2 using `iperf3`.
+Real throughput test between pi4-1 and pi4-2 using `iperf3`.
 
 First, install iperf3 on all Pis:
 
@@ -513,22 +523,18 @@ On pi4-2, run the client:
 
 ```bash
 ssh pi4-2
-iperf3 -c 10.0.0.1 -t 20 -f m
+iperf3 -c 10.0.1.1 -t 20 -f m
 ```
 
 Output:
 
-```
-Connecting to host 10.0.0.1, port 5201
-[  5] local 10.0.0.2 port 54321 connected to 10.0.0.1 port 5201
+Connecting to host 10.0.1.1, port 5201
+[  5] local 10.0.1.2 port 54321 connected to 10.0.1.1 port 5201
 [ ID] Interval           Transfer     Bitrate         Retr  Cwnd
 [  5]  0.00-20.00  sec  22.8 MBytes  9.54 Mbits/sec  0   28.3 KBytes       sender
 [  5]  0.00-20.35  sec  22.8 MBytes  9.38 Mbits/sec                  receiver
 ```
 
-**You got ~9.5 Mbps.** That's the current ceiling — the TP-Link LS110P is a 10/100 Mbps switch and your link is negotiated at 10 Mbps. The Pi 4 NIC is gigabit-capable; better Cat 6 cables or a different switch port should get you to ~95 Mbps (the switch's 100 Mbps max). To go above that you'd need a gigabit switch.
-
-> **Note:** CPU load has zero impact on throughput at this speed. Tested under full 4-core stress: still 9.59 Mbps. The NIC handles 10 Mbps without competing with CPU workloads.
 
 Test again between different pairs (pi4-1↔pi4-3, pi4-2↔pi4-4) to confirm consistency across all links.
 
@@ -614,7 +620,7 @@ On pi4-1:
 ```bash
 ssh-keygen -t ed25519
 # Press Enter for all defaults
-ssh-copy-id -i ~/.ssh/id_ed25519.pub pi@10.0.0.2
+ssh-copy-id -i ~/.ssh/id_ed25519.pub pi@10.0.1.2
 ```
 
 Then retry:
@@ -637,7 +643,7 @@ Should work now.
 | IP address | `hostname -I` |
 | Memory | `free -h` |
 | Disk | `df -h` |
-| Ping another Pi | `ping 10.0.0.2 -c 3` |
+| Ping another Pi | `ping 10.0.1.2 -c 3` |
 | SSH to another Pi | `ssh pi4-2` |
 | Bandwidth test (server) | `iperf3 -s` |
 | Bandwidth test (client) | `iperf3 -c <ip> -t 20 -f m` |
@@ -704,10 +710,10 @@ This is a cable/port auto-negotiation issue, not a Pi limitation. The TP-Link LS
 
 You have a working 4-node Pi cluster. Ideas:
 
-- **Run distributed inference:** Load a model on each Pi, batch requests across them.
+- **Run distributed inference:** Load a model on each Pi, batch requests across them (will do this next!)
 - **Distributed preprocessing:** Split a dataset across 4 Pis for parallel ETL.
 - **Learn systems:** Build a simple consensus or leader election protocol.
-- **Edge monitoring:** Run a small LLM locally on the cluster.
+- **Edge monitoring:** Run a small LLM locally on the cluster (haha this is what smolcluster is for!).
 
 ---
 
