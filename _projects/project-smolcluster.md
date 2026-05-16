@@ -10,7 +10,7 @@ location: Online
 date_iso: 2026-01-01
 github_url: https://github.com/YuvrajSingh-mist/smolcluster
 website_url: https://smolcluster.com
-stars: 62
+stars: 63
 ---
 
 # Smolcluster
