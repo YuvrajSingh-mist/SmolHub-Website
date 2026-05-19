@@ -702,7 +702,7 @@ The plist requires `UserName` (so it runs as the user, not root) and `Environmen
 ## Closing thoughts
 
 Started off as a soltuion to a frustrating problem of me keet rew-trting my checkpoints. It ended up being the most educational thing I've built - not because distributed systems are complicated in theory, but because the gap between "it works on my machine" and "it works when two things reboot at the same time" is where all the real engineering lives.
-d
+
 The bugs that hurt the most weren't logic errors. They were assumption errors: assuming `bytes +=` is fine for large buffers, assuming a socket timeout set for connect is cleared before send, assuming the same serializer works on both sides of a framework boundary, assuming macOS APIs from 2020 still work on Tahoe. Each one cost hours. Each one is now a comment in the code or a line in this post.
 
 
