@@ -12,8 +12,6 @@ tags:
   - Python
 ---
 
-# smoltorrent — Distributing ML Checkpoints Across a Pi Cluster
-
 **A 942 MB checkpoint. Four Raspberry Pis. ~1.5 min gather. No single point of failure.**
 
 [GitHub](https://github.com/YuvrajSingh-mist/smoltorrent) · [Setup Guide](https://yuvrajsingh-mist.github.io/smoltorrent/setup.html)
@@ -40,21 +38,29 @@ The watcher daemon does all of it automatically the moment training writes a fil
 
 These are real numbers from the actual setup — store/gather wall times from Prometheus (9 runs), sequential baseline measured directly (242 s/shard × 4 workers). The Pi cluster is not fast — but **parallel gather is ~10× faster than sequential**.
 
-![Wall-clock time chart](/images/blogs/smoltorrent/perf_wall_time.png)
-*Store RF2: ~321 s · Gather: ~95 s · Sequential gather: ~968 s — Prometheus, 9 runs*
+<figure>
+  <img src="/images/blogs/smoltorrent/perf_wall_time.png" alt="Wall-clock time chart">
+  <figcaption>Store RF2: ~321 s · Gather: ~95 s · Sequential gather: ~968 s — Prometheus, 9 runs</figcaption>
+</figure>
 
-![Aggregate throughput chart](/images/blogs/smoltorrent/perf_throughput.png)
-*Gather hits 9.9 MB/s aggregate. Store moves 2× the data (RF2) so 5.9 MB/s aggregate.*
+<figure>
+  <img src="/images/blogs/smoltorrent/perf_throughput.png" alt="Aggregate throughput chart">
+  <figcaption>Gather hits 9.9 MB/s aggregate. Store moves 2× the data (RF2) so 5.9 MB/s aggregate.</figcaption>
+</figure>
 
-![Per-node cumulative bandwidth](/images/blogs/smoltorrent/perf_bandwidth_per_node.png)
-*Lifetime recv/send per Pi from Prometheus. pi4-4 receives the most — it's both primary for shard 3 and replica for shard 2 due to the RF2 ring offset.*
+<figure>
+  <img src="/images/blogs/smoltorrent/perf_bandwidth_per_node.png" alt="Per-node cumulative bandwidth">
+  <figcaption>Lifetime recv/send per Pi from Prometheus. pi4-4 receives the most — it's both primary for shard 3 and replica for shard 2 due to the RF2 ring offset.</figcaption>
+</figure>
 
-![TCP send latency](/images/blogs/smoltorrent/perf_latency.png)
-*Coordinator→worker sends avg 314 s each (~213 MB shards). Worker→coordinator sends are shorter — already-stored shards served from microSD.*
+<figure>
+  <img src="/images/blogs/smoltorrent/perf_latency.png" alt="TCP send latency">
+  <figcaption>Coordinator→worker sends avg 314 s each (~213 MB shards). Worker→coordinator sends are shorter — already-stored shards served from microSD.</figcaption>
+</figure>
 
 ---
 
-# Why this setup?
+## Why this setup?
 
 A few reasons drove this project:
 1. **Cost.** A 1 TB NVMe SSD costs around $100. A 4× Pi cluster with 64 GB microSD cards costs around $200 — but the Pi's storage is effectively free since it's not used for anything else. The cluster can also be repurposed for other tasks when not checkpointing.
@@ -90,8 +96,10 @@ A Mac mini M4 acts as the **coordinator**: it runs the API, the watcher daemon, 
 | **Coordinator** | Apple Mac mini M4 | Apple M4 (arm64) | macOS 26.2 Tahoe | 3.13.3 | 16 GB | 256 GB SSD |
 | **Workers × 4** | Raspberry Pi 4 Model B Rev 1.5 | BCM2711 Cortex-A72 (aarch64) | Debian 13 Trixie (kernel 6.12) | 3.13.5 | 4 GB | 64 GB microSD |
 
-![4× Raspberry Pi 4 in a rack enclosure](/images/blogs/smoltorrent/my-pi-cluster.jpeg)
-*Figure 1 — The worker cluster. 4× Pi 4B in a rack enclosure, connected over Ethernet via a 10/100 MBps TP-Link LS110P PoE switch.*
+<figure>
+  <img src="/images/blogs/smoltorrent/my-pi-cluster.jpeg" alt="4× Raspberry Pi 4 in a rack enclosure">
+  <figcaption>Figure 1 — The worker cluster. 4× Pi 4B in a rack enclosure, connected over Ethernet via a 10/100 MBps TP-Link LS110P PoE switch.</figcaption>
+</figure>
 
 > For the full cluster build walkthrough — hardware selection, PoE switch setup, SD card prep, and OS config — see the [smoltorrent build blog post](https://yuvrajsingh.io/blogs/smoltorrent).
 
@@ -99,9 +107,10 @@ A Mac mini M4 acts as the **coordinator**: it runs the API, the watcher daemon, 
 
 ## What happens when everything boots up
 
-![Watcher boot sequence flowchart](/images/blogs/smoltorrent/watcher-boot-sequence.svg)
-
-*Figure — Watcher boot sequence. Left lane: Mac coordinator. Right lane: Pi workers. Startup-only path (checksum_sync) shown in amber; loop-back on gaps shown in red.*
+<figure>
+  <img src="/images/blogs/smoltorrent/watcher-boot-sequence.svg" alt="Watcher boot sequence flowchart">
+  <figcaption>Figure — Watcher boot sequence. Left lane: Mac coordinator. Right lane: Pi workers. Startup-only path (checksum_sync) shown in amber; loop-back on gaps shown in red.</figcaption>
+</figure>
 
 ### After that: steady-state
 
@@ -194,7 +203,7 @@ The worst case: a worker binds after the crosscheck. The watcher is now in stead
 
 ---
 
-# The Core Funcionality - Explained!
+## The Core Functionality — Explained
 
 ## Zero-config discovery — mDNS + AirDrop (grove)
 
@@ -313,8 +322,10 @@ for round_idx in range(REDUNDANCY):          # REDUNDANCY = 2
 
 Round 0: shard `i` → `workers[i]`. Round 1: shard `i` → `workers[(i+1) % N]`. With 4 workers that gives 8 parallel sends total.
 
-![Replication scheme diagram](/images/blogs/smoltorrent/replication.svg)
-*Figure 2 — Each shard goes to two workers. Any single worker can fail — gather falls back to the replica on the next node.*
+<figure>
+  <img src="/images/blogs/smoltorrent/replication.svg" alt="Replication scheme diagram">
+  <figcaption>Figure 2 — Each shard goes to two workers. Any single worker can fail — gather falls back to the replica on the next node.</figcaption>
+</figure>
 
 ---
 
@@ -365,8 +376,10 @@ So checksums do two jobs: **transit integrity** (coordinator → worker, verifie
 
 Failed sends go into a retry queue with exponential backoff (`2^attempt` seconds, up to 6 retries). `store_queue.join()` blocks until every retry is resolved or dead-lettered.
 
-![Pipeline workflow diagram](/images/blogs/smoltorrent/workflow-flowchart.svg)
-*Figure 3 — Full store (left) and gather (right) pipeline. The watcher auto-triggers store on new files.*
+<figure>
+  <img src="/images/blogs/smoltorrent/workflow-flowchart.svg" alt="Pipeline workflow diagram">
+  <figcaption>Figure 3 — Full store (left) and gather (right) pipeline. The watcher auto-triggers store on new files.</figcaption>
+</figure>
 
 ---
 
@@ -413,8 +426,10 @@ result = pickle.loads(buf)
 
 Every message on the wire is a **4-byte big-endian length prefix followed by a pickled payload**. TCP has no message boundaries — without the header, the receiver can't tell where one message ends and the next begins.
 
-![TCP wire format](/images/blogs/smoltorrent/wire-format.svg)
-*Figure 4 — The framing protocol. The 4-byte uint32 header tells the receiver exactly how many bytes to read.*
+<figure>
+  <img src="/images/blogs/smoltorrent/wire-format.svg" alt="TCP wire format">
+  <figcaption>Figure 4 — The framing protocol. The 4-byte uint32 header tells the receiver exactly how many bytes to read.</figcaption>
+</figure>
 
 ```python
 # send_message — networking/send_receive.py
@@ -429,6 +444,7 @@ sock.sendall(struct.pack(">I", len(data)) + data)
 >- `pickle.dumps()` serializes the Python object (tuple in this case) into bytes, which can then be sent over the network. The receiver will use `pickle.loads()` to deserialize it back into a Python object.
 >- ```struct``` is required to pack the length of the data (```>I```, ```len(data)```) into a fixed-size byte format that can be easily read by the receiver to determine how many bytes to expect for the actual message. 
 >Why not use pickle? Well, it is mainly used for conversion of hierarchical objects with some metadata not required in this case.
+
 ---
 
 ## Workers: TCP servers
