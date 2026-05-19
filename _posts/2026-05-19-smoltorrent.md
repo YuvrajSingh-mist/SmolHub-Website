@@ -40,25 +40,24 @@ The watcher daemon does all of it automatically the moment training writes a fil
 
 These are real numbers from the actual setup — store/gather wall times from Prometheus (9 runs), sequential baseline measured directly (242 s/shard × 4 workers). The Pi cluster is not fast — but **parallel gather is ~10× faster than sequential**.
 
-<figure>
-  <img src="/images/blogs/smoltorrent/perf_wall_time.png" alt="Wall-clock time chart">
-  <figcaption>Store RF2: ~321 s · Gather: ~95 s · Sequential gather: ~968 s — Prometheus, 9 runs</figcaption>
-</figure>
-
-<figure>
-  <img src="/images/blogs/smoltorrent/perf_throughput.png" alt="Aggregate throughput chart">
-  <figcaption>Gather hits 9.9 MB/s aggregate. Store moves 2× the data (RF2) so 5.9 MB/s aggregate.</figcaption>
-</figure>
-
-<figure>
-  <img src="/images/blogs/smoltorrent/perf_bandwidth_per_node.png" alt="Per-node cumulative bandwidth">
-  <figcaption>Lifetime recv/send per Pi from Prometheus. pi4-4 receives the most — it's both primary for shard 3 and replica for shard 2 due to the RF2 ring offset.</figcaption>
-</figure>
-
-<figure>
-  <img src="/images/blogs/smoltorrent/perf_latency.png" alt="TCP send latency">
-  <figcaption>Coordinator→worker sends avg 314 s each (~213 MB shards). Worker→coordinator sends are shorter — already-stored shards served from microSD.</figcaption>
-</figure>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+  <figure style="margin: 0;">
+    <img src="/images/blogs/smoltorrent/perf_wall_time.png" alt="Wall-clock time chart" style="width: 100%;">
+    <figcaption>Store RF2: ~321 s · Gather: ~95 s · Sequential gather: ~968 s — Prometheus, 9 runs</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/blogs/smoltorrent/perf_throughput.png" alt="Aggregate throughput chart" style="width: 100%;">
+    <figcaption>Gather hits 9.9 MB/s aggregate. Store moves 2× the data (RF2) so 5.9 MB/s aggregate.</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/blogs/smoltorrent/perf_bandwidth_per_node.png" alt="Per-node cumulative bandwidth" style="width: 100%;">
+    <figcaption>Lifetime recv/send per Pi from Prometheus. pi4-4 receives the most — it's both primary for shard 3 and replica for shard 2 due to the RF2 ring offset.</figcaption>
+  </figure>
+  <figure style="margin: 0;">
+    <img src="/images/blogs/smoltorrent/perf_latency.png" alt="TCP send latency" style="width: 100%;">
+    <figcaption>Coordinator→worker sends avg 314 s each (~213 MB shards). Worker→coordinator sends are shorter — already-stored shards served from microSD.</figcaption>
+  </figure>
+</div>
 
 ---
 
