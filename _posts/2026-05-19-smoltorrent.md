@@ -13,15 +13,15 @@ tags:
 ---
 
 
-| Role | Hardware | Chip | OS | Python | RAM | Storage |
-|---|---|---|---|---|---|---|
-| **Coordinator** | Apple Mac mini M4 | Apple M4 (arm64) | macOS 26.2 Tahoe | 3.13.3 | 16 GB | 256 GB SSD |
-| **Workers × 4** | Raspberry Pi 4 Model B Rev 1.5 | BCM2711 Cortex-A72 (aarch64) | Debian 13 Trixie (kernel 6.12) | 3.13.5 | 4 GB | 64 GB microSD |
-
 ---
 
 This is a technical writeup of [smoltorrent](https://github.com/YuvrajSingh-mist/smoltorrent) — a distributed checkpoint sharding system I built to offload `.safetensors` checkpoints from my Mac mini to a cluster of Raspberry Pi 4s over raw TCP. It shards, replicates, verifies integrity, and reassembles. 
 The watcher daemon does all of it automatically the moment training writes a file. Grafana + Prometheus monitoring shows transfer progress and health without SSH.
+
+| Role | Hardware | Chip | OS | Python | RAM | Storage |
+|---|---|---|---|---|---|---|
+| **Coordinator** | Apple Mac mini M4 | Apple M4 (arm64) | macOS 26.2 Tahoe | 3.13.3 | 16 GB | 256 GB SSD |
+| **Workers × 4** | Raspberry Pi 4 Model B Rev 1.5 | BCM2711 Cortex-A72 (aarch64) | Debian 13 Trixie (kernel 6.12) | 3.13.5 | 4 GB | 64 GB microSD |
 
 ---
 
