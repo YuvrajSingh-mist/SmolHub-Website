@@ -1,6 +1,5 @@
 ---
-title: 'smoltorrent'
-subtitle: 'Distributing ML Checkpoints Across a Pi Cluster'
+title: 'smoltorrent: Distributing ML Checkpoints Across a Pi Cluster'
 date: 2026-05-19
 permalink: /posts/smoltorrent/
 author_profile: false
@@ -39,7 +38,7 @@ The watcher daemon does all of it automatically the moment training writes a fil
 | Single node failure | zero data loss | shard lost |
 | Wire format | `.safetensors` only | same |
 
-These are real numbers from the actual setup - store/gather wall times from Prometheus (9 runs), sequential baseline measured directly (242 s/shard × 4 workers). The Pi cluster is not fast - but **parallel gather is ~10× faster than sequential**.
+These are real numbers from the actual setup. Parallel gather averaged 95 s across 9 Prometheus runs. The sequential baseline (968 s) is one measured run - 242 s to transfer a single 213 MB shard, times 4 workers done back-to-back with no overlap. 968 ÷ 95 = 10.2×. The Pi cluster is not fast - but **parallel gather is ~10× faster than sequential**.
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
   <figure style="margin: 0;">
@@ -51,8 +50,8 @@ These are real numbers from the actual setup - store/gather wall times from Prom
     <figcaption>Gather hits 9.9 MB/s aggregate. Store moves 2× the data (RF2) so 5.9 MB/s aggregate.</figcaption>
   </figure>
   <figure style="margin: 0;">
-    <img src="/images/blogs/smoltorrent/perf_bandwidth_per_node.png" alt="Per-node cumulative bandwidth" style="width: 100%;">
-    <figcaption>Lifetime recv/send per Pi from Prometheus. pi4-4 receives the most - it's both primary for shard 3 and replica for shard 2 due to the RF2 ring offset.</figcaption>
+    <img src="/images/blogs/smoltorrent/benchmark_throughput.png" alt="Aggregate throughput across checkpoints" style="width: 100%;">
+    <figcaption>Aggregate throughput (MB/s) across two checkpoints - Qwen2.5-0.5B (942 MB) and LFM2.5-350M (676 MB). Gather consistently outpaces store since RF2 doubles the data sent.</figcaption>
   </figure>
   <figure style="margin: 0;">
     <img src="/images/blogs/smoltorrent/perf_latency.png" alt="TCP send latency" style="width: 100%;">
@@ -703,7 +702,7 @@ The plist requires `UserName` (so it runs as the user, not root) and `Environmen
 ## Closing thoughts
 
 Started off as a soltuion to a frustrating problem of me keet rew-trting my checkpoints. It ended up being the most educational thing I've built - not because distributed systems are complicated in theory, but because the gap between "it works on my machine" and "it works when two things reboot at the same time" is where all the real engineering lives.
-
+d
 The bugs that hurt the most weren't logic errors. They were assumption errors: assuming `bytes +=` is fine for large buffers, assuming a socket timeout set for connect is cleared before send, assuming the same serializer works on both sides of a framework boundary, assuming macOS APIs from 2020 still work on Tahoe. Each one cost hours. Each one is now a comment in the code or a line in this post.
 
 
