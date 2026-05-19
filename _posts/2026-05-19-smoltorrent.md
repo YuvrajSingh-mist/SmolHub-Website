@@ -12,9 +12,11 @@ tags:
   - Python
 ---
 
-**A 942 MB checkpoint. Four Raspberry Pis. ~1.5 min gather. No single point of failure.**
 
-[GitHub](https://github.com/YuvrajSingh-mist/smoltorrent) · [Setup Guide](https://yuvrajsingh-mist.github.io/smoltorrent/setup.html)
+| Role | Hardware | Chip | OS | Python | RAM | Storage |
+|---|---|---|---|---|---|---|
+| **Coordinator** | Apple Mac mini M4 | Apple M4 (arm64) | macOS 26.2 Tahoe | 3.13.3 | 16 GB | 256 GB SSD |
+| **Workers × 4** | Raspberry Pi 4 Model B Rev 1.5 | BCM2711 Cortex-A72 (aarch64) | Debian 13 Trixie (kernel 6.12) | 3.13.5 | 4 GB | 64 GB microSD |
 
 ---
 
@@ -90,11 +92,6 @@ replicate training checkpoints across cheap cluster nodes so a single SSD/SD-car
 ## The setup
 
 A Mac mini M4 acts as the **coordinator**: it runs the API, the watcher daemon, and the logging (Grafana - Prometheus - Loki) + owns tensor ops (sharding using ```torch.chunk```). Four Raspberry Pi 4s are the **workers**: TCP servers that store and serve shards. Any Linux or macOS machine can fill either role — the Pi is not special here.
-
-| Role | Hardware | Chip | OS | Python | RAM | Storage |
-|---|---|---|---|---|---|---|
-| **Coordinator** | Apple Mac mini M4 | Apple M4 (arm64) | macOS 26.2 Tahoe | 3.13.3 | 16 GB | 256 GB SSD |
-| **Workers × 4** | Raspberry Pi 4 Model B Rev 1.5 | BCM2711 Cortex-A72 (aarch64) | Debian 13 Trixie (kernel 6.12) | 3.13.5 | 4 GB | 64 GB microSD |
 
 <figure>
   <img src="/images/blogs/smoltorrent/my-pi-cluster.jpeg" alt="4× Raspberry Pi 4 in a rack enclosure">
