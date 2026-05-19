@@ -554,7 +554,7 @@ None of this worked on the first try. Here are every real problem hit, in the or
 
 ---
 
-### Wire format - safetensors (`utils/common_utils.py`)
+### 1. Wire format - safetensors <small>(`utils/common_utils.py`)</small>
 
 Coordinator runs MLX, Pi workers run torch. Two serializers failed:
 
@@ -572,7 +572,7 @@ On Pi: `safetensors.torch.load(received_bytes)` → torch tensors → saved to d
 
 ---
 
-### MLX gather save bug (`backend/api.py`)
+### 2. MLX gather save bug <small>(`backend/api.py`)</small>
 
 `/gather-shards` received shard bytes from a Pi and called `safetensors.torch.save_file(received_shard, path)` on the coordinator to cache it locally. On the coordinator, `shard_from_bytes` deserializes to MLX arrays - not torch tensors. `safetensors.torch.save_file` expects torch tensors:
 
@@ -584,7 +584,7 @@ Fix: replaced with `_save_shard()` from `common_utils`, which branches on `_IS_M
 
 ---
 
-### Reliability - retry queue + checksum (`backend/api.py`)
+### 3. Reliability - retry queue + checksum <small>(`backend/api.py`)</small>
 
 A flaky worker should not block the other three or silently corrupt data.
 
@@ -598,13 +598,13 @@ A flaky worker should not block the other three or silently corrupt data.
 ---
     
 
-### Crosscheck command (`algorithms/SyncPS/worker.py`)
+### 4. Crosscheck command <small>(`algorithms/SyncPS/worker.py`)</small>
 
 Added `all_shards_present` command: coordinator sends `(rank, [rel_paths])`, worker checks each `shards/worker_{rank}/{rel_path}/shard.safetensors` exists, returns list of missing rel_paths. Coordinator re-transfers anything non-empty.
 
 ---
 
-### Double serialization bug (`backend/api.py`)
+### 5. Double serialization bug <small>(`backend/api.py`)</small>
 
 `/store-shard` serialized each shard once (to compute checksum), then passed the raw dict to `_send_shard_to_worker`, which serialized it again after the socket was open. Second serialization stalled long enough that the worker saw `"Socket connection broken"`.
 
@@ -612,7 +612,7 @@ Fix: `_send_shard_to_worker` takes `shard_bytes: bytes` directly. Serialized onc
 
 ---
 
-### Socket timeout bug (`backend/api.py`)
+### 6. Socket timeout bug <small>(`backend/api.py`)</small>
 
 `_connect_with_retry` set `sock.settimeout(2.0)` for the connect attempt and never cleared it. Every `sendall` on the returned socket had a 2s deadline. A 70 MB shard over Tailscale blows past that - the shard starts sending, hits the timeout mid-transfer, and the worker sees `ConnectionError: Socket connection broken`. The retry queue reconnects and fails identically.
 
@@ -620,7 +620,7 @@ Fix: `send_message` and `receive_message` in `send_receive.py` both call `sock.s
 
 ---
 
-### Serialization vs pickling (`networking/send_receive.py`)
+### 7. Serialization vs pickling <small>(`networking/send_receive.py`)</small>
 
 Two different serializers for two different jobs:
 
@@ -631,7 +631,7 @@ Rule: pickle handles structure, safetensors handles tensors. Never let pickle se
 
 ---
 
-### Streaming progress (`backend/api.py`, `utils/shard_ops.py`)
+### 8. Streaming progress <small>(`backend/api.py`, `utils/shard_ops.py`)</small>
 
 Both endpoints return `text/plain` streaming responses. The server yields the same lines it logs, one per event. The client reads with `httpx.stream` and passes each line straight to `logger.info` - no JSON, no event parsing, client is just a pipe.
 
@@ -639,13 +639,13 @@ HTTP status code is committed in headers before streaming starts, so mid-stream 
 
 ---
 
-### Gather saves on arrival (`backend/api.py`)
+### 9. Gather saves on arrival <small>(`backend/api.py`)</small>
 
 Previously gathered all shards into memory then saved at the end - a mid-gather failure discarded everything. Now `_gather_and_save` wraps pull + save together; each shard hits disk as soon as it arrives. Retry thread uses the same function.
 
 ---
 
-### O(n²) receive bug (`networking/send_receive.py`)
+### 10. O(n²) receive bug <small>(`networking/send_receive.py`)</small>
 
 The receive loop built the buffer with `data += chunk`. `bytes` is immutable in Python - every `+=` allocates a new object and copies all bytes received so far into it. For a 169 MB shard received in ~2700 chunks of 65 KB each, total bytes copied is roughly `sum(1..2700) × 65 KB ≈ 240 GB`. On a Pi with slow microSD backing swap, this was catastrophic - a 2-minute transfer became 13 minutes.
 
@@ -669,7 +669,7 @@ Pre-allocate a single `bytearray` of the exact message length, wrap in a `memory
 
 ---
 
-### macOS TCC + LaunchDaemon (`scripts/launch.sh`, `scripts/smoltorrent_startup.sh`)
+### 11. macOS TCC + LaunchDaemon <small>(`scripts/launch.sh`, `scripts/smoltorrent_startup.sh`)</small>
 
 macOS TCC blocks system daemons (running as root) from accessing `~/Desktop`, `~/Documents`, and `~/Downloads`. The project was at `~/Desktop/smoltorrent/` and checkpoints at `~/Desktop/smolcluster/checkpoints/` - the LaunchDaemon registered fine, ran at boot, then silently found nothing. No error, no log.
 
@@ -677,7 +677,7 @@ Fix: moved code to `~/smoltorrent/` and checkpoints to `~/smolcluster/checkpoint
 
 ---
 
-### macOS 26 Tahoe LaunchDaemon registration
+### 12. macOS 26 Tahoe LaunchDaemon registration
 
 Every traditional auto-start API was broken:
 
