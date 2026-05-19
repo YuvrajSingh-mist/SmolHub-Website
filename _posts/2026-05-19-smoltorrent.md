@@ -1,5 +1,6 @@
 ---
-title: 'smoltorrent - Distributing ML Checkpoints Across a Pi Cluster'
+title: 'smoltorrent'
+subtitle: 'Distributing ML Checkpoints Across a Pi Cluster'
 date: 2026-05-19
 permalink: /posts/smoltorrent/
 author_profile: false
