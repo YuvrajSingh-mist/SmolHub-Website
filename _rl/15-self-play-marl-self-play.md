@@ -10,7 +10,7 @@ framework: "PyTorch"
 environment: "Atari"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/MARL/Self Play"
 date: 2025-08-21
-stars: 223
+stars: 222
 ---
 
 Implementation of Self Play reinforcement learning algorithm

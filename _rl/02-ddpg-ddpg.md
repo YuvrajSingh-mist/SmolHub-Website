@@ -10,7 +10,7 @@ framework: "PyTorch"
 environment: "MuJoCo"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DDPG"
 date: 2025-08-21
-stars: 223
+stars: 222
 ---
 
 Implementation of DDPG reinforcement learning algorithm
