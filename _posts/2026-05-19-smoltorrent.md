@@ -10,7 +10,7 @@ tags:
   - Raspberry Pi
   - Checkpoint Storage
   - Python
----
+
 
 
 ---
@@ -23,7 +23,6 @@ The watcher daemon does all of it automatically the moment training writes a fil
 | **Coordinator** | Apple Mac mini M4 | Apple M4 (arm64) | macOS 26.2 Tahoe | 3.13.3 | 16 GB | 256 GB SSD |
 | **Workers × 4** | Raspberry Pi 4 Model B Rev 1.5 | BCM2711 Cortex-A72 (aarch64) | Debian 13 Trixie (kernel 6.12) | 3.13.5 | 4 GB | 64 GB microSD |
 
----
 
 ## The numbers, upfront
 
@@ -59,7 +58,7 @@ These are real numbers from the actual setup. Parallel gather averaged 95 s acro
   </figure>
 </div>
 
----
+
 
 ## Why this setup?
 
@@ -86,7 +85,7 @@ replicate training checkpoints across cheap cluster nodes so a single SSD/SD-car
 * Prometheus/Grafana/Loki stack for monitoring + alerts
 * mDNS discovery to get rid of hardcoded IPs
 
----
+
 
 ## The setup
 
@@ -99,7 +98,7 @@ A Mac mini M4 acts as the **coordinator**: it runs the API, the watcher daemon, 
 
 > For the full cluster build walkthrough - hardware selection, PoE switch setup, SD card prep, and OS config - see the [Raspberry Pi cluster build blog post](https://www.smolhub.com/posts/raspberry-pi-cluster-setup-guide).
 
----
+
 
 ## What happens when everything boots up
 
@@ -113,7 +112,7 @@ A Mac mini M4 acts as the **coordinator**: it runs the API, the watcher daemon, 
 - The watcher enters its event loop. A separate **pending loop** thread wakes every 10 seconds to check for files that were recently modified but haven't stabilised yet. 
 - When a new checkpoint lands in `ckpt_root`, it goes through the same pipeline - minus checksum_sync - and the cluster is back in sync within seconds.
 
----
+
 
 ## Restart behaviour and daemon setup
 
@@ -197,11 +196,70 @@ What actually happens:
 
 The worst case: a worker binds after the crosscheck. The watcher is now in steady-state waiting for the next file event. That worker has no shards. The next time a new checkpoint lands, file_sync queries it, sees it has nothing, and transfers everything it should have. No permanent data loss - just a window where one worker is empty. Since replication factor is 2, the replica on the adjacent worker covers any gather request during that window.
 
----
+
+
+## Workers: TCP servers
+
+Each worker is a TCP listener that dispatches on the first field of the incoming tuple:
+
+```python
+# algorithms/SyncPS/worker.py
+command, *_ = msg if isinstance(msg, tuple) else (msg,)
+
+if command == "store_shard":
+    _, rank, shard_bytes, received_checksum, rel_path = msg
+    if compute_checksum(shard_bytes) != received_checksum:
+        send_message(conn, ("store_shard_failed", rank, "checksum mismatch"))
+        return
+    shard = shard_from_bytes(shard_bytes)
+    save_file(shard, str(shard_path))
+    cksum = compute_checksum(shard_path)
+    (shard_dir / "shard.checksum").write_text(cksum)
+    send_message(conn, ("store_shard_done", rank, str(shard_path)))
+```
+
+Workers verify the SHA-256 checksum before writing - if the bytes were corrupted in transit, the shard is rejected and the master queues a retry. After writing, a `.checksum` sidecar is written alongside `shard.safetensors` for offline integrity detection at startup.
+
+| Command | What the worker does |
+|---|---|
+| `store_shard` | Verify checksum → deserialize → write to disk → write `.checksum` |
+| `send_shard` | Load from disk → serialize → send bytes back |
+| `sync` | List existing shard rel_paths for the watcher (*here: ```rel_paths``` refers to paths of shard files relative to the worker's storage directory*) |
+| `checksum_sync` | Re-hash disk file, compare to sidecar |
+| `all_shards_present` | Check which paths exist (crosscheck) |
+| `heartbeat` | Reply `"alive"` |
+
+
+
+## The watcher: 4 phases of paranoia
+
+The watcher monitors `ckpt_root` with `watchdog` and triggers a 4-phase sync loop on every new file:
+
+**Phase 1 - file_sync.** Query every worker in parallel to get the set of paths they already have. Take the intersection (paths on *all* workers). Diff against local files. Only transfer the difference.
+
+**Phase 2 - checksum_sync** (startup only). At startup, ask every worker to re-hash all their shards and compare to the `.checksum` sidecar. Catch disk corruption before training continues. Skipped on subsequent triggers - the per-shard SHA-256 at store time already guarantees correctness.
+
+**Phase 3 - transfer.** `POST /store-shard` for each missing file.
+
+**Phase 4 - crosscheck.** Ask every worker if they have every expected path. If anything is missing, re-transfer. This catches partial failures that slipped through the retry queue.
+
+Files detected while still being written go to a **pending list** rather than triggering immediately:
+
+```python
+# watcher/watch.py
+def _is_stable(path: Path, wait: float = 1.0) -> bool:
+    """Return True if file size hasn't changed after wait seconds."""
+    before = path.stat().st_size
+    time.sleep(wait)
+    return path.stat().st_size == before
+```
+
+A background thread polls pending files every 10 seconds until stable.
+
 
 ## The Core Functionality - Explained
 
-## Zero-config discovery - mDNS + AirDrop (grove)
+### Zero-config discovery - mDNS + AirDrop (grove)
 
 There are no hardcoded IPs anywhere in this codebase. When a worker starts, it advertises itself over **mDNS** (`_smoltorrent._tcp.local.`) using Zeroconf:
 
@@ -229,8 +287,6 @@ grove start main.py -n 4
 > DHCP just reassigned all your Pi IPs? Doesn't matter. Run `grove join` on each worker and they re-register. 
 
 *Hail mDNS/Zeroconf for making this seamless.*
-
----
 
 
 
@@ -323,7 +379,6 @@ Round 0: shard `i` → `workers[i]`. Round 1: shard `i` → `workers[(i+1) % N]`
   <figcaption>Figure 2 - Each shard goes to two workers. Any single worker can fail - gather falls back to the replica on the next node.</figcaption>
 </figure>
 
----
 
 ## The store pipeline
 
@@ -345,7 +400,9 @@ Done: 8/8 sends (2x replicated) → grpo/run1/step_100
 
 All 8 futures run concurrently via `ThreadPoolExecutor`.
 
-### Checksums and Why they are necessary
+## Checksums and Why they are necessary
+
+
 
 TCP guarantees delivery order but not data integrity - a bit flip in a router buffer, an SD card write error, or a memory fault can corrupt bytes that TCP happily delivers. Without verification you'd silently store garbage and only discover it at resume time when the model fails to load.
 
@@ -377,9 +434,9 @@ Failed sends go into a retry queue with exponential backoff (`2^attempt` seconds
   <figcaption>Figure 3 - Full store (left) and gather (right) pipeline. The watcher auto-triggers store on new files.</figcaption>
 </figure>
 
----
 
-## The bug that costed precious bandwidth
+
+## The bug - the bandwidth killer
 
 Early in development the receive loop looked like this:
 
@@ -416,7 +473,7 @@ result = pickle.loads(buf)
 
 > In short, this is why `recv_into` + `memoryview` exists, saved the day (and bandwidth from going to almost decaying)!
 
----
+
 
 ## The wire format
 
@@ -441,40 +498,8 @@ sock.sendall(struct.pack(">I", len(data)) + data)
 >- ```struct``` is required to pack the length of the data (```>I```, ```len(data)```) into a fixed-size byte format that can be easily read by the receiver to determine how many bytes to expect for the actual message. 
 >Why not use pickle? Well, it is mainly used for conversion of hierarchical objects with some metadata not required in this case.
 
----
 
-## Workers: TCP servers
 
-Each worker is a TCP listener that dispatches on the first field of the incoming tuple:
-
-```python
-# algorithms/SyncPS/worker.py
-command, *_ = msg if isinstance(msg, tuple) else (msg,)
-
-if command == "store_shard":
-    _, rank, shard_bytes, received_checksum, rel_path = msg
-    if compute_checksum(shard_bytes) != received_checksum:
-        send_message(conn, ("store_shard_failed", rank, "checksum mismatch"))
-        return
-    shard = shard_from_bytes(shard_bytes)
-    save_file(shard, str(shard_path))
-    cksum = compute_checksum(shard_path)
-    (shard_dir / "shard.checksum").write_text(cksum)
-    send_message(conn, ("store_shard_done", rank, str(shard_path)))
-```
-
-Workers verify the SHA-256 checksum before writing - if the bytes were corrupted in transit, the shard is rejected and the master queues a retry. After writing, a `.checksum` sidecar is written alongside `shard.safetensors` for offline integrity detection at startup.
-
-| Command | What the worker does |
-|---|---|
-| `store_shard` | Verify checksum → deserialize → write to disk → write `.checksum` |
-| `send_shard` | Load from disk → serialize → send bytes back |
-| `sync` | List existing shard rel_paths for the watcher |
-| `checksum_sync` | Re-hash disk file, compare to sidecar |
-| `all_shards_present` | Check which paths exist (crosscheck) |
-| `heartbeat` | Reply `"alive"` |
-
----
 
 ## Gather: the subtle correctness requirement
 
@@ -504,34 +529,7 @@ merged = merge_shards([shards_by_index[i] for i in range(num_workers)])
 ```
 
 
----
 
-## The watcher: 4 phases of paranoia
-
-The watcher monitors `ckpt_root` with `watchdog` and triggers a 4-phase sync loop on every new file:
-
-**Phase 1 - file_sync.** Query every worker in parallel to get the set of paths they already have. Take the intersection (paths on *all* workers). Diff against local files. Only transfer the difference.
-
-**Phase 2 - checksum_sync** (startup only). At startup, ask every worker to re-hash all their shards and compare to the `.checksum` sidecar. Catch disk corruption before training continues. Skipped on subsequent triggers - the per-shard SHA-256 at store time already guarantees correctness.
-
-**Phase 3 - transfer.** `POST /store-shard` for each missing file.
-
-**Phase 4 - crosscheck.** Ask every worker if they have every expected path. If anything is missing, re-transfer. This catches partial failures that slipped through the retry queue.
-
-Files detected while still being written go to a **pending list** rather than triggering immediately:
-
-```python
-# watcher/watch.py
-def _is_stable(path: Path, wait: float = 1.0) -> bool:
-    """Return True if file size hasn't changed after wait seconds."""
-    before = path.stat().st_size
-    time.sleep(wait)
-    return path.stat().st_size == before
-```
-
-A background thread polls pending files every 10 seconds until stable.
-
----
 
 ## Monitoring
 
@@ -539,13 +537,13 @@ A Prometheus + Grafana + Loki stack runs in Docker on the coordinator. Workers e
 
 Metrics include per-operation counters, end-to-end wall-clock histograms, send/receive bandwidth gauges, and per-worker error counts. Everything you need to see a slow Pi, a flaky cable, or a shard that keeps retrying - without SSH.
 
----
+
 
 ## Try it
 
 Full setup instructions, config reference, and CLI usage are on the **[smoltorrent docs →](https://yuvrajsingh-mist.github.io/smoltorrent/setup.html)**
 
----
+
 
 
 ## Challenges
