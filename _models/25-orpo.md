@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "UltraFeedback"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ORPO"
 date: 2025-04-10
-stars: 416
+stars: 417
 ---
 
 ## Overview

@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "Cityscapes"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CycleGANs"
 date: 2025-02-09
-stars: 416
+stars: 417
 ---
 
 ## Overview

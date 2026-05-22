@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "GigaSpeech"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/TTS"
 date: 2025-05-01
-stars: 416
+stars: 417
 ---
 
 ## Overview

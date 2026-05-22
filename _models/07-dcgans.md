@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "CelebA / CIFAR-10"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DCGANs"
 date: 2025-08-06
-stars: 416
+stars: 417
 ---
 
 ## Overview
