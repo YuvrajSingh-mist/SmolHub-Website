@@ -65,7 +65,7 @@ These are real numbers from the actual setup. Parallel gather averaged 95 s acro
 A few reasons drove this project:
 1. **Cost.** A 1 TB NVMe SSD costs around $100. A 4× Pi cluster with 64 GB microSD cards costs around $200 - but the Pi's storage is effectively free since it's not used for anything else. The cluster can also be repurposed for other tasks when not checkpointing.
 2. **Learning.** A great way to learn about distributed systems for storage is to build one from scratch.
-3. **Well...I kept overwriting my checkpoits for projects very Frequently**: One of the main reasons I built smoltorrent was to avoid the hassle of manually copying checkpoints back and forth between my Mac and an external drive...because i kept overwriting the existing checkpoints and the trained weights were just gone.
+ 
 
 I know the obvious answer is
 >*just upload checkpoints to Hugging Face/S3/etc*
