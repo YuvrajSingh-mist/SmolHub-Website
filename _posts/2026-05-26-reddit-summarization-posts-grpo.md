@@ -13,7 +13,6 @@ tags:
     - Reddit TLDR
 ---
 
-**Authors:** Yuvraj Singh · **Date:** May 2026 · **Reading time:** ~20 min
 
 > **Abstract.** We ablate reward signals for GRPO summarization on [Reddit TL;DR](https://huggingface.co/datasets/mlabonne/smoltldr), targeting a **64-token** output budget across **Qwen2.5-0.5B** and **LFM-2.5-350M**. **Twelve reward configurations** *(six per strategy)* combine a length penalty with [ROUGE-L](#algorithm-1-1), [METEOR](#algorithm-1-1), [BLEU](#algorithm-1-1), and their pairings under two strategies: **length-penalty fine-tuned** *(starting from a length-pretrained 64-token checkpoint)* and **length-penalty included** *(including the length penalty directly in the reward function)*. Starting from a **length-penalty fine-tuned** checkpoint consistently outperforms the **length-penalty included** variant, with best G-Eval averages of ***2.904*** *(LFM)* and ***2.817*** *(Qwen)*. All experiments run on an **Apple Silicon 3x Mac mini M4 (2024, 16 GB each) cluster**.
 

@@ -1041,3 +1041,30 @@ code.highlighter-rouge,
 .highlight .gi                                                   { color: #6e8c6a !important; }
 .highlight .gd                                                   { color: #9a5050 !important; }
 .highlight .cp                                                   { color: #8a7355 !important; }
+
+/* Wider, more readable tables in posts/pages */
+.page__content table,
+.archive__content table {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.page__content table th,
+.page__content table td,
+.archive__content table th,
+.archive__content table td {
+  padding: 0.62rem 0.78rem;
+  vertical-align: top;
+}
+
+.page__content table th,
+.archive__content table th {
+  white-space: nowrap;
+}
