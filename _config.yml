@@ -183,6 +183,7 @@ exclude:
   - log
   - node_modules
   - package.json
+  - smolcluster
   - tmp
   - vendor
 keep_files:
