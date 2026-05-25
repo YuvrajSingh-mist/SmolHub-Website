@@ -362,6 +362,8 @@ All six quality reward configurations improve significantly over this baseline, 
 
 *Table 10: LFM-2.5-350M - Length-Penalty Fine-tuned results per reward configuration. Significance: two-sided paired t-test vs. `length-only` baseline on average score (n = 200, α = 0.05).*
 
+<div style="overflow-x: auto;" markdown="1">
+
 | Reward Configuration | Average | Faithfulness | Coverage | Conciseness | Clarity | Pass Rate | ΔAverage | t | p | Sig |
 |----------------------|:-------:|:------------:|:--------:|:-----------:|:-------:|:---------:|:--------:|------:|------:|:---:|
 | `length-only` (GRPO baseline) | 2.233 | 0.627 | 0.378 | 0.554 | 0.674 | 24.6% | - | - | - | - |
@@ -371,10 +373,15 @@ All six quality reward configurations improve significantly over this baseline, 
 | `quality-meteor-bleu` | 2.878 | 0.901 | **0.611** | 0.597 | 0.769 | 46.6% | +0.6448 | 14.8908 | 3.44e-34 | ✓ |
 | `quality-meteor-rouge` | 2.840 | **0.918** | 0.506 | 0.704 | 0.711 | 43.3% | +0.6073 | 13.5378 | 5.00e-30 | ✓ |
 | `quality-bleu-rouge` | 2.726 | 0.887 | 0.275 | **0.841** | 0.723 | 9.1% | +0.4931 | 11.2246 | 5.74e-23 | ✓ |
+{: style="min-width: 950px;"}
+
+</div>
 
 All six configurations achieve significance at *p < 0.001*. `quality-meteor` is the best overall (average *2.904*, 5/5 metrics significant).
 
 *Table 10a: Output token distribution per reward configuration - LFM-2.5-350M Length-Penalty Fine-tuned rollouts (n = 200 test examples, model-native tokenizer). Within ±5 of 64 tok = 59–69 token range.*
+
+<div style="overflow-x: auto;" markdown="1">
 
 | Reward Configuration | Mean | Std | Min | P50 | P90 | P95 | P99 | Max | Within ±5 of 64 |
 |----------------------|-----:|----:|----:|----:|----:|----:|----:|----:|:---------------:|
@@ -384,6 +391,9 @@ All six configurations achieve significance at *p < 0.001*. `quality-meteor` is 
 | `quality-meteor-bleu` | 130.2 | 27.2 | 59 | 130 | 166 | 176 | 183 | 198 | 4/200 (2%) |
 | `quality-meteor-rouge` | 71.9 | 20.0 | 29 | 72 | 94 | 108 | 135 | 149 | 44/200 (22%) |
 | `quality-bleu-rouge` | 32.4 | 13.0 | 10 | 29 | 50 | 58 | 67 | 84 | 8/200 (4%) |
+{: style="min-width: 750px;"}
+
+</div>
 
 
 ### 2. LFM-2.5-350M - Length-Penalty Included
@@ -391,6 +401,8 @@ All six configurations achieve significance at *p < 0.001*. `quality-meteor` is 
 With length and quality rewards active simultaneously, the picture is more differentiated. Only 4 of 6 configurations achieve a significant average improvement; `length-quality-rouge` and `length-quality-bleu` fall short (Table 11).
 
 *Table 11: LFM-2.5-350M - Length-Penalty Included results per reward configuration. Significance: two-sided paired t-test vs. `length-only` baseline on average score (n = 200, α = 0.05).*
+
+<div style="overflow-x: auto;" markdown="1">
 
 | Reward Configuration | Average | Faithfulness | Coverage | Conciseness | Clarity | Pass Rate | ΔAverage | t | p | Sig |
 |----------------------|:-------:|:------------:|:--------:|:-----------:|:-------:|:---------:|:--------:|------:|------:|:---:|
@@ -401,10 +413,15 @@ With length and quality rewards active simultaneously, the picture is more diffe
 | `length-quality-meteor-bleu` | 2.377 | 0.696 | 0.451 | 0.595 | 0.634 | 34.2% | +0.1440 | 2.8426 | 0.0049 | ✓ |
 | `length-quality-meteor-rouge` ⭐ | **2.701** | **0.834** | **0.493** | **0.685** | **0.690** | **45.2%** | +0.4685 | 10.5579 | 5.63e-21 | ✓ |
 | `length-quality-bleu-rouge` | 2.387 | 0.696 | 0.443 | 0.606 | 0.643 | 35.4% | +0.1541 | 3.2827 | 0.0012 | ✓ |
+{: style="min-width: 950px;"}
+
+</div>
 
 `length-quality-meteor-rouge` is the clear outlier - it achieves average *2.701* (*+0.4685*), while the next best is *2.387* (*+0.1541*).
 
 *Table 11a: Output token distribution per reward configuration - LFM-2.5-350M Length-Penalty Included rollouts (n = 200 test examples, model-native tokenizer). Within ±5 of 64 tok = 59–69 token range.*
+
+<div style="overflow-x: auto;" markdown="1">
 
 | Reward Configuration | Mean | Std | Min | P50 | P90 | P95 | P99 | Max | Within ±5 of 64 |
 |----------------------|-----:|----:|----:|----:|----:|----:|----:|----:|:---------------:|
@@ -415,12 +432,17 @@ With length and quality rewards active simultaneously, the picture is more diffe
 | `length-quality-meteor-bleu` | 70.8 | 13.7 | 43 | 70 | 88 | 94 | 100 | 114 | 60/200 (30%) |
 | `length-quality-meteor-rouge` | 71.5 | 14.7 | 37 | 72 | 90 | 96 | 109 | 113 | 49/200 (24%) |
 | `length-quality-bleu-rouge` | 68.8 | 12.9 | 39 | 67 | 85 | 94 | 106 | 108 | 74/200 (37%) |
+{: style="min-width: 750px;"}
+
+</div>
 
 ### 1. Qwen2.5-0.5B - Length-Penalty Fine-tuned
 
 The length-only GRPO baseline for Qwen is *2.416*. Five of six configurations improve significantly; `quality-bleu` alone fails to reach significance *(p = 0.9825)* (Table 12).
 
 *Table 12: Qwen2.5-0.5B - Length-Penalty Fine-tuned results per reward configuration. Significance: two-sided paired t-test vs. `length-only` baseline on average score (n = 200, α = 0.05).*
+
+<div style="overflow-x: auto;" markdown="1">
 
 | Reward Configuration | Average | Faithfulness | Coverage | Conciseness | Clarity | Pass Rate | ΔAverage | t | p | Sig |
 |----------------------|:-------:|:------------:|:--------:|:-----------:|:-------:|:---------:|:--------:|------:|------:|:---:|
@@ -431,10 +453,15 @@ The length-only GRPO baseline for Qwen is *2.416*. Five of six configurations im
 | `quality-meteor-bleu` | 2.734 | **0.933** | **0.716** | 0.322 | **0.763** | 26.1% | +0.3187 | 6.0349 | 7.65e-09 | ✓ |
 | `quality-meteor-rouge` | 2.796 | 0.853 | 0.489 | 0.692 | 0.762 | **38.3%** | +0.3808 | 6.7336 | 1.73e-10 | ✓ |
 | `quality-bleu-rouge` ⭐ | **2.817** | 0.865 | 0.329 | **0.839** | 0.784 | 18.2% | +0.4018 | 7.1184 | 1.94e-11 | ✓ |
+{: style="min-width: 950px;"}
+
+</div>
 
 `quality-meteor-bleu` achieves the highest `Faithfulness` *(0.933)* and `Coverage` *(0.716)* of any Qwen configuration, but `Conciseness` regresses sharply *(0.322)* - the model produces longer, more faithful outputs at the cost of brevity. `quality-bleu-rouge` and `quality-rouge` flip this: high `Conciseness`, `Coverage` not significant.
 
 *Table 12a: Output token distribution per reward configuration - Qwen2.5-0.5B Length-Penalty Fine-tuned rollouts (n = 200 test examples, model-native tokenizer). Within ±5 of 64 tok = 59–69 token range.*
+
+<div style="overflow-x: auto;" markdown="1">
 
 | Reward Configuration | Mean | Std | Min | P50 | P90 | P95 | P99 | Max | Within ±5 of 64 |
 |----------------------|-----:|----:|----:|----:|----:|----:|----:|----:|:---------------:|
@@ -444,10 +471,15 @@ The length-only GRPO baseline for Qwen is *2.416*. Five of six configurations im
 | `quality-meteor-bleu` | 123.8 | 61.7 | 29 | 112 | 207 | 223 | 290 | 512 | 18/200 (9%) |
 | `quality-meteor-rouge` | 65.8 | 28.8 | 23 | 62 | 96 | 106 | 152 | 294 | 42/200 (21%) |
 | `quality-bleu-rouge` | 34.0 | 14.2 | 8 | 32 | 52 | 61 | 71 | 95 | 8/200 (4%) |
+{: style="min-width: 750px;"}
+
+</div>
 
 ### 2. Qwen2.5-0.5B - Length-Penalty Included
 
 *Table 13: Qwen2.5-0.5B - Length-Penalty Included results per reward configuration. Significance: two-sided paired t-test vs. `length-only` baseline on average score (n = 200, α = 0.05).*
+
+<div style="overflow-x: auto;" markdown="1">
 
 | Reward Configuration | Average | Faithfulness | Coverage | Conciseness | Clarity | Pass Rate | ΔAverage | t | p | Sig |
 |----------------------|:-------:|:------------:|:--------:|:-----------:|:-------:|:---------:|:--------:|------:|------:|:---:|
@@ -458,10 +490,15 @@ The length-only GRPO baseline for Qwen is *2.416*. Five of six configurations im
 | `length-quality-meteor-bleu` | 2.664 | 0.792 | 0.468 | 0.648 | 0.756 | 38.3% | +0.2489 | 4.3514 | 2.16e-05 | ✓ |
 | `length-quality-meteor-rouge` ⭐ | **2.769** | **0.832** | **0.511** | **0.659** | **0.767** | **44.3%** | +0.3530 | 6.3615 | 1.35e-09 | ✓ |
 | `length-quality-bleu-rouge` | 2.732 | 0.810 | 0.502 | 0.650 | **0.770** | 39.1% | +0.3161 | 5.3205 | 2.77e-07 | ✓ |
+{: style="min-width: 950px;"}
+
+</div>
 
 `length-quality-meteor-rouge` is the only configuration achieving 5/5 metric significance (Table 13). `length-quality-bleu` is the only configuration where **0/5** individual metrics are significant - BLEU-only reward provides no measurable quality signal for Qwen under joint training.
 
 *Table 13a: Output token distribution per reward configuration - Qwen2.5-0.5B Length-Penalty Included rollouts (n = 200 test examples, model-native tokenizer). Within ±5 of 64 tok = 59–69 token range.*
+
+<div style="overflow-x: auto;" markdown="1">
 
 | Reward Configuration | Mean | Std | Min | P50 | P90 | P95 | P99 | Max | Within ±5 of 64 |
 |----------------------|-----:|----:|----:|----:|----:|----:|----:|----:|:---------------:|
@@ -472,6 +509,9 @@ The length-only GRPO baseline for Qwen is *2.416*. Five of six configurations im
 | `length-quality-meteor-bleu` | 68.5 | 18.8 | 29 | 66 | 96 | 104 | 120 | 129 | 62/200 (31%) |
 | `length-quality-meteor-rouge` | 69.5 | 20.3 | 34 | 67 | 96 | 110 | 122 | 161 | 42/200 (21%) |
 | `length-quality-bleu-rouge` | 71.0 | 26.6 | 29 | 66 | 102 | 112 | 158 | 271 | 49/200 (24%) |
+{: style="min-width: 750px;"}
+
+</div>
 
 ### Cross-Model Analysis
 
