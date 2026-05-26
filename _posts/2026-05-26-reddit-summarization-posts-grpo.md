@@ -204,7 +204,7 @@ Because advantages are group-relative, GRPO is sensitive to within-group varianc
 
 Two categories of reward signals are tested: a length penalty to enforce the 64-token constraint, and lexical overlap metrics to encourage quality against the reference summary.
 
-#### 1. Length Penalty
+### 1. Length Penalty
 
 The length reward penalizes deviation from a target of **64 tokens**:
 
@@ -212,7 +212,7 @@ $$r_{\text{length}}(\hat{y}) = -\frac{|\text{tokens}(\hat{y}) - 64|}{64} \quad \
 
 A perfect 64-token output receives 0.0; every token of deviation costs 1/64. Critically, the penalty is **symmetric** - outputs longer than 64 tokens are penalized equally to outputs shorter than 64 tokens, so there is no reward incentive to dump padding tokens.
 
-#### 2. Quality Metrics
+### 2. Quality Metrics
 
 Three lexical overlap metrics are used as quality reward signals (Table 7):
 
