@@ -56,7 +56,7 @@ All experiments use the [`mlabonne/smoltldr`](https://huggingface.co/datasets/ml
 | Train | **2,000** |
 | Validation | **200** |
 | Test | **200** |
-{: style="width: auto;"}
+{: style="width: auto !important;"}
 
 All reported scores are computed on the **200-example test split**. Training uses the full train split for 1 epoch.
 
@@ -110,7 +110,7 @@ Summaries are scored with **[LLM Evals (G-Eval)](https://deepeval.com/docs/metri
 | **Conciseness** | Is the summary free of unnecessary repetition and filler words? |
 | **Clarity** | Is the summary well-formed and easy to read? |
 | **Composite** | Sum of all four - maximum score of **4.0** |
-{: style="width: auto;"}
+{: style="width: auto !important;"}
 
 Statistical significance is assessed using a **two-sided paired t-test** (n = 200, α = 0.05) on the **average score** (sum of all four G-Eval metric scores per example, averaged across 5 evaluation rounds). Each pair is one test example evaluated under both conditions.
 
@@ -223,25 +223,35 @@ Three lexical overlap metrics are used as quality reward signals (Table 7):
 | [**BLEU**](#algorithm-1-1) | [0, 1] | n-gram precision of prediction vs. reference |
 | [**ROUGE-L**](#algorithm-1-1) | [0, 1] | Longest common subsequence F1 vs. reference |
 | [**METEOR**](#algorithm-1-1) | [0, 1] | Precision/recall with stemming and synonym matching |
-{: style="width: auto;"}
+{: style="width: auto !important;"}
 
 All three are computed against the human-written reference summary in the dataset. The total reward for a given completion is the sum of all enabled signals.
 
 <a id="algorithm-1-1"></a>
 
-> **Algorithm 1.1 - Quality Reward Signal Formulas**
->
-> **ROUGE-L**
-> $$\frac{(1 + \beta^2) \cdot P \cdot R}{R + \beta^2 \cdot P}$$
-> where $P$ is precision and $R$ is recall of the longest common subsequence against the reference summary.
->
-> **METEOR**
-> $$F_{\text{mean}} \cdot (1 - P_{\text{frag}})$$
-> where $F_{\text{mean}}$ is the harmonic mean of unigram precision and recall (with stemming and synonym matching), and $P_{\text{frag}}$ is a fragmentation penalty based on how contiguous the matched chunks are.
->
-> **BLEU**
-> $$\text{BP} \cdot \exp\!\left(\sum_{n=1}^{N} w_n \log p_n\right)$$
-> where $\text{BP}$ is a brevity penalty that discounts outputs shorter than the reference, and $p_n$ is the modified n-gram precision for order $n$.
+<div style="border-left: 4px solid #ccc; padding: 0.5em 1em; margin: 1em 0;" markdown="1">
+
+**Algorithm 1.1 - Quality Reward Signal Formulas**
+
+**ROUGE-L**
+
+$$\frac{(1 + \beta^2) \cdot P \cdot R}{R + \beta^2 \cdot P}$$
+
+where $P$ is precision and $R$ is recall of the longest common subsequence against the reference summary.
+
+**METEOR**
+
+$$F_{\text{mean}} \cdot (1 - P_{\text{frag}})$$
+
+where $F_{\text{mean}}$ is the harmonic mean of unigram precision and recall (with stemming and synonym matching), and $P_{\text{frag}}$ is a fragmentation penalty based on how contiguous the matched chunks are.
+
+**BLEU**
+
+$$\text{BP} \cdot \exp\!\left(\sum_{n=1}^{N} w_n \log p_n\right)$$
+
+where $\text{BP}$ is a brevity penalty that discounts outputs shorter than the reference, and $p_n$ is the modified n-gram precision for order $n$.
+
+</div>
 
 
 ### Training Strategies
@@ -272,7 +282,7 @@ Length penalty and quality reward(s) are active simultaneously from the first st
 | `meteor-bleu` | [METEOR](#algorithm-1-1) + [BLEU](#algorithm-1-1) |
 | `bleu-rouge` | [BLEU](#algorithm-1-1) + [ROUGE-L](#algorithm-1-1) |
 | `meteor-rouge` | [METEOR](#algorithm-1-1) + [ROUGE-L](#algorithm-1-1) |
-{: style="width: auto;"}
+{: style="width: auto !important;"}
 
 This gives **6 configurations × 2 strategies × 2 models = 24 fine-tuned checkpoints**, plus the length-only checkpoint used as the GRPO baseline for each model.
 
@@ -327,7 +337,7 @@ The following hyperparameters are fixed across all runs (Table 9):
 | Training epochs | 1 |
 | Dtype | bfloat16 |
 | LoRA | disabled (full bf16 params) |
-{: style="width: auto;"}
+{: style="width: auto !important;"}
 
 > - **On KL:** `use_kl: true` loads a **second, frozen copy** of the initial model (`ref_model`) to compute `ref_logprobs` for the KL penalty term $\beta\,\mathbb{D}_{\text{KL}}[\pi_\theta\|\pi_{\text{ref}}]$. This doubles parameter memory - a meaningful cost at 12 GB of memeory I had on my mac mini. 
 > - `π_old` (the IS ratio denominator) is **not** from vLLM; it is computed locally by scoring the rollout text through the training model before each gradient update, then snapshotted. With β = 0.0001 the KL term contributes negligibly to the loss - the primary regularizer is the clip ratio (ε = 0.2) and gradient norm clipping.
@@ -640,7 +650,7 @@ Across both models, the length penalty fine-tuned strategy **consistently outper
 |-------|:---------------:|:-------------:|:-:|
 | LFM-2.5-350M | 2.904 (`quality-meteor`) | 2.701 (`length-quality-meteor-rouge`) | −0.203 |
 | Qwen2.5-0.5B | 2.817 (`quality-bleu-rouge`) | 2.769 (`length-quality-meteor-rouge`) | −0.048 |
-{: style="width: auto;"}
+{: style="width: auto !important;"}
 
 The gap is larger for LFM (−0.203) than for Qwen (−0.048). In both cases, the best reward configuration under the included strategy is `meteor-rouge`.
 
