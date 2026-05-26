@@ -51,12 +51,15 @@ All experiments use the [`mlabonne/smoltldr`](https://huggingface.co/datasets/ml
 
 *Table 1: smoltldr dataset split sizes.*
 
+<div style="width: fit-content; max-width: 100%;" markdown="1">
+
 | Split | Examples |
 |-------|:--------:|
 | Train | **2,000** |
 | Validation | **200** |
 | Test | **200** |
-{: style="width: auto !important;"}
+
+</div>
 
 All reported scores are computed on the **200-example test split**. Training uses the full train split for 1 epoch.
 
@@ -103,6 +106,8 @@ Summaries are scored with **[LLM Evals (G-Eval)](https://deepeval.com/docs/metri
 
 *Table 3: G-Eval evaluation metrics and what each measures.*
 
+<div style="width: fit-content; max-width: 100%;" markdown="1">
+
 | Metric | What it measures |
 |--------|-----------------|
 | **Faithfulness** | Does the summary contain only information present in the source? |
@@ -110,7 +115,8 @@ Summaries are scored with **[LLM Evals (G-Eval)](https://deepeval.com/docs/metri
 | **Conciseness** | Is the summary free of unnecessary repetition and filler words? |
 | **Clarity** | Is the summary well-formed and easy to read? |
 | **Composite** | Sum of all four - maximum score of **4.0** |
-{: style="width: auto !important;"}
+
+</div>
 
 Statistical significance is assessed using a **two-sided paired t-test** (n = 200, α = 0.05) on the **average score** (sum of all four G-Eval metric scores per example, averaged across 5 evaluation rounds). Each pair is one test example evaluated under both conditions.
 
@@ -192,7 +198,7 @@ where the per-token importance-sampling ratio is
 
 $$r_{i,t} = \frac{\pi_\theta(o_{i,t}\mid q,o_{i,<t})}{\pi_{\text{old}}(o_{i,t}\mid q,o_{i,<t})}$$
 
-$\varepsilon$ is the clip ratio, and $\beta$ is the KL penalty coefficient.
+where $\varepsilon$ is the clip ratio, and $\beta$ is the KL penalty coefficient.
 
 In the implementation, `compute_logprobs` averages over completion tokens first, reducing each rollout to a single scalar before the group averaging and clipping happen - matching the $\frac{1}{\lvert o_i\rvert}$ term analytically.
 
@@ -218,12 +224,15 @@ Three lexical overlap metrics are used as quality reward signals (Table 7):
 
 *Table 7: Lexical overlap metrics used as quality reward signals.*
 
+<div style="width: fit-content; max-width: 100%;" markdown="1">
+
 | Signal | Range | What it measures |
 |--------|:-----:|-----------------|
 | [**BLEU**](#algorithm-1-1) | [0, 1] | n-gram precision of prediction vs. reference |
 | [**ROUGE-L**](#algorithm-1-1) | [0, 1] | Longest common subsequence F1 vs. reference |
 | [**METEOR**](#algorithm-1-1) | [0, 1] | Precision/recall with stemming and synonym matching |
-{: style="width: auto !important;"}
+
+</div>
 
 All three are computed against the human-written reference summary in the dataset. The total reward for a given completion is the sum of all enabled signals.
 
@@ -274,6 +283,8 @@ Length penalty and quality reward(s) are active simultaneously from the first st
 
 *Table 8: Reward configurations tested under each training strategy.*
 
+<div style="width: fit-content; max-width: 100%;" markdown="1">
+
 | Configuration | Signals |
 |---------------|---------|
 | `bleu` | [BLEU](#algorithm-1-1) only |
@@ -282,7 +293,8 @@ Length penalty and quality reward(s) are active simultaneously from the first st
 | `meteor-bleu` | [METEOR](#algorithm-1-1) + [BLEU](#algorithm-1-1) |
 | `bleu-rouge` | [BLEU](#algorithm-1-1) + [ROUGE-L](#algorithm-1-1) |
 | `meteor-rouge` | [METEOR](#algorithm-1-1) + [ROUGE-L](#algorithm-1-1) |
-{: style="width: auto !important;"}
+
+</div>
 
 This gives **6 configurations × 2 strategies × 2 models = 24 fine-tuned checkpoints**, plus the length-only checkpoint used as the GRPO baseline for each model.
 
@@ -322,6 +334,8 @@ The following hyperparameters are fixed across all runs (Table 9):
 
 *Table 9: Fixed GRPO hyperparameters shared across all experiments.*
 
+<div style="width: fit-content; max-width: 100%;" markdown="1">
+
 | Hyperparameter | Value |
 |----------------|:-----:|
 | Learning rate | 2e-6 |
@@ -337,7 +351,8 @@ The following hyperparameters are fixed across all runs (Table 9):
 | Training epochs | 1 |
 | Dtype | bfloat16 |
 | LoRA | disabled (full bf16 params) |
-{: style="width: auto !important;"}
+
+</div>
 
 > - **On KL:** `use_kl: true` loads a **second, frozen copy** of the initial model (`ref_model`) to compute `ref_logprobs` for the KL penalty term $\beta\,\mathbb{D}_{\text{KL}}[\pi_\theta\|\pi_{\text{ref}}]$. This doubles parameter memory - a meaningful cost at 12 GB of memeory I had on my mac mini. 
 > - `π_old` (the IS ratio denominator) is **not** from vLLM; it is computed locally by scoring the rollout text through the training model before each gradient update, then snapshotted. With β = 0.0001 the KL term contributes negligibly to the loss - the primary regularizer is the clip ratio (ε = 0.2) and gradient norm clipping.
@@ -646,11 +661,14 @@ Across both models, the length penalty fine-tuned strategy **consistently outper
 
 *Table 14: Best configuration per model and strategy - fine-tuned vs. included.*
 
+<div style="width: fit-content; max-width: 100%;" markdown="1">
+
 | Model | Best Fine-tuned | Best Included | Δ |
 |-------|:---------------:|:-------------:|:-:|
 | LFM-2.5-350M | 2.904 (`quality-meteor`) | 2.701 (`length-quality-meteor-rouge`) | −0.203 |
 | Qwen2.5-0.5B | 2.817 (`quality-bleu-rouge`) | 2.769 (`length-quality-meteor-rouge`) | −0.048 |
-{: style="width: auto !important;"}
+
+</div>
 
 The gap is larger for LFM (−0.203) than for Qwen (−0.048). In both cases, the best reward configuration under the included strategy is `meteor-rouge`.
 
