@@ -200,12 +200,12 @@ $$r_{i,t} = \frac{\pi_\theta(o_{i,t}\mid q,o_{i,<t})}{\pi_{\text{old}}(o_{i,t}\m
 
 where $\varepsilon$ is the clip ratio, and $\beta$ is the KL penalty coefficient.
 
-In the implementation, `compute_logprobs` averages over completion tokens first, reducing each rollout to a single scalar before the group averaging and clipping happen - matching the $\frac{1}{\lvert o_i\rvert}$ term analytically.
+In the implementation, `compute_logprobs` averages over completion tokens first, reducing each rollout to a single scalar before the group averaging and clipping happen — matching the $\tfrac{1}{|o_i|}$ term analytically.
 
 Because advantages are group-relative, GRPO is sensitive to within-group variance. If all rollouts in a group receive similar rewards, the normalized advantages collapse toward zero and the gradient signal vanishes - a dynamic that will be visible in the training curves.
 
 
-### Reward Signals
+## Reward Signals
 ---
 
 Two categories of reward signals are tested: a length penalty to enforce the 64-token constraint, and lexical overlap metrics to encourage quality against the reference summary.
@@ -304,13 +304,13 @@ This gives **6 configurations × 2 strategies × 2 models = 24 fine-tuned checkp
 
 Both models are small, instruction-tuned, and quantized to bfloat16 - targeting deployment on resource-constrained hardware.
 
-#### Qwen2.5-0.5B-Instruct-bf16
+### Qwen2.5-0.5B-Instruct-bf16
 
 - **Architecture:** Qwen2.5 transformer, 0.5B parameters
 - **Source:** [`mlx-community/Qwen2.5-0.5B-Instruct-bf16`](https://huggingface.co/mlx-community/Qwen2.5-0.5B-Instruct-bf16)
 - **Format:** bfloat16 weights, MLX-native
 
-#### LFM-2.5-350M-bf16
+### LFM-2.5-350M-bf16
 
 - **Architecture:** LFM-2.5 (Liquid Foundation Model), 350M parameters
 - **Source:** [`mlx-community/LFM-2.5-350M-bf16`](https://huggingface.co/mlx-community/LFM-2.5-350M-bf16)
