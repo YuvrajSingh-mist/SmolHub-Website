@@ -200,13 +200,13 @@ $$r_{i,t} = \frac{\pi_\theta(o_{i,t}\mid q,o_{i,<t})}{\pi_{\text{old}}(o_{i,t}\m
 
 where $\varepsilon$ is the clip ratio, and $\beta$ is the KL penalty coefficient.
 
-In the implementation, `compute_logprobs` averages over completion tokens first, reducing each rollout to a single scalar before the group averaging and clipping happen — matching the $\tfrac{1}{|o_i|}$ term analytically.
+In the implementation, `compute_logprobs` averages over completion tokens first, reducing each rollout to a single scalar before the group averaging and clipping happen — matching the $\tfrac{1}{\vert o_i\vert}$ term analytically.
 
 Because advantages are group-relative, GRPO is sensitive to within-group variance. If all rollouts in a group receive similar rewards, the normalized advantages collapse toward zero and the gradient signal vanishes - a dynamic that will be visible in the training curves.
 
 
 ## Reward Signals
----
+
 
 Two categories of reward signals are tested: a length penalty to enforce the 64-token constraint, and lexical overlap metrics to encourage quality against the reference summary.
 
@@ -714,9 +714,11 @@ Analysis of [Figure 2](#figure-2) shows that, neither `kl_divergence` nor `clip_
 
 ## Demo
 
-<div style="text-align: center; margin: 1.5em 0;">
-  <iframe width="100%" style="max-width: 720px; aspect-ratio: 16/9;" src="https://www.youtube.com/embed/PqwUJAc8mj4" frameborder="0" allowfullscreen></iframe>
-  <p><em>Running GRPO training using smolcluster</em></p>
+<div style="max-width: 720px; margin: 1.5em auto;">
+  <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/PqwUJAc8mj4" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <p style="text-align: center; margin-top: 0.5em;"><em>Running GRPO training using smolcluster</em></p>
 </div>
 
 ## Acknowledgments
