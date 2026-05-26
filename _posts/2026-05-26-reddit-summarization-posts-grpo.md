@@ -656,7 +656,8 @@ Training infrastructure built with [smolcluster](https://github.com/YuvrajSingh9
 All checkpoints, eval rollouts, and per-example scores are available at:
 - Model weights: [`GRPO Reddit Posts Summarization(LFM & Qwen)`](https://huggingface.co/collections/YuvrajSingh9886/grpo-reddit-posts-summarizationlfm-and-qwen) (26 checkpoints)
 - Evaluations data: [`reddit-posts-summarization-grpo`](https://huggingface.co/datasets/YuvrajSingh9886/reddit-posts-summarization-grpo)
-
+- Github: [`Code`](https://github.com/YuvrajSingh-mist/smolcluster/blob/master/src/smolcluster/applications/reasoning/grpo/train_summarization.py)
+- Wandb: [`GRPO Reddit Posts Summarization`](https://wandb.ai/rentio/grpo-summarization?nw=nwuserrajceo2031)
 ## References
 
 1. Shao et al. (2024). *DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models.* arXiv:2402.03300 - GRPO algorithm.
