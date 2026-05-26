@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "Samanantar"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Transformer"
 date: 2025-03-10
-stars: 417
+stars: 418
 ---
 
 ## Overview

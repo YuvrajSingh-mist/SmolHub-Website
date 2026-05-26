@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "Aerial2Map"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Pix2Pix"
 date: 2025-05-01
-stars: 417
+stars: 418
 ---
 
 ## Overview

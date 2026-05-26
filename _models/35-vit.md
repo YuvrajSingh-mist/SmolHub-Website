@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "Food-101 (subset)"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/ViT"
 date: 2024-06-20
-stars: 417
+stars: 418
 ---
 
 ## Overview

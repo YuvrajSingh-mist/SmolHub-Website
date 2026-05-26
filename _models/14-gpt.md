@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "TinyShakespeare"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/GPT"
 date: 2025-02-08
-stars: 417
+stars: 418
 ---
 
 ## Overview

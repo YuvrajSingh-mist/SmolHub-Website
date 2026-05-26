@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "TinyShakespeare"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Llama"
 date: 2025-04-20
-stars: 417
+stars: 418
 ---
 
 ## Overview

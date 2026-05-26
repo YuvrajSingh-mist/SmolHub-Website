@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "CelebA"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/VAE"
 date: 2025-05-01
-stars: 417
+stars: 418
 ---
 
 ## Overview
