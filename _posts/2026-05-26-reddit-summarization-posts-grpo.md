@@ -56,24 +56,35 @@ All experiments use the [`mlabonne/smoltldr`](https://huggingface.co/datasets/ml
 | Train | **2,000** |
 | Validation | **200** |
 | Test | **200** |
+{: style="width: auto;"}
 
 All reported scores are computed on the **200-example test split**. Training uses the full train split for 1 epoch.
 
 *Table 1b: Reference summary token distribution - `completion` column, model-native tokenizer, test split (n = 200).*
 
+<div style="overflow-x: auto;" markdown="1">
+
 | Tokenizer | Mean | Std | Min | P50 | P90 | P95 | P99 | Max |
 |-----------|-----:|----:|----:|----:|----:|----:|----:|----:|
 | Qwen2.5-0.5B-Instruct | 25.2 | 2.1 | 21 | 25 | 28 | 29 | 32 | 36 |
 | LFM-2.5-350M | 26.9 | 1.9 | 24 | 26 | 29 | 30 | 33 | 34 |
+{: style="min-width: 550px;"}
+
+</div>
 
 Reference summaries are extremely tight - P50 to P90 spans only 3-4 tokens for both tokenizers. This narrow target distribution makes the 64-token length reward a generous upper bound (~2.5× the reference length), giving the model room to be more thorough while still penalising runaway outputs.
 
 *Table 1c: Raw Reddit post token distribution - `prompt` column, no system prompt, train split (n = 2000).*
 
+<div style="overflow-x: auto;" markdown="1">
+
 | Tokenizer | Mean | Std | Min | P50 | P90 | P95 | P99 | Max |
 |-----------|-----:|----:|----:|----:|----:|----:|----:|----:|
 | Qwen2.5-0.5B-Instruct | 260.7 | 59.3 | 37 | 261 | 341 | 353 | 373 | 412 |
 | LFM-2.5-350M | 272.8 | 60.8 | 43 | 272 | 355 | 368 | 386 | 414 |
+{: style="min-width: 550px;"}
+
+</div>
 
 No post exceeds 414 tokens raw, well within the `max_input_tokens: 512` budget even after the system prompt is prepended.
 
@@ -99,6 +110,7 @@ Summaries are scored with **[LLM Evals (G-Eval)](https://deepeval.com/docs/metri
 | **Conciseness** | Is the summary free of unnecessary repetition and filler words? |
 | **Clarity** | Is the summary well-formed and easy to read? |
 | **Composite** | Sum of all four - maximum score of **4.0** |
+{: style="width: auto;"}
 
 Statistical significance is assessed using a **two-sided paired t-test** (n = 200, α = 0.05) on the **average score** (sum of all four G-Eval metric scores per example, averaged across 5 evaluation rounds). Each pair is one test example evaluated under both conditions.
 
@@ -110,18 +122,25 @@ Before any fine-tuning, we evaluate both models under zero-shot instruction foll
 
 *Table 4: Pre-GRPO zero-shot baselines for both models under two prompt variants.*
 
+<div style="overflow-x: auto;" markdown="1">
+
 | Model | Prompt | Composite | Faithfulness | Coverage | Conciseness | Clarity | Pass Rate |
 |-------|--------|:---------:|:------------:|:--------:|:-----------:|:-------:|:---------:|
 | Qwen2.5-0.5B | `baseline-50-words` | 2.376 | 0.698 | 0.415 | 0.571 | 0.693 | 21.0% |
 | Qwen2.5-0.5B | `baseline-64-tokens` | 2.436 | 0.782 | 0.462 | 0.533 | 0.659 | 18.3% |
 | LFM-2.5-350M | `baseline-50-words` | 2.332 | 0.549 | 0.304 | 0.823 | 0.656 | 13.4% |
 | LFM-2.5-350M | `baseline-64-tokens` | 2.257 | 0.576 | 0.316 | 0.778 | 0.587 | 12.2% |
+{: style="min-width: 650px;"}
+
+</div>
 
 A two-sided paired t-test (n = 200) comparing `50-words` vs `64-tokens` within each model reveals that the models respond **differently to the length instruction wording** per metric out of the four defined above:
 
 **Qwen2.5-0.5B** - individual metrics like `Faithfulness` and `Coverage` improve significantly with `64-tokens`, but cancel at the composite level (not significant) (Table 5).
 
 *Table 5: Qwen2.5-0.5B - paired t-test comparing 50-words vs. 64-tokens prompt variants.*
+
+<div style="overflow-x: auto;" markdown="1">
 
 | Metric | 50-words | 64-tokens | Δ | t | p |
 |--------|:--------:|:---------:|:---:|------:|------:|
@@ -130,10 +149,15 @@ A two-sided paired t-test (n = 200) comparing `50-words` vs `64-tokens` within e
 | Conciseness | 0.5706 | 0.5326 | −0.0380 | −2.2210 | 0.0275 ✓ |
 | Clarity | 0.6927 | 0.6593 | −0.0334 | −3.2169 | 0.0015 ✓ |
 | **Composite** | **2.3762** | **2.4359** | **+0.0597** | **1.6255** | **0.1056 ✗** |
+{: style="min-width: 500px;"}
+
+</div>
 
 **LFM-2.5-350M** - 50-words **wins significantly at the composite level**; 64-tokens hurts `Conciseness` and `Clarity` with no gain elsewhere (Table 6).
 
 *Table 6: LFM-2.5-350M - paired t-test comparing 50-words vs. 64-tokens prompt variants.*
+
+<div style="overflow-x: auto;" markdown="1">
 
 | Metric | 50-words | 64-tokens | Δ | t | p |
 |--------|:--------:|:---------:|:---:|------:|------:|
@@ -142,6 +166,9 @@ A two-sided paired t-test (n = 200) comparing `50-words` vs `64-tokens` within e
 | Conciseness | 0.8233 | 0.7782 | −0.0451 | −4.4114 | 1.68e-05 ✓ |
 | Clarity | 0.6555 | 0.5870 | −0.0685 | −5.9349 | 1.29e-08 ✓ |
 | **Composite** | **2.3320** | **2.2571** | **−0.0749** | **−2.4321** | **0.0159 ✓** |
+{: style="min-width: 500px;"}
+
+</div>
 
 These baselines serve as the reference point against which all GRPO-trained models are compared.
 
@@ -161,9 +188,13 @@ The policy is then updated to increase the probability of higher-advantage compl
 
 $$\mathcal{L}_{\text{GRPO}}(\theta) = -\mathbb{E}\!\left[\frac{1}{G}\sum_{i=1}^{G}\frac{1}{|o_i|}\sum_{t=1}^{|o_i|}\!\left(\min\!\left(r_{i,t}\,\hat{A}_i,\ \text{clip}(r_{i,t},1{-}\varepsilon,1{+}\varepsilon)\,\hat{A}_i\right) - \beta\,\mathbb{D}_{\text{KL}}\!\left[\pi_\theta\,\|\,\pi_{\text{ref}}\right]\right)\right]$$
 
-where the per-token importance-sampling ratio is $r_{i,t} = \dfrac{\pi_\theta(o_{i,t}\mid q,o_{i,<t})}{\pi_{\text{old}}(o_{i,t}\mid q,o_{i,<t})}$, $\varepsilon$ is the clip ratio, and $\beta$ is the KL penalty coefficient.
+where the per-token importance-sampling ratio is
 
-In the implementation, `compute_logprobs` averages over completion tokens first, reducing each rollout to a single scalar before the group averaging and clipping happen - matching the $\frac{1}{|o_i|}$ term analytically.
+$$r_{i,t} = \frac{\pi_\theta(o_{i,t}\mid q,o_{i,<t})}{\pi_{\text{old}}(o_{i,t}\mid q,o_{i,<t})}$$
+
+$\varepsilon$ is the clip ratio, and $\beta$ is the KL penalty coefficient.
+
+In the implementation, `compute_logprobs` averages over completion tokens first, reducing each rollout to a single scalar before the group averaging and clipping happen - matching the $\frac{1}{\lvert o_i\rvert}$ term analytically.
 
 Because advantages are group-relative, GRPO is sensitive to within-group variance. If all rollouts in a group receive similar rewards, the normalized advantages collapse toward zero and the gradient signal vanishes - a dynamic that will be visible in the training curves.
 
@@ -192,6 +223,7 @@ Three lexical overlap metrics are used as quality reward signals (Table 7):
 | [**BLEU**](#algorithm-1-1) | [0, 1] | n-gram precision of prediction vs. reference |
 | [**ROUGE-L**](#algorithm-1-1) | [0, 1] | Longest common subsequence F1 vs. reference |
 | [**METEOR**](#algorithm-1-1) | [0, 1] | Precision/recall with stemming and synonym matching |
+{: style="width: auto;"}
 
 All three are computed against the human-written reference summary in the dataset. The total reward for a given completion is the sum of all enabled signals.
 
@@ -200,15 +232,15 @@ All three are computed against the human-written reference summary in the datase
 > **Algorithm 1.1 - Quality Reward Signal Formulas**
 >
 > **ROUGE-L**
-> $$\text{ROUGE-L} = \frac{(1 + \beta^2) \cdot P \cdot R}{R + \beta^2 \cdot P}$$
+> $$\frac{(1 + \beta^2) \cdot P \cdot R}{R + \beta^2 \cdot P}$$
 > where $P$ is precision and $R$ is recall of the longest common subsequence against the reference summary.
 >
 > **METEOR**
-> $$\text{METEOR} = F_{\text{mean}} \cdot (1 - P_{\text{frag}})$$
+> $$F_{\text{mean}} \cdot (1 - P_{\text{frag}})$$
 > where $F_{\text{mean}}$ is the harmonic mean of unigram precision and recall (with stemming and synonym matching), and $P_{\text{frag}}$ is a fragmentation penalty based on how contiguous the matched chunks are.
 >
 > **BLEU**
-> $$\text{BLEU} = \text{BP} \cdot \exp\!\left(\sum_{n=1}^{N} w_n \log p_n\right)$$
+> $$\text{BP} \cdot \exp\!\left(\sum_{n=1}^{N} w_n \log p_n\right)$$
 > where $\text{BP}$ is a brevity penalty that discounts outputs shorter than the reference, and $p_n$ is the modified n-gram precision for order $n$.
 
 
@@ -240,6 +272,7 @@ Length penalty and quality reward(s) are active simultaneously from the first st
 | `meteor-bleu` | [METEOR](#algorithm-1-1) + [BLEU](#algorithm-1-1) |
 | `bleu-rouge` | [BLEU](#algorithm-1-1) + [ROUGE-L](#algorithm-1-1) |
 | `meteor-rouge` | [METEOR](#algorithm-1-1) + [ROUGE-L](#algorithm-1-1) |
+{: style="width: auto;"}
 
 This gives **6 configurations × 2 strategies × 2 models = 24 fine-tuned checkpoints**, plus the length-only checkpoint used as the GRPO baseline for each model.
 
@@ -294,6 +327,7 @@ The following hyperparameters are fixed across all runs (Table 9):
 | Training epochs | 1 |
 | Dtype | bfloat16 |
 | LoRA | disabled (full bf16 params) |
+{: style="width: auto;"}
 
 > - **On KL:** `use_kl: true` loads a **second, frozen copy** of the initial model (`ref_model`) to compute `ref_logprobs` for the KL penalty term $\beta\,\mathbb{D}_{\text{KL}}[\pi_\theta\|\pi_{\text{ref}}]$. This doubles parameter memory - a meaningful cost at 12 GB of memeory I had on my mac mini. 
 > - `π_old` (the IS ratio denominator) is **not** from vLLM; it is computed locally by scoring the rollout text through the training model before each gradient update, then snapshotted. With β = 0.0001 the KL term contributes negligibly to the loss - the primary regularizer is the clip ratio (ε = 0.2) and gradient norm clipping.
@@ -606,6 +640,7 @@ Across both models, the length penalty fine-tuned strategy **consistently outper
 |-------|:---------------:|:-------------:|:-:|
 | LFM-2.5-350M | 2.904 (`quality-meteor`) | 2.701 (`length-quality-meteor-rouge`) | −0.203 |
 | Qwen2.5-0.5B | 2.817 (`quality-bleu-rouge`) | 2.769 (`length-quality-meteor-rouge`) | −0.048 |
+{: style="width: auto;"}
 
 The gap is larger for LFM (−0.203) than for Qwen (−0.048). In both cases, the best reward configuration under the included strategy is `meteor-rouge`.
 
