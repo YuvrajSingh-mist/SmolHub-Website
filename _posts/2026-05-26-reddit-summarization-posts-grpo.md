@@ -14,7 +14,7 @@ tags:
 ---
 
 
-> **Abstract.** We ablate reward signals for GRPO summarization on [Reddit TL;DR](https://huggingface.co/datasets/mlabonne/smoltldr), targeting a **64-token** output budget across **Qwen2.5-0.5B** and **LFM-2.5-350M**. **Twelve reward configurations** *(six per strategy)* combine a length penalty with [ROUGE-L](#algorithm-1-1), [METEOR](#algorithm-1-1), [BLEU](#algorithm-1-1), and their pairings under two strategies: **length-penalty fine-tuned** *(starting from a length-pretrained 64-token checkpoint)* and **length-penalty included** *(including the length penalty directly in the reward function)*. Starting from a **length-penalty fine-tuned** checkpoint consistently outperforms the **length-penalty included** variant, with best G-Eval averages of ***2.904*** *(LFM)* and ***2.817*** *(Qwen)*. All experiments run on an **Apple Silicon 3x Mac mini M4 (2024, 16 GB each) cluster**.
+> **Abstract.** We ablate reward signals for GRPO summarization on [Reddit TL;DR](https://huggingface.co/datasets/mlabonne/smoltldr), targeting a **64-token** output budget across **Qwen2.5-0.5B** and **LFM-2.5-350M**. **Twelve reward configurations** *(six per strategy)* combine a length penalty with [ROUGE-L](#algorithm-1-1), [METEOR](#algorithm-1-1), [BLEU](#algorithm-1-1), and their pairings under two strategies: **length-penalty fine-tuned** *(starting from a length-pretrained 64-token checkpoint)* and **length-penalty included** *(including the length penalty directly in the reward function)*. Starting from a **length-penalty fine-tuned** checkpoint consistently outperforms the **length-penalty included** variant, with best G-Eval averages of ***2.904*** *(LFM)* and ***2.817*** *(Qwen)*. All experiments run on **Apple Silicon 3x Mac mini M4 (2024, 16 GB each) using [smolcluster](https://github.com/mlabonne/smolcluster) **.
 
 ## Table of Contents
 
@@ -711,6 +711,13 @@ Analysis of [Figure 2](#figure-2) shows that, neither `kl_divergence` nor `clip_
 
 - **Multi-domain generalization.** All experiments use a single dataset (Reddit posts, informal register). The same reward signal ablation on formal text (news, scientific abstracts) may produce different orderings, particularly for metrics like [BLEU](#algorithm-1-1) that are sensitive to domain vocabulary.
 
+
+## Demo
+
+<div style="text-align: center; margin: 1.5em 0;">
+  <iframe width="100%" style="max-width: 720px; aspect-ratio: 16/9;" src="https://www.youtube.com/embed/PqwUJAc8mj4" frameborder="0" allowfullscreen></iframe>
+  <p><em>Running GRPO training using smolcluster</em></p>
+</div>
 
 ## Acknowledgments
 
