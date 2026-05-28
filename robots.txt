@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://smolhub.com/sitemap.xml
+Sitemap: https://www.smolhub.com/sitemap.xml
 
 
 
