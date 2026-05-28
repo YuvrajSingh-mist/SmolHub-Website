@@ -17,7 +17,7 @@ title                    : "Yuvraj Singh Portfolio"
 title_separator          : "-"
 name                     : &name "Yuvraj Singh"
 description              : &description "Portfolio Website | AI Research, LLM Tooling, RL Reasoning, Distributed Systems & Open Source Projects"
-url                      : https://smolhub.com # Primary domain
+url                      : https://www.smolhub.com # Primary domain (www canonical to match Vercel's redirect)
 # Alternate domains: https://yuvrajsingh-portfoilo-website.vercel.app, https://smolhub.vercel.app
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "YuvrajSingh-mist/SmolHub-Website"
