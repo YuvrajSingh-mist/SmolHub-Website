@@ -1045,9 +1045,8 @@ code.highlighter-rouge,
 /* Wider, more readable tables in posts/pages */
 .page__content table,
 .archive__content table {
-  display: block;
-  width: max-content;
-  min-width: 100%;
+  display: table;
+  width: 100%;
   max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
