@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "Multi30k (German–English)"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Encoder-Decoder"
 date: 2025-03-01
-stars: 418
+stars: 419
 ---
 
 ## Overview

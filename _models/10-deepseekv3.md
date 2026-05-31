@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "TinyStories"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/DeepSeekV3"
 date: 2025-08-06
-stars: 418
+stars: 419
 ---
 
 ## Overview

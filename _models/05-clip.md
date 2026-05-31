@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "Flickr8K"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CLiP"
 date: 2025-04-25
-stars: 418
+stars: 419
 ---
 
 ## Overview

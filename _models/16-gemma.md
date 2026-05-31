@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "TinyShakespeare"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/Gemma"
 date: 2025-04-20
-stars: 418
+stars: 419
 ---
 
 ## Overview

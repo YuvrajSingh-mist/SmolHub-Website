@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "TinyShakespeare"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/LoRA"
 date: 2025-04-05
-stars: 418
+stars: 419
 ---
 
 ## Overview

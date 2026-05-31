@@ -8,7 +8,7 @@ framework: "PyTorch"
 dataset: "MNIST"
 github_url: "https://github.com/YuvrajSingh-mist/Paper-Replications/tree/master/CGANs"
 date: 2025-08-06
-stars: 418
+stars: 419
 ---
 
 ## Overview
