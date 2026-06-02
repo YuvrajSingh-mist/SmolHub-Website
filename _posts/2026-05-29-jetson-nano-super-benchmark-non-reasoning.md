@@ -1,5 +1,21 @@
-# Tiny LLM Benchmark: Jetson Orin Nano Super 8GB
-## Four Power Modes x Eight Models: llama.cpp / CUDA
+---
+title: 'Tiny LLM Benchmark: Jetson Orin Nano Super 8GB — Four Power Modes × Eight Models'
+date: 2026-05-29
+permalink: /posts/jetson-nano-super-benchmark-non-reasoning/
+author_profile: false
+excerpt: "Eight non-thinking LLMs benchmarked across all four Jetson Orin Nano Super power modes (7W / 15W / 25W / MAXN) with llama.cpp CUDA. 25W is the Pareto-optimal sweet spot: 43 % more throughput than 15W while beating MAXN on output tok/J for every model tested."
+tags:
+  - Jetson
+  - Benchmark
+  - LLM Inference
+  - Edge AI
+  - llama.cpp
+  - CUDA
+  - Energy Efficiency
+  - NVIDIA Jetson
+---
+
+## Four Power Modes × Eight Models: llama.cpp / CUDA
 
 **Dates:** 2026-05-25 → 2026-05-28  
 **Platform:** NVIDIA Jetson Orin Nano Super 8GB  
@@ -1116,6 +1132,7 @@ RL_p99     = request_latency.p99
 ---
 
 <a id="appendix-j12"></a>
+<a id="energy-caveat"></a>
 ### J.12 Energy caveat: which metrics are accurate vs approximate
 
 | Metric | Accurate? | Condition |
