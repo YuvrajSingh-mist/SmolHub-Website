@@ -7,6 +7,7 @@ excerpt: "Eight non-thinking LLMs benchmarked across all four Jetson Orin Nano S
 header:
   image: /images/blogs/jetson-nano-super-benchmark/jetson-setup.jpg
   teaser: /images/blogs/jetson-nano-super-benchmark/jetson-setup.jpg
+  og_image: https://www.smolhub.com/images/blogs/jetson-nano-super-benchmark/jetson-setup.jpg
 tags:
   - Jetson
   - Benchmark
