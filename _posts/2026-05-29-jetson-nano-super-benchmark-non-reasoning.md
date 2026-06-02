@@ -1,5 +1,5 @@
 ---
-title: 'Tiny LLM Benchmark: Jetson Orin Nano Super 8GB — Four Power Modes × Eight Models'
+title: 'Tiny LLM Benchmark: Jetson Orin Nano Super 8GB, Four Power Modes × Eight Models'
 date: 2026-05-29
 permalink: /posts/jetson-nano-super-benchmark-non-reasoning/
 author_profile: false
@@ -40,7 +40,10 @@ tags:
 
 > `Github` repo with all code, scripts, and plotting notebooks can be found [here](https://github.com/smollm/jetson-nano-super-benchmark)
 
-![Jetson Orin Nano Super 8GB Setup](/images/blogs/jetson-nano-super-benchmark/jetson-setup.jpg)
+<figure style="text-align: center;">
+  <img src="/images/blogs/jetson-nano-super-benchmark/jetson-setup.jpg" alt="Jetson Orin Nano Super 8GB setup" style="width: 55%; border-radius: 8px;" />
+  <figcaption>My mini rack of 3× Jetson Orin Nano Super 8GB — $750 of edge inference crammed into a shoebox.</figcaption>
+</figure>
 
 ## Executive Summary
 
