@@ -564,7 +564,7 @@ The *LFM2.5 models* (Liquid AI) are a notable new entrant: **LFM2.5-350M** achie
 | Gemma3-1B    | 15W  | 28.1 | 1442.3 | 35.57 | 5.01 | 4.85 |
 | Gemma3-1B    | 25W  | 40.8 | 1000.1 | 24.51 | 6.87 | **5.14** |
 | Gemma3-1B    | MAXN | **44.2** | **900.2** | **22.60** | 8.62 | 4.46 |
-| Gemma3-4B    | all  | OOM: too large for 8 GB unified memory at any power mode |||||||
+| Gemma3-4B    | all  | OOM: too large for 8 GB unified memory at any power mode | — | — | — | — |
 
 
 
