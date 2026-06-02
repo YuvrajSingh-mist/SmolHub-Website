@@ -34,6 +34,7 @@ tags:
 | 25W  | [`YuvrajSingh9886/jetson-non-reasoning-benchmark-25w`](https://huggingface.co/datasets/YuvrajSingh9886/jetson-non-reasoning-benchmark-25w) | 8 | 96 |
 | MAXN | [`YuvrajSingh9886/jetson-non-reasoning-benchmark-maxn`](https://huggingface.co/datasets/YuvrajSingh9886/jetson-non-reasoning-benchmark-maxn) | 8 | 96 |
 
+> `Github` repo with all code, scripts, and plotting notebooks can be found [here](https://github.com/smollm/jetson-nano-super-benchmark)
 ## Executive Summary
 
 Eight tiny non-thinking LLMs were benchmarked across all four Jetson Orin Nano Super power modes: **7W**, **15W**, **25W**, and **MAXN_SUPER**. Each model ran 12 combinations of prompt × generation length (20 requests per combo) at every power mode where it could load.
@@ -95,6 +96,7 @@ Eight tiny non-thinking LLMs were benchmarked across all four Jetson Orin Nano S
 | Python | 3.10 (aiperf-env), pandas, seaborn, matplotlib |
 | Datasets | Synthetic prompts at exact token counts (128, 512, 1024, 2048) generated synthetically via aiperf |
 | Concurrency | **1 user, 1 request at a time** (`--parallel 1`, `--concurrency 1`) — single-user latency and throughput profile only |
+| Clock locking | `jetson_clocks` run after each `nvpmodel` switch (pins GPU + CPU at the mode's maximum frequency so DVFS cannot drop clocks between requests — [see I.13](#appendix-i13) for why this matters for reproducibility) |
 
 ### 1.3 Models Under Test
 
@@ -283,7 +285,7 @@ Average [`VDD_CPU_GPU_CV`](#glossary) per model at each mode:
 
 - In terms of [`TJ` temperature appendix](#tj-temperature) temperature, the average is 56.8 °C for models <= 0.5B and about 61.1 °C for models > 0.5B, ~4.3 °C cooler for the smaller models across all power modes. See [Table 16](#table-16) in the appendix for detailed temperature data.
 
-- As one can see, the power draw across all the four modes, when locked at the maximum possible GPU and CPU clocks, is well **below** the configured mode limits (7W, 15W, 25W, MAXN). This is possibly because we do not fully utilize the GPU with our current settings, small batch-size, single user-single requests mode as the GPU is *memory bandwidth bound*, **not** *compute bound*. 
+- As one can see, the power draw across all the four modes, when locked at the maximum possible GPU and CPU clocks, is not the maximum one could receive. This is possibly because we do not fully utilize the GPU with our current settings, small batch-size, single user-single requests mode as the GPU is mostly occupied during the *prefill stage* and during *decode* its *memory bandwidth bound*, **not** *compute bound*. 
 
 ## 3. Analysis
 
@@ -1167,6 +1169,9 @@ Power is the **mean VDD_CPU_GPU_CV** (CPU+GPU+CV rail) from `tegrastats` sampled
 | Symbol | Source | Definition |
 |--------|--------|------------|
 | `VDD_CPU_GPU_CV` | tegrastats | Instantaneous power (mW) on the CPU+GPU+CV rail |
+| `GR3D_FREQ` | tegrastats | GPU utilization and clock: `GR3D_FREQ 87%@820` means GPU is running at 820 MHz (the nvpmodel cap for 25W) and is 87 % utilized. Low % with high EMC % = memory-bandwidth bound (GPU waiting for weights); high % = compute bound |
+| `EMC_FREQ` | tegrastats | Memory controller utilization and frequency: `EMC_FREQ 61%@2133` means LPDDR5 memory bus is 61 % saturated at 2133 MHz. High EMC % alongside low GR3D % is the signature of memory-bandwidth-bound decode — the GPU finishes each matrix-vector step in microseconds then stalls waiting for the next chunk of model weights |
+| `CPU [%@MHz, ...]` | tegrastats | Per-core CPU utilization and frequency, one entry per core: e.g. `CPU [45%@1420, 32%@1420, ...]` means all 6 cores locked at 1420 MHz (25W cap), averaging 45 % and 32 % busy respectively |
 | `cpu@` | tegrastats | CPU cluster temperature (°C) |
 | `gpu@` | tegrastats | GPU temperature (°C) |
 | `tj@` | tegrastats | Junction (hottest internal die) temperature (°C) |
@@ -1176,3 +1181,5 @@ Power is the **mean VDD_CPU_GPU_CV** (CPU+GPU+CV rail) from `tegrastats` sampled
 | `peak_tj_C` | computed | Maximum TJ temperature observed |
 
 Throttling is flagged when `peak_tj_C > 85 °C` (leaving a 10 °C safety margin below the hardware limit).
+
+**Why clocks are locked with `jetson_clocks`:** without it, the Jetson's DVFS (dynamic voltage and frequency scaling) governor drops clocks during light load to save power. For benchmarking this creates non-determinism - two identical requests could run at different frequencies depending on recent load history, making latency and throughput numbers incomparable across runs. `jetson_clocks` pins GPU and CPU at the maximum frequency permitted by the current `nvpmodel` profile for the entire benchmark window, ensuring every request sees the same hardware state.
