@@ -17,7 +17,6 @@ tags:
 
 ## Four Power Modes × Eight Models: llama.cpp / CUDA
 
-**Dates:** 2026-05-25 → 2026-05-28  
 **Platform:** NVIDIA Jetson Orin Nano Super 8GB  
 **CPU:** 6-core Arm Cortex-A78AE · **GPU:** NVIDIA Ampere (1024 CUDA cores, 32 Tensor cores)  
 **Memory:** 8 GB LPDDR5 shared CPU+GPU · **JetPack:** R36.4.7 (L4T 36.4)  
@@ -26,7 +25,14 @@ tags:
 **Sweep:** prompt ∈ {128, 512, 1024, 2048} tok × gen ∈ {64, 128, 256} tok × **20 reqs/combo**  
 **Concurrency:** 1 (single-user) · **Key metric:** **output tok/J** = [OSL](#glossary) ÷ ([`avg_power_W`](#glossary) × [RL](#glossary)\_p50\_s)
 
+**Raw data on Hugging Face** — complete per-cell JSON exports (all 33 metrics, 12 prompt×gen combos × 20 requests per cell, `profile_export_aiperf.json` + `tegrastats.log` + server logs):
 
+| Mode | Dataset | Models | Cells |
+|------|---------|-------:|------:|
+| 7W   | [`YuvrajSingh9886/jetson-non-reasoning-benchmark-7w`](https://huggingface.co/datasets/YuvrajSingh9886/jetson-non-reasoning-benchmark-7w) | 8 | 96 |
+| 15W  | [`YuvrajSingh9886/jetson-non-reasoning-benchmark-15w`](https://huggingface.co/datasets/YuvrajSingh9886/jetson-non-reasoning-benchmark-15w) | 8 | 96 |
+| 25W  | [`YuvrajSingh9886/jetson-non-reasoning-benchmark-25w`](https://huggingface.co/datasets/YuvrajSingh9886/jetson-non-reasoning-benchmark-25w) | 8 | 96 |
+| MAXN | [`YuvrajSingh9886/jetson-non-reasoning-benchmark-maxn`](https://huggingface.co/datasets/YuvrajSingh9886/jetson-non-reasoning-benchmark-maxn) | 8 | 96 |
 
 ## Executive Summary
 
@@ -48,8 +54,6 @@ Eight tiny non-thinking LLMs were benchmarked across all four Jetson Orin Nano S
 
 
 **gemma3-4b (Q4_K_M, 2.4 GB)** fails at every power mode: too large for 8 GB unified memory when combined with KV cache and CUDA overhead.
-
-> **Raw data** — complete per-cell JSON exports (all metrics, 12 prompt×gen combos × 20 requests) for all four power modes are on Hugging Face: [7W](https://huggingface.co/datasets/YuvrajSingh9886/jetson-non-reasoning-benchmark-7w) · [15W](https://huggingface.co/datasets/YuvrajSingh9886/jetson-non-reasoning-benchmark-15w) · [25W](https://huggingface.co/datasets/YuvrajSingh9886/jetson-non-reasoning-benchmark-25w) · [MAXN](https://huggingface.co/datasets/YuvrajSingh9886/jetson-non-reasoning-benchmark-maxn). Each dataset includes `profile_export_aiperf.json`, `tegrastats.log`, and per-model server logs.
 
 ## 1. Test Setup
 
@@ -494,32 +498,32 @@ Tiny LLM inference on a $250 Jetson Orin Nano Super 8GB is genuinely practical. 
 - **5.4 W under load** : runs on a USB-C power bank  
 - **22.6 output tok/J** : the best energy efficiency in this suite
 
-The LFM2.5 models (Liquid AI) are a notable new entrant: LFM2.5-350M achieves **120 tok/s** at 25W (competitive with SmolLM2-360M) in 219 MB. LFM2.5-1.2B at 25W hits **55.1 tok/s** in 698 MB : the best tok/s-per-byte in the 1B class.
+The *LFM2.5 models* (Liquid AI) are a notable new entrant: **LFM2.5-350M** achieves **120 tok/s** at 25W (competitive with SmolLM2-360M) in 219 MB. **LFM2.5-1.2B** at 25W (ctx=2048, gen=256):
 
-### The Clear Winner: 25W Mode
+- **Throughput:** **54.1 tok/s** — 13 % faster than Llama3.2-1B (47.0) and 33 % faster than Gemma3-1B (40.8)
+- **Output tok/J:** **5.26** vs Llama 4.67 (+13 %) vs Gemma 5.14 (+2 %) — clear lead over Llama, narrow over Gemma
+- **Total tok/J:** Gemma edges ahead here (118.5 vs 116.2 vs Llama 108.9) — its lower power draw (6.87 W vs 8.46 W) compensates for slower decode
+- **Disk footprint:** 698 MB vs 771 MB (Llama) / 769 MB (Gemma) — smallest in the class, making it the best tok/s-per-byte overall
 
-**25W (nvpmodel -m 1) is the Pareto-optimal power mode for edge LLM inference on the Jetson Orin Nano Super.** It is the right answer for virtually every deployment:
+### The 25W Mode:
 
-- *43 % more* throughput than 15W
-- Only *36 % more* power than 15W
-- *12-25 % better* output tok/J than MAXN
+**25W is the Pareto-optimal power mode for edge LLM inference on the Jetson Orin Nano Super.** It is the right answer for virtually every deployment:
+
+- *43 % more* throughput than 15W; within *−3 % to +8 %* of MAXN (MAXN gains only marginally on larger models; 25W wins or ties on sub-500M models)
+- Only *36 % more* power than 15W; *~17 % less* power than MAXN
+- *3–26 % better* output tok/J than 15W; *8–35 % better* output tok/J than MAXN
 - Low enough peak power (≤ 10 W for sub-1B models) to stay comfortable for sustained operation
 
-Use MAXN only when raw [TTFT](#glossary) matters (live interactive sessions with long prompts). Use 15W or below only when thermally constrained. Never use 7W for production inference: CMA fragmentation will eventually block model loads.
+---
 
-### What Is Not Yet Benchmarked
-
-- **Multi-user concurrency**: all results are single-user. Real-world servers will see different throughput profiles at concurrency > 1.
-- **Ollama backend**: matched-quant Ollama comparison (identical GGUFs) is the next phase. GGUF sizes and quantizations above are already chosen to match Ollama defaults for a fair comparison.
-- **Larger models**: gemma3-4b and any model requiring > ~1.5 GB CUDA buffers is blocked by JetPack R36.4.7 CMA regression. Fix: reflash to JetPack 6.2.2 (L4T 36.5).
-
-### **CMA fragmentation caveat:** 
-
+> **NOTE**: **CMA fragmentation caveat** 
 - After three sequential model loads in the same OS session, the CUDA IOVA address space accumulates fragmentation that blocks `cudaMalloc` calls requiring > 300 MB contiguous buffers. Qwen3-0.6B, Llama3.2-1B, Gemma3-1B, and Gemma3-4B all hit `NvMapMemAllocInternalTagged: error 12 (ENOMEM)` when loaded after other models without a reboot. A reboot + `--resume` run recovered all three smaller models (Gemma3-4B is OOM at every mode regardless). All 8 non-gemma3-4b models produced valid 7W data after this workaround; the full 96-cell 7W dataset is now complete.
 
----
+
 <a id="appendix-a"></a>
-## Appendix A: Full 4-Mode Comparison (ctx=2048, gen=256)
+## Appendix
+
+### A. Full 4-Mode Comparison (ctx=2048, gen=256)
 
 > Raw numbers from the canonical benchmark cell. All latencies in milliseconds. Power = [`VDD_CPU_GPU_CV`](#glossary) averaged over each run window.
 
@@ -565,7 +569,7 @@ Use MAXN only when raw [TTFT](#glossary) matters (live interactive sessions with
 
 
 <a id="appendix-b"></a>
-## Appendix B: Thermal Summary - All Power Modes
+### B. Thermal Summary - All Power Modes
 
 Power and temperature averaged over each model's full benchmark window (all *12 prompt×gen* combos). **No model triggered thermal throttling** at any power mode (threshold ≈ 95 °C).
 
@@ -612,7 +616,7 @@ Power and temperature averaged over each model's full benchmark window (all *12 
 
 
 <a id="appendix-c"></a>
-## Appendix C: Full Per-Mode Raw Data
+### C. Full Per-Mode Raw Data
 
 Complete per-cell JSON exports (all 33 metrics, all 12 prompt×gen combos × 20 requests per cell) are published on Hugging Face Datasets:
 
@@ -628,7 +632,7 @@ Each dataset contains the full `profile_export_aiperf.json` per cell (all 33 met
 
 
 <a id="appendix-e"></a>
-## Appendix E: Full 12-Combination Heatmaps (All Power Modes)
+### E. Full 12-Combination Heatmaps (All Power Modes)
 
 Each heatmap is a `2×4` grid (8 models) showing all `12 prompt×gen` combinations for one power mode and one metric. Rows = gen length (64, 128, 256 tok), columns = prompt length (128, 512, 1024, 2048 tok). Brighter colour = higher value.
 
@@ -673,7 +677,7 @@ Each heatmap is a `2×4` grid (8 models) showing all `12 prompt×gen` combinatio
 
 
 <a id="appendix-f"></a>
-## Appendix F: Prefill / Decode / Total tok/J: All Combinations
+### F. Prefill / Decode / Total tok/J: All Combinations
 
 All charts are 2×4 faceted line plots with a fixed y-scale across all subplots. The canonical combination (ctx=2048, gen=256) is also shown in §2.2.
 
@@ -757,7 +761,7 @@ Decode tok/J depends on the number of output tokens (gen length), not input prom
 
 
 <a id="appendix-g"></a>
-## Appendix G: Request Latency (E2E): All Combinations
+### G. Request Latency (E2E): All Combinations
 
 Request latency (E2E) p50 - total time from request start to last token received. Line charts show variation with prompt length (2×4 facet, fixed y-scale). Grouped bar charts show per-model × per-mode breakdown.
 
@@ -786,7 +790,7 @@ Request latency (E2E) p50 - total time from request start to last token received
 
 <a id="appendix-g"></a>
 <a id="appendix-g-ttft"></a>
-## Appendix G: TTFT: All Prompt x Gen Combinations
+### G. TTFT: All Prompt x Gen Combinations
 
 TTFT p50 (median time to first token, ms) is driven almost entirely by prompt length, it is the prefill cost. These charts show how it varies across all 12 prompt x gen combinations and across all 4 power modes.
 
@@ -841,7 +845,7 @@ Each cell is TTFT in ms. Rows = gen length, columns = prompt length. Independent
 
 
 <a id="appendix-h"></a>
-## Appendix H: ITL: All Combinations
+### H. ITL: All Combinations
 
 Inter-token latency (ms) = time between consecutive output tokens. It measures decode cost and is driven by model size and GPU clock, not prompt length.
 
@@ -903,7 +907,7 @@ Inter-token latency (ms) = time between consecutive output tokens. It measures d
 
 
 <a id="appendix-i"></a>
-## Appendix I: Prefill Throughput: All Combinations
+### I. Prefill Throughput: All Combinations
 
 Prefill throughput (tok/s) measures how fast the model processes input tokens. It scales with prompt length (longer prompts hit peak GPU utilisation) and GPU clock speed.
 
@@ -957,7 +961,7 @@ Prefill throughput (tok/s) measures how fast the model processes input tokens. I
 
 
 <a id="appendix-j"></a>
-## Appendix J: All Metrics, Formulas, and Calculation Methods
+### J. All Metrics, Formulas, and Calculation Methods
 
 This appendix documents every metric reported in this benchmark, its formula, its source, and any caveats.
 
