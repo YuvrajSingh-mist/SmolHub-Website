@@ -40,6 +40,14 @@ Eight tiny non-thinking LLMs were benchmarked across all four Jetson Orin Nano S
 
 **Key finding: 25W (nvpmodel -m 1) is the energy-efficiency sweet spot for every model tested.** It delivers *36–47 %* more output tok/s than 15W while pushing output tok/J *3–26 %* higher than 15W and *8–35 %* higher than MAXN_SUPER across every model (ctx=2048, gen=256).
 
+**Sub-1B standouts at 25W:**
+- **SmolLM2-135M** — **165.1 tok/s**, **22.6 output tok/J** (best in suite), 101 MB, ~5.4 W: runs on a USB-C power bank
+- **LFM2.5-350M** — **120 tok/s** in only 219 MB: competitive with SmolLM2-360M (369 MB) at less than half the size
+
+**~1B class at 25W** *(ctx=2048, gen=256):*
+- **LFM2.5-1.2B** leads on throughput (**54.1 tok/s**, 13 % ahead of Llama3.2-1B, 33 % ahead of Gemma3-1B) and output tok/J (5.26) in the smallest footprint (698 MB)
+- **Gemma3-1B** edges ahead on total tok/J (118.5 vs 116.2) thanks to lower power draw (6.87 W vs 8.46 W)
+
 **Throughput winner at each mode** *(ctx=2048, gen=256, highest sweep point):*
 
 <a id="table-1"></a>
