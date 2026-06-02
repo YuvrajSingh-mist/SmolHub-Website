@@ -128,7 +128,7 @@ Eight tiny non-thinking LLMs were benchmarked across all four Jetson Orin Nano S
 | Gemma3-1B-IT          | Q4_K_M | 769 MB | google/gemma-3-1b-it |
 | Gemma3-4B-IT          | Q4_K_M | 2.4 GB  | N/A |
 
-> **Quantization note:** SmolLM2-360M-Instruct and Qwen3-0.6B use **Q8_0** (8-bit, near-lossless); all other models use **Q4_K_M** (4-bit K-quant medium). These match the quantizations that `ollama` ships for Qwen2.5-0.5B, Gemma3-1B, and Gemma3-4B, but differ for SmolLM2-135M (Ollama: F16), SmolLM2-360M (Ollama: F16), Qwen3-0.6B (Ollama: Q4_K_M), and Llama-3.2-1B (Ollama: Q8_0). Results should not be assumed comparable to `ollama run` defaults without accounting for these quantization differences.
+> **Quantization note:** SmolLM2-360M-Instruct and Qwen3-0.6B use **Q8_0** (8-bit, near-lossless); all other models use **Q4_K_M** (4-bit K-quant medium).
 
 ### 1.4 Power Modes
 
