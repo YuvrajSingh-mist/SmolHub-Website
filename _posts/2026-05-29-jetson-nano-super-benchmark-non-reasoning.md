@@ -475,12 +475,12 @@ See [Figure 7b](#figure-7b) (decode tok/J vs prompt length) and [Figure 7c](#fig
 <a id="figure-15"></a>
 **Figure 15: Total energy per request vs output length at 25W, ctx=2048**
 
-![Total energy vs output length at 25W](./artifacts/charts/E_total_energy_vs_gen_length.png)
+![Total energy vs output length at 25W](/images/blogs/jetson-nano-super-benchmark/E_total_energy_vs_gen_length.png)
 
 <a id="figure-16"></a>
 **Figure 16: Decode energy per output token in mJ (ctx=2048, gen=256)**
 
-![mJ per output token by mode](./artifacts/charts/E_mj_per_output_token.png)
+![mJ per output token by mode](/images/blogs/jetson-nano-super-benchmark/E_mj_per_output_token.png)
 
 ## 5. Conclusion
 
@@ -636,38 +636,38 @@ Each heatmap is a `2×4` grid (8 models) showing all `12 prompt×gen` combinatio
 
 **Figure E.1a: All 12 combos at 7W**
 
-![Tok/s heatmap 7W](./artifacts/charts/E_tok_s_heatmap_7w.png)
+![Tok/s heatmap 7W](/images/blogs/jetson-nano-super-benchmark/E_tok_s_heatmap_7w.png)
 
 **Figure E.1b: All 12 combos at 15W**
 
-![Tok/s heatmap 15W](./artifacts/charts/E_tok_s_heatmap_15w.png)
+![Tok/s heatmap 15W](/images/blogs/jetson-nano-super-benchmark/E_tok_s_heatmap_15w.png)
 
 **Figure E.1c: All 12 combos at 25W**
 
-![Tok/s heatmap 25W](./artifacts/charts/E_tok_s_heatmap_25w.png)
+![Tok/s heatmap 25W](/images/blogs/jetson-nano-super-benchmark/E_tok_s_heatmap_25w.png)
 
 **Figure E.1d: All 12 combos at MAXN**
 
-![Tok/s heatmap MAXN](./artifacts/charts/E_tok_s_heatmap_maxn.png)
+![Tok/s heatmap MAXN](/images/blogs/jetson-nano-super-benchmark/E_tok_s_heatmap_maxn.png)
 
 <a id="appendix-e2"></a>
 ### E.2 Output Tok/J heatmaps
 
 **Figure E.2a: All 12 combos at 7W**
 
-![Tok/J heatmap 7W](./artifacts/charts/E_tok_j_heatmap_7w.png)
+![Tok/J heatmap 7W](/images/blogs/jetson-nano-super-benchmark/E_tok_j_heatmap_7w.png)
 
 **Figure E.2b: All 12 combos at 15W**
 
-![Tok/J heatmap 15W](./artifacts/charts/E_tok_j_heatmap_15w.png)
+![Tok/J heatmap 15W](/images/blogs/jetson-nano-super-benchmark/E_tok_j_heatmap_15w.png)
 
 **Figure E.2c: All 12 combos at 25W**
 
-![Tok/J heatmap 25W](./artifacts/charts/E_tok_j_heatmap_25w.png)
+![Tok/J heatmap 25W](/images/blogs/jetson-nano-super-benchmark/E_tok_j_heatmap_25w.png)
 
 **Figure E.2d: All 12 combos at MAXN**
 
-![Tok/J heatmap MAXN](./artifacts/charts/E_tok_j_heatmap_maxn.png)
+![Tok/J heatmap MAXN](/images/blogs/jetson-nano-super-benchmark/E_tok_j_heatmap_maxn.png)
 
 
 
@@ -683,7 +683,7 @@ All charts are 2×4 faceted line plots with a fixed y-scale across all subplots.
 
 <a id="figure-f1a"></a>
 
-![Prefill tok/J vs prompt gen=64](./artifacts/charts/EF_prefill_tokj_vs_prompt_gen64.png)
+![Prefill tok/J vs prompt gen=64](/images/blogs/jetson-nano-super-benchmark/EF_prefill_tokj_vs_prompt_gen64.png)
 
 > ⚠ [Prefill tok/J is approximate for 63 % of cells.](#energy-caveat)
 
@@ -691,7 +691,7 @@ All charts are 2×4 faceted line plots with a fixed y-scale across all subplots.
 
 <a id="figure-f1b"></a>
 
-![Prefill tok/J vs prompt gen=128](./artifacts/charts/EF_prefill_tokj_vs_prompt_gen128.png)
+![Prefill tok/J vs prompt gen=128](/images/blogs/jetson-nano-super-benchmark/EF_prefill_tokj_vs_prompt_gen128.png)
 
 > ⚠ [Prefill tok/J is approximate for 63 % of cells.](#energy-caveat)
 
@@ -699,7 +699,7 @@ All charts are 2×4 faceted line plots with a fixed y-scale across all subplots.
 
 <a id="figure-f1c"></a>
 
-![Prefill tok/J vs prompt gen=256](./artifacts/charts/22e_prefill_tokj_vs_prompt_gen256.png)
+![Prefill tok/J vs prompt gen=256](/images/blogs/jetson-nano-super-benchmark/22e_prefill_tokj_vs_prompt_gen256.png)
 
 > ⚠ [Prefill tok/J is approximate for 63 % of cells.](#energy-caveat)
 
@@ -712,25 +712,25 @@ Decode tok/J depends on the number of output tokens (gen length), not input prom
 
 <a id="figure-f2a"></a>
 
-![Decode tok/J vs gen ctx=128](./artifacts/charts/EF_decode_tokj_vs_gen_ctx128.png)
+![Decode tok/J vs gen ctx=128](/images/blogs/jetson-nano-super-benchmark/EF_decode_tokj_vs_gen_ctx128.png)
 
 **Figure F.2b: Decode tok/J vs gen length: ctx=512**
 
 <a id="figure-f2b"></a>
 
-![Decode tok/J vs gen ctx=512](./artifacts/charts/EF_decode_tokj_vs_gen_ctx512.png)
+![Decode tok/J vs gen ctx=512](/images/blogs/jetson-nano-super-benchmark/EF_decode_tokj_vs_gen_ctx512.png)
 
 **Figure F.2c: Decode tok/J vs gen length: ctx=1024**
 
 <a id="figure-f2c"></a>
 
-![Decode tok/J vs gen ctx=1024](./artifacts/charts/EF_decode_tokj_vs_gen_ctx1024.png)
+![Decode tok/J vs gen ctx=1024](/images/blogs/jetson-nano-super-benchmark/EF_decode_tokj_vs_gen_ctx1024.png)
 
 **Figure F.2d: Decode tok/J vs gen length: ctx=2048**
 
 <a id="figure-f2d"></a>
 
-![Decode tok/J vs gen ctx=2048](./artifacts/charts/EF_decode_tokj_vs_gen_ctx2048.png)
+![Decode tok/J vs gen ctx=2048](/images/blogs/jetson-nano-super-benchmark/EF_decode_tokj_vs_gen_ctx2048.png)
 
 <a id="appendix-f3"></a>
 ### F.3 Total tok/J ((input+output) tok / J) vs prompt length
@@ -739,19 +739,19 @@ Decode tok/J depends on the number of output tokens (gen length), not input prom
 
 <a id="figure-f3a"></a>
 
-![Total tok/J vs prompt gen=64](./artifacts/charts/EF_total_tokj_vs_prompt_gen64.png)
+![Total tok/J vs prompt gen=64](/images/blogs/jetson-nano-super-benchmark/EF_total_tokj_vs_prompt_gen64.png)
 
 **Figure F.3b: Total tok/J vs prompt length: gen=128**
 
 <a id="figure-f3b"></a>
 
-![Total tok/J vs prompt gen=128](./artifacts/charts/EF_total_tokj_vs_prompt_gen128.png)
+![Total tok/J vs prompt gen=128](/images/blogs/jetson-nano-super-benchmark/EF_total_tokj_vs_prompt_gen128.png)
 
 **Figure F.3c: Total tok/J vs prompt length: gen=256** *(canonical, also in § 2.2)*
 
 <a id="figure-f3c"></a>
 
-![Total tok/J vs prompt gen=256](./artifacts/charts/22g_total_tokj_vs_prompt_gen256.png)
+![Total tok/J vs prompt gen=256](/images/blogs/jetson-nano-super-benchmark/22g_total_tokj_vs_prompt_gen256.png)
 
 
 
@@ -767,19 +767,19 @@ Request latency (E2E) p50 - total time from request start to last token received
 
 <a id="figure-g1a"></a>
 
-![Request latency vs prompt gen=64](./artifacts/charts/EF_req_latency_vs_prompt_gen64.png)
+![Request latency vs prompt gen=64](/images/blogs/jetson-nano-super-benchmark/EF_req_latency_vs_prompt_gen64.png)
 
 **Figure G.1b: Request latency vs prompt length: gen=128**
 
 <a id="figure-g1b"></a>
 
-![Request latency vs prompt gen=128](./artifacts/charts/EF_req_latency_vs_prompt_gen128.png)
+![Request latency vs prompt gen=128](/images/blogs/jetson-nano-super-benchmark/EF_req_latency_vs_prompt_gen128.png)
 
 **Figure G.1c: Request latency vs prompt length: gen=256** *(canonical, also in §2.3)*
 
 <a id="figure-g1c"></a>
 
-![Request latency vs prompt gen=256](./artifacts/charts/22a_request_latency_vs_prompt_gen256.png)
+![Request latency vs prompt gen=256](/images/blogs/jetson-nano-super-benchmark/22a_request_latency_vs_prompt_gen256.png)
 
 
 
@@ -796,11 +796,11 @@ TTFT p50 (median time to first token, ms) is driven almost entirely by prompt le
 
 <a id="figure-g1a"></a>
 
-![TTFT vs prompt gen=64](./artifacts/charts/EG_ttft_vs_prompt_gen64.png)
+![TTFT vs prompt gen=64](/images/blogs/jetson-nano-super-benchmark/EG_ttft_vs_prompt_gen64.png)
 
 **Figure G.1b: TTFT vs prompt length: gen=256** *(canonical, also in section 2.3)*
 
-![TTFT vs prompt gen=256](./artifacts/charts/EG_ttft_vs_prompt_gen256.png)
+![TTFT vs prompt gen=256](/images/blogs/jetson-nano-super-benchmark/EG_ttft_vs_prompt_gen256.png)
 
 *TTFT is independent of gen length, so only gen=64 and gen=256 are shown.*
 
@@ -816,24 +816,24 @@ Each cell is TTFT in ms. Rows = gen length, columns = prompt length. Independent
 <td align="center">
   <a id="figure-g2a"></a>
   <strong>Figure G.2a: TTFT heatmap: 7W</strong><br>
-  <img src="./artifacts/charts/EG_ttft_heatmap_7w.png" width="100%">
+  <img src="/images/blogs/jetson-nano-super-benchmark/EG_ttft_heatmap_7w.png" width="100%">
 </td>
 <td align="center">
   <a id="figure-g2b"></a>
   <strong>Figure G.2b: TTFT heatmap: 15W</strong><br>
-  <img src="./artifacts/charts/EG_ttft_heatmap_15w.png" width="100%">
+  <img src="/images/blogs/jetson-nano-super-benchmark/EG_ttft_heatmap_15w.png" width="100%">
 </td>
 </tr>
 <tr>
 <td align="center">
   <a id="figure-g2c"></a>
   <strong>Figure G.2c: TTFT heatmap: 25W</strong><br>
-  <img src="./artifacts/charts/EG_ttft_heatmap_25w.png" width="100%">
+  <img src="/images/blogs/jetson-nano-super-benchmark/EG_ttft_heatmap_25w.png" width="100%">
 </td>
 <td align="center">
   <a id="figure-g2d"></a>
   <strong>Figure G.2d: TTFT heatmap: MAXN</strong><br>
-  <img src="./artifacts/charts/EG_ttft_heatmap_maxn.png" width="100%">
+  <img src="/images/blogs/jetson-nano-super-benchmark/EG_ttft_heatmap_maxn.png" width="100%">
 </td>
 </tr>
 </table>
@@ -851,19 +851,19 @@ Inter-token latency (ms) = time between consecutive output tokens. It measures d
 
 <a id="figure-h1a"></a>
 
-![ITL vs prompt gen=64](./artifacts/charts/EH_itl_vs_prompt_gen64.png)
+![ITL vs prompt gen=64](/images/blogs/jetson-nano-super-benchmark/EH_itl_vs_prompt_gen64.png)
 
 **Figure H.1b: ITL vs prompt length: gen=128**
 
 <a id="figure-h1b"></a>
 
-![ITL vs prompt gen=128](./artifacts/charts/EH_itl_vs_prompt_gen128.png)
+![ITL vs prompt gen=128](/images/blogs/jetson-nano-super-benchmark/EH_itl_vs_prompt_gen128.png)
 
 **Figure H.1c: ITL vs prompt length: gen=256** *(canonical, also in section 2.3)*
 
 <a id="figure-h1c"></a>
 
-![ITL vs prompt gen=256](./artifacts/charts/EH_itl_vs_prompt_gen256.png)
+![ITL vs prompt gen=256](/images/blogs/jetson-nano-super-benchmark/EH_itl_vs_prompt_gen256.png)
 
 
 
@@ -877,24 +877,24 @@ Inter-token latency (ms) = time between consecutive output tokens. It measures d
 <td align="center">
   <a id="figure-h2a"></a>
   <strong>Figure H.2a: ITL heatmap: 7W</strong><br>
-  <img src="./artifacts/charts/EH_itl_heatmap_7w.png" width="100%">
+  <img src="/images/blogs/jetson-nano-super-benchmark/EH_itl_heatmap_7w.png" width="100%">
 </td>
 <td align="center">
   <a id="figure-h2b"></a>
   <strong>Figure H.2b: ITL heatmap: 15W</strong><br>
-  <img src="./artifacts/charts/EH_itl_heatmap_15w.png" width="100%">
+  <img src="/images/blogs/jetson-nano-super-benchmark/EH_itl_heatmap_15w.png" width="100%">
 </td>
 </tr>
 <tr>
 <td align="center">
   <a id="figure-h2c"></a>
   <strong>Figure H.2c: ITL heatmap: 25W</strong><br>
-  <img src="./artifacts/charts/EH_itl_heatmap_25w.png" width="100%">
+  <img src="/images/blogs/jetson-nano-super-benchmark/EH_itl_heatmap_25w.png" width="100%">
 </td>
 <td align="center">
   <a id="figure-h2d"></a>
   <strong>Figure H.2d: ITL heatmap: MAXN</strong><br>
-  <img src="./artifacts/charts/EH_itl_heatmap_maxn.png" width="100%">
+  <img src="/images/blogs/jetson-nano-super-benchmark/EH_itl_heatmap_maxn.png" width="100%">
 </td>
 </tr>
 </table>
@@ -913,11 +913,11 @@ Prefill throughput (tok/s) measures how fast the model processes input tokens. I
 
 <a id="figure-i1a"></a>
 
-![Prefill tput vs prompt gen=64](./artifacts/charts/EI_prefill_tput_vs_prompt_gen64.png)
+![Prefill tput vs prompt gen=64](/images/blogs/jetson-nano-super-benchmark/EI_prefill_tput_vs_prompt_gen64.png)
 
 **Figure I.1b: Prefill throughput vs prompt length: gen=256** *(canonical, also in section 2.4)*
 
-![Prefill tput vs prompt gen=256](./artifacts/charts/EI_prefill_tput_vs_prompt_gen256.png)
+![Prefill tput vs prompt gen=256](/images/blogs/jetson-nano-super-benchmark/EI_prefill_tput_vs_prompt_gen256.png)
 
 *Prefill throughput is independent of gen length, so only gen=64 and gen=256 are shown.*
 
@@ -931,24 +931,24 @@ Prefill throughput (tok/s) measures how fast the model processes input tokens. I
 <td align="center">
   <a id="figure-i2a"></a>
   <strong>Figure I.2a: Prefill throughput heatmap: 7W</strong><br>
-  <img src="./artifacts/charts/EI_prefill_tput_heatmap_7w.png" width="100%">
+  <img src="/images/blogs/jetson-nano-super-benchmark/EI_prefill_tput_heatmap_7w.png" width="100%">
 </td>
 <td align="center">
   <a id="figure-i2b"></a>
   <strong>Figure I.2b: Prefill throughput heatmap: 15W</strong><br>
-  <img src="./artifacts/charts/EI_prefill_tput_heatmap_15w.png" width="100%">
+  <img src="/images/blogs/jetson-nano-super-benchmark/EI_prefill_tput_heatmap_15w.png" width="100%">
 </td>
 </tr>
 <tr>
 <td align="center">
   <a id="figure-i2c"></a>
   <strong>Figure I.2c: Prefill throughput heatmap: 25W</strong><br>
-  <img src="./artifacts/charts/EI_prefill_tput_heatmap_25w.png" width="100%">
+  <img src="/images/blogs/jetson-nano-super-benchmark/EI_prefill_tput_heatmap_25w.png" width="100%">
 </td>
 <td align="center">
   <a id="figure-i2d"></a>
   <strong>Figure I.2d: Prefill throughput heatmap: MAXN</strong><br>
-  <img src="./artifacts/charts/EI_prefill_tput_heatmap_maxn.png" width="100%">
+  <img src="/images/blogs/jetson-nano-super-benchmark/EI_prefill_tput_heatmap_maxn.png" width="100%">
 </td>
 </tr>
 </table>
@@ -1185,769 +1185,3 @@ Throttling is flagged when `peak_tj_C > 85 °C` (leaving a 10 °C safety margin 
 > **What this means in practice:** Any GGUF model requiring more than roughly **1.1 GB** of contiguous CUDA buffers is blocked at load time on this JetPack version. This is why the benchmark is limited to models under ~1 GB GGUF size. Smaller models load fine because their contiguous IOVA requirement fits within what the fragmented address space can still provide.
 >
 > **Affected platform:** NVIDIA Jetson Orin Nano Super 8GB running JetPack R36.4.7 (L4T 36.4.7 / Ubuntu 22.04). The same board on **JetPack 6.2.2 (L4T 36.5)** resolves this regression.
-.42x | 1.37x | 2.31x | **3.28x** | 3.17x | 0.97x |
-| SmolLM2-360M | 1.44x | 1.37x | 2.47x | **3.55x** | 3.38x | 0.95x |
-| Qwen2.5-0.5B | 1.37x | 1.51x | 2.63x | 3.60x | **3.96x** | 1.10x |
-| LFM2.5-350M  | 1.44x | 1.43x | 2.62x | **3.77x** | 3.75x | 1.00x |
-| LFM2.5-1.2B  | 1.46x | 1.49x | 2.79x | 4.06x | **4.17x** | 1.03x |
-| Qwen3-0.6B   | 1.43x | 1.57x | 2.54x | 3.64x | **4.01x** | 1.10x |
-| Llama3.2-1B  | 1.45x | 1.61x | 2.78x | 4.03x | **4.46x** | 1.11x |
-| Gemma3-1B    | 1.44x | 1.59x | 2.63x | 3.78x | **4.19x** | 1.11x |
-
-- `MAXN` has the highest speedup ratios across all modes, with the largest gains for the bigger models (Qwen3-0.6B, Llama3.2-1B, Gemma3-1B) where the GPU clock increase has more impact.
-- `MAXN/25W` ratios cluster near *1.0x* (*~0.95–1.11x*). Prefill is *compute-bound* (parallel GEMMs over all input tokens), so a naive expectation would be that higher clocks help proportionally - but this was not the case. Why? maybe it becomes memory-bandwidth bound?(let me know in the comments!). 
-For the two smallest models (SmolLM2) the prefill completes so quickly (<300 ms at 25W) that kernel-launch overhead dominates, making higher clocks irrelevant (0.95–0.97x).
-
-**Request latency (E2E) speedup** - Speedup = mean(`RL_s` at baseline) / mean(`RL_s` at mode), averaged over all 12 prompt × gen combos:
-
-<a id="table-12"></a>
-**Table 12: Request latency (E2E) speedup ratios - all pairwise mode comparisons**
-
-| Model | 25W vs 15W | MAXN vs 15W | 15W vs 7W | 25W vs 7W | MAXN vs 7W | MAXN vs 25W |
-|-------|----------:|-----------:|---------:|---------:|----------:|-----------:|
-| SmolLM2-135M | 1.41x | 1.36x | 2.14x | **3.02x** | 2.92x | 0.97x |
-| SmolLM2-360M | **1.46x** | 1.31x | 1.84x | 2.69x | 2.40x | 0.89x |
-| Qwen2.5-0.5B | 1.34x | 1.41x | 2.81x | 3.77x | **3.97x** | 1.06x |
-| LFM2.5-350M  | 1.45x | 1.43x | 2.56x | **3.70x** | 3.66x | 0.99x |
-| LFM2.5-1.2B  | 1.46x | 1.43x | 2.72x | **3.98x** | 3.90x | 0.98x |
-| Qwen3-0.6B   | 1.45x | 1.59x | 2.46x | 3.58x | **3.90x** | 1.09x |
-| Llama3.2-1B  | 1.46x | 1.62x | 2.71x | 3.96x | **4.38x** | 1.11x |
-| Gemma3-1B    | 1.45x | 1.58x | 2.52x | 3.65x | **3.98x** | 1.09x |
-
-- Mirrors the [TTFT](#glossary) speedup trends since prefill dominates the request latency at these gen lengths.
-
-### 3.6 Model Size vs Efficiency
-
-The relationship is clear: **smaller quantized models always win on total tok/J**, not just tok/s.
-
-<a id="table-13"></a>
-**Table 13: Best total tok/J ranked by model size**
-
-| Model | Params | GGUF | Best total tok/J | At mode / ctx / gen |
-|-------|-------:|-----:|-----------------:|---------------------|
-| SmolLM2-135M | 135M | 101 MB | **487.3** | 25W / 2048 / 64 |
-| LFM2.5-350M  | 350M | 219 MB | **330.7** | 25W / 2048 / 64 |
-| SmolLM2-360M | 360M | 369 MB | **262.3** | 25W / 2048 / 64 |
-| Qwen2.5-0.5B | 500M | 469 MB | **237.7** | 25W / 2048 / 64 |
-| Qwen3-0.6B   | 600M | 610 MB | **149.0** | 25W / 2048 / 64 |
-| Gemma3-1B    | 1.0B | 769 MB | **118.5** | 25W / 2048 / 64 |
-| LFM2.5-1.2B  | 1.2B | 698 MB | **116.2** | 25W / 2048 / 64 |
-| Llama3.2-1B  | 1.0B | 771 MB | **108.9** | 25W / 2048 / 64 |
-
-> Total tok/J = ([ISL](#glossary) + [OSL](#glossary)) / (avg\_power\_W × `RL_s`) - see [Appendix I.6](#appendix-i6) for the full formula. Peaks at ctx=2048, gen=64 for every model because the long prompt dominates the numerator while 25W minimises energy per token. All 48 mode × ctx × gen combinations were searched.
-
-SmolLM2-135M at 25W achieves **487 total tok/J**, nearly 4.5× more efficient than Llama3.2-1B across the full request.
-
----
-
-### 3.7 Energy Efficiency: Decode tok/J and Total tok/J
-
-Two complementary tok/J lenses on energy efficiency — see [I.6](#appendix-i6) for formulas:
-
-- **Decode tok/J** = *[OSL](#glossary) / [`decode_J`](#glossary)* - output tokens generated per joule of decode energy only ([TTFT](#glossary) excluded). Measures how efficiently the GPU runs the autoregressive generation loop.
-- **Total tok/J** = *([ISL](#glossary) + [OSL](#glossary)) / [`total_J`](#glossary)* - all tokens processed per joule of the full request. Accounts for both prompt processing and generation; favours models that handle long prompts cheaply.
-
-See [Figure 7b](#figure-7b) (decode tok/J vs prompt length) and [Figure 7c](#figure-7c) (total tok/J vs prompt length) in section 2.2 - *25W leads at every model and prompt length*. Full combinations: [D.2 Decode](#appendix-d2) · [D.3 Total](#appendix-d3).
-
-
-**Key findings:**
-
-1. **25W wins on both metrics for almost every model.** The exception is SmolLM2-360M, where 7W edges ahead on both decode and total tok/J - decode is memory-bandwidth bound for this model and the lower clock still delivers competitive throughput at much lower power.
-
-2. ~1B around models tops at ~5-8 tok/J (decode) whereas the <1B models can reach 15-35 tok/J. Thus these are more energy efficient (decode) than ~1B models we have tested.
-
-3. Charts in [D.2](#appendix-d2) show that the ~1B models are roughly *flat*, that is, prompt length becomes independent of tok/J in decode tok/J as going from *64* to *256 gen length*.
-
-4. *Total tok/J* grows with *prompt length* because [ISL](#glossary) dominates ([ISL](#glossary)+[OSL](#glossary)) as ctx increases while [`total_J`](#glossary) grows more slowly (decode time is constant), see [D.3](#appendix-d3).
-
-
-<a id="figure-15"></a>
-**Figure 15: Total energy per request vs output length at 25W, ctx=2048**
-
-![Total energy vs output length at 25W](/images/blogs/jetson-nano-super-benchmark/E_total_energy_vs_gen_length.png)
-
-<a id="figure-16"></a>
-**Figure 16: Decode energy per output token in mJ (ctx=2048, gen=256)**
-
-![mJ per output token by mode](/images/blogs/jetson-nano-super-benchmark/E_mj_per_output_token.png)
-
-## 5. Conclusion
-
-### What These Numbers Mean for Edge Inference
-
-Tiny LLM inference on a $250 Jetson Orin Nano Super 8GB is genuinely practical. At SmolLM2-135M Q4_K_M:
-
-- **187 tok/s** at 25W : real-time fluent generation  
-- **101 MB on disk** : trivially portable  
-- **5.4 W under load** : runs on a USB-C power bank  
-- **22.6 output tok/J** : the best energy efficiency in this suite
-
-The *LFM2.5 models* (Liquid AI) are a notable new entrant: **LFM2.5-350M** achieves **115.1 tok/s** at 25W (competitive with SmolLM2-360M) in 219 MB. **LFM2.5-1.2B** at 25W (ctx=2048, gen=256):
-
-- **Throughput:** **54.1 tok/s** — 13 % faster than Llama3.2-1B (47.0) and 33 % faster than Gemma3-1B (40.8)
-- **Output tok/J:** **5.26** vs Llama 4.67 (+13 %) vs Gemma 5.14 (+2 %) — clear lead over Llama, narrow over Gemma
-- **Total tok/J:** Gemma edges ahead here (118.5 vs 116.2 vs Llama 108.9) — its lower power draw (6.87 W vs 8.46 W) compensates for slower decode
-- **Disk footprint:** 698 MB vs 771 MB (Llama) / 769 MB (Gemma) — smallest in the class, making it the best tok/s-per-byte overall
-
-### The 25W Mode:
-
-**25W is the Pareto-optimal power mode for edge LLM inference on the Jetson Orin Nano Super.** It is the right answer for virtually every deployment:
-
-- *43 % more* throughput than 15W; within *−3 % to +8 %* of MAXN (MAXN gains only marginally on larger models; 25W wins or ties on sub-500M models)
-- Only *36 % more* power than 15W; *~17 % less* power than MAXN
-- *3–26 % better* output tok/J than 15W; *8–35 % better* output tok/J than MAXN
-- Low enough peak power (≤ 10 W for sub-1B models) to stay comfortable for sustained operation
-
----
-
-> **NOTE**: **CMA fragmentation caveat** 
-- After three sequential model loads in the same OS session, the CUDA IOVA address space accumulates fragmentation that blocks `cudaMalloc` calls requiring > 300 MB contiguous buffers. Qwen3-0.6B, Llama3.2-1B, Gemma3-1B, and Gemma3-4B all hit `NvMapMemAllocInternalTagged: error 12 (ENOMEM)` when loaded after other models without a reboot. A reboot + `--resume` run recovered all three smaller models (Gemma3-4B is OOM at every mode regardless). All 8 non-gemma3-4b models produced valid 7W data after this workaround; the full 96-cell 7W dataset is now complete.
-
-
-<a id="appendix-a"></a>
-## Appendix
-
-### A. Full 4-Mode Comparison (ctx=2048, gen=256)
-
-> Raw numbers from the canonical benchmark cell. All latencies in milliseconds. Power = [`VDD_CPU_GPU_CV`](#glossary) averaged over each run window.
-
-<a id="table-15"></a>
-**Table 15: Full 4-mode comparison, ctx=2048, gen=256**
-
-| Model | Mode | Output Tok/s | `TTFT` p50 (ms) | `ITL` p50 (ms) | Power (W) | Output Tok/J |
-|-------|------|------:|----------:|---------:|----------:|------:|
-| SmolLM2-135M | 7W   | 53.9 | 1044.7 | 18.55 | 1.99 | 21.72 |
-| SmolLM2-135M | 15W  | 114.5 | 442.5 | 8.74 | 4.27 | 21.67 |
-| SmolLM2-135M | 25W  | **165.1** | **308.7** | **6.06** | 5.74 | **22.57** |
-| SmolLM2-135M | MAXN | 159.4 | 319.5 | 6.28 | 6.51 | 19.95 |
-| SmolLM2-360M | 7W   | 34.8 | 1820.6 | 28.74 | 2.27 | **10.97** |
-| SmolLM2-360M | 15W  | 70.6 | 725.4 | 14.16 | 4.98 | 9.74 |
-| SmolLM2-360M | 25W  | **101.8** | **502.5** | **9.82** | 6.76 | 10.21 |
-| SmolLM2-360M | MAXN | 89.4 | 528.3 | 11.18 | 7.42 | 7.56 |
-| Qwen2.5-0.5B | 7W   | 27.4 | 1956.3 | 36.48 | 2.22 | 7.26 |
-| Qwen2.5-0.5B | 15W  | 68.3 | 735.0 | 14.64 | 5.34 | 7.26 |
-| Qwen2.5-0.5B | 25W  | 92.6 | 530.9 | 10.80 | 7.05 | **9.16** |
-| Qwen2.5-0.5B | MAXN | **100.5** | **484.8** | **9.95** | 8.73 | 6.94 |
-| LFM2.5-350M  | 7W   | 31.5 | 1509.2 | 31.79 | 2.10 | 11.83 |
-| LFM2.5-350M  | 15W  | 79.2 | 568.3 | 12.63 | 5.00 | 11.78 |
-| LFM2.5-350M  | 25W  | **115.1** | **393.7** | **8.69** | 6.79 | **13.74** |
-| LFM2.5-350M  | MAXN | 112.9 | 396.0 | 8.86 | 7.88 | 11.72 |
-| LFM2.5-1.2B  | 7W   | 13.7 | 4227.6 | 72.98 | 2.34 | 4.79 |
-| LFM2.5-1.2B  | 15W  | 37.0 | 1510.0 | 27.06 | 5.96 | 5.10 |
-| LFM2.5-1.2B  | 25W  | **54.1** | 1033.7 | **18.49** | 8.46 | **5.26** |
-| LFM2.5-1.2B  | MAXN | 52.6 | **1008.0** | 19.00 | 9.79 | 4.47 |
-| Qwen3-0.6B   | 7W   | 14.2 | 2875.1 | 70.62 | 1.98 | 6.19 |
-| Qwen3-0.6B   | 15W  | 33.9 | 1113.4 | 29.52 | 5.02 | 5.90 |
-| Qwen3-0.6B   | 25W  | 49.4 | 771.0 | 20.25 | 6.89 | **6.26** |
-| Qwen3-0.6B   | MAXN | **54.2** | **700.3** | **18.45** | 8.19 | 5.78 |
-| Llama3.2-1B  | 7W   | 12.1 | 4000.2 | 82.88 | 2.26 | 4.51 |
-| Llama3.2-1B  | 15W  | 32.3 | 1432.1 | 31.00 | 6.04 | 4.54 |
-| Llama3.2-1B  | 25W  | 47.0 | 982.7 | 21.27 | 8.56 | **4.67** |
-| Llama3.2-1B  | MAXN | **51.9** | **890.5** | **19.27** | 10.54 | 4.19 |
-| Gemma3-1B    | 7W   | 11.2 | 3817.6 | 89.08 | 1.96 | 4.92 |
-| Gemma3-1B    | 15W  | 28.1 | 1442.3 | 35.57 | 5.01 | 4.85 |
-| Gemma3-1B    | 25W  | 40.8 | 1000.1 | 24.51 | 6.87 | **5.14** |
-| Gemma3-1B    | MAXN | **44.2** | **900.2** | **22.60** | 8.62 | 4.46 |
-| Gemma3-4B    | all  | OOM: too large for 8 GB unified memory at any power mode | — | — | — | — |
-
-
-
-<a id="appendix-b"></a>
-### B. Thermal Summary - All Power Modes
-
-Power and temperature averaged over each model's full benchmark window (all *12 prompt×gen* combos). **No model triggered thermal throttling** at any power mode (threshold ≈ 95 °C).
-
->**Junction temperature (TJ)** is the hottest internal die temperature on the Jetson SoC, reported by `tegrastats` as `tj@`. It is the primary metric for thermal safety: if TJ reaches ~95 °C, the hardware automatically throttles clocks to prevent damage. Peak TJ < 70 °C across all runs means thermal headroom is ample.
-
-<a id="table-16"></a>
-**Table 16: Thermal summary - all power modes**
-
-| Model | Mode | Avg Power (W) | Avg CPU (°C) | Avg GPU (°C) | Peak TJ (°C) | Throttled |
-|-------|------|-------------:|-------------:|-------------:|-------------:|:---------:|
-| SmolLM2-135M | 7W   | 1.95 | 47.2 | 48.9 | 50.3 | No |
-| SmolLM2-135M | 15W  | 4.17 | 56.0 | 57.8 | 60.2 | No |
-| SmolLM2-135M | 25W  | 5.60 | 49.2 | 51.6 | 54.3 | No |
-| SmolLM2-135M | MAXN | 6.39 | 49.0 | 51.4 | 53.2 | No |
-| SmolLM2-360M | 7W   | 2.23 | 49.2 | 50.9 | 52.1 | No |
-| SmolLM2-360M | 15W  | 4.89 | 59.1 | 60.9 | 63.3 | No |
-| SmolLM2-360M | 25W  | 6.67 | 52.7 | 55.2 | 58.6 | No |
-| SmolLM2-360M | MAXN | 7.28 | 50.9 | 53.5 | 56.8 | No |
-| Qwen2.5-0.5B | 7W   | 2.19 | 49.2 | 51.0 | 52.2 | No |
-| Qwen2.5-0.5B | 15W  | 5.24 | 55.7 | 57.7 | 59.6 | No |
-| Qwen2.5-0.5B | 25W  | 6.95 | 53.1 | 55.7 | 59.1 | No |
-| Qwen2.5-0.5B | MAXN | 8.57 | 56.6 | 59.1 | 62.8 | No |
-| LFM2.5-350M  | 7W   | 2.09 | 50.1 | 51.7 | 53.0 | No |
-| LFM2.5-350M  | 15W  | 4.93 | 58.0 | 60.0 | 62.1 | No |
-| LFM2.5-350M  | 25W  | 6.72 | 52.9 | 55.5 | 58.1 | No |
-| LFM2.5-350M  | MAXN | 7.78 | 50.5 | 53.4 | 56.8 | No |
-| LFM2.5-1.2B  | 7W   | 2.35 | 51.3 | 52.9 | 54.0 | No |
-| LFM2.5-1.2B  | 15W  | 6.01 | 60.7 | 62.9 | 65.5 | No |
-| LFM2.5-1.2B  | 25W  | 8.42 | 57.4 | 60.2 | 63.0 | No |
-| LFM2.5-1.2B  | MAXN | 9.68 | 56.7 | 59.7 | 63.5 | No |
-| Qwen3-0.6B   | 7W   | 2.00 | 44.2 | 46.0 | 47.5 | No |
-| Qwen3-0.6B   | 15W  | 5.00 | 61.6 | 63.6 | 65.4 | No |
-| Qwen3-0.6B   | 25W  | 6.83 | 57.4 | 59.9 | 63.1 | No |
-| Qwen3-0.6B   | MAXN | 8.32 | 57.2 | 59.9 | 64.0 | No |
-| Llama3.2-1B  | 7W   | 2.28 | 44.6 | 46.5 | 47.6 | No |
-| Llama3.2-1B  | 15W  | 6.04 | 61.9 | 64.1 | 65.7 | No |
-| Llama3.2-1B  | 25W  | 8.52 | 60.3 | 63.2 | 66.1 | No |
-| Llama3.2-1B  | MAXN | 10.55 | 59.9 | 63.0 | 69.5 | No |
-| Gemma3-1B    | 7W   | 1.98 | 45.1 | 46.9 | 50.5 | No |
-| Gemma3-1B    | 15W  | 4.99 | 60.2 | 62.1 | 63.6 | No |
-| Gemma3-1B    | 25W  | 6.84 | 57.5 | 60.0 | 61.9 | No |
-| Gemma3-1B    | MAXN | 8.51 | 61.2 | 63.8 | 67.0 | No |
-
-
-
-<a id="appendix-c"></a>
-### C. Full 12-Combination Heatmaps (All Power Modes)
-
-Each heatmap is a `2×4` grid (8 models) showing all `12 prompt×gen` combinations for one power mode and one metric. Rows = gen length (64, 128, 256 tok), columns = prompt length (128, 512, 1024, 2048 tok). Brighter colour = higher value.
-
-<a id="appendix-c1"></a>
-### C.1 Output Tok/s heatmaps
-
-**Figure C.1a: All 12 combos at 7W**
-
-![Tok/s heatmap 7W](/images/blogs/jetson-nano-super-benchmark/E_tok_s_heatmap_7w.png)
-
-**Figure C.1b: All 12 combos at 15W**
-
-![Tok/s heatmap 15W](/images/blogs/jetson-nano-super-benchmark/E_tok_s_heatmap_15w.png)
-
-**Figure C.1c: All 12 combos at 25W**
-
-![Tok/s heatmap 25W](/images/blogs/jetson-nano-super-benchmark/E_tok_s_heatmap_25w.png)
-
-**Figure C.1d: All 12 combos at MAXN**
-
-![Tok/s heatmap MAXN](/images/blogs/jetson-nano-super-benchmark/E_tok_s_heatmap_maxn.png)
-
-<a id="appendix-c2"></a>
-### C.2 Output Tok/J heatmaps
-
-**Figure C.2a: All 12 combos at 7W**
-
-![Tok/J heatmap 7W](/images/blogs/jetson-nano-super-benchmark/E_tok_j_heatmap_7w.png)
-
-**Figure C.2b: All 12 combos at 15W**
-
-![Tok/J heatmap 15W](/images/blogs/jetson-nano-super-benchmark/E_tok_j_heatmap_15w.png)
-
-**Figure C.2c: All 12 combos at 25W**
-
-![Tok/J heatmap 25W](/images/blogs/jetson-nano-super-benchmark/E_tok_j_heatmap_25w.png)
-
-**Figure C.2d: All 12 combos at MAXN**
-
-![Tok/J heatmap MAXN](/images/blogs/jetson-nano-super-benchmark/E_tok_j_heatmap_maxn.png)
-
-
-
-<a id="appendix-d"></a>
-### D. Prefill / Decode / Total tok/J: All Combinations
-
-All charts are 2×4 faceted line plots with a fixed y-scale across all subplots. The canonical combination (ctx=2048, gen=256) is also shown in §2.2.
-
-<a id="appendix-d1"></a>
-### D.1 Prefill tok/J (input tok / J) vs prompt length
-
-**Figure D.1a: Prefill tok/J vs prompt length: gen=64**
-
-<a id="figure-f1a"></a>
-
-![Prefill tok/J vs prompt gen=64](/images/blogs/jetson-nano-super-benchmark/EF_prefill_tokj_vs_prompt_gen64.png)
-
-> ⚠ [Prefill tok/J is approximate for 63 % of cells.](#energy-caveat)
-
-**Figure D.1b: Prefill tok/J vs prompt length: gen=128**
-
-<a id="figure-f1b"></a>
-
-![Prefill tok/J vs prompt gen=128](/images/blogs/jetson-nano-super-benchmark/EF_prefill_tokj_vs_prompt_gen128.png)
-
-> ⚠ [Prefill tok/J is approximate for 63 % of cells.](#energy-caveat)
-
-**Figure D.1c: Prefill tok/J vs prompt length: gen=256** *(canonical, also in § 2.2)*
-
-<a id="figure-f1c"></a>
-
-![Prefill tok/J vs prompt gen=256](/images/blogs/jetson-nano-super-benchmark/22e_prefill_tokj_vs_prompt_gen256.png)
-
-> ⚠ [Prefill tok/J is approximate for 63 % of cells.](#energy-caveat)
-
-<a id="appendix-d2"></a>
-### D.2 Decode tok/J (output tok / J) - independent of prompt length
-
-Decode tok/J depends on the number of output tokens (gen length), not input prompt length, since decode happens after prefill completes. These charts show decode tok/J as a function of **gen length** for each prompt context length.
-
-**Figure D.2a: Decode tok/J vs gen length: ctx=128**
-
-<a id="figure-f2a"></a>
-
-![Decode tok/J vs gen ctx=128](/images/blogs/jetson-nano-super-benchmark/EF_decode_tokj_vs_gen_ctx128.png)
-
-**Figure D.2b: Decode tok/J vs gen length: ctx=512**
-
-<a id="figure-f2b"></a>
-
-![Decode tok/J vs gen ctx=512](/images/blogs/jetson-nano-super-benchmark/EF_decode_tokj_vs_gen_ctx512.png)
-
-**Figure D.2c: Decode tok/J vs gen length: ctx=1024**
-
-<a id="figure-f2c"></a>
-
-![Decode tok/J vs gen ctx=1024](/images/blogs/jetson-nano-super-benchmark/EF_decode_tokj_vs_gen_ctx1024.png)
-
-**Figure D.2d: Decode tok/J vs gen length: ctx=2048**
-
-<a id="figure-f2d"></a>
-
-![Decode tok/J vs gen ctx=2048](/images/blogs/jetson-nano-super-benchmark/EF_decode_tokj_vs_gen_ctx2048.png)
-
-<a id="appendix-d3"></a>
-### D.3 Total tok/J ((input+output) tok / J) vs prompt length
-
-**Figure D.3a: Total tok/J vs prompt length: gen=64**
-
-<a id="figure-f3a"></a>
-
-![Total tok/J vs prompt gen=64](/images/blogs/jetson-nano-super-benchmark/EF_total_tokj_vs_prompt_gen64.png)
-
-**Figure D.3b: Total tok/J vs prompt length: gen=128**
-
-<a id="figure-f3b"></a>
-
-![Total tok/J vs prompt gen=128](/images/blogs/jetson-nano-super-benchmark/EF_total_tokj_vs_prompt_gen128.png)
-
-**Figure D.3c: Total tok/J vs prompt length: gen=256** *(canonical, also in § 2.2)*
-
-<a id="figure-f3c"></a>
-
-![Total tok/J vs prompt gen=256](/images/blogs/jetson-nano-super-benchmark/22g_total_tokj_vs_prompt_gen256.png)
-
-
-
-<a id="appendix-e"></a>
-### E. Request Latency (E2E): All Combinations
-
-Request latency (E2E) p50 - total time from request start to last token received. Line charts show variation with prompt length (2×4 facet, fixed y-scale). Grouped bar charts show per-model × per-mode breakdown.
-
-<a id="appendix-e1"></a>
-### E.1 Request latency vs prompt length (by gen length)
-
-**Figure E.1a: Request latency vs prompt length: gen=64**
-
-<a id="figure-g1a"></a>
-
-![Request latency vs prompt gen=64](/images/blogs/jetson-nano-super-benchmark/EF_req_latency_vs_prompt_gen64.png)
-
-**Figure E.1b: Request latency vs prompt length: gen=128**
-
-<a id="figure-g1b"></a>
-
-![Request latency vs prompt gen=128](/images/blogs/jetson-nano-super-benchmark/EF_req_latency_vs_prompt_gen128.png)
-
-**Figure E.1c: Request latency vs prompt length: gen=256** *(canonical, also in §2.3)*
-
-<a id="figure-g1c"></a>
-
-![Request latency vs prompt gen=256](/images/blogs/jetson-nano-super-benchmark/22a_request_latency_vs_prompt_gen256.png)
-
-
-
-<a id="appendix-f"></a>
-<a id="appendix-f-ttft"></a>
-### F. TTFT: All Prompt x Gen Combinations
-
-`TTFT_s` (median time to first token, ms) is driven almost entirely by prompt length, it is the prefill cost. These charts show how it varies across all 12 prompt x gen combinations and across all 4 power modes.
-
-<a id="appendix-f1"></a>
-### F.1 TTFT vs prompt length (by gen length)
-
-**Figure F.1a: TTFT vs prompt length: gen=64**
-
-<a id="figure-g1a"></a>
-
-![TTFT vs prompt gen=64](/images/blogs/jetson-nano-super-benchmark/EG_ttft_vs_prompt_gen64.png)
-
-**Figure F.1b: TTFT vs prompt length: gen=256** *(canonical, also in section 2.3)*
-
-![TTFT vs prompt gen=256](/images/blogs/jetson-nano-super-benchmark/EG_ttft_vs_prompt_gen256.png)
-
-*TTFT is independent of gen length, so only gen=64 and gen=256 are shown.*
-
----
-
-<a id="appendix-f2"></a>
-### F.2 TTFT heatmaps (gen x prompt) per power mode
-
-Each cell is TTFT in ms. Rows = gen length, columns = prompt length. Independent of `gen` length hence the same across rows.
-
-<table>
-<tr>
-<td align="center">
-  <a id="figure-g2a"></a>
-  <strong>Figure F.2a: TTFT heatmap: 7W</strong><br>
-  <img src="/images/blogs/jetson-nano-super-benchmark/EG_ttft_heatmap_7w.png" width="100%">
-</td>
-<td align="center">
-  <a id="figure-g2b"></a>
-  <strong>Figure F.2b: TTFT heatmap: 15W</strong><br>
-  <img src="/images/blogs/jetson-nano-super-benchmark/EG_ttft_heatmap_15w.png" width="100%">
-</td>
-</tr>
-<tr>
-<td align="center">
-  <a id="figure-g2c"></a>
-  <strong>Figure F.2c: TTFT heatmap: 25W</strong><br>
-  <img src="/images/blogs/jetson-nano-super-benchmark/EG_ttft_heatmap_25w.png" width="100%">
-</td>
-<td align="center">
-  <a id="figure-g2d"></a>
-  <strong>Figure F.2d: TTFT heatmap: MAXN</strong><br>
-  <img src="/images/blogs/jetson-nano-super-benchmark/EG_ttft_heatmap_maxn.png" width="100%">
-</td>
-</tr>
-</table>
-
-
-<a id="appendix-g"></a>
-### G. ITL: All Combinations
-
-Inter-token latency (ms) = time between consecutive output tokens. It measures decode cost and is driven by model size and GPU clock, not prompt length.
-
-<a id="appendix-g1"></a>
-### G.1 ITL vs prompt length (by gen length)
-
-**Figure G.1a: ITL vs prompt length: gen=64**
-
-<a id="figure-h1a"></a>
-
-![ITL vs prompt gen=64](/images/blogs/jetson-nano-super-benchmark/EH_itl_vs_prompt_gen64.png)
-
-**Figure G.1b: ITL vs prompt length: gen=128**
-
-<a id="figure-h1b"></a>
-
-![ITL vs prompt gen=128](/images/blogs/jetson-nano-super-benchmark/EH_itl_vs_prompt_gen128.png)
-
-**Figure G.1c: ITL vs prompt length: gen=256** *(canonical, also in section 2.3)*
-
-<a id="figure-h1c"></a>
-
-![ITL vs prompt gen=256](/images/blogs/jetson-nano-super-benchmark/EH_itl_vs_prompt_gen256.png)
-
-
-
----
-
-<a id="appendix-g2"></a>
-### G.2 ITL heatmaps (gen x prompt) per power mode
-
-<table>
-<tr>
-<td align="center">
-  <a id="figure-h2a"></a>
-  <strong>Figure G.2a: ITL heatmap: 7W</strong><br>
-  <img src="/images/blogs/jetson-nano-super-benchmark/EH_itl_heatmap_7w.png" width="100%">
-</td>
-<td align="center">
-  <a id="figure-h2b"></a>
-  <strong>Figure G.2b: ITL heatmap: 15W</strong><br>
-  <img src="/images/blogs/jetson-nano-super-benchmark/EH_itl_heatmap_15w.png" width="100%">
-</td>
-</tr>
-<tr>
-<td align="center">
-  <a id="figure-h2c"></a>
-  <strong>Figure G.2c: ITL heatmap: 25W</strong><br>
-  <img src="/images/blogs/jetson-nano-super-benchmark/EH_itl_heatmap_25w.png" width="100%">
-</td>
-<td align="center">
-  <a id="figure-h2d"></a>
-  <strong>Figure G.2d: ITL heatmap: MAXN</strong><br>
-  <img src="/images/blogs/jetson-nano-super-benchmark/EH_itl_heatmap_maxn.png" width="100%">
-</td>
-</tr>
-</table>
-
-
-
-<a id="appendix-h"></a>
-### H. Prefill Throughput: All Combinations
-
-Prefill throughput (tok/s) measures how fast the model processes input tokens. It scales with prompt length (longer prompts hit peak GPU utilisation) and GPU clock speed.
-
-<a id="appendix-h1"></a>
-### H.1 Prefill throughput vs prompt length (by gen length)
-
-**Figure H.1a: Prefill throughput vs prompt length: gen=64**
-
-<a id="figure-i1a"></a>
-
-![Prefill tput vs prompt gen=64](/images/blogs/jetson-nano-super-benchmark/EI_prefill_tput_vs_prompt_gen64.png)
-
-**Figure H.1b: Prefill throughput vs prompt length: gen=256** *(canonical, also in section 2.4)*
-
-![Prefill tput vs prompt gen=256](/images/blogs/jetson-nano-super-benchmark/EI_prefill_tput_vs_prompt_gen256.png)
-
-*Prefill throughput is independent of gen length, so only gen=64 and gen=256 are shown.*
-
-
-
-<a id="appendix-h2"></a>
-### H.2 Prefill throughput heatmaps (gen x prompt) per power mode
-
-<table>
-<tr>
-<td align="center">
-  <a id="figure-i2a"></a>
-  <strong>Figure H.2a: Prefill throughput heatmap: 7W</strong><br>
-  <img src="/images/blogs/jetson-nano-super-benchmark/EI_prefill_tput_heatmap_7w.png" width="100%">
-</td>
-<td align="center">
-  <a id="figure-i2b"></a>
-  <strong>Figure H.2b: Prefill throughput heatmap: 15W</strong><br>
-  <img src="/images/blogs/jetson-nano-super-benchmark/EI_prefill_tput_heatmap_15w.png" width="100%">
-</td>
-</tr>
-<tr>
-<td align="center">
-  <a id="figure-i2c"></a>
-  <strong>Figure H.2c: Prefill throughput heatmap: 25W</strong><br>
-  <img src="/images/blogs/jetson-nano-super-benchmark/EI_prefill_tput_heatmap_25w.png" width="100%">
-</td>
-<td align="center">
-  <a id="figure-i2d"></a>
-  <strong>Figure H.2d: Prefill throughput heatmap: MAXN</strong><br>
-  <img src="/images/blogs/jetson-nano-super-benchmark/EI_prefill_tput_heatmap_maxn.png" width="100%">
-</td>
-</tr>
-</table>
-
-
-
-<a id="appendix-i"></a>
-### I. All Metrics, Formulas, and Calculation Methods
-
-This appendix documents every metric reported in this benchmark, its formula, its source, and any caveats.
-
-
-
-<a id="glossary"></a>
-<a id="appendix-i1"></a>
-<a id="glossary"></a>
-### I.1 Raw inputs from aiperf and tegrastats
-
-| Symbol | Source | Definition |
-|--------|--------|------------|
-| `ISL` | aiperf JSON `input_sequence_length.avg` | Actual input tokens processed per request (may differ from target due to tokenizer rounding) |
-| `OSL` | aiperf JSON `output_sequence_length.avg` | Actual output tokens generated per request |
-| `TTFT` | aiperf JSON `time_to_first_token.p50` (ms) | Median time from request sent to first output token received; proxy for prefill duration. p50 used (not avg) to avoid skew from occasional slow requests |
-| `TTFT_s` | Derived: `TTFT / 1000` | Time to first token in seconds (converted from ms) |
-| `ITL` | aiperf JSON `inter_token_latency.p50` (ms) | Median time between consecutive output tokens; per-token decode cost. p50 used for robustness against outliers |
-| `RL` | aiperf JSON `request_latency.p50` (ms) | Median total wall time per request: TTFT + all inter-token intervals. p50 used for energy calculations |
-| `RL_s` | Derived: `RL / 1000` | Request latency in seconds (converted from ms) |
-| `tok_s` | aiperf JSON `output_token_throughput_per_user.avg` | Output tokens per second, single-user (OSL / RL in steady state) |
-| `prefill_tput` | aiperf JSON `prefill_throughput_per_user.avg` | Input tokens processed per second during prefill phase |
-| `t0`, `t1` | aiperf JSON `start_time`, `end_time` (ISO 8601) | Wall-clock start and end of the full 20-request profiling run |
-| `mW_i` | tegrastats `VDD_CPU_GPU_CV` field (mW) | Instantaneous power on the CPU+GPU+CV rail at sample `i` |
-
-All aiperf metrics are averages over 20 requests per combo. Percentile variants (p50, p90, p99) are also available in the raw JSON but not reproduced here.
-
----
-
-<a id="appendix-i2"></a>
-### I.2 Power
-
-```
-avg_power_W = mean(mW_i for all tegrastats samples where t0 <= sample_time <= t1) / 1000
-```
-
-- `VDD_CPU_GPU_CV` covers the CPU, GPU, and Computer Vision engine rail
-- Does NOT include board overhead (fan, storage, USB) which is on `VDD_IN`
-- `VDD_IN` is ~1.5-3 W higher than `VDD_CPU_GPU_CV` during inference
-- Tegrastats interval: 500 ms
-
----
-
-<a id="appendix-i3"></a>
-### I.3 Output tok/J (main efficiency metric)
-
-```
-output_tok_J = OSL / (avg_power_W * RL_s)
-```
-
-Where `RL_s` = `RL` / 1000 (request latency in seconds).
-
-Higher is better. This measures how many output tokens are generated per joule of compute energy. It is the primary metric of the benchmark.
-
-**Not affected by the prefill/decode split approximation** (see section J.7).
-
----
-
-<a id="appendix-i4"></a>
-### I.4 Request latency energy
-
-```
-total_J = avg_power_W * (RL / 1000)
-```
-
-Energy consumed by one average request from first byte sent to last token received. Accurate for all cells regardless of TTFT.
-
----
-
-<a id="appendix-i5"></a>
-### I.5 Prefill and decode energy
-
-```
-prefill_J  = avg_power_W * (TTFT / 1000)
-decode_J   = avg_power_W * ((RL - TTFT) / 1000)
-           = total_J - prefill_J
-
-prefill_%  = prefill_J / total_J * 100
-```
-
-**CAUTION:**  See [energy measurement caveat](#energy-caveat).
-
----
-
-<a id="appendix-i6"></a>
-### I.6 Phase tok/J metrics
-
-```
-prefill_tok_J = ISL / prefill_J
-              = ISL / (avg_power_W * TTFT_s)
-
-decode_tok_J  = OSL / decode_J
-              = OSL / (avg_power_W * (RL_s - TTFT_s))
-
-total_tok_J   = (ISL + OSL) / total_J
-              = (ISL + OSL) / (avg_power_W * RL_s)
-```
-
-Where `TTFT_s` = `TTFT` / 1000, `RL_s` = `RL` / 1000.
-
-- `prefill_tok_J`: input tokens processed per joule of prefill energy. Affected by the approximation in J.5.
-- `decode_tok_J`: output tokens generated per joule of decode energy. Reasonably accurate.
-- `total_tok_J`: all tokens (in + out) per joule of total request energy. Accurate.
-
----
-
-<a id="appendix-i7"></a>
-### I.7 mJ per output token
-
-```
-mJ_per_output_tok = (decode_J / OSL) * 1000
-                  = 1000 / decode_tok_J
-```
-
-Millijoules per generated output token (`decode_J` is in joules, ×1000 converts to mJ for readability). Carries the same caveat as J.5 for cells where TTFT < 500 ms.
-
----
-
-<a id="appendix-i8"></a>
-### I.8 Prefill throughput
-
-```
-prefill_tput (tok/s) = aiperf JSON prefill_throughput_per_user.avg
-```
-
-Directly from aiperf. Measures how fast input tokens are processed during the prefill phase. Scales with prompt length (longer prompts hit peak GPU utilisation) and GPU clock.
-
----
-
-<a id="appendix-i9"></a>
-### I.9 Throughput speedup ratios (Table 9)
-
-```
-speedup_25W_vs_15W  = mean(tok_s_25W  over all 12 combos) / mean(tok_s_15W  over all 12 combos)
-speedup_MAXN_vs_15W = mean(tok_s_MAXN over all 12 combos) / mean(tok_s_15W  over all 12 combos)
-speedup_15W_vs_7W   = mean(tok_s_15W  over all 12 combos) / mean(tok_s_7W   over all 12 combos)
-```
-
-Averages are over all 4 prompt lengths × 3 gen lengths = 12 combos. `tok_s` = `output_token_throughput_per_user.avg` (aiperf); no p50 is available for throughput. Latency speedup ratios (Tables 10a, 11, 12) use mean of p50 values instead.
-
----
-
-<a id="appendix-i10"></a>
-### I.10 Best total tok/J per model (Table 13)
-
-```
-best_total_tok_J(model) = max(total_tok_J(mode, model, gen, ctx))
-                          over all modes in {7W, 15W, 25W, MAXN}
-                          and all gen in {64, 128, 256}
-                          and all ctx in {128, 512, 1024, 2048}
-
-total_tok_J = (ISL + OSL) / (avg_power_W * RL_s)
-```
-
-The single highest total tok/J value observed for that model across all 48 combinations. Peaks at ctx=2048, gen=64 for every model because the long prompt dominates the (ISL + OSL) numerator.
-
----
-
-<a id="appendix-i11"></a>
-### I.11 TTFT, ITL, RL percentiles
-
-All percentile variants come directly from aiperf JSON without further computation:
-
-```
-TTFT       = time_to_first_token.p50   (canonical; p50 used everywhere)
-TTFT_p90   = time_to_first_token.p90
-TTFT_p99   = time_to_first_token.p99
-ITL        = inter_token_latency.p50    (canonical; p50 used everywhere)
-ITL_p99    = inter_token_latency.p99
-RL         = request_latency.p50        (canonical; p50 used everywhere)
-RL_p99     = request_latency.p99
-```
-
----
-
-<a id="appendix-i12"></a>
-<a id="energy-caveat"></a>
-### I.12 Energy caveat: which metrics are accurate vs approximate
-
-| Metric | Accurate? | Condition |
-|--------|-----------|-----------|
-| `output_tok_J` | Always | No phase split needed |
-| `total_J` | Always | Full window power * RL |
-| `decode_J` | Mostly | avg_power approx decode power since decode dominates window |
-| `decode_tok_J` | Mostly | Same as above |
-| `total_tok_J` | Always | Uses total_J which is accurate |
-| `prefill_J` | TTFT >= 500 ms only (37 % of cells) | Needs tegrastats sample in prefill window |
-| `prefill_tok_J` | TTFT >= 500 ms only (37 % of cells) | Derived from prefill_J |
-| `prefill_%` | TTFT >= 500 ms only (37 % of cells) | Derived from prefill_J |
-| `mJ_per_output_tok` | Mostly | Derived from decode_J |
-
----
-
-<a id="appendix-i13"></a>
-### I.13 Power and temperature
-
-```
-avg_power_W = mean(tegrastats.VDD_CPU_GPU_CV[mW] / 1000
-              for all samples where aiperf_t0 <= sample_time <= aiperf_t1)
-```
-
-Power is the **mean VDD_CPU_GPU_CV** (CPU+GPU+CV rail) from `tegrastats` sampled at 500 ms intervals, averaged over each model's active inference windows only (idle/cool-down between models excluded).
-
-**Junction temperature (TJ)** is the hottest internal die temperature on the Jetson SoC, reported by `tegrastats` as `tj@`. The hardware automatically throttles GPU/CPU clocks when TJ reaches ~95 °C to prevent damage. Peak TJ < 70 °C across all runs confirms ample thermal headroom at every power mode.
-
-| Symbol | Source | Definition |
-|--------|--------|------------|
-| `VDD_CPU_GPU_CV` | tegrastats | Instantaneous power (mW) on the CPU+GPU+CV rail |
-| `GR3D_FREQ` | tegrastats | GPU utilization and clock: `GR3D_FREQ 87%@820` means GPU is running at 820 MHz (the nvpmodel cap for 25W) and is 87 % utilized. Low % with high EMC % = memory-bandwidth bound (GPU waiting for weights); high % = compute bound |
-| `EMC_FREQ` | tegrastats | Memory controller utilization and frequency: `EMC_FREQ 61%@2133` means LPDDR5 memory bus is 61 % saturated at 2133 MHz. High EMC % alongside low GR3D % is the signature of memory-bandwidth-bound decode — the GPU finishes each matrix-vector step in microseconds then stalls waiting for the next chunk of model weights |
-| `CPU [%@MHz, ...]` | tegrastats | Per-core CPU utilization and frequency, one entry per core: e.g. `CPU [45%@1420, 32%@1420, ...]` means all 6 cores locked at 1420 MHz (25W cap), averaging 45 % and 32 % busy respectively |
-| `cpu@` | tegrastats | CPU cluster temperature (°C) |
-| `gpu@` | tegrastats | GPU temperature (°C) |
-| `tj@` | tegrastats | Junction (hottest internal die) temperature (°C) |
-| `avg_power_W` | computed | Mean VDD_CPU_GPU_CV over active inference window (W) |
-| `avg_cpu_C` | computed | Mean CPU temp over active inference window |
-| `avg_gpu_C` | computed | Mean GPU temp over active inference window |
-| `peak_tj_C` | computed | Maximum TJ temperature observed |
-
-Throttling is flagged when `peak_tj_C > 85 °C` (leaving a 10 °C safety margin below the hardware limit).
-
-**Why clocks are locked with `jetson_clocks`:** without it, the Jetson's DVFS (dynamic voltage and frequency scaling) governor drops clocks during light load to save power. For benchmarking this creates non-determinism - two identical requests could run at different frequencies depending on recent load history, making latency and throughput numbers incomparable across runs. `jetson_clocks` pins GPU and CPU at the maximum frequency permitted by the current `nvpmodel` profile for the entire benchmark window, ensuring every request sees the same hardware state.
