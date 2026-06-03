@@ -31,7 +31,7 @@ tags:
 **Runs:** Four full sweeps: **7W**, **15W**, **25W**, **MAXN_SUPER**  
 **Sweep:** prompt ∈ {128, 512, 1024, 2048} tok × gen ∈ {64, 128, 256} tok × **20 reqs/combo**  
 **Concurrency:** 1 (single-user) 
-· **Key metric:** **output tok/J** = [`OSL`](#glossary) ÷ ([`avg_power_W`](#glossary) × [`RL_s`](#glossary))
+· **Key metric:** **output tok/J** = [`OSL`](#glossary) ÷ ([`avg_power_W`](#glossary) × ([`RL_s`](#glossary) − [`TTFT_s`](#glossary)))
 
 **Raw data on Hugging Face**  -  complete per-cell JSON exports (all 33 metrics, 12 prompt×gen combos × 20 requests per cell, `profile_export_aiperf.json` + `tegrastats.log` + server logs):
 
@@ -146,7 +146,7 @@ Eight tiny non-thinking LLMs were benchmarked across all four Jetson Orin Nano S
 ### 1.5 Benchmark Methodology
 
 - For each `model` × `prompt` × `gen combo`, `aiperf` sends 20 single-concurrency requests with synthetic prompts at the exact target token count. 
-- Power is computed from `tegrastats` [`VDD_CPU_GPU_CV`](#glossary) (mW → W) averaged over each run's `start_time`/`end_time` window. [`output_tok_J`](#glossary) = [`OSL`](#glossary) ÷ ([`avg_power_W`](#glossary) × [`RL_s`](#glossary)). 
+- Power is computed from `tegrastats` [`VDD_CPU_GPU_CV`](#glossary) (mW → W) averaged over each run's `start_time`/`end_time` window. [`output_tok_J`](#glossary) = [`OSL`](#glossary) ÷ ([`avg_power_W`](#glossary) × ([`RL_s`](#glossary) − [`TTFT_s`](#glossary))). 
 - Clocks were locked with `jetson_clocks` at all modes. CMA was compacted (`/proc/sys/vm/compact_memory`) between model loads.
 - Each run's power and clock speed was capped at x W through `nvpmodel` and monitored for thermal stability (no sustained throttling; `junction temp` ≤ 73 °C).
 - **Latency percentile used throughout:** all [`TTFT`](#glossary), [`ITL`](#glossary), and request latency ([`RL`](#glossary)) values reported in charts, tables, and energy calculations use the **p50 (median)** over the 20 requests per combo. The mean is not used for latency because occasional slow requests (GC pause, memory compaction, OS scheduling) inflate it without reflecting typical behaviour. p90 and p99 are available in the raw per-mode Hugging Face datasets (see raw data table at the top of this post) for tail-latency analysis.
@@ -309,7 +309,7 @@ Tok/s (left half) and tok/J (right half) are intentionally both shown, a faster 
 
 - MAXN beats 25W on raw tok/s for some models but loses on tok/J because its power increase outpaces the throughput gain for *ctx = 2048, gen = 256*.
 
-> [`output_tok_J`](#glossary) = [`tok_s`](#glossary) / [`VDD_CPU_GPU_CV`](#glossary) (W), averaged over each aiperf run window.
+> [`output_tok_J`](#glossary) = [`OSL`](#glossary) / ([`avg_power_W`](#glossary) × ([`RL_s`](#glossary) − [`TTFT_s`](#glossary))), decode energy only.
 
 <a id="table-7"></a>
 **Table 7: Canonical cell comparison (ctx=2048, gen=256)**
@@ -989,15 +989,14 @@ avg_power_W = mean(mW_i for all tegrastats samples where t0 <= sample_time <= t1
 ### I.3 Output tok/J (main efficiency metric)
 
 ```
-output_tok_J = OSL / (avg_power_W * RL_p50_s)
-
+output_tok_J = OSL / (avg_power_W * (RL_p50_s - TTFT_p50_s))
 ```
 
-Where `RL_s = RL / 1000` (request latency in seconds).
+Where `RL_p50_s = RL_p50 / 1000` and `TTFT_p50_s = TTFT_p50 / 1000` (latencies in seconds). The denominator is decode-phase energy only — prefill is excluded because no output tokens are produced during prefill.
 
-Higher is better. This measures how many output tokens are generated per joule of compute energy. It is the primary metric of the benchmark.
+Higher is better. This is the primary metric of the benchmark and is numerically equivalent to `decode_tok_J` (see [I.6](#appendix-i6)).
 
-**Not affected by the prefill/decode split approximation** (see section J.7).
+> **Approximation caveat:** [`avg_power_W`](#glossary) is a single mean over the full 20-request profiling window - it is not split by phase. Applying it to the decode interval `(RL_p50 - TTFT_p50)` assumes that decode-phase power ≈ full-window average power. The exact per-request prefill and decode timestamps are not preserved in the `aiperf` aggregates and cannot be reconstructed, so a phase-exact power reading is not possible from this data.
 
 ---
 
@@ -1043,8 +1042,8 @@ total_tok_J   = (ISL + OSL) / total_J
 
 Where `TTFT_s = TTFT / 1000`, `RL_s = RL / 1000`.
 
-- [`prefill_tok_J`](#glossary): input tokens processed per joule of prefill energy. Affected by the approximation in J.5.
-- [`decode_tok_J`](#glossary): output tokens generated per joule of decode energy. Reasonably accurate.
+- [`prefill_tok_J`](#glossary): input tokens processed per joule of prefill energy. Affected by the approximation in I.5.
+- [`decode_tok_J`](#glossary): output tokens generated per joule of decode energy. **Numerically identical to [`output_tok_J`](#glossary)** — both equal `OSL / (avg_power_W * (RL_s - TTFT_s))`. `output_tok_J` is the name used in all tables and figures; `decode_tok_J` is retained here for formula clarity. Subject to the [`avg_power_W`](#glossary) approximation caveat in [I.3](#appendix-i3).
 - [`total_tok_J`](#glossary): all tokens (in + out) per joule of total request energy. Accurate.
 
 ---
@@ -1123,7 +1122,7 @@ RL_p99     = request_latency.p99
 
 | Metric | Accurate? | Condition |
 |--------|-----------|-----------|
-| [`output_tok_J`](#glossary) | Always | No phase split needed |
+| [`output_tok_J`](#glossary) | Mostly | Uses decode window `(RL_p50 - TTFT_p50)`; [`avg_power_W`](#glossary) is full-window mean — see [I.3](#appendix-i3) caveat |
 | [`total_J`](#glossary) | Always | Full window power * RL |
 | [`decode_J`](#glossary) | Mostly | avg_power approx decode power since decode dominates window |
 | [`decode_tok_J`](#glossary) | Mostly | Same as above |
