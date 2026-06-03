@@ -41,7 +41,7 @@ tags:
 | 25W  | [`YuvrajSingh9886/jetson-non-reasoning-benchmark-25w`](https://huggingface.co/datasets/YuvrajSingh9886/jetson-non-reasoning-benchmark-25w) | 8 | 96 |
 | MAXN | [`YuvrajSingh9886/jetson-non-reasoning-benchmark-maxn`](https://huggingface.co/datasets/YuvrajSingh9886/jetson-non-reasoning-benchmark-maxn) | 8 | 96 |
 
-> `Github` repo with all code, scripts, and plotting notebooks can be found [here](https://github.com/smollm/jetson-nano-super-benchmark)
+> `Github` repo with all code, scripts, and plotting notebooks can be found [here](https://github.com/YuvrajSingh-mist/smolbenchmark/tree/master/non-reasoning-models)
 
 <figure style="text-align: center;">
   <img src="/images/blogs/jetson-nano-super-benchmark/jetson-setup.jpg" alt="Jetson Orin Nano Super 8GB setup" style="width: 55%; border-radius: 8px;" />
