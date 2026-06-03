@@ -31,7 +31,7 @@ tags:
 **Runs:** Four full sweeps: **7W**, **15W**, **25W**, **MAXN_SUPER**  
 **Sweep:** prompt ∈ {128, 512, 1024, 2048} tok × gen ∈ {64, 128, 256} tok × **20 reqs/combo**  
 **Concurrency:** 1 (single-user) 
-· **Key metric:** **output tok/J** = [OSL](#glossary) ÷ ([avg_power_W](#glossary) × `RL_s`)
+· **Key metric:** **output tok/J** = [`OSL`](#glossary) ÷ ([`avg_power_W`](#glossary) × [`RL_s`](#glossary))
 
 **Raw data on Hugging Face**  -  complete per-cell JSON exports (all 33 metrics, 12 prompt×gen combos × 20 requests per cell, `profile_export_aiperf.json` + `tegrastats.log` + server logs):
 
@@ -146,10 +146,10 @@ Eight tiny non-thinking LLMs were benchmarked across all four Jetson Orin Nano S
 ### 1.5 Benchmark Methodology
 
 - For each `model` × `prompt` × `gen combo`, `aiperf` sends 20 single-concurrency requests with synthetic prompts at the exact target token count. 
-- Power is computed from `tegrastats` [`VDD_CPU_GPU_CV`](#glossary) (mW → W) averaged over each run's `start_time`/`end_time` window. [`output_tok_J`](#glossary) = [OSL](#glossary) ÷ ([`avg_power_W`](#glossary) × `RL_s`). 
+- Power is computed from `tegrastats` [`VDD_CPU_GPU_CV`](#glossary) (mW → W) averaged over each run's `start_time`/`end_time` window. [`output_tok_J`](#glossary) = [`OSL`](#glossary) ÷ ([`avg_power_W`](#glossary) × [`RL_s`](#glossary)). 
 - Clocks were locked with `jetson_clocks` at all modes. CMA was compacted (`/proc/sys/vm/compact_memory`) between model loads.
 - Each run's power and clock speed was capped at x W through `nvpmodel` and monitored for thermal stability (no sustained throttling; `junction temp` ≤ 73 °C).
-- **Latency percentile used throughout:** all [TTFT](#glossary), [ITL](#glossary), and request latency ([RL](#glossary)) values reported in charts, tables, and energy calculations use the **p50 (median)** over the 20 requests per combo. The mean is not used for latency because occasional slow requests (GC pause, memory compaction, OS scheduling) inflate it without reflecting typical behaviour. p90 and p99 are available in the raw per-mode Hugging Face datasets (see raw data table at the top of this post) for tail-latency analysis.
+- **Latency percentile used throughout:** all [`TTFT`](#glossary), [`ITL`](#glossary), and request latency ([`RL`](#glossary)) values reported in charts, tables, and energy calculations use the **p50 (median)** over the 20 requests per combo. The mean is not used for latency because occasional slow requests (GC pause, memory compaction, OS scheduling) inflate it without reflecting typical behaviour. p90 and p99 are available in the raw per-mode Hugging Face datasets (see raw data table at the top of this post) for tail-latency analysis.
 
 ## 2. Results: Charts
 
@@ -214,7 +214,7 @@ All charts use data from all four power modes.
 
 ![Prefill tok/J vs prompt gen=256](/images/blogs/jetson-nano-super-benchmark/22e_prefill_tokj_vs_prompt_gen256.png)
 
-> ⚠ [Prefill tok/J is approximate for 63 % of cells](#energy-caveat) ([TTFT](#glossary) < 500 ms → no tegrastats sample in prefill window). Decode tok/J and total tok/J are not affected.
+> ⚠ [Prefill tok/J is approximate for 63 % of cells](#energy-caveat) ([`TTFT`](#glossary) < 500 ms → no tegrastats sample in prefill window). Decode tok/J and total tok/J are not affected.
 
 - `Decode tok/J` (output tokens per joule of decode energy) vs prompt length at *gen=256*, output generation efficiency; decreases with increase in prompt length since decode cost depends on output length not input; 25W leads:
 
@@ -236,17 +236,17 @@ All charts use data from all four power modes.
 
 ### 2.3 Latency
 
-[TTFT](#glossary) p50 at ctx=2048, gen=256; 25W and MAXN reduce TTFT by *30–38 %* vs 15W:
+[`TTFT`](#glossary) p50 at ctx=2048, gen=256; 25W and MAXN reduce TTFT by *30–38 %* vs 15W:
 
 <a id="figure-8"></a>
-**Figure 8: [TTFT](#glossary) p50 by power mode (ctx=2048, gen=256)**
+**Figure 8: [`TTFT`](#glossary) p50 by power mode (ctx=2048, gen=256)**
 
 ![TTFT vs Prompt](/images/blogs/jetson-nano-super-benchmark/5_ttft_vs_prompt.png)
 
 [`ITL`](#glossary) *(inter-token latency)* p50 at ctx=2048, gen=256; lower is better:
 
 <a id="figure-9"></a>
-**Figure 9: [ITL](#glossary) p50 by power mode (ctx=2048, gen=256)**
+**Figure 9: [`ITL`](#glossary) p50 by power mode (ctx=2048, gen=256)**
 
 ![ITL Comparison](/images/blogs/jetson-nano-super-benchmark/8_itl_compare.png)
 
@@ -329,12 +329,12 @@ Tok/s (left half) and tok/J (right half) are intentionally both shown, a faster 
 
 **25W is unambiguously the best mode for output tok/J and tok/sec across every model.** The reason is arithmetic:
 
-- Going from **15W → 25W**: output tok/s rises *36–47 %* (GPU clock 612 → 820 MHz), while power rises *~36 %*. Net output tok/J gain: *+3 to +26 %* (range wider than tok/s because 25W also cuts [TTFT](#glossary), shrinking the [RL](#glossary) denominator).
+- Going from **15W → 25W**: output tok/s rises *36–47 %* (GPU clock 612 → 820 MHz), while power rises *~36 %*. Net output tok/J gain: *+3 to +26 %* (range wider than tok/s because 25W also cuts [`TTFT`](#glossary), shrinking the [`RL`](#glossary) denominator).
 - Going from **25W → MAXN**: output tok/s changes *−3 %* to *+8 %* depending on model (decode is memory-bandwidth bound, not compute bound), while power rises *~17 %*. Net output tok/J loss: *−8 to −35 %*.
 
 The GPU clock ceiling at 15W (612 MHz) leaves significant decode throughput on the table. Raising it to 820 MHz at 25W captures most of the available throughput improvement with modest additional power. The final jump to 1020 MHz at MAXN costs disproportionate power for marginal gains.
 
-> **Practical recommendation:** Run at 25W for the best balance of speed and efficiency. Use MAXN only when minimising latency ([TTFT](#glossary)) matters more than energy (e.g. interactive chat with long prompts).
+> **Practical recommendation:** Run at 25W for the best balance of speed and efficiency. Use MAXN only when minimising latency ([`TTFT`](#glossary)) matters more than energy (e.g. interactive chat with long prompts).
 
 
 ### 3.3 Best use cases for each power mode
@@ -382,9 +382,9 @@ All figures are mean(p50) across the full prompt × gen sweep (12 combos per mod
 
 ### 3.5 Latency Characteristics
 
-**[TTFT](#glossary) scales near-linearly with prompt across all modes.** At ctx=128 a model like LFM2.5-350M prefills in ~80 ms (25W); at ctx=2048 that grows to ~820 ms. The 25W / MAXN modes reduce TTFT proportionally to their clock ratio vs 15W.
+**[`TTFT`](#glossary) scales near-linearly with prompt across all modes.** At ctx=128 a model like LFM2.5-350M prefills in ~80 ms (25W); at ctx=2048 that grows to ~820 ms. The 25W / MAXN modes reduce TTFT proportionally to their clock ratio vs 15W.
 
-**Inter-token latency ([ITL](#glossary)) p50** is the median per-token decode cost. ITL heatmaps per power mode (all 8 models, all 12 prompt×gen combos) are in [**Appendix G.2**](#appendix-e2)  -  see Figures G.2.a–G.2.d. At the canonical ctx=2048, gen=256:
+**Inter-token latency ([`ITL`](#glossary)) p50** is the median per-token decode cost. ITL heatmaps per power mode (all 8 models, all 12 prompt×gen combos) are in [**Appendix G.2**](#appendix-e2)  -  see Figures G.2.a–G.2.d. At the canonical ctx=2048, gen=256:
 
 <a id="figure-10a"></a>
 
@@ -399,12 +399,12 @@ All figures are mean(p50) across the full prompt × gen sweep (12 combos per mod
 </tr>
 </table>
 
-**Figure 10a: [ITL](#glossary) p50 heatmaps  -  all 4 power modes (rows = gen length, cols = prompt length)**
+**Figure 10a: [`ITL`](#glossary) p50 heatmaps  -  all 4 power modes (rows = gen length, cols = prompt length)**
 
-- [ITL](#glossary) depends on *gen-length* (64, 128, 256) and to some extent reflects the *memory-bandwidth bound*. 
+- [`ITL`](#glossary) depends on *gen-length* (64, 128, 256) and to some extent reflects the *memory-bandwidth bound*. 
 - In our case the gen-lengths tested are *not enough* to cause differences across model × mode combinations beyond the general trend: models <1B have lower ITL than ~1B models, possibly because the KV-cache stays small enough to avoid refills. 
 
-**Decode time (s) p50** is the time spent generating output tokens: `decode_time = request_latency - TTFT`. At ctx=2048, gen=256 (computed as `RL_s` - `TTFT_s` where `RL_s` = [OSL](#glossary) / `tok_s`):
+**Decode time (s) p50** is the time spent generating output tokens: `decode_time = request_latency - TTFT`. At ctx=2048, gen=256 (computed as [`RL_s`](#glossary) - [`TTFT_s`](#glossary) where [`RL_s`](#glossary) = [`OSL`](#glossary) / [`tok_s`](#glossary)):
 
 <a id="table-10a"></a>
 **Table 10a: Decode time speedup ratios - all pairwise mode comparisons (ctx=2048, gen=256)**
@@ -420,15 +420,15 @@ All figures are mean(p50) across the full prompt × gen sweep (12 combos per mod
 | Llama3.2-1B  | 1.46x | 1.62x | 2.70x | 3.95x | **4.37x** | 1.11x |
 | Gemma3-1B    | 1.45x | 1.58x | 2.50x | 3.63x | **3.95x** | 1.09x |
 
-> Speedup = mean(decode_time_baseline) / mean(decode_time_mode) where decode_time = `RL_s` - `TTFT_s`, averaged over all 12 prompt × gen combos. [`decode_J`](#glossary) = [`avg_power_W`](#glossary) × decode_time_s.
+> Speedup = mean(decode_time_baseline) / mean(decode_time_mode) where decode_time = [`RL_s`](#glossary) - [`TTFT_s`](#glossary), averaged over all 12 prompt × gen combos. [`decode_J`](#glossary) = [`avg_power_W`](#glossary) × decode_time_s.
 
-- Decode speedups closely mirror throughput speedups (Table 9) since decode time ≈ 1 / [`tok_s`](#glossary) once [TTFT](#glossary) is subtracted.
+- Decode speedups closely mirror throughput speedups (Table 9) since decode time ≈ 1 / [`tok_s`](#glossary) once [`TTFT`](#glossary) is subtracted.
 - `MAXN vs 25W` > 1.0 for 0.5B–1B models; < 1.0 for SmolLM2 (memory-bandwidth bound, extra clock gives no decode gain).
 
-**[TTFT](#glossary) speedup** - TTFT_baseline / TTFT_mode; values > 1.0 mean the mode has lower TTFT (faster prefill). Speedup = mean(`TTFT_s` at baseline) / mean(`TTFT_s` at mode), averaged over all 12 prompt × gen combos:
+**[`TTFT`](#glossary) speedup** - TTFT_baseline / TTFT_mode; values > 1.0 mean the mode has lower TTFT (faster prefill). Speedup = mean([`TTFT_s`](#glossary) at baseline) / mean([`TTFT_s`](#glossary) at mode), averaged over all 12 prompt × gen combos:
 
 <a id="table-11"></a>
-**Table 11: [TTFT](#glossary) speedup ratios - all pairwise mode comparisons**
+**Table 11: [`TTFT`](#glossary) speedup ratios - all pairwise mode comparisons**
 
 | Model | 25W vs 15W | MAXN vs 15W | 15W vs 7W | 25W vs 7W | MAXN vs 7W | MAXN vs 25W |
 |-------|----------:|-----------:|---------:|---------:|----------:|-----------:|
@@ -446,7 +446,7 @@ d by model size**
 | LFM2.5-1.2B  | 1.2B | 698 MB | **116.2** | 25W / 2048 / 64 |
 | Llama3.2-1B  | 1.0B | 771 MB | **108.9** | 25W / 2048 / 64 |
 
-> Total tok/J = ([ISL](#glossary) + [OSL](#glossary)) / (avg\_power\_W × [RL](#glossary)\_p50\_s)  -  see [Appendix I.6](#appendix-i6) for the full formula. Peaks at ctx=2048, gen=64 for every model because the long prompt dominates the numerator while 25W minimises energy per token. All 48 mode × ctx × gen combinations were searched.
+> Total tok/J = ([`ISL`](#glossary) + [`OSL`](#glossary)) / ([`avg_power_W`](#glossary) × [`RL`](#glossary)\_p50\_s)  -  see [Appendix I.6](#appendix-i6) for the full formula. Peaks at ctx=2048, gen=64 for every model because the long prompt dominates the numerator while 25W minimises energy per token. All 48 mode × ctx × gen combinations were searched.
 
 SmolLM2-135M at 25W achieves **487 total tok/J**, nearly 4.5× more efficient than Llama3.2-1B across the full request.
 
@@ -456,8 +456,8 @@ SmolLM2-135M at 25W achieves **487 total tok/J**, nearly 4.5× more efficient th
 
 Two complementary tok/J lenses on energy efficiency  -  see [I.6](#appendix-i6) for formulas:
 
-- **Decode tok/J** = *[OSL](#glossary) / [`decode_J`](#glossary)*  -  output tokens generated per joule of decode energy only ([TTFT](#glossary) excluded). Measures how efficiently the GPU runs the autoregressive generation loop.
-- **Total tok/J** = *([ISL](#glossary) + [OSL](#glossary)) / [`total_J`](#glossary)*  -  all tokens processed per joule of the full request. Accounts for both prompt processing and generation; favours models that handle long prompts cheaply.
+- **Decode tok/J** = *[`OSL`](#glossary) / [`decode_J`](#glossary)*  -  output tokens generated per joule of decode energy only ([`TTFT`](#glossary) excluded). Measures how efficiently the GPU runs the autoregressive generation loop.
+- **Total tok/J** = *([`ISL`](#glossary) + [`OSL`](#glossary)) / [`total_J`](#glossary)*  -  all tokens processed per joule of the full request. Accounts for both prompt processing and generation; favours models that handle long prompts cheaply.
 
 See [Figure 7b](#figure-7b) (decode tok/J vs prompt length) and [Figure 7c](#figure-7c) (total tok/J vs prompt length) in section 2.2  -  *25W leads at every model and prompt length*. Full combinations: [D.2 Decode](#appendix-d2) · [D.3 Total](#appendix-d3).
 
@@ -470,7 +470,7 @@ See [Figure 7b](#figure-7b) (decode tok/J vs prompt length) and [Figure 7c](#fig
 
 3. Charts in [D.2](#appendix-d2) show that the ~1B models are roughly *flat*, that is, prompt length becomes independent of tok/J in decode tok/J as going from *64* to *256 gen length*.
 
-4. *Total tok/J* grows with *prompt length* because [ISL](#glossary) dominates ([ISL](#glossary)+[OSL](#glossary)) as ctx increases while [`total_J`](#glossary) grows more slowly (decode time is constant), see [D.3](#appendix-d3).
+4. *Total tok/J* grows with *prompt length* because [`ISL`](#glossary) dominates ([`ISL`](#glossary)+[`OSL`](#glossary)) as ctx increases while [`total_J`](#glossary) grows more slowly (decode time is constant), see [D.3](#appendix-d3).
 
 
 <a id="figure-15"></a>
@@ -505,7 +505,7 @@ The LFM2.5 models (Liquid AI) are a notable new entrant: LFM2.5-350M achieves **
 - *12-25 % better* output tok/J than MAXN
 - Low enough peak power (≤ 10 W for sub-1B models) to stay comfortable for sustained operation
 
-Use MAXN only when raw [TTFT](#glossary) matters (live interactive sessions with long prompts). Use 15W or below only when thermally constrained. Never use 7W for production inference: CMA fragmentation will eventually block model loads.
+Use MAXN only when raw [`TTFT`](#glossary) matters (live interactive sessions with long prompts). Use 15W or below only when thermally constrained. Never use 7W for production inference: CMA fragmentation will eventually block model loads.
 
 ### What Is Not Yet Benchmarked
 
@@ -957,15 +957,15 @@ This appendix documents every metric reported in this benchmark, its formula, it
 
 | Symbol | Source | Definition |
 |--------|--------|------------|
-| `ISL` | aiperf JSON `input_sequence_length.avg` | Actual input tokens processed per request (may differ from target due to tokenizer rounding) |
-| `OSL` | aiperf JSON `output_sequence_length.avg` | Actual output tokens generated per request |
-| `TTFT` | aiperf JSON `time_to_first_token.p50` (ms) | Median time from request sent to first output token received; proxy for prefill duration. p50 used (not avg) to avoid skew from occasional slow requests |
-| `ITL` | aiperf JSON `inter_token_latency.p50` (ms) | Median time between consecutive output tokens; per-token decode cost. p50 used for robustness against outliers |
-| `RL` | aiperf JSON `request_latency.p50` (ms) | Median total wall time per request: TTFT + all inter-token intervals. p50 used for energy calculations |
-| `tok_s` | aiperf JSON `output_token_throughput_per_user.avg` | Output tokens per second, single-user (OSL / RL in steady state) |
-| `prefill_tput` | aiperf JSON `prefill_throughput_per_user.avg` | Input tokens processed per second during prefill phase |
+| [`ISL`](#glossary) | aiperf JSON `input_sequence_length.avg` | Actual input tokens processed per request (may differ from target due to tokenizer rounding) |
+| [`OSL`](#glossary) | aiperf JSON `output_sequence_length.avg` | Actual output tokens generated per request |
+| [`TTFT`](#glossary) | aiperf JSON `time_to_first_token.p50` (ms) | Median time from request sent to first output token received; proxy for prefill duration. p50 used (not avg) to avoid skew from occasional slow requests |
+| [`ITL`](#glossary) | aiperf JSON `inter_token_latency.p50` (ms) | Median time between consecutive output tokens; per-token decode cost. p50 used for robustness against outliers |
+| [`RL`](#glossary) | aiperf JSON `request_latency.p50` (ms) | Median total wall time per request: TTFT + all inter-token intervals. p50 used for energy calculations |
+| [`tok_s`](#glossary) | aiperf JSON `output_token_throughput_per_user.avg` | Output tokens per second, single-user (OSL / RL in steady state) |
+| [`prefill_tput`](#glossary) | aiperf JSON `prefill_throughput_per_user.avg` | Input tokens processed per second during prefill phase |
 | `t0`, `t1` | aiperf JSON `start_time`, `end_time` (ISO 8601) | Wall-clock start and end of the full 20-request profiling run |
-| `mW_i` | tegrastats `VDD_CPU_GPU_CV` field (mW) | Instantaneous power on the CPU+GPU+CV rail at sample `i` |
+| `mW_i` | tegrastats [`VDD_CPU_GPU_CV`](#glossary) field (mW) | Instantaneous power on the CPU+GPU+CV rail at sample `i` |
 
 All aiperf metrics are averages over 20 requests per combo. Percentile variants (p50, p90, p99) are also available in the raw JSON but not reproduced here.
 
@@ -978,9 +978,9 @@ All aiperf metrics are averages over 20 requests per combo. Percentile variants 
 avg_power_W = mean(mW_i for all tegrastats samples where t0 <= sample_time <= t1) / 1000
 ```
 
-- `VDD_CPU_GPU_CV` covers the CPU, GPU, and Computer Vision engine rail
+- [`VDD_CPU_GPU_CV`](#glossary) covers the CPU, GPU, and Computer Vision engine rail
 - Does NOT include board overhead (fan, storage, USB) which is on `VDD_IN`
-- `VDD_IN` is ~1.5-3 W higher than `VDD_CPU_GPU_CV` during inference
+- `VDD_IN` is ~1.5-3 W higher than [`VDD_CPU_GPU_CV`](#glossary) during inference
 - Tegrastats interval: 500 ms
 
 ---
@@ -1043,9 +1043,9 @@ total_tok_J   = (ISL + OSL) / total_J
 
 Where `TTFT_s = TTFT / 1000`, `RL_s = RL / 1000`.
 
-- `prefill_tok_J`: input tokens processed per joule of prefill energy. Affected by the approximation in J.5.
-- `decode_tok_J`: output tokens generated per joule of decode energy. Reasonably accurate.
-- `total_tok_J`: all tokens (in + out) per joule of total request energy. Accurate.
+- [`prefill_tok_J`](#glossary): input tokens processed per joule of prefill energy. Affected by the approximation in J.5.
+- [`decode_tok_J`](#glossary): output tokens generated per joule of decode energy. Reasonably accurate.
+- [`total_tok_J`](#glossary): all tokens (in + out) per joule of total request energy. Accurate.
 
 ---
 
@@ -1057,7 +1057,7 @@ mJ_per_output_tok = (decode_J / OSL) * 1000
                   = 1000 / decode_tok_J
 ```
 
-Millijoules per generated output token (`decode_J` is in joules, ×1000 converts to mJ for readability). Carries the same caveat as J.5 for cells where TTFT < 500 ms.
+Millijoules per generated output token ([`decode_J`](#glossary) is in joules, ×1000 converts to mJ for readability). Carries the same caveat as J.5 for cells where TTFT < 500 ms.
 
 ---
 
@@ -1081,7 +1081,7 @@ speedup_MAXN_vs_15W = mean(tok_s_MAXN over all 12 combos) / mean(tok_s_15W  over
 speedup_15W_vs_7W   = mean(tok_s_15W  over all 12 combos) / mean(tok_s_7W   over all 12 combos)
 ```
 
-Averages are over all 4 prompt lengths × 3 gen lengths = 12 combos. `tok_s` = `output_token_throughput_per_user.avg` (aiperf); no p50 is available for throughput. Latency speedup ratios (Tables 10a, 11, 12) use mean of p50 values instead.
+Averages are over all 4 prompt lengths × 3 gen lengths = 12 combos. [`tok_s`](#glossary) = `output_token_throughput_per_user.avg` (aiperf); no p50 is available for throughput. Latency speedup ratios (Tables 10a, 11, 12) use mean of p50 values instead.
 
 ---
 
@@ -1123,15 +1123,15 @@ RL_p99     = request_latency.p99
 
 | Metric | Accurate? | Condition |
 |--------|-----------|-----------|
-| `output_tok_J` | Always | No phase split needed |
-| `total_J` | Always | Full window power * RL |
-| `decode_J` | Mostly | avg_power approx decode power since decode dominates window |
-| `decode_tok_J` | Mostly | Same as above |
-| `total_tok_J` | Always | Uses total_J which is accurate |
-| `prefill_J` | TTFT >= 500 ms only (37 % of cells) | Needs tegrastats sample in prefill window |
-| `prefill_tok_J` | TTFT >= 500 ms only (37 % of cells) | Derived from prefill_J |
+| [`output_tok_J`](#glossary) | Always | No phase split needed |
+| [`total_J`](#glossary) | Always | Full window power * RL |
+| [`decode_J`](#glossary) | Mostly | avg_power approx decode power since decode dominates window |
+| [`decode_tok_J`](#glossary) | Mostly | Same as above |
+| [`total_tok_J`](#glossary) | Always | Uses total_J which is accurate |
+| [`prefill_J`](#glossary) | TTFT >= 500 ms only (37 % of cells) | Needs tegrastats sample in prefill window |
+| [`prefill_tok_J`](#glossary) | TTFT >= 500 ms only (37 % of cells) | Derived from prefill_J |
 | `prefill_%` | TTFT >= 500 ms only (37 % of cells) | Derived from prefill_J |
-| `mJ_per_output_tok` | Mostly | Derived from decode_J |
+| [`mJ_per_output_tok`](#glossary) | Mostly | Derived from decode_J |
 
 ---
 
@@ -1149,11 +1149,11 @@ Power is the **mean VDD_CPU_GPU_CV** (CPU+GPU+CV rail) from `tegrastats` sampled
 
 | Symbol | Source | Definition |
 |--------|--------|------------|
-| `VDD_CPU_GPU_CV` | tegrastats | Instantaneous power (mW) on the CPU+GPU+CV rail |
+| [`VDD_CPU_GPU_CV`](#glossary) | tegrastats | Instantaneous power (mW) on the CPU+GPU+CV rail |
 | `cpu@` | tegrastats | CPU cluster temperature (°C) |
 | `gpu@` | tegrastats | GPU temperature (°C) |
 | `tj@` | tegrastats | Junction (hottest internal die) temperature (°C) |
-| `avg_power_W` | computed | Mean VDD_CPU_GPU_CV over active inference window (W) |
+| [`avg_power_W`](#glossary) | computed | Mean VDD_CPU_GPU_CV over active inference window (W) |
 | `avg_cpu_C` | computed | Mean CPU temp over active inference window |
 | `avg_gpu_C` | computed | Mean GPU temp over active inference window |
 | `peak_tj_C` | computed | Maximum TJ temperature observed |
@@ -1164,7 +1164,8 @@ Throttling is flagged when `peak_tj_C > 85 °C` (leaving a 10 °C safety margin 
 <a id="hardware-disclaimer"></a>
 > ### ⚠ Why Models with Weights > ~1 GB Were Not Tested
 >
-> **All models in this benchmark have GGUF weights ≤ 958 MB. Larger models (e.g. Gemma3-4B Q4_K_M at 2.4 GB) fail to load on JetPack R36.4.7 (L4T 36.4) regardless of power mode or available memory.** This is a known regression in the CUDA IOVA / NvMap contiguous-memory allocator introduced in this JetPack release  -  not a simple "out of RAM" failure.
+> **All models in this benchmar
+k have GGUF weights ≤ 958 MB. Larger models (e.g. Gemma3-4B Q4_K_M at 2.4 GB) fail to load on JetPack R36.4.7 (L4T 36.4) regardless of power mode or available memory.** This is a known regression in the CUDA IOVA / NvMap contiguous-memory allocator introduced in this JetPack release  -  not a simple "out of RAM" failure.
 >
 > **Root cause:** On Jetson platforms, the CUDA driver allocates device-mapped memory through the `NvMap` kernel driver, which requires a **single contiguous block** in the IOVA (I/O Virtual Address) space. Unlike a general-purpose allocator that can stitch together scattered pages, NvMap must find one unbroken IOVA range large enough for the entire allocation in a single call. For a 2.4 GB GGUF like Gemma3-4B, that means requesting a contiguous block of roughly **2.4 GB** (plus KV-cache and CUDA runtime overhead) before any other tensor or buffer is placed in the address space.
 >
