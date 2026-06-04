@@ -10,7 +10,7 @@ framework: "PyTorch"
 environment: "Atari"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/MARL/IPPO"
 date: 2025-08-21
-stars: 222
+stars: 223
 ---
 
 Implementation of IPPO reinforcement learning algorithm

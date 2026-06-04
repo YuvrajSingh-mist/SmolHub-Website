@@ -9,7 +9,7 @@ framework: "NumPy"
 environment: "FrozenLake / GridWorld"
 github_url: "https://github.com/YuvrajSingh-mist/NeatRL/tree/master/Q-Learning"
 date: 2025-01-01
-stars: 222
+stars: 223
 ---
 
 ## Overview

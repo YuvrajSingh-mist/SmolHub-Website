@@ -10,7 +10,7 @@ framework: "PyTorch"
 environment: "Atari"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/DQN-atari"
 date: 2025-08-21
-stars: 222
+stars: 223
 ---
 
 

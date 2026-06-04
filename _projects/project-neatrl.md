@@ -10,7 +10,7 @@ location: Online
 date_iso: 2025-02-01
 github_url: https://github.com/YuvrajSingh-mist/NeatRL
 website_url: /rl/
-stars: 222
+stars: 223
 ---
 
 One-file implementations of deep RL algorithms in PyTorch. Each algorithm is self-contained — readable, runnable, and stripped of unnecessary abstraction.

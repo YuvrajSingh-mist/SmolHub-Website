@@ -9,7 +9,7 @@ framework: "PyTorch"
 environment: "Flappy Bird"
 github_url: "https://github.com/YuvrajSingh-mist/NeatRL/tree/master/DQN-flappy"
 date: 2025-03-01
-stars: 222
+stars: 223
 ---
 
 ## Overview
