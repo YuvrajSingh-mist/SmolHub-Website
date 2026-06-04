@@ -30,8 +30,8 @@ tags:
 **Backend:** llama.cpp CUDA, `-ngl 99` (all layers on GPU), `--no-cache-prompt`  
 **Runs:** Four full sweeps: **7W**, **15W**, **25W**, **MAXN_SUPER**  
 **Sweep:** prompt ∈ {128, 512, 1024, 2048} tok × gen ∈ {64, 128, 256} tok × **20 reqs/combo**  
-**Concurrency:** 1 (single-user) 
-· **Key metric:** **output tok/J** = [`OSL`](#glossary) ÷ ([`avg_power_W`](#glossary) × ([`RL_s`](#glossary) − [`TTFT_s`](#glossary)))
+**Concurrency:** 1 (single-user) - no batching, no parallel requests, no multi-user load  
+**Key metric:** **output tok/J** = [`OSL`](#glossary) ÷ ([`avg_power_W`](#glossary) × ([`RL_s`](#glossary) − [`TTFT_s`](#glossary)))
 
 **Raw data on Hugging Face**  -  complete per-cell JSON exports (all 33 metrics, 12 prompt×gen combos × 20 requests per cell, `profile_export_aiperf.json` + `tegrastats.log` + server logs):
 
@@ -432,8 +432,43 @@ All figures are mean(p50) across the full prompt × gen sweep (12 combos per mod
 
 | Model | 25W vs 15W | MAXN vs 15W | 15W vs 7W | 25W vs 7W | MAXN vs 7W | MAXN vs 25W |
 |-------|----------:|-----------:|---------:|---------:|----------:|-----------:|
-| SmolLM2-135M | 1
-d by model size**
+| SmolLM2-135M | 1.42x | 1.37x | 2.31x | **3.28x** | 3.17x | 0.97x |
+| SmolLM2-360M | 1.44x | 1.37x | 2.47x | **3.55x** | 3.38x | 0.95x |
+| Qwen2.5-0.5B | 1.37x | 1.51x | 2.63x | 3.60x | **3.96x** | 1.10x |
+| LFM2.5-350M  | 1.44x | 1.43x | 2.62x | **3.77x** | 3.75x | 1.00x |
+| LFM2.5-1.2B  | 1.46x | 1.49x | 2.79x | 4.06x | **4.17x** | 1.03x |
+| Qwen3-0.6B   | 1.43x | 1.57x | 2.54x | 3.64x | **4.01x** | 1.10x |
+| Llama3.2-1B  | 1.45x | 1.61x | 2.78x | 4.03x | **4.46x** | 1.11x |
+| Gemma3-1B    | 1.44x | 1.59x | 2.63x | 3.78x | **4.19x** | 1.11x |
+
+- `MAXN` has the highest speedup ratios across all modes, with the largest gains for the bigger models (Qwen3-0.6B, Llama3.2-1B, Gemma3-1B) where the GPU clock increase has more impact.
+- `MAXN/25W` ratios cluster near *1.0x* (*~0.95–1.11x*). Prefill is *compute-bound* (parallel GEMMs over all input tokens), so a naive expectation would be that higher clocks help proportionally - but this was not the case. Why? maybe it becomes memory-bandwidth bound?(let me know in the comments!). 
+For the two smallest models (SmolLM2) the prefill completes so quickly (<300 ms at 25W) that kernel-launch overhead dominates, making higher clocks irrelevant (0.95–0.97x).
+
+**Request latency (E2E) speedup** - Speedup = mean([`RL`](#glossary) p50 at baseline) / mean(RL p50 at mode), averaged over all 12 prompt × gen combos:
+
+<a id="table-12"></a>
+**Table 12: Request latency (E2E) speedup ratios - all pairwise mode comparisons**
+
+| Model | 25W vs 15W | MAXN vs 15W | 15W vs 7W | 25W vs 7W | MAXN vs 7W | MAXN vs 25W |
+|-------|----------:|-----------:|---------:|---------:|----------:|-----------:|
+| SmolLM2-135M | 1.41x | 1.36x | 2.14x | **3.02x** | 2.92x | 0.97x |
+| SmolLM2-360M | **1.46x** | 1.31x | 1.84x | 2.69x | 2.40x | 0.89x |
+| Qwen2.5-0.5B | 1.34x | 1.41x | 2.81x | 3.77x | **3.97x** | 1.06x |
+| LFM2.5-350M  | 1.45x | 1.43x | 2.56x | **3.70x** | 3.66x | 0.99x |
+| LFM2.5-1.2B  | 1.46x | 1.43x | 2.72x | **3.98x** | 3.90x | 0.98x |
+| Qwen3-0.6B   | 1.45x | 1.59x | 2.46x | 3.58x | **3.90x** | 1.09x |
+| Llama3.2-1B  | 1.46x | 1.62x | 2.71x | 3.96x | **4.38x** | 1.11x |
+| Gemma3-1B    | 1.45x | 1.58x | 2.52x | 3.65x | **3.98x** | 1.09x |
+
+- Mirrors the [`TTFT`](#glossary) speedup trends since prefill dominates the request latency at these gen lengths.
+
+### 3.6 Model Size vs Efficiency
+
+The relationship is clear: **smaller quantized models always win on total tok/J**, not just tok/s.
+
+<a id="table-13"></a>
+**Table 13: Best total tok/J ranked by model size**
 
 | Model | Params | GGUF | Best total tok/J | At mode / ctx / gen |
 |-------|-------:|-----:|-----------------:|---------------------|
