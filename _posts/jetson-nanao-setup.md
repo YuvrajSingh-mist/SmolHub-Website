@@ -1,235 +1,185 @@
 ---
-title: 'Clustering 4 Raspberry Pis 4B'
+title: 'Clustering 3 Jetson Orin Nanos'
 date: 2026-05-10
-permalink: /posts/raspberry-pi-cluster-setup-guide/
+permalink: /posts/jetson-orin-nano-cluster-setup-guide/
 author_profile: false
-excerpt: "Build a 4-node Raspberry Pi 4B cluster with UCTRONICS enclosure, PoE+ hats, and TP-Link LS110P PoE switch. Real numbers: 94.4 Mbps per link (100 Mbps switch ceiling), 62.3°C under full 16-core load, zero throttling at 1800 MHz throughout."
+excerpt: "Build a 3-node Jetson Orin Nano 8GB cluster with active cooling. Real numbers: ~759 Mbps per link (gigabit), peak 58.3°C across all 3 nodes under full 18-core sustained load, zero throttling at 1728 MHz throughout."
 tags:
   - Distributed Setup
   - Cluster Setup
   - Ethernet Networking
-  - Raspberry Pi
-  - PoE
+  - Jetson Orin Nano
+  - NVIDIA
+  - Edge AI
   - Guide
 ---
 
-> **Tested on:** Raspberry Pi 4B 4GB (Rev 1.5), Debian GNU/Linux 13 (trixie) — kernel 6.12.62+rpt-rpi-v8, UCTRONICS U6260 enclosure, Official PoE+ HAT, TP-Link LS110P PoE switch
-> **Firmware:** Raspberry Pi 4 Model B Rev 1.5 — `6.12.62+rpt-rpi-v8` — Aug 20 2025 17:02:31 — `cd866525580337c0aee4b25880e1f5f9f674fb24`
+> **Tested on:** NVIDIA Jetson Orin Nano 8GB Developer Kit, Ubuntu 22.04.5 LTS, kernel 5.15.148-tegra, L4T R36.4.7, CUDA 12.6, TP-Link TL-SG108E gigabit switch
+> **JetPack:** R36 (release), REVISION: 4.7, CUDA 12.6, Driver 540.4.0
 
-You have four Raspberry Pi 4Bs. You built the proper setup: UCTRONICS enclosure, PoE+ hats, TP-Link unmanaged switch. One power cable. Everything stacked, cooled, and networked.
+You have three Jetson Orin Nanos. Each has a 6-core ARM Cortex-A78 CPU, an Ampere GPU with CUDA 12.6, and 8GB LPDDR5. This is real GPU compute at the edge. Not a toy..
 
-This guide walks you through setting up a real 4-node Raspberry Pi cluster. Not marketing hype — real measured numbers: **94.4 Mbps** per link (100 Mbps switch ceiling), **62.3°C** peak under full 16-core sustained load, zero throttling at 1800 MHz throughout. Stable, thermally managed, and ready for distributed inference.
+This guide walks you through setting up a real 3-node Jetson Orin Nano cluster. Real measured numbers from this exact hardware: **~759 Mbps** per link (gigabit), peak **58.3°C** across all 3 nodes under full 18-core sustained load, zero throttling at 1728 MHz throughout. Stable, thermally managed, and ready for CUDA-accelerated distributed inference.
 
-By the end, your Pis will boot via PoE, talk to each other with <5ms latency, and be ready for inference workloads across all 4 nodes.
+By the end, your Nanos will boot, talk to each other with <2ms latency, and be ready for inference workloads across all 3 nodes.
 
 <figure>
-  <img src="/images/blogs/pi-cluster-setup-guide/my-pi-cluster.jpeg" alt="My Raspberry Pi cluster setup with UCTRONICS enclosure, PoE+ HATs, and TP-Link LS110P switch" />
-  <figcaption>Figure 1. My Raspberry Pi cluster setup with UCTRONICS enclosure, PoE+ HATs, and TP-Link LS110P switch.</figcaption>
+  <img src="/images/blogs/jetson-orin-nano-super-cluster-setup/jetson-setup.jpg" alt="My Jetson Orin Nano cluster" />
+  <figcaption>Figure 1. 3-node Jetson Orin Nano cluster.</figcaption>
 </figure>
 
----
 
 ## Why This Setup?
 
-- **No separate power cables.** PoE powers each Pi over the same Ethernet cable. Cleaner.
-- **Thermal managed.** UCTRONICS fans keep temps 45-62°C under full 16-core load. No throttling.
-- **Real performance.** 94.4 Mbps per link — the TP-Link LS110P's 100 Mbps ceiling. CPU has zero impact on throughput. A gigabit switch would give another 10×.
-- **Simple network.** One switch. Star topology. All nodes see each other at <5ms latency.
+- **Real GPU compute on every node.** Each Orin Nano has a 1024-core Ampere GPU and CUDA 12.6 built in. Not CPU-only edge boxes.
+- **Active cooling keeps temps in check.** Under full 18-core sustained load across all 3 nodes, temps plateau at ~60°C, 35°C below the the 95°C throttle threshold.
+- **MAXN_SUPER mode unlocks full performance.** Set `nvpmodel -m 2` and `jetson_clocks` on each node. Clocks pin at 1728 MHz CPU / 1020 MHz GPU.
+- **Simple network.** One unmanaged switch. Star topology. All nodes at <2ms latency.
 
----
 
 ## The Hardware
 
 | Component | Model | Notes |
 |---|---|---|
-| **Cluster** | 4x Raspberry Pi 4B 4GB (Rev 1.5) | ARM Cortex-A72, up to 1800 MHz (ondemand governor) |
-| **Enclosure** | UCTRONICS U6260 | Stacks 4 Pis, 2 cooling fans included |
-| **Power/Network** | Official PoE+ HAT (×4) | 30W max per port, power + data over Ethernet |
-| **Switch** | TP-Link LS110P | 10-port unmanaged, 8 PoE+ ports (10/100Mbps per port), **96W total PoE budget**, Plug & Play, Isolation Mode |
-| **Cables** | Cat 6 Ethernet (×4) | Cat 6 recommended; some switch bundles include cables |
-| **Storage** | MicroSD 32GB (×4) | Or NVMe boot via PoE+ HAT |
+| **Nodes** | 3x NVIDIA Jetson Orin Nano 8GB Developer Kit | 6x ARM Cortex-A78 @ 1728 MHz, 1024-core Ampere GPU @ 1020 MHz, 8GB LPDDR5 |
+| **Switch** | TP-Link TL-SG108E | 8-port unmanaged gigabit switch, plug & play |
+| **Power** | 19V DC power adapter (included with dev kit) | Included in the box; use only the provided adapter |
+| **Cables** | Cat 6–Cat 8 Ethernet (×3) | Any Cat 6+ works |
+| **Storage** | microSD 128GB (×3) or NVMe SSD | JetPack + CUDA libs + models fill space fast; NVMe is faster |
+| **Cooling** | Active fan (included with dev kit) | Required; do not run cluster workloads fanless |
+| **Case** | 52Pi Raspberry Pi Cluster Case with 120mm RGB LED 5V Fan | Acrylic cluster enclosure with active 120mm top fan; fits the Orin Nano carrier boards with standard standoff spacing |
 
----
+
 
 ## Real Performance Expectations
 
-**Be real with yourself:**
+Numbers measured on this exact hardware:
 
-- **Throughput:** **94.4 Mbps** per link after fixing cables (Cat6/Cat8). Original cables negotiated at 10 Mbps → cable swap was a 10× improvement. Switch ceiling is 100 Mbps. Gigabit switch (e.g. TL-SG108PE) would give another 10×.
+- **Throughput (measured, gigabit)**:
+    - nano-3→nano-1: **770 Mbps**
+    - nano-3→nano-2: **759 Mbps**
+    - nano-1→nano-2: **750 Mbps**. 
 
-> **Update:** Mine was stuck at 10 Mbps because the TP-Link LS110P's **Extend Mode** (PoE Long-Range) was enabled — it hard-caps ports to 10 Mbps to extend cable range to 250m. Flipping the DIP switch on the bottom of the switch from EXTEND → NORMAL fixed it instantly. Then swapping to proper Cat6/Cat8 cables got it to 94.4 Mbps. See the [Bandwidth troubleshooting](#bandwidth-is-only-95-mbps) section.
-- **Latency:** <5ms between nodes. Good enough for inference batching.
-- **Thermals:** Idle 45–49°C. Single core load peaks at ~54°C. All 4 cores sustained: 60–62°C. Full 16-core cluster sustained 10 min: **62.3°C max, zero throttling**. Clock holds at 1800 MHz throughout.
-- **Power draw:** ~15-20W per Pi under load. Total ~60-80W cluster. Well within PoE+ limits (30W per port).
+  Both nodes sending simultaneously from nano-3: 391 + 365 Mbps (nano-3 NIC saturated at ~756 Mbps total).
+- **Latency:** <2ms between nodes on the local switch. Measured: 0.5–1.3ms in real ping tests.
+- **Thermals, single node (5-min stress, fan running):**
+  - Idle: **~50°C** CPU / 49°C GPU
+  - 1-core load: peak **55.2°C**, stabilises 54–55°C, 1728 MHz throughout
+  - All 6 cores: peak **60.4°C**, stabilises 59–60°C, 1728 MHz throughout
+- **Thermals, full cluster (18 cores across all 3 nodes, 10-min stress, measured on each node):**
+  - nano-1 peak: **57.0°C** | nano-2 peak: **55.5°C** | nano-3 peak: **58.3°C** CPU / **56.8°C** GPU
+  - All nodes held **1728 MHz** for the full 10 minutes. Zero throttling.
+  - 95°C throttle threshold gives **~37°C headroom** at peak cluster load.
+- **GPU:** 1024-core Ampere @ 1020 MHz (MAXN_SUPER + jetson_clocks). CUDA 12.6, cuDNN 9.x, TensorRT 10.x.
 
 **Perfect for:**
-- Distributed inference (models <500M params)
-- Data preprocessing / ETL
-- Learning how distributed systems actually work
-- Edge AI that runs on device
+- Distributed GPU inference (split model or batch across nodes)
+- CUDA-accelerated preprocessing / ETL
+- Edge AI that runs entirely on-device
+- Learning how distributed GPU systems work
 
 **Not good for:**
-- Large model training (>1B params gets slow)
-- High-bandwidth gradient sync
 
----
+- High-bandwidth inter-node gradient sync at scale since these are linked via 100 Mbps Ethernet. For distributed training, consider a cluster with a 10 Gbps switch or direct NVLink connections.
+
 
 ## Step 1: Assemble the Hardware
 
-1. Follow the UCTRONICS manual (trust me it's good!) to construct the housing.
+**Start with the case.** Follow the 52Pi cluster case user manual to assemble the acrylic layers and mount the standoffs before touching the Jetson boardssince it's much easier to build the frame empty than to retrofit boards into it later.
 
-2. Once its done, stack all 4 Pis with PoE+ HATs (make sure to properly align the pins with the Pi ones!)
+Once the frame is built, seat each Orin Nano carrier board into its layer using the standoffs provided in the 52Pi kit, then connect the 120mm 5V RGB fan header to an available 5V GPIO or fan pin as shown in the manual. The case fan handles ambient airflow across all three nodes; the per-board fan on each Orin Nano still handles direct SoC cooling and must remain connected.
 
-3. Finally, place the stacked Pis into the enclosure. Stack order matters for airflow—usually bottom to top 
- > **IMPORTANT:** You'll need to conenct the inbuilt enclusure's fans to  a few of the PI's - follow the enclosure manual for the PIN configuration.
+> SoC or a system on a chip is where all the CPU, GPU ,memory, and other components are integrated into a single chip. The fan on the Orin Nano carrier board cools this critical component directly, while the case fan circulates air around the whole cluster.
 
-4. Plug the TP-Link switch into power. Wait 30 seconds for it to boot.
+The Orin Nano Developer Kit ships with a 19V power adapter. Connect it to the barrel jack on the carrier board. The board powers on automatically when connected. No power button is required to be pressed.
 
-Plug each Pi into the switch via Cat 6 Ethernet cables. One end of the Cat 6 cable goes in the Pi, the other end goes into the switch.
+Make sure each node's fan is connected. The developer kit includes an active fan and it is mandatory for sustained workloads; connect it to the fan header on the carrier board before first boot.
+
+Connect each Orin Nano to the TL-SG108E switch via Cat 6 Ethernet:
+
+```
+nano-1 ──── Cat6 ──── TP-Link TL-SG108E port 1
+nano-2 ──── Cat6 ──── TP-Link TL-SG108E port 2
+nano-3 ──── Cat6 ──── TP-Link TL-SG108E port 3
+```
+
+Plug the switch into power. Wait 30 seconds for it to initialise.
 
 <figure>
-  <img src="/images/blogs/pi-cluster-setup-guide/tp-link-router.jpeg" alt="TP-Link Switch all plugged in with ethernet cables connecting to Pi cluster" />
-  <figcaption>Figure 2. TP-Link Switch all plugged in with ethernet cables connecting to Pi cluster.</figcaption>
+  <img src="/images/blogs/jetson-orin-nano-super-cluster-setup/switch.jpg" alt="TP-Link TL-SG108E switch connected to the three Orin Nanos" />
+  <figcaption>Figure 2. TP-Link TL-SG108E with all 3 Orin Nanos connected.</figcaption>
 </figure>
 
-> **Caution — Verify your cables before plugging in:**
-> Cat 6 cables are labeled. Flip the cable and look for `CAT6` or `CAT.6` printed along the sheath. If it says `CAT5` or `CAT5e`, it'll still work but you won't get the full benefit for Gigabit at this length. If there's no label at all, it's likely a cheap unrated cable—swap it.
-> 
-> Also do a quick physical check: both RJ45 connectors should click firmly into the port (you'll hear it), the locking tab should be intact, and the cable shouldn't have any sharp kinks or crimps along the run. A damaged cable can cause intermittent drops that are annoying to debug later.
 
-5. Watch for the red LED to light up on each Pi—that's PoE power being detected. Its just for verification that power is flowing. The green LED will start blinking as the Pi boots (after following [Step 2](#step-2-flash-raspberry-pi-os)).
+## Step 2: Install JetPack & First Boot
 
-<div style="display:flex; gap:1rem; align-items:flex-start; flex-wrap:wrap;">
-  <figure style="flex:1; min-width:240px; margin:0;">
-    <img src="/images/blogs/pi-cluster-setup-guide/pi-poe-hat.jpeg" alt="Pi PoE+ hat on Raspberry Pi" style="width:100%;" />
-    <figcaption>Figure 3. Pi PoE+ hat on Raspberry Pi.</figcaption>
-  </figure>
-  <figure style="flex:1; min-width:240px; margin:0;">
-    <img src="/images/blogs/pi-cluster-setup-guide/picluster-case-with-ethernet-cables.jpeg" alt="Complete Pi Cluster" style="width:100%;" />
-    <figcaption>Figure 4. Complete Pi Cluster.</figcaption>
-  </figure>
-</div>
+Follow the **[NVIDIA Jetson Orin Nano Developer Kit Quick Start Guide](https://docs.nvidia.com/jetson/orin-nano-devkit/user-guide/latest/quick_start.html)** to get each node booted and set up. That guide covers everything: firmware check, creating the bootable USB installer with balenaEtcher, the install flow, and the first-boot OOBE wizard.
 
----
+Two things to set consistently across all 3 nodes during setup:
+- **Username:** same on every node (e.g. `yuvrajsingh`)
+- **Hostname:** `nano-1`, `nano-2`, `nano-3`
 
-## Step 2: Flash Raspberry Pi OS
-
-Download **Raspberry Pi Imager** from [raspberrypi.com](https://raspberrypi.com):
-
-Launch Imager and flash each microSD card with these settings:
-
-1. Click **Choose Device** → **Raspberry Pi 4**
-2. Click **Choose OS** → **Raspberry Pi OS (64-bit)**
-3. Click **Choose Storage** → Your microSD card
-4. Click **Settings** (gear icon) and configure:
-   - **Hostname:** `pi-1` (or `pi-2`, `pi-3`, `pi-4` for the others)
-   - **Enable SSH:** ✓
-   - **Set username and password:** `pi` / your password
-   - **Configure wireless LAN:** Leave blank
-   - **Set locale:** Your timezone
-
-Click **Save**, then **Write**. Wait ~2 minutes per card.
-
-Repeat for all 4 cards.
-
-Follow the video here if you need a visual:
-
-<div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; max-width:680px;">
-  <iframe
-    src="https://www.youtube.com/embed/_d-qvHJ7EwU"
-    title="Raspberry Pi Imager Tutorial"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen
-    style="position:absolute; top:0; left:0; width:100%; height:100%;">
-  </iframe>
-</div>
-
----
-
-## Step 3: Insert microSD Cards & Boot
-
-Unscrew each of Pi from the enclosure and insert each flashed microSD card into each of your Pi (flip the board and you'll see a tiny microSD slot) in the UCTRONICS tray.
-
-Plug all Cat 6 Ethernet cables into the switch ports. You should see:
-- Red LED on each Pi lights up within 5 seconds (PoE power detected)
-- All 4 Pis boot within 45 seconds
-- Green LED activity on the switch ports as they initialize
-
-Test from your laptop:
+After the wizard, enable SSH on each node:
 
 ```bash
-ping pi-1.local
-ping pi-2.local
-ping pi-3.local
-ping pi-4.local
+sudo systemctl enable --now ssh
 ```
 
-Expected:
+Then set max performance mode. Default after install is 25W; switch to MAXN_SUPER:
 
-```
-PING pi-1.local (192.168.1.100): 56 data bytes
-64 bytes from 192.168.1.100: icmp_seq=0 ttl=64 time=1.234 ms
-64 bytes from 192.168.1.100: icmp_seq=1 ttl=64 time=1.156 ms
---- pi-1.local statistics ---
-4 packets transmitted, 4 packets received, 0.0% packet loss
-round-trip min/avg/max/stddev = 1.156/1.237/1.340/0.065 ms
+```bash
+sudo nvpmodel -m 2
 ```
 
-If `.local` mDNS doesn't work on your laptop, find the IPs instead (Step 4).
+Disconnect the monitor/keyboard. Everything from here is headless.
 
----
 
 ## Step 4: Find Your IP Addresses
 
-SSH into pi-1:
+SSH into nano-1:
 
 ```bash
-ssh pi@pi-1.local
+ssh yuvrajsingh@nano-1.local
 ```
 
-Password: whatever you set in Imager (e.g., `raspberry`).
-
-Once logged in, find the IP:
+Find the IP:
 
 ```bash
-hostname -I (gives you all IPs assigned to the Pi)
+hostname -I
 ```
 
 Output (example):
 
 ```
-192.168.1.100 fd12:3456::789
+192.168.1.11 172.17.0.1
 ```
 
-Note the IPv4 address (the first number). Repeat for all 4 Pis and write them down.
+The first address is your LAN IP. Ignore `172.17.0.1` (Docker's bridge). Repeat for all 3 Nanos.
 
-**Your IPs will be different** depending on your router and network. This is an example:
+**Example IPs (yours will differ):**
 
 ```
-pi-1: 192.168.1.100
-pi-2: 192.168.1.101
-pi-3: 192.168.1.102
-pi-4: 192.168.1.103
+nano-1: 192.168.1.11
+nano-2: 192.168.1.12
+nano-3: 192.168.1.13
 ```
 
-Before moving on, note these DHCP IPs — you'll need them for the next step to set up a private subnet.
+Write these down. You need them for the next step.
 
----
 
 ## Step 4b: Assign Private Subnet IPs (Recommended)
 
-> **Why?** A private subnet gives each Pi a stable, predictable address that you control, isolates all cluster traffic to a known range, and makes SSH config, scripts, and inter-node communication unambiguous.
+> **Why?** A private subnet gives each Nano a stable, predictable address you control, isolates all cluster traffic to a known range, and makes SSH config, scripts, and inter-node communication unambiguous.
 
-We'll add a static secondary IP on `10.10.1.x/24` to each Pi's eth0 alongside the existing DHCP address. The Pi keeps internet access via DHCP; cluster jobs use `10.10.1.x`.
+We'll add a static secondary IP on `10.10.1.x/24` to each Nano's `eth0` alongside the existing DHCP address.
 
-Do this on each Pi one at a time. SSH in using its DHCP IP from Step 4:
+SSH into each Nano using its DHCP IP:
 
 ```bash
-ssh pi@192.168.1.7   # pi4-1 — use your actual DHCP IP
+ssh yuvrajsingh@192.168.1.11   # nano-1
 ```
 
-Check your NetworkManager connection name:
+Check the NetworkManager connection name:
 
 ```bash
 nmcli connection show
@@ -242,15 +192,15 @@ NAME                UUID                                  TYPE      DEVICE
 Wired connection 1  a1b2c3d4-...                          ethernet  eth0
 ```
 
-Note the name in the first column. Then add the static private IP — use the matching IP from the table below:
+Add the static private IP:
 
 ```bash
-# On pi4-1:
+# On nano-1:
 sudo nmcli connection modify "Wired connection 1" +ipv4.addresses "10.10.1.1/24"
 sudo nmcli connection up "Wired connection 1"
 ```
 
-Verify both IPs are now live:
+Verify:
 
 ```bash
 ip addr show eth0
@@ -260,229 +210,248 @@ Expected:
 
 ```
 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> ...
-    inet 192.168.1.7/24 brd 192.168.1.255 scope global dynamic noprefixroute eth0
+    inet 192.168.1.11/24 brd 192.168.1.255 scope global dynamic noprefixroute eth0
     inet 10.10.1.1/24 brd 10.10.1.255 scope global noprefixroute eth0
 ```
 
-Repeat on all 4 Pis:
+Repeat on all 3 Nanos:
 
 | Node | DHCP IP (Step 4) | Private IP to assign |
 |---|---|---|
-| pi4-1 | 192.168.1.7 | `10.10.1.1` |
-| pi4-2 | 192.168.1.5 | `10.10.1.2` |
-| pi4-3 | 192.168.1.3 | `10.10.1.3` |
-| pi4-4 | 192.168.1.6 | `10.10.1.4` |
+| nano-1 | 192.168.1.11 | `10.10.1.1` |
+| nano-2 | 192.168.1.12 | `10.10.1.2` |
+| nano-3 | 192.168.1.13 | `10.10.1.3` |
 
-**From here on, all steps use `10.10.1.x` IPs.** The DHCP IPs are still active if you need them, but everything cluster-related — SSH keys, config, inter-node traffic — goes through `10.10.1.x`.
+**From here on, all steps use `10.10.1.x` IPs.**
 
----
 
-## Step 5: Test All 4 Nodes Ping Each Other
+## Step 5: Test All 3 Nodes Ping Each Other
 
-From your laptop, ping all 4 Pis using the private subnet IPs assigned in Step 4b:
+From your laptop:
 
 ```bash
 ping 10.10.1.1
 ping 10.10.1.2
 ping 10.10.1.3
-ping 10.10.1.4
 ```
 
-(If private IPs aren't responding yet, you can use the DHCP IPs from Step 4 temporarily.)
-
-### 5a: SSH into pi-1 and ping the other nodes
-
-SSH into pi4-1:
+### 5a: SSH into nano-1 and ping the other nodes
 
 ```bash
-ssh pi@10.10.1.1
+ssh yuvrajsingh@10.10.1.1
 ```
 
-It'll ask you to verify the host fingerprint the first time:
-
-```
-The authenticity of host '10.10.1.1 (10.10.1.1)' can't be established.
-ED25519 key fingerprint is SHA256:abc123xyz...
-Are you sure you want to continue connecting (yes/no/[fingerprint])?
-```
-
-Type `yes` and press Enter:
-
-```
-Warning: Permanently added '10.10.1.1' (ED25519) to the list of known hosts.
-pi@10.10.1.1's password:
-```
-
-Enter the password you set in Imager. You won't see anything typed—that's normal. Press Enter:
-
-```
-Linux pi-1 6.1.21-v8+ #1642 SMP PREEMPT Mon Apr  3 17:24:16 BST 2023 aarch64
-...
-Last login: Tue May 13 10:00:00 2026
-pi@minilab-pi4-1:~ $
-```
-
-You're in.
-
-From there, ping the others:
+From there:
 
 ```bash
 ping 10.10.1.2
 ping 10.10.1.3
-ping 10.10.1.4
 ```
 
-Expected output for each:
+Expected output:
 
 ```
-PING 10.10.1.2 (10.10.1.2): 56 data bytes
-64 bytes from 10.10.1.2: icmp_seq=0 ttl=64 time=2.341 ms
-64 bytes from 10.10.1.2: icmp_seq=1 ttl=64 time=2.215 ms
+PING 10.10.1.2 (10.10.1.2) 56(84) bytes of data.
+64 bytes from 10.10.1.2: icmp_seq=1 ttl=64 time=0.633 ms
+64 bytes from 10.10.1.2: icmp_seq=2 ttl=64 time=0.477 ms
 ```
 
-All working? Good. Move on.
+Measured on this hardware: **0.5–1.3ms** between nodes. All working? Move on.
 
----
 
 ## Step 6: Set Up SSH Keys
 
-Generate a key on your laptop (coordinator node eg your macbook):
+Generate a key on your laptop (or any node you want to connect from):
 
 ```bash
-ssh-keygen -t ed25519 -f ~/.ssh/pi_cluster
+ssh-keygen -t ed25519 -f ~/.ssh/nano_cluster -N ""
 ```
 
-It'll ask for a passphrase:
+The `-N ""` skips the passphrase prompt, needed for passwordless SSH to work smoothly. You'll see:
 
 ```
 Generating public/private ed25519 key pair.
-Enter passphrase (empty for no passphrase):
-```
-
-Press Enter to leave it empty (recommended for cluster use so passwordless SSH works smoothly later):
-
-```
-Enter same passphrase again:
-```
-
-Press Enter again. You'll see:
-
-```
-Your identification has been saved in /Users/your_user/.ssh/pi_cluster
-Your public key has been saved in /Users/your_user/.ssh/pi_cluster.pub
+Your identification has been saved in /home/yuvrajsingh/.ssh/nano_cluster
+Your public key has been saved in /home/yuvrajsingh/.ssh/nano_cluster.pub
 The key fingerprint is:
-SHA256:abc123xyz... your_user@your_laptop
+SHA256:ej69Uum+V2f0xsSXr8/hZjqhGwuvEi/UehbtTqc5iSE yuvrajsingh@nano-3
+The key's randomart image is:
++--[ED25519 256]--+
+|                 |
+|               ..|
+|        S ..   ++|
+|       E +o. .. B|
+|      o *==ooo.* |
+|       *o=*=B.o+.|
++----[SHA256]-----+
 ```
 
-Key generated. Two files created: `pi_cluster` (private, never share) and `pi_cluster.pub` (public, goes on the Pis).
-
-Copy the key to all 4 Pis using the private subnet IPs from Step 4b:
+Pre-add the other nodes' host keys to skip the fingerprint prompt on first connect:
 
 ```bash
-ssh-copy-id -i ~/.ssh/pi_cluster.pub pi@10.10.1.1
-ssh-copy-id -i ~/.ssh/pi_cluster.pub pi@10.10.1.2
-ssh-copy-id -i ~/.ssh/pi_cluster.pub pi@10.10.1.3
-ssh-copy-id -i ~/.ssh/pi_cluster.pub pi@10.10.1.4
+ssh-keyscan -H 10.10.1.1 10.10.1.2 >> ~/.ssh/known_hosts
 ```
 
-For each, you'll see:
+Copy the key to all nodes:
+
+```bash
+ssh-copy-id -i ~/.ssh/nano_cluster.pub yuvrajsingh@10.10.1.1
+ssh-copy-id -i ~/.ssh/nano_cluster.pub yuvrajsingh@10.10.1.2
+ssh-copy-id -i ~/.ssh/nano_cluster.pub yuvrajsingh@10.10.1.3
+```
+
+Each will ask for the node's password once, then show:
 
 ```
-/usr/bin/ssh-copy-id: INFO: attempting to log in with the key(s) from "/Users/your_user/.ssh/pi_cluster.pub" to see if they work
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
 /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
-pi@10.10.1.1's password:
-```
+yuvrajsingh@10.10.1.1's password:
 
-Enter the Pi's password. After success:
-
-```
 Number of key(s) added: 1
 
-Now try logging in with:
-  "ssh -i /Users/your_user/.ssh/pi_cluster 'pi@10.10.1.1'"
-
+Now try logging into the machine, with:   "ssh 'yuvrajsingh@10.10.1.1'"
 and check to make sure that only the key(s) you wanted were added.
 ```
 
 Test passwordless login:
 
 ```bash
-ssh -i ~/.ssh/pi_cluster pi@10.10.1.1
+ssh -i ~/.ssh/nano_cluster yuvrajsingh@10.10.1.1
 ```
 
-Should connect without a password. Type `exit` to disconnect.
+No password prompt. Type `exit`.
 
----
 
 ## Step 7: Create SSH Config
 
-Edit `~/.ssh/config` on your laptop:
+Append to `~/.ssh/config`:
 
 ```bash
-nano ~/.ssh/config
-```
+cat >> ~/.ssh/config << 'EOF'
 
-Add (using the private subnet IPs from Step 4b):
-
-```
-Host pi4-1
+Host nano-1
     HostName 10.10.1.1
-    User pi
-    IdentityFile ~/.ssh/pi_cluster
+    User yuvrajsingh
+    IdentityFile ~/.ssh/nano_cluster
     IdentitiesOnly yes
 
-Host pi4-2
+Host nano-2
     HostName 10.10.1.2
-    User pi
-    IdentityFile ~/.ssh/pi_cluster
+    User yuvrajsingh
+    IdentityFile ~/.ssh/nano_cluster
     IdentitiesOnly yes
 
-Host pi4-3
+Host nano-3
     HostName 10.10.1.3
-    User pi
-    IdentityFile ~/.ssh/pi_cluster
+    User yuvrajsingh
+    IdentityFile ~/.ssh/nano_cluster
     IdentitiesOnly yes
-
-Host pi4-4
-    HostName 10.10.1.4
-    User pi
-    IdentityFile ~/.ssh/pi_cluster
-    IdentitiesOnly yes
+EOF
 ```
 
-Replace the IPs with your actual ones from Step 4b.
-
-Save and exit. Now connect with:
+Test the shortcuts:
 
 ```bash
-ssh pi4-1
-ssh pi4-2
-ssh pi4-3
-ssh pi4-4
+ssh nano-1
 ```
 
-Much cleaner.
+You'll see:
 
----
+```
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.148-tegra aarch64)
+...
+yuvrajsingh@yuvrajsingh-jetson-nano1:~$
+```
 
-## Step 8: Update All Pis
+No password. Type `exit` and repeat for `nano-2` and `nano-3`.
 
-SSH into pi4-1:
+
+## Step 8: Update & Set Performance Mode
+
+### Update the OS
 
 ```bash
-ssh pi4-1
+ssh nano-1
 sudo apt update && sudo apt upgrade -y
 sudo reboot
 ```
 
-Wait 30 seconds and repeat for pi4-2, pi4-3, pi4-4.
+Wait 30 seconds, repeat for nano-2 and nano-3.
 
-Install Python and tools:
+### Set MAXN_SUPER Performance Mode
+
+By default, Orin Nano may boot in a lower power mode. The available modes on this hardware:
+
+| Mode ID | Name | Notes |
+|---|---|---|
+| 0 | 15W | Moderate performance |
+| 1 | 25W | High performance |
+| 2 | MAXN_SUPER | Maximum (use this) |
+| 3 | 7W | Low power |
+
+Switch to MAXN_SUPER (mode 2) on each node:
 
 ```bash
-ssh pi4-1
+sudo nvpmodel -m 2
+```
+
+Verify:
+
+```bash
+nvpmodel -q
+```
+
+Expected:
+
+```
+NV Power Mode: MAXN_SUPER
+2
+```
+
+Lock all clocks to maximum:
+
+```bash
+sudo jetson_clocks
+```
+
+Verify:
+
+```bash
+sudo jetson_clocks --show
+```
+
+GPU should show `MinFreq=1020000000 MaxFreq=1020000000 CurrentFreq=1020000000`. CPU should be at 1728 MHz.
+
+Check current CPU freq:
+
+```bash
+cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq
+```
+
+Expected: `1728000` (1728 MHz).
+
+> **Make it persistent across reboots.** Add to `/etc/rc.local` before the `exit 0` line:
+> ```bash
+> sudo nano /etc/rc.local
+> # Add before 'exit 0':
+> /usr/bin/nvpmodel -m 2
+> /usr/bin/jetson_clocks
+> ```
+
+### Install Python and Tools
+
+```bash
 sudo apt install -y python3-pip python3-venv python3-dev git htop
 ```
+
+Install `jtop`, interactive monitoring for Jetson (GPU, CPU, temps, CUDA all in one):
+
+```bash
+sudo pip3 install jetson-stats
+sudo systemctl restart jtop.service
+```
+
+Run with: `sudo jtop`
 
 Create a venv:
 
@@ -491,28 +460,25 @@ python3 -m venv ~/cluster_env
 source ~/cluster_env/bin/activate
 ```
 
-Repeat on all 4 Pis.
+Repeat on all 3 Nanos.
 
----
 
 ## Step 9: Test Bandwidth
 
 Real throughput test between nodes using `iperf3`.
 
-First, install iperf3 on all Pis:
+Install on all Nanos:
 
 ```bash
 sudo apt install -y iperf3
 ```
 
-On pi4-1, start the server:
+On nano-1, start the server:
 
 ```bash
-ssh pi4-1
+ssh nano-1
 iperf3 -s
 ```
-
-You'll see:
 
 ```
 -----------------------------------------------------------
@@ -520,272 +486,913 @@ Server listening on 5201
 -----------------------------------------------------------
 ```
 
-On pi4-2, run the client:
+On nano-3, run the client against nano-1:
 
 ```bash
-ssh pi4-2
 iperf3 -c 10.10.1.1 -t 20 -f m
 ```
 
-Output:
+Actual output from this hardware:
 
 ```
 Connecting to host 10.10.1.1, port 5201
-[  5] local 10.10.1.2 port 54321 connected to 10.10.1.1 port 5201
+[  5] local 10.10.1.3 port 56890 connected to 10.10.1.1 port 5201
 [ ID] Interval           Transfer     Bitrate         Retr  Cwnd
-[  5]  0.00-20.00  sec  225 MBytes   94.4 Mbits/sec  0   112 KBytes       sender
-[  5]  0.00-20.01  sec  225 MBytes   94.3 Mbits/sec                        receiver
+[  5]   0.00-20.00  sec  1.79 GBytes   770 Mbits/sec    0             sender
+[  5]   0.00-20.04  sec  1.79 GBytes   766 Mbits/sec                  receiver
 ```
 
-**94.4 Mbps — the switch's 100 Mbps ceiling.** The Pi 4 NIC is gigabit-capable; the TP-Link LS110P is the bottleneck.
+**770 Mbps**, real gigabit. Consistent across all three node pairs.
 
-> **Note:** If you see ~9.5 Mbps instead of ~94 Mbps, the switch's Extend Mode is probably still enabled. See [Bandwidth troubleshooting](#bandwidth-is-only-95-mbps).
-
-Test again between different pairs (pi4-1↔pi4-3, pi4-2↔pi4-4) to confirm consistency across all links.
-
-### What the real numbers look like across all test scenarios
+### Bandwidth table (all numbers measured on this hardware)
 
 | Scenario | Throughput | Notes |
 |---|---|---|
-| Single link, idle (pi4-2 → pi4-1) | **94.4 Mbps** | Switch 100 Mbps ceiling |
-| Bidirectional (pi4-2 → pi4-1 AND pi4-3 → pi4-1) | **~47 Mbps each** | Receiver's rx port saturated — bandwidth split ~50/50 |
-| Single link under full 4-core CPU load | **94.4 Mbps** | Zero throughput degradation — NIC doesn't compete with CPU |
-| 3 nodes → pi4-1 simultaneously | **~47 Mbps (2 of 3 flows)** | Third sender starved — unmanaged switch, no QoS |
-| Original cables (Extend Mode off, bad cables) | **9.54 Mbps** | 10 Mbps negotiation fallback |
-| With gigabit switch (TL-SG108PE) | **~940 Mbps** (expected) | Pi 4 NIC is gigabit-capable |
+| nano-3 → nano-1 (single link) | **770 Mbps** | Gigabit link |
+| nano-3 → nano-2 (single link) | **759 Mbps** | Consistent across all pairs |
+| nano-1 → nano-2 (single link) | **750 Mbps** | All three pairs within 20 Mbps of each other |
+| nano-3 → nano-1 AND nano-3 → nano-2 simultaneously | **391 + 365 Mbps** | nano-3 NIC saturated (~756 Mbps total) |
+| All-to-all (nano-1→nano-2, nano-2→nano-3, nano-3→nano-1 simultaneously) | **709 / 693 / 695 Mbps** | Each node sustaining ~700 Mbps while simultaneously receiving |
 
-**Key finding:** CPU load has zero impact on throughput at these speeds. Tested with pi4-1 receiver running `stress-ng --cpu 4` — still 94.4 Mbps, temp 60.3°C, clock 1800 MHz. The NIC operates independently.
+### Latency matrix (all 6 pairs pinged concurrently, 20 packets each)
 
----
+| Pair | Min (ms) | Avg (ms) | Max (ms) | Packet Loss |
+|---|---|---|---|---|
+| nano-3 → nano-1 | 0.442 | 0.828 | 1.264 | 0% |
+| nano-3 → nano-2 | 0.426 | 0.562 | 0.748 | 0% |
+| nano-1 → nano-2 | 0.219 | 0.530 | 1.039 | 0% |
+| nano-1 → nano-3 | 0.298 | 0.670 | 1.160 | 0% |
+| nano-2 → nano-1 | 0.285 | 0.509 | 1.063 | 0% |
+| nano-2 → nano-3 | 0.239 | 0.440 | 0.950 | 0% |
+
+**Sub-millisecond average latency across all pairs under concurrent load. Zero packet loss.**
+
+> For full commands and monitoring procedure, see [Appendix B: Cluster Test Commands](#appendix-b-cluster-test-commands).
+
 
 ## Step 11: Test Temperatures
 
-Install `stress-ng` on all Pis:
+Install `stress-ng`:
 
 ```bash
 sudo apt install -y stress-ng
 ```
 
-Check baseline temperature before stressing:
+Check baseline temperature:
 
 ```bash
-vcgencmd measure_temp
+for zone in cpu-thermal gpu-thermal; do
+  idx=$(grep -rl "^${zone}$" /sys/class/thermal/thermal_zone*/type | grep -o '[0-9]*' | tail -1)
+  temp=$(cat /sys/class/thermal/thermal_zone${idx}/temp)
+  printf "%-20s %.1f°C\n" "$zone" "$(echo $temp | awk '{print $1/1000}')"
+done
 ```
 
-Expected at idle:
+Or use tegrastats for a full readout:
 
+```bash
+sudo tegrastats --interval 1000
 ```
-temp=48.7'C
-```
 
-Idle range across all 4 nodes: **45–49°C**.
+Output includes `CPU@XX.XC` and `GPU@XX.XC` fields.
 
-### Test 1 — Single Core at 100% (5 min)
+Idle on this hardware (fan running): **~50°C CPU, ~49°C GPU**.
+
+### Test 1: Single Core at 100% (5 min)
 
 ```bash
 stress-ng --cpu 1 --timeout 300s
 ```
 
-Watch temp + frequency on another terminal:
+Monitor in another terminal:
 
 ```bash
-watch -n 5 'vcgencmd measure_temp && cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq'
+watch -n 5 'cat /sys/class/thermal/thermal_zone0/temp | awk "{printf \"CPU: %.1f°C\n\", \$1/1000}"'
 ```
 
-| Time (s) | Temp (°C) | Freq (MHz) |
-|---|---|---|
-| 0 | 49.1 | 1800 |
-| 30 | 53.5 | 1800 |
-| 60–300 | 53–54 | 1800 |
+Results on this hardware:
 
-**Result:** Peaks at ~54°C, stabilises within 30s. Zero throttling. 1800 MHz throughout.
+| Time (s) | CPU (°C) | GPU (°C) | Freq (MHz) |
+|---|---|---|---|
+| 0 | 52.0 | 52.1 | 1728 |
+| 30 | 53.0 | 52.7 | 1728 |
+| 60 | 53.4 | 53.6 | 1728 |
+| 120 | 54.7 | 54.1 | 1728 |
+| 300 | 54.8 | 54.8 | 1728 |
 
-### Test 2 — All 4 Cores at 100% (5 min)
+**Result:** Peaks at 55.2°C, stabilises at 54–55°C. Zero throttling. 1728 MHz throughout.
+
+> For commands and monitoring procedure, see [Appendix A: Single Node Test Commands](#appendix-a-single-node-test-commands).
+
+### Test 2: All 6 Cores at 100% (5 min)
 
 ```bash
-stress-ng --cpu 4 --timeout 300s
+stress-ng --cpu 6 --timeout 300s
 ```
 
-| Time (s) | Temp (°C) | Freq (MHz) |
-|---|---|---|
-| 0 | 51.1 | 1800 |
-| 30 | 60.3 | 1800 |
-| 60–300 | 60–62 | 1800 |
+Results on this hardware:
 
-**Result:** Ramp is steeper (+9°C in first 30s vs +4°C for single-core), but cooling catches up within 60s. Plateaus at 60–62°C. Zero throttling.
+| Time (s) | CPU (°C) | GPU (°C) | Freq (MHz) |
+|---|---|---|---|
+| 0 | 53.9 | 54.1 | 1728 |
+| 30 | 57.7 | 56.2 | 1728 |
+| 60 | 58.4 | 57.0 | 1728 |
+| 120 | 59.6 | 58.6 | 1728 |
+| 300 | 60.4 | 59.0 | 1728 |
 
-### Test 3 — Full Cluster 16 Cores at 100% (10 min)
+**Result:** Ramp +6.5°C in first 30s, cooling catches up within 60s. Plateaus at 59–60.4°C. Zero throttling.
 
-Run on all 4 Pis simultaneously:
+> For commands and monitoring procedure, see [Appendix A: Single Node Test Commands](#appendix-a-single-node-test-commands).
+
+### Test 3: Full Cluster 18 Cores at 100% (10 min)
+
+Run on all 3 Nanos simultaneously. Use SSH to start stress on the remote nodes while running locally; keep the SSH sessions alive in the foreground so the processes don't die when the connection closes:
 
 ```bash
-stress-ng --cpu 4 --timeout 600s
+ssh nano-1 "stress-ng --cpu 6 --timeout 600s" &
+ssh nano-2 "stress-ng --cpu 6 --timeout 600s" &
+stress-ng --cpu 6 --timeout 600s &
+wait
 ```
 
-| Min | pi4-1 (°C) | pi4-2 (°C) | pi4-3 (°C) | pi4-4 (°C) | Avg (°C) |
+Measured from each node simultaneously:
+
+| Min | nano-1 (°C) | nano-2 (°C) | nano-3 CPU (°C) | nano-3 GPU (°C) | Freq (MHz) |
 |---|---|---|---|---|---|
-| 0 | 54.5 | 52.1 | 53.0 | 48.2 | 52.0 |
-| 1 | 60.3 | 59.4 | 59.9 | 55.0 | 58.6 |
-| 2 | 61.8 | 60.8 | 60.3 | 56.0 | 59.7 |
-| 3 | 62.3 | 61.8 | 59.9 | 56.0 | 60.0 |
-| 4–9 | ~62 | ~61 | ~61 | ~56 | ~60 |
-| 10 | 53.0 | 50.6 | 50.1 | 48.7 | 50.6 |
+| 0 (baseline) | 54.5 | 54.0 | 54.4 | 54.4 | 1728 |
+| 1 | 56.2 | 54.6 | 57.2 | 55.8 | 1728 |
+| 2 | 56.4 | 54.9 | 57.5 | 56.4 | 1728 |
+| 3 | 56.5 | 54.7 | 57.8 | 56.1 | 1728 |
+| 5 | 56.8 | 55.3 | 57.8 | 56.3 | 1728 |
+| 7 | 56.9 | 54.9 | 57.9 | 56.5 | 1728 |
+| 10 | 55.2 | 54.3 | 55.0 | 54.7 | cooling |
 
-**Result:** Cluster avg plateaus at ~60°C, peak 62.3°C on pi4-1. pi4-4 ran 5–6°C cooler throughout (better airflow position in enclosure). All 4 nodes held 1800 MHz for the full 10 minutes.
+**Result:** nano-1 peaked at 57.0°C, nano-2 at 55.5°C, nano-3 at 58.3°C CPU / 56.8°C GPU. All 3 nodes held 1728 MHz for the full 10 minutes. Zero throttling. **37°C headroom** before the 95°C Orin throttle threshold.
 
-After the test, verify no throttling events occurred:
+> For full commands and live monitoring procedure, see [Appendix B: Cluster Test Commands](#appendix-b-cluster-test-commands).
+
+After the test, verify clocks are still at max:
 
 ```bash
-vcgencmd get_throttled
+cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq
 ```
 
-Expected:
+Expected: `1728000`
 
-```
-throttled=0x0
+```bash
+nvpmodel -q
 ```
 
-`0x0` means clean — no throttling, no undervoltage, nothing. If you see anything other than `0x0`, check the UCTRONICS fans are spinning and the PoE+ HAT power rail is stable.
+Expected: `MAXN_SUPER` / `2`
+
+### Test 4: Full Cluster GPU Burn (5 min, all 3 nodes)
+
+Install [gpu-burn](https://github.com/wilicc/gpu-burn), the standard CUDA GPU stress tool:
+
+```bash
+git clone https://github.com/wilicc/gpu-burn
+cd gpu-burn && make
+```
+
+Run on all 3 nodes simultaneously (copy the binary to each node first via `scp`):
+
+```bash
+ssh nano-1 "cd /tmp && ./gpu_burn 300" &
+ssh nano-2 "cd /tmp && ./gpu_burn 300" &
+./gpu_burn 300 &
+wait
+```
+
+Results on this hardware:
+
+| Time | nano-1 CPU | nano-1 GPU | nano-2 CPU | nano-2 GPU | nano-3 CPU | nano-3 GPU | CPU Freq |
+|---|---|---|---|---|---|---|---|
+| 0 (baseline) | 49.2°C | 51.1°C | 49.2°C | 50.6°C | 48.5°C | 48.3°C | 1728 MHz |
+| 1m | 49.2°C | 50.9°C | 49.1°C | 50.5°C | 48.5°C | 48.5°C | 1114 MHz |
+| 3m | 49.8°C | 51.3°C | 49.2°C | 50.9°C | 48.2°C | 48.4°C | 1114 MHz |
+| 5m | 49.9°C | 51.3°C | 49.1°C | 50.5°C | 48.5°C | 48.9°C | 1190 MHz |
+
+**Result:** GPU temps peaked at **51.3°C**, barely above idle. CPU temps unchanged. CPU frequency dropped from 1728 to ~1114–1190 MHz because the GPU workload draws from the shared power budget in MAXN_SUPER mode. Zero GPU throttling (95°C threshold gives **~44°C headroom**).
+
+> For full commands and monitoring procedure, see [Appendix B: Cluster Test Commands](#appendix-b-cluster-test-commands).
 
 ### Thermal Summary
 
-| Scenario | Peak Temp | Throttled? | Clock |
-|---|---|---|---|
-| Idle (all nodes) | 49.1°C | No | 1800 MHz |
-| Single core, 5 min | 54.0°C | No | 1800 MHz |
-| All 4 cores, 5 min | 61.8°C | No | 1800 MHz |
-| Full cluster 16 cores, 10 min | **62.3°C** | **No** | **1800 MHz** |
+| Scenario | Nodes | Peak CPU | Peak GPU | Throttled? | CPU Clock |
+|---|---|---|---|---|---|
+| Idle | all 3 | ~50°C | ~49°C | No | 1728 MHz |
+| 1 core CPU stress, 5 min | nano-3 only | 55.2°C | 54.8°C | No | 1728 MHz |
+| All 6 cores CPU stress, 5 min | nano-3 only | 60.4°C | 59.1°C | No | 1728 MHz |
+| Full cluster 18 cores CPU stress, 10 min | all 3 | **58.3°C** | **56.8°C** | No | 1728 MHz |
+| Full cluster GPU burn (gpu-burn), 5 min | all 3 | 49.9°C | **51.3°C** | No | ~1114–1190 MHz |
 
-**~8–10°C of headroom** before the 70°C soft-throttle threshold. This cluster will not throttle under normal workloads.
+**Key finding:** The Ampere GPU runs remarkably cool under full compute load. CPU stress is the thermal ceiling for this cluster at 58.3°C, still 37°C from the 95°C throttle threshold.
 
----
 
-## Step 12: Test Inter-Pi SSH (for distributed jobs)
+## Step 12: Test Inter-Node SSH (for distributed jobs)
 
-From pi4-1, SSH to pi4-2 without a password:
+From nano-1, SSH to nano-2 without a password:
 
 ```bash
-ssh pi4-1
-ssh pi4-2
+ssh nano-1
+ssh yuvrajsingh@10.10.1.2
 ```
 
-Should work. If it asks for password, you need to set up keys between the Pis:
+If it asks for a password, set up keys between the Nanos:
 
-On pi4-1:
+On nano-1:
 
 ```bash
 ssh-keygen -t ed25519
 # Press Enter for all defaults
-ssh-copy-id -i ~/.ssh/id_ed25519.pub pi@10.10.1.2
+ssh-copy-id -i ~/.ssh/id_ed25519.pub yuvrajsingh@10.10.1.2
+ssh-copy-id -i ~/.ssh/id_ed25519.pub yuvrajsingh@10.10.1.3
 ```
 
-Then retry:
+Retry:
 
 ```bash
-ssh pi4-2
+ssh yuvrajsingh@10.10.1.2
 ```
 
-Should work now.
+Works now. Repeat from each Nano to all others. Distributed frameworks (Ray, MPI) need passwordless SSH between all node pairs.
 
----
 
 ## Debugging Commands
 
 | What to Check | Command |
 |---|---|
-| Temperature | `vcgencmd measure_temp` |
-| Throttle status | `vcgencmd get_throttled` |
-| CPU frequency | `cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq` |
-| IP address | `hostname -I` |
+| All temps (live) | `sudo tegrastats --interval 1000` |
+| CPU temp (quick) | `cat /sys/class/thermal/thermal_zone0/temp \| awk '{printf "%.1f°C\n", $1/1000}'` |
+| GPU temp | `cat /sys/class/thermal/thermal_zone1/temp \| awk '{printf "%.1f°C\n", $1/1000}'` |
+| Performance mode | `nvpmodel -q` |
+| All clock settings | `sudo jetson_clocks --show` |
+| CPU frequencies (all cores) | `cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq` |
+| GPU frequency | `cat /sys/devices/platform/gpu.0/devfreq/*/cur_freq` |
+| Full system monitor | `sudo jtop` |
+| Ethernet link speed | `ethtool enP8p1s0 \| grep Speed` |
+| IP addresses | `hostname -I` |
 | Memory | `free -h` |
 | Disk | `df -h` |
-| Ping another Pi | `ping 10.10.1.2 -c 3` |
-| SSH to another Pi | `ssh pi4-2` |
+| Ping another node | `ping 10.10.1.2 -c 3` |
 | Bandwidth test (server) | `iperf3 -s` |
 | Bandwidth test (client) | `iperf3 -c <ip> -t 20 -f m` |
 
----
 
 ## Common Issues
 
-### "PoE+ HAT LED is off / Pi won't power on"
+### "Bandwidth is only ~94 Mbps instead of ~940 Mbps"
 
-- Is the Ethernet cable fully plugged in? (Listen for a click.)
-- Is the switch powered and showing the PoE+ light?
-- Try a different switch port.
-- Try a different Ethernet cable.
+The TL-SG108E has **no physical DIP switches or buttons**. Unlike the LS110P which had an Extend Mode DIP switch on the bottom, the SG108E is managed entirely through its **web interface**. A port manually set to 100 Mbps there will stay at 100 Mbps regardless of cable quality or driver.
+
+**Step 1: Check the LED on the switch port.**
+
+TL-SG108E port LEDs show negotiated speed:
+- **Green** = 1000 Mbps ✓
+- **Yellow/Amber** = 10/100 Mbps ← this is what you have
+
+**Step 2: Access the switch web UI.**
+
+Connect a laptop directly to the switch (or any device on the same subnet as the switch's management IP). Factory default is `192.168.0.1`:
+
+```
+Browser: http://192.168.0.1
+Login: admin / admin  (factory default)
+```
+
+**Step 3: Fix the port speed.**
+
+Go to **Switching → Port Config**. Find the port your Nano is on. If Speed/Duplex is set to `100M Full` or `100M Half`, change it to **Auto** or **1000M Full**. Click **Apply**.
+
+The port re-links within a few seconds. LED turns green. iperf3 will now show ~940 Mbps.
 
 ### "Bandwidth is only ~9.5 Mbps"
 
-> ⚠️ **Gotcha: TP-Link Extend Mode is probably the culprit**
->
-> A normal 10/100 switch advertises `100baseTx-FD 100baseTx-HD 10baseT-FD 10baseT-HD`. If your switch is advertising **only `10baseT`**, it has deliberately capped itself to 10 Mbps.
->
-> This is almost certainly **TP-Link's "Extend Mode"** (also called PoE Long-Range mode). Many TP-Link PoE switches have a physical DIP switch that forces ports to 10 Mbps to extend PoE cable range from 100m to 250m. When enabled, it hard-caps the port at 10 Mbps regardless of cable or NIC quality.
->
-> **Fix it:**
-> 1. Check the bottom/side of your TP-Link switch for a DIP switch or buttons labeled `250m / VLAN / QoS` or `EXTEND / NORMAL`.
-> 2. If the **EXTEND** switch is ON — flip it to **NORMAL/OFF**.
-> 3. If there's no physical switch, log into the TP-Link web UI → **Port Settings** → look for "Extend", "Long Range", or "PoE Mode" per port and disable it.
->
-> That single toggle will take you from **10 Mbps → 100 Mbps instantly** — no cable changes, no Pi config, nothing else.
+Same fix: open the TL-SG108E web UI at its management IP, go to **Switching → Port Config**, find the port set to `10M`, change to **Auto**, apply.
 
-If Extend Mode is already off, then it's a cable/port issue. Try: reseat both Cat 6 cable ends, swap to a different switch port, or try a known-good cable. The Pi 4 NIC supports gigabit — if you want above 100 Mbps you'd need to replace the switch with a gigabit model.
+### "CPU throttling: frequencies drop drop below 1728 MHz"
 
-### "Can't SSH from pi4-1 to pi4-2"
+- Run `nvpmodel -q`. If not `MAXN_SUPER`, run `sudo nvpmodel -m 2`.
+- Run `sudo jetson_clocks` to re-pin clocks.
+- Check temp with `sudo tegrastats`. If CPU temp is >95°C, it's thermal; the fan isn't keeping up.
+- Make sure the fan header is properly seated. Under full 6-core load this hardware holds ~60°C with fan running; throttling means airflow is blocked or the fan isn't running.
 
-- Did you set up SSH keys between them? Run `ssh-keygen -t ed25519` on pi4-1, then `ssh-copy-id`.
-- Check `cat ~/.ssh/authorized_keys` on pi4-2 to see if pi4-1's key is there.
+### "nvpmodel -m 2 doesn't persist after reboot"
 
-### "Thermal throttling: CPU stuck below 1800 MHz"
+- JetPack can reset to a default lower power mode on reboot.
+- Fix: add to `/etc/rc.local`:
+  ```bash
+  /usr/bin/nvpmodel -m 2
+  /usr/bin/jetson_clocks
+  ```
 
-- Run `vcgencmd get_throttled` — if it returns anything other than `0x0`, throttling has occurred.
-- Ensure UCTRONICS fans are spinning.
-- Open the case slightly for better airflow.
-- Move the cluster away from heat sources.
-- Under full 16-core load the cluster plateaus at ~62°C — there's 8–10°C headroom. If you're seeing throttling, something is blocking airflow.
+### "Can't SSH from nano-1 to nano-2"
 
----
+- Did you set up inter-node SSH keys? Run `ssh-keygen -t ed25519` on nano-1, then `ssh-copy-id`.
+- Check `cat ~/.ssh/authorized_keys` on nano-2 to confirm nano-1's key is present.
+- Verify `10.10.1.x` addresses are live on both nodes: `ip addr show eth0`.
+
+### "jtop shows unexpected temps or jtop won't start"
+
+- Run `sudo systemctl restart jtop.service` then retry `sudo jtop`.
+- If not installed: `sudo pip3 install jetson-stats`
+
 
 ## My Cluster Layout
 
 | Node | Hostname | IP | Specs |
 |---|---|---|---|
-| pi4-1 | minilab-pi4-1 | 10.10.1.1 | RPi 4B 4GB Rev 1.5, PoE+ HAT |
-| pi4-2 | minilab-pi4-2 | 10.10.1.2 | RPi 4B 4GB Rev 1.5, PoE+ HAT |
-| pi4-3 | minilab-pi4-3 | 10.10.1.3 | RPi 4B 4GB Rev 1.5, PoE+ HAT |
-| pi4-4 | minilab-pi4-4 | 10.10.1.4 | RPi 4B 4GB Rev 1.5, PoE+ HAT |
+| nano-1 | yuvrajsingh-jetson-nano1 | 10.10.1.1 | Orin Nano 8GB, MAXN_SUPER, fan connected |
+| nano-2 | yuvrajsingh-jetson-nano2 | 10.10.1.2 | Orin Nano 8GB, MAXN_SUPER, fan connected |
+| nano-3 | yuvrajsingh-jetson-nano3 | 10.10.1.3 | Orin Nano 8GB, MAXN_SUPER, fan connected |
 
-**Network:** TP-Link LS110P PoE+ switch, Cat 6 Ethernet cables, all on ports 1-4
+**Network:** TP-Link TL-SG108E (gigabit switch), Cat 6–8 Ethernet, ports 1–3. Negotiating at 100 Mbps (r8168 driver quirk on L4T R36).
 
----
 
 ## Final Checklist
 
-- [ ] UCTRONICS enclosure assembled with all 4 Pis
-- [ ] All 4 Pis boot via PoE (red LEDs light up)
-- [ ] All Pis reachable via ping (<5ms latency)
-- [ ] IPs found and noted (via `hostname -I`)
-- [ ] SSH keys set up from your laptop
-- [ ] Passwordless SSH works to all Pis
+- [ ] All 3 Nanos boot successfully
+- [ ] Fan connected and spinning on each node
+- [ ] JetPack R36 (Ubuntu 22.04) flashed on all 3 microSD cards
+- [ ] OOB setup complete on all 3 Nanos (hostname, username, password)
+- [ ] All Nanos reachable via ping (<2ms latency)
+- [ ] Private subnet `10.10.1.x` configured on all nodes
+- [ ] SSH keys set up from laptop to all Nanos
+- [ ] Passwordless SSH works to all Nanos
 - [ ] SSH config created on your laptop
-- [ ] Python 3 and PyTorch installed on all Pis
-- [ ] Bandwidth test shows ~94 Mbps per link (switch's 100 Mbps ceiling — disable Extend Mode if stuck at 9.5 Mbps)
-- [ ] Temperatures stable 50-60°C with fans
+- [ ] MAXN_SUPER mode active (`nvpmodel -m 2` + `jetson_clocks`)
+- [ ] Python 3 and tools installed on all Nanos
+- [ ] jtop installed and showing GPU/CPU readout
+- [ ] Bandwidth test shows ~94 Mbps per link (disable Extend Mode if stuck at 9.5 Mbps)
+- [ ] Temperatures stable at <65°C under full load with fan running
+- [ ] nvpmodel + jetson_clocks added to `/etc/rc.local` for persistence
 
----
 
 ## What's Next?
 
-You have a working 4-node Pi cluster. Ideas:
+You have a working 3-node Jetson Orin Nano cluster, each with CUDA 12.6, cuDNN, and TensorRT ready to go. Ideas:
 
-- **Run distributed inference:** Load a model on each Pi, batch requests across them (will do this next!)
-- **Distributed preprocessing:** Split a dataset across 4 Pis for parallel ETL.
-- **Learn systems:** Build a simple consensus or leader election protocol.
-- **Edge monitoring:** Run a small LLM locally on the cluster (haha this is what smolcluster is for!).
+- **Distributed GPU inference:** Split a model across nodes, or assign each node a batch partition. Ray Serve or a custom split-inference script.
+- **TensorRT optimization:** Convert ONNX models to TensorRT engines on-device, 2–4× inference speedup over vanilla PyTorch.
+- **Distributed preprocessing:** CUDA-accelerated ETL across 3 nodes in parallel.
+- **Edge monitoring:** Run a quantized LLM locally across the cluster; this is what smolcluster is for.
 
----
+
+## Appendix A: Single Node Test Commands
+
+These are the exact commands used to produce the single-node results in Step 11.
+
+### Baseline temperature
+
+```bash
+# Quick per-zone readout
+for zone in cpu-thermal gpu-thermal; do
+  idx=$(grep -rl "^${zone}$" /sys/class/thermal/thermal_zone*/type | grep -o '[0-9]*' | tail -1)
+  temp=$(cat /sys/class/thermal/thermal_zone${idx}/temp)
+  printf "%-20s %.1f°C\n" "$zone" "$(echo $temp | awk '{print $1/1000}')"
+done
+
+# Or live stream via tegrastats
+sudo tegrastats --interval 1000
+```
+
+### Single core stress (5 min) with live temp monitoring
+
+```bash
+# Terminal 1: run stress
+stress-ng --cpu 1 --timeout 300s
+
+# Terminal 2: watch CPU temp every 5s
+watch -n 5 'cat /sys/class/thermal/thermal_zone0/temp | awk "{printf \"CPU: %.1f°C\n\", \$1/1000}"'
+```
+
+### All 6 cores stress (5 min) with live temp monitoring
+
+```bash
+# Terminal 1
+stress-ng --cpu 6 --timeout 300s
+
+# Terminal 2
+watch -n 5 'cat /sys/class/thermal/thermal_zone0/temp | awk "{printf \"CPU: %.1f°C\n\", \$1/1000}"'
+```
+
+### Single node bandwidth (iperf3)
+
+```bash
+# On the server node
+iperf3 -s
+
+# On the client node
+iperf3 -c <server-ip> -t 20 -f m
+```
+
+### Single node GPU burn
+
+```bash
+# Build once
+git clone https://github.com/wilicc/gpu-burn
+cd gpu-burn && make
+
+# Run (seconds as argument)
+./gpu_burn 300
+```
+
+## Appendix B: Cluster Test Commands
+
+These are the exact commands used to produce all cluster-wide results in Steps 9 and 11.
+
+### All node pairs bandwidth (iperf3)
+
+Start iperf3 server on each target node, then run client from another:
+
+```bash
+# Start servers on nano-1 and nano-2
+ssh nano-1 "iperf3 -s -D"
+ssh nano-2 "iperf3 -s -D"
+
+# Test each pair individually (20s each)
+iperf3 -c 10.10.1.1 -t 20 -f m   # nano-3 -> nano-1
+iperf3 -c 10.10.1.2 -t 20 -f m   # nano-3 -> nano-2
+ssh nano-1 "iperf3 -c 10.10.1.2 -t 20 -f m"  # nano-1 -> nano-2
+
+# Two links from nano-3 simultaneously
+iperf3 -c 10.10.1.1 -t 20 -f m &
+iperf3 -c 10.10.1.2 -t 20 -f m &
+wait
+```
+
+### All-to-all bandwidth (all 3 nodes sending simultaneously)
+
+```bash
+# Start iperf3 servers on all 3 nodes
+iperf3 -s -D
+ssh nano-1 "iperf3 -s -D"
+ssh nano-2 "iperf3 -s -D"
+sleep 2
+
+# Each node sends to a different node at the same time
+ssh nano-1 "iperf3 -c 10.10.1.2 -t 20 -f m 2>&1 | tail -3" &
+ssh nano-2 "iperf3 -c 10.10.1.3 -t 20 -f m 2>&1 | tail -3" &
+iperf3 -c 10.10.1.1 -t 20 -f m 2>&1 | tail -3 &
+wait
+```
+
+### Latency matrix (all 6 directional pairs, concurrent)
+
+```bash
+ping -c 20 -q 10.10.1.1 2>&1 | tail -2 &   # nano-3 -> nano-1
+ping -c 20 -q 10.10.1.2 2>&1 | tail -2 &   # nano-3 -> nano-2
+ssh nano-1 "ping -c 20 -q 10.10.1.2 2>&1 | tail -2" &  # nano-1 -> nano-2
+ssh nano-1 "ping -c 20 -q 10.10.1.3 2>&1 | tail -2" &  # nano-1 -> nano-3
+ssh nano-2 "ping -c 20 -q 10.10.1.1 2>&1 | tail -2" &  # nano-2 -> nano-1
+ssh nano-2 "ping -c 20 -q 10.10.1.3 2>&1 | tail -2" &  # nano-2 -> nano-3
+wait
+```
+
+### Full cluster CPU stress (18 cores, all 3 nodes)
+
+Keep SSH sessions alive in the foreground so stress processes don't die when the connection closes:
+
+```bash
+ssh nano-1 "stress-ng --cpu 6 --timeout 600s" &
+ssh nano-2 "stress-ng --cpu 6 --timeout 600s" &
+stress-ng --cpu 6 --timeout 600s &
+wait
+```
+
+Monitor temps from each node while running (separate terminal):
+
+```bash
+watch -n 60 '
+  echo "nano-1: $(ssh nano-1 "cat /sys/class/thermal/thermal_zone0/temp" | awk "{printf \"%.1f\", \$1/1000}")°C"
+  echo "nano-2: $(ssh nano-2 "cat /sys/class/thermal/thermal_zone0/temp" | awk "{printf \"%.1f\", \$1/1000}")°C"
+  echo "nano-3: $(cat /sys/class/thermal/thermal_zone0/temp | awk "{printf \"%.1f\", \$1/1000}")°C"
+'
+```
+
+### Full cluster GPU burn (all 3 nodes)
+
+Build gpu-burn on one node and copy to the others:
+
+```bash
+# Build on nano-3
+git clone https://github.com/wilicc/gpu-burn
+cd gpu-burn && make
+
+# Copy to other nodes
+scp gpu_burn compare.fatbin nano-1:/tmp/
+scp gpu_burn compare.fatbin nano-2:/tmp/
+
+# Run on all 3 simultaneously (300 = seconds)
+ssh nano-1 "cd /tmp && ./gpu_burn 300" &
+ssh nano-2 "cd /tmp && ./gpu_burn 300" &
+./gpu_burn 300 &
+wait
+```
+
+Monitor GPU temps during the run:
+
+```bash
+watch -n 30 'sudo tegrastats --interval 100 | head -1'
+```
 
 You're ready. Build something.
 
-**Built for [smolcluster](https://smolcluster.com)** — distributed training and inference from scratch, on your own hardware.
+**Built for [smolcluster](https://smolcluster.com).** Distributed training and inference, from scratch, on your own hardware.
+ommands](#appendix-a-single-node-test-commands).
+
+### Test 3: Full Cluster 18 Cores at 100% (10 min)
+
+Run on all 3 Nanos simultaneously. Use SSH to start stress on the remote nodes while running locally; keep the SSH sessions alive in the foreground so the processes don't die when the connection closes:
+
+```bash
+ssh nano-1 "stress-ng --cpu 6 --timeout 600s" &
+ssh nano-2 "stress-ng --cpu 6 --timeout 600s" &
+stress-ng --cpu 6 --timeout 600s &
+wait
+```
+
+Measured from each node simultaneously:
+
+| Min | nano-1 (°C) | nano-2 (°C) | nano-3 CPU (°C) | nano-3 GPU (°C) | Freq (MHz) |
+|---|---|---|---|---|---|
+| 0 (baseline) | 54.5 | 54.0 | 54.4 | 54.4 | 1728 |
+| 1 | 56.2 | 54.6 | 57.2 | 55.8 | 1728 |
+| 2 | 56.4 | 54.9 | 57.5 | 56.4 | 1728 |
+| 3 | 56.5 | 54.7 | 57.8 | 56.1 | 1728 |
+| 5 | 56.8 | 55.3 | 57.8 | 56.3 | 1728 |
+| 7 | 56.9 | 54.9 | 57.9 | 56.5 | 1728 |
+| 10 | 55.2 | 54.3 | 55.0 | 54.7 | cooling |
+
+**Result:** nano-1 peaked at 57.0°C, nano-2 at 55.5°C, nano-3 at 58.3°C CPU / 56.8°C GPU. All 3 nodes held 1728 MHz for the full 10 minutes. Zero throttling. **37°C headroom** before the 95°C Orin throttle threshold.
+
+> For full commands and live monitoring procedure, see [Appendix B: Cluster Test Commands](#appendix-b-cluster-test-commands).
+
+After the test, verify clocks are still at max:
+
+```bash
+cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq
+```
+
+Expected: `1728000`
+
+```bash
+nvpmodel -q
+```
+
+Expected: `MAXN_SUPER` / `2`
+
+### Test 4: Full Cluster GPU Burn (5 min, all 3 nodes)
+
+Install [gpu-burn](https://github.com/wilicc/gpu-burn), the standard CUDA GPU stress tool:
+
+```bash
+git clone https://github.com/wilicc/gpu-burn
+cd gpu-burn && make
+```
+
+Run on all 3 nodes simultaneously (copy the binary to each node first via `scp`):
+
+```bash
+ssh nano-1 "cd /tmp && ./gpu_burn 300" &
+ssh nano-2 "cd /tmp && ./gpu_burn 300" &
+./gpu_burn 300 &
+wait
+```
+
+Results on this hardware:
+
+| Time | nano-1 CPU | nano-1 GPU | nano-2 CPU | nano-2 GPU | nano-3 CPU | nano-3 GPU | CPU Freq |
+|---|---|---|---|---|---|---|---|
+| 0 (baseline) | 49.2°C | 51.1°C | 49.2°C | 50.6°C | 48.5°C | 48.3°C | 1728 MHz |
+| 1m | 49.2°C | 50.9°C | 49.1°C | 50.5°C | 48.5°C | 48.5°C | 1114 MHz |
+| 3m | 49.8°C | 51.3°C | 49.2°C | 50.9°C | 48.2°C | 48.4°C | 1114 MHz |
+| 5m | 49.9°C | 51.3°C | 49.1°C | 50.5°C | 48.5°C | 48.9°C | 1190 MHz |
+
+**Result:** GPU temps peaked at **51.3°C**, barely above idle. CPU temps unchanged. CPU frequency dropped from 1728 to ~1114–1190 MHz because the GPU workload draws from the shared power budget in MAXN_SUPER mode. Zero GPU throttling (95°C threshold gives **~44°C headroom**).
+
+> For full commands and monitoring procedure, see [Appendix B: Cluster Test Commands](#appendix-b-cluster-test-commands).
+
+### Thermal Summary
+
+| Scenario | Nodes | Peak CPU | Peak GPU | Throttled? | CPU Clock |
+|---|---|---|---|---|---|
+| Idle | all 3 | ~50°C | ~49°C | No | 1728 MHz |
+| 1 core CPU stress, 5 min | nano-3 only | 55.2°C | 54.8°C | No | 1728 MHz |
+| All 6 cores CPU stress, 5 min | nano-3 only | 60.4°C | 59.1°C | No | 1728 MHz |
+| Full cluster 18 cores CPU stress, 10 min | all 3 | **58.3°C** | **56.8°C** | No | 1728 MHz |
+| Full cluster GPU burn (gpu-burn), 5 min | all 3 | 49.9°C | **51.3°C** | No | ~1114–1190 MHz |
+
+**Key finding:** The Ampere GPU runs remarkably cool under full compute load. CPU stress is the thermal ceiling for this cluster at 58.3°C, still 37°C from the 95°C throttle threshold.
+
+
+## Step 12: Test Inter-Node SSH (for distributed jobs)
+
+From nano-1, SSH to nano-2 without a password:
+
+```bash
+ssh nano-1
+ssh yuvrajsingh@10.10.1.2
+```
+
+If it asks for a password, set up keys between the Nanos:
+
+On nano-1:
+
+```bash
+ssh-keygen -t ed25519
+# Press Enter for all defaults
+ssh-copy-id -i ~/.ssh/id_ed25519.pub yuvrajsingh@10.10.1.2
+ssh-copy-id -i ~/.ssh/id_ed25519.pub yuvrajsingh@10.10.1.3
+```
+
+Retry:
+
+```bash
+ssh yuvrajsingh@10.10.1.2
+```
+
+Works now. Repeat from each Nano to all others. Distributed frameworks (Ray, MPI) need passwordless SSH between all node pairs.
+
+
+## Debugging Commands
+
+| What to Check | Command |
+|---|---|
+| All temps (live) | `sudo tegrastats --interval 1000` |
+| CPU temp (quick) | `cat /sys/class/thermal/thermal_zone0/temp \| awk '{printf "%.1f°C\n", $1/1000}'` |
+| GPU temp | `cat /sys/class/thermal/thermal_zone1/temp \| awk '{printf "%.1f°C\n", $1/1000}'` |
+| Performance mode | `nvpmodel -q` |
+| All clock settings | `sudo jetson_clocks --show` |
+| CPU frequencies (all cores) | `cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq` |
+| GPU frequency | `cat /sys/devices/platform/gpu.0/devfreq/*/cur_freq` |
+| Full system monitor | `sudo jtop` |
+| Ethernet link speed | `ethtool enP8p1s0 \| grep Speed` |
+| IP addresses | `hostname -I` |
+| Memory | `free -h` |
+| Disk | `df -h` |
+| Ping another node | `ping 10.10.1.2 -c 3` |
+| Bandwidth test (server) | `iperf3 -s` |
+| Bandwidth test (client) | `iperf3 -c <ip> -t 20 -f m` |
+
+
+## Common Issues
+
+### "Bandwidth is only ~94 Mbps instead of ~940 Mbps"
+
+The TL-SG108E has **no physical DIP switches or buttons**. Unlike the LS110P which had an Extend Mode DIP switch on the bottom, the SG108E is managed entirely through its **web interface**. A port manually set to 100 Mbps there will stay at 100 Mbps regardless of cable quality or driver.
+
+**Step 1: Check the LED on the switch port.**
+
+TL-SG108E port LEDs show negotiated speed:
+- **Green** = 1000 Mbps ✓
+- **Yellow/Amber** = 10/100 Mbps ← this is what you have
+
+**Step 2: Access the switch web UI.**
+
+Connect a laptop directly to the switch (or any device on the same subnet as the switch's management IP). Factory default is `192.168.0.1`:
+
+```
+Browser: http://192.168.0.1
+Login: admin / admin  (factory default)
+```
+
+**Step 3: Fix the port speed.**
+
+Go to **Switching → Port Config**. Find the port your Nano is on. If Speed/Duplex is set to `100M Full` or `100M Half`, change it to **Auto** or **1000M Full**. Click **Apply**.
+
+The port re-links within a few seconds. LED turns green. iperf3 will now show ~940 Mbps.
+
+### "Bandwidth is only ~9.5 Mbps"
+
+Same fix: open the TL-SG108E web UI at its management IP, go to **Switching → Port Config**, find the port set to `10M`, change to **Auto**, apply.
+
+### "CPU throttling: frequencies drop drop below 1728 MHz"
+
+- Run `nvpmodel -q`. If not `MAXN_SUPER`, run `sudo nvpmodel -m 2`.
+- Run `sudo jetson_clocks` to re-pin clocks.
+- Check temp with `sudo tegrastats`. If CPU temp is >95°C, it's thermal; the fan isn't keeping up.
+- Make sure the fan header is properly seated. Under full 6-core load this hardware holds ~60°C with fan running; throttling means airflow is blocked or the fan isn't running.
+
+### "nvpmodel -m 2 doesn't persist after reboot"
+
+- JetPack can reset to a default lower power mode on reboot.
+- Fix: add to `/etc/rc.local`:
+  ```bash
+  /usr/bin/nvpmodel -m 2
+  /usr/bin/jetson_clocks
+  ```
+
+### "Can't SSH from nano-1 to nano-2"
+
+- Did you set up inter-node SSH keys? Run `ssh-keygen -t ed25519` on nano-1, then `ssh-copy-id`.
+- Check `cat ~/.ssh/authorized_keys` on nano-2 to confirm nano-1's key is present.
+- Verify `10.10.1.x` addresses are live on both nodes: `ip addr show eth0`.
+
+### "jtop shows unexpected temps or jtop won't start"
+
+- Run `sudo systemctl restart jtop.service` then retry `sudo jtop`.
+- If not installed: `sudo pip3 install jetson-stats`
+
+
+## My Cluster Layout
+
+| Node | Hostname | IP | Specs |
+|---|---|---|---|
+| nano-1 | yuvrajsingh-jetson-nano1 | 10.10.1.1 | Orin Nano 8GB, MAXN_SUPER, fan connected |
+| nano-2 | yuvrajsingh-jetson-nano2 | 10.10.1.2 | Orin Nano 8GB, MAXN_SUPER, fan connected |
+| nano-3 | yuvrajsingh-jetson-nano3 | 10.10.1.3 | Orin Nano 8GB, MAXN_SUPER, fan connected |
+
+**Network:** TP-Link TL-SG108E (gigabit switch), Cat 6–8 Ethernet, ports 1–3. Negotiating at 100 Mbps (r8168 driver quirk on L4T R36).
+
+
+## Final Checklist
+
+- [ ] All 3 Nanos boot successfully
+- [ ] Fan connected and spinning on each node
+- [ ] JetPack R36 (Ubuntu 22.04) flashed on all 3 microSD cards
+- [ ] OOB setup complete on all 3 Nanos (hostname, username, password)
+- [ ] All Nanos reachable via ping (<2ms latency)
+- [ ] Private subnet `10.10.1.x` configured on all nodes
+- [ ] SSH keys set up from laptop to all Nanos
+- [ ] Passwordless SSH works to all Nanos
+- [ ] SSH config created on your laptop
+- [ ] MAXN_SUPER mode active (`nvpmodel -m 2` + `jetson_clocks`)
+- [ ] Python 3 and tools installed on all Nanos
+- [ ] jtop installed and showing GPU/CPU readout
+- [ ] Bandwidth test shows ~94 Mbps per link (disable Extend Mode if stuck at 9.5 Mbps)
+- [ ] Temperatures stable at <65°C under full load with fan running
+- [ ] nvpmodel + jetson_clocks added to `/etc/rc.local` for persistence
+
+
+## What's Next?
+
+You have a working 3-node Jetson Orin Nano cluster, each with CUDA 12.6, cuDNN, and TensorRT ready to go. Ideas:
+
+- **Distributed GPU inference:** Split a model across nodes, or assign each node a batch partition. Ray Serve or a custom split-inference script.
+- **TensorRT optimization:** Convert ONNX models to TensorRT engines on-device, 2–4× inference speedup over vanilla PyTorch.
+- **Distributed preprocessing:** CUDA-accelerated ETL across 3 nodes in parallel.
+- **Edge monitoring:** Run a quantized LLM locally across the cluster; this is what smolcluster is for.
+
+
+## Appendix A: Single Node Test Commands
+
+These are the exact commands used to produce the single-node results in Step 11.
+
+### Baseline temperature
+
+```bash
+# Quick per-zone readout
+for zone in cpu-thermal gpu-thermal; do
+  idx=$(grep -rl "^${zone}$" /sys/class/thermal/thermal_zone*/type | grep -o '[0-9]*' | tail -1)
+  temp=$(cat /sys/class/thermal/thermal_zone${idx}/temp)
+  printf "%-20s %.1f°C\n" "$zone" "$(echo $temp | awk '{print $1/1000}')"
+done
+
+# Or live stream via tegrastats
+sudo tegrastats --interval 1000
+```
+
+### Single core stress (5 min) with live temp monitoring
+
+```bash
+# Terminal 1: run stress
+stress-ng --cpu 1 --timeout 300s
+
+# Terminal 2: watch CPU temp every 5s
+watch -n 5 'cat /sys/class/thermal/thermal_zone0/temp | awk "{printf \"CPU: %.1f°C\n\", \$1/1000}"'
+```
+
+### All 6 cores stress (5 min) with live temp monitoring
+
+```bash
+# Terminal 1
+stress-ng --cpu 6 --timeout 300s
+
+# Terminal 2
+watch -n 5 'cat /sys/class/thermal/thermal_zone0/temp | awk "{printf \"CPU: %.1f°C\n\", \$1/1000}"'
+```
+
+### Single node bandwidth (iperf3)
+
+```bash
+# On the server node
+iperf3 -s
+
+# On the client node
+iperf3 -c <server-ip> -t 20 -f m
+```
+
+### Single node GPU burn
+
+```bash
+# Build once
+git clone https://github.com/wilicc/gpu-burn
+cd gpu-burn && make
+
+# Run (seconds as argument)
+./gpu_burn 300
+```
+
+## Appendix B: Cluster Test Commands
+
+These are the exact commands used to produce all cluster-wide results in Steps 9 and 11.
+
+### All node pairs bandwidth (iperf3)
+
+Start iperf3 server on each target node, then run client from another:
+
+```bash
+# Start servers on nano-1 and nano-2
+ssh nano-1 "iperf3 -s -D"
+ssh nano-2 "iperf3 -s -D"
+
+# Test each pair individually (20s each)
+iperf3 -c 10.10.1.1 -t 20 -f m   # nano-3 -> nano-1
+iperf3 -c 10.10.1.2 -t 20 -f m   # nano-3 -> nano-2
+ssh nano-1 "iperf3 -c 10.10.1.2 -t 20 -f m"  # nano-1 -> nano-2
+
+# Two links from nano-3 simultaneously
+iperf3 -c 10.10.1.1 -t 20 -f m &
+iperf3 -c 10.10.1.2 -t 20 -f m &
+wait
+```
+
+### All-to-all bandwidth (all 3 nodes sending simultaneously)
+
+```bash
+# Start iperf3 servers on all 3 nodes
+iperf3 -s -D
+ssh nano-1 "iperf3 -s -D"
+ssh nano-2 "iperf3 -s -D"
+sleep 2
+
+# Each node sends to a different node at the same time
+ssh nano-1 "iperf3 -c 10.10.1.2 -t 20 -f m 2>&1 | tail -3" &
+ssh nano-2 "iperf3 -c 10.10.1.3 -t 20 -f m 2>&1 | tail -3" &
+iperf3 -c 10.10.1.1 -t 20 -f m 2>&1 | tail -3 &
+wait
+```
+
+### Latency matrix (all 6 directional pairs, concurrent)
+
+```bash
+ping -c 20 -q 10.10.1.1 2>&1 | tail -2 &   # nano-3 -> nano-1
+ping -c 20 -q 10.10.1.2 2>&1 | tail -2 &   # nano-3 -> nano-2
+ssh nano-1 "ping -c 20 -q 10.10.1.2 2>&1 | tail -2" &  # nano-1 -> nano-2
+ssh nano-1 "ping -c 20 -q 10.10.1.3 2>&1 | tail -2" &  # nano-1 -> nano-3
+ssh nano-2 "ping -c 20 -q 10.10.1.1 2>&1 | tail -2" &  # nano-2 -> nano-1
+ssh nano-2 "ping -c 20 -q 10.10.1.3 2>&1 | tail -2" &  # nano-2 -> nano-3
+wait
+```
+
+### Full cluster CPU stress (18 cores, all 3 nodes)
+
+Keep SSH sessions alive in the foreground so stress processes don't die when the connection closes:
+
+```bash
+ssh nano-1 "stress-ng --cpu 6 --timeout 600s" &
+ssh nano-2 "stress-ng --cpu 6 --timeout 600s" &
+stress-ng --cpu 6 --timeout 600s &
+wait
+```
+
+Monitor temps from each node while running (separate terminal):
+
+```bash
+watch -n 60 '
+  echo "nano-1: $(ssh nano-1 "cat /sys/class/thermal/thermal_zone0/temp" | awk "{printf \"%.1f\", \$1/1000}")°C"
+  echo "nano-2: $(ssh nano-2 "cat /sys/class/thermal/thermal_zone0/temp" | awk "{printf \"%.1f\", \$1/1000}")°C"
+  echo "nano-3: $(cat /sys/class/thermal/thermal_zone0/temp | awk "{printf \"%.1f\", \$1/1000}")°C"
+'
+```
+
+### Full cluster GPU burn (all 3 nodes)
+
+Build gpu-burn on one node and copy to the others:
+
+```bash
+# Build on nano-3
+git clone https://github.com/wilicc/gpu-burn
+cd gpu-burn && make
+
+# Copy to other nodes
+scp gpu_burn compare.fatbin nano-1:/tmp/
+scp gpu_burn compare.fatbin nano-2:/tmp/
+
+# Run on all 3 simultaneously (300 = seconds)
+ssh nano-1 "cd /tmp && ./gpu_burn 300" &
+ssh nano-2 "cd /tmp && ./gpu_burn 300" &
+./gpu_burn 300 &
+wait
+```
+
+Monitor GPU temps during the run:
+
+```bash
+watch -n 30 'sudo tegrastats --interval 100 | head -1'
+```
+
+You're ready. Build something.
+
+**Built for [smolcluster](https://smolcluster.com).** Distributed training and inference, from scratch, on your own hardware.
