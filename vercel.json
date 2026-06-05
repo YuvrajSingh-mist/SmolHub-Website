@@ -2,6 +2,20 @@
   "buildCommand": "bundle exec jekyll build",
   "outputDirectory": "_site",
   "devCommand": "bundle exec jekyll serve --port $PORT",
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "smolhub.com" }],
+      "destination": "/smolhub",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.smolhub.com" }],
+      "destination": "/smolhub",
+      "permanent": false
+    }
+  ],
   "cleanUrls": true,
   "trailingSlash": true
 }
