@@ -1,9 +1,9 @@
 ---
-title: 'Clustering 3 Jetson Orin Nanos'
+title: 'Clustering 3 Jetson Orin Nano Super'
 date: 2026-06-05
 permalink: /posts/jetson-orin-nano-cluster-setup-guide/
 author_profile: false
-excerpt: "Build a 3-node Jetson Orin Nano 8GB cluster with active cooling. Real numbers: ~759 Mbps per link (gigabit), peak 58.3°C across all 3 nodes under full 18-core sustained load, zero throttling at 1728 MHz throughout."
+excerpt: "Build a 3-node Jetson Orin Nano Super 8GB cluster with active cooling. Real numbers: ~759 Mbps per link (gigabit), peak 58.3°C across all 3 nodes under full 18-core sustained load, zero throttling at 1728 MHz throughout."
 tags:
   - Distributed Setup
   - Cluster Setup
@@ -67,7 +67,9 @@ Numbers measured on this exact hardware:
   - 1-core load: peak **55.2°C**, stabilises 54–55°C, 1728 MHz throughout
   - All 6 cores: peak **60.4°C**, stabilises 59–60°C, 1728 MHz throughout
 - **Thermals, full cluster (18 cores across all 3 nodes, 10-min stress, measured on each node):**
-  - nano-1 peak: **57.0°C** | nano-2 peak: **55.5°C** | nano-3 peak: **58.3°C** CPU / **56.8°C** GPU
+  - nano-1 peak: **57.0°C**
+  - nano-2 peak: **55.5°C**
+  - nano-3 peak: **58.3°C** CPU / **56.8°C** GPU
   - All nodes held **1728 MHz** for the full 10 minutes. Zero throttling.
   - 95°C throttle threshold gives **~37°C headroom** at peak cluster load.
 - **GPU:** 1024-core Ampere @ 1020 MHz (MAXN_SUPER + jetson_clocks). CUDA 12.6, cuDNN 9.x, TensorRT 10.x.
