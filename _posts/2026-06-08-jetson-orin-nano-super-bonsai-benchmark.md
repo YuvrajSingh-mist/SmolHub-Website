@@ -42,7 +42,7 @@ tags:
 | Concurrency | 1 (single-user) |
 | Key metric | [output tok/J](#appendix-h3) |
 
-> Github for scripts and code available at [YuvrajSingh9886/bonsai-jetson-benchmark]
+> Github for scripts and code available at [link.](https://github.com/YuvrajSingh-mist/smolbenchmark/tree/master/benchmark-jetson-nano-orin-super/bonsai-models)
 ## Executive Summary
 
 Five Bonsai-family 1-1.53bit LLMs were benchmarked across all four Jetson Orin Nano Super power modes: **7W**, **15W**, **25W**, and **MAXN_SUPER**. Each model ran 12 combinations of prompt × generation length (20 requests per combo) at every power mode where it could load.
