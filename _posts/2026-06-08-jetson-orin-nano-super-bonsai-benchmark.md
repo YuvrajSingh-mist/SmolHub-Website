@@ -80,7 +80,7 @@ Complete per-cell JSON exports (all 33 metrics, all 12 prompt×gen combos × 20 
 | 25W  | [`YuvrajSingh9886/bonsai-jetson-benchmark-25w`](https://huggingface.co/datasets/YuvrajSingh9886/bonsai-jetson-benchmark-25w) | 5 | 60 |
 | MAXN | [`YuvrajSingh9886/bonsai-jetson-benchmark-maxn`](https://huggingface.co/datasets/YuvrajSingh9886/bonsai-jetson-benchmark-maxn) | 5 | 60 |
 
-Each dataset contains the full `profile_export_aiperf.json` per cell (all 33 metrics including [`ISL`](#glossary), [`OSL`](#glossary), [`TTFT`](#glossary) avg/p50/p90/p99, [`ITL`](#glossary), [output tok/s](#glossary), [request latency](#glossary), [prefill tok/s](#appendix-h8), [power W](#appendix-h2), [output tok/J](#appendix-h3)), `tegrastats.log`, and per-model server logs.
+Each dataset contains the full `profile_export_aiperf.json` per cell (all 33 metrics including [`ISL`](#glossary), [`OSL`](#glossary), [`TTFT`](#glossary) avg/p50/p90/p99, [`ITL`](#glossary), [`output tok/s`](#glossary), [`request latency`](#glossary), [`prefill tok/s`](#appendix-h8), [`power W`](#appendix-h2), [`output tok/J`](#appendix-h3)), `tegrastats.log`, and per-model server logs.
 
 
 ## 1. Test Setup
