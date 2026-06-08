@@ -1196,7 +1196,7 @@ Throttling is flagged when `peak_tj_C > 85 °C` (leaving a 10 °C safety margin 
 
 
 <a id="hardware-disclaimer"></a>
-> ### ⚠ Why Models with Weights > ~1 GB Were Not Tested
+> ### ⚠ Why Models with Weights > ~1 GB Were Not Tested (and even so with higher ctx/gen lengths)
 >
 > **All models in this benchmar
 k have GGUF weights ≤ 958 MB. Larger models (e.g. Gemma3-4B Q4_K_M at 2.4 GB) fail to load on JetPack R36.4.7 (L4T 36.4) regardless of power mode or available memory.** This is a known regression in the CUDA IOVA / NvMap contiguous-memory allocator introduced in this JetPack release  -  not a simple "out of RAM" failure.
