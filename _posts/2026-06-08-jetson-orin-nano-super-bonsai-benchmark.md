@@ -47,7 +47,10 @@ tags:
 
 Five Bonsai-family 1-1.53bit LLMs were benchmarked across all four Jetson Orin Nano Super power modes: **7W**, **15W**, **25W**, and **MAXN_SUPER**. Each model ran 12 combinations of prompt × generation length (20 requests per combo) at every power mode where it could load.
 
-**Key finding: 25W is the energy-efficiency sweet spot for all models ≤4B parameters. For Bonsai-8B, 15W and 25W deliver near-identical output tok/J (~1 % difference), making 15W the more power-conservative choice. MAXN costs 10–11 % more energy per token than 25W across every model tested.** 25W delivers *47–48 %* more output tok/s than 15W while maintaining or improving output tok/J for sub-4B models (ctx=2048, gen=512). **No thermal throttling was observed at any power mode** - peak junction temperature (TJ) reached 75.3 °C at MAXN (Bonsai-8B), well below the 95 °C hardware throttle threshold. All other models peak below 72 °C even at MAXN.
+**Key finding**: 
+- 25W is the energy-efficiency sweet spot for all models ≤4B parameters. For Bonsai-8B, 15W and 25W deliver near-identical output tok/J (~1 % difference), making 15W the more power-conservative choice. 
+- MAXN costs 10–11 % more energy per token than 25W across every model tested.** 25W delivers *47–48 %* more output tok/s than 15W while maintaining or improving output tok/J for sub-4B models (ctx=2048, gen=512). 
+- **No thermal throttling was observed at any power mode** - peak junction temperature (TJ) reached 75.3 °C at MAXN (Bonsai-8B), well below the 95 °C hardware throttle threshold. All other models peak below 72 °C even at MAXN.
 
 **Throughput and efficiency winner at each mode** *(ctx=2048, gen=512, Ternary-Bonsai-1.7B dominates):*
 
