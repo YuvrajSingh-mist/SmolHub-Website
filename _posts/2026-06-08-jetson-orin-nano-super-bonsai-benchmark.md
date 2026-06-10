@@ -95,7 +95,7 @@ Each dataset contains the full `profile_export_aiperf.json` per cell (all 33 met
 | Board | Jetson Orin Nano Super 8GB (Developer Kit) |
 | CPU | 6× Arm Cortex-A78AE @ up to 1.728 GHz |
 | GPU | NVIDIA Ampere, 1024 CUDA cores, 32 Tensor cores |
-| Memory | 8 GB LPDDR5 204.8 GB/s (unified CPU + GPU) |
+| Memory | 8 GB LPDDR5 102 GB/s (unified CPU + GPU) |
 | CMA | 256 MB (contiguous memory pool; depletes across sequential model loads) |
 | Cooling | Active fan; peak junction temperature ≤ 75 °C across all modes |
 
