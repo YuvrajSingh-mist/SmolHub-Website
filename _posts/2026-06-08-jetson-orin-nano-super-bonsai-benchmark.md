@@ -24,8 +24,7 @@ tags:
   - Ultra-Low-Bit Quantization
 ---
 
-# Bonsai LLM Benchmark: Jetson Orin Nano Super 8GB
-
+![Jetson Orin Nano Super 8GB setup used for the Bonsai LLM inference benchmark](/images/blogs/jetson-nano-super-benchmark/jetson-setup-og.jpg)
 
 ## Benchmark Configuration
 
@@ -673,7 +672,7 @@ For **Bonsai-8B**: prefer **15W** for energy-efficiency-neutral operation at ~43
 | Ternary-Bonsai-4B | 15W  | 11.4 | 5280.1  | 87.95  | 5.05 | 2.25 |
 | Ternary-Bonsai-4B | 25W  | **16.9** | **3569.0** | **59.29** | 7.36 | **2.30** |
 | Ternary-Bonsai-4B | MAXN | 18.6 | 3257.6  | 53.72  | 9.04 | 2.06 |
-| Ternary-Bonsai-8B | all  | OOM: too large for 8 GB unified memory at any power mode |||||||
+| Ternary-Bonsai-8B | all  | OOM: too large for 8 GB unified memory at any power mode | | | | |
 
 
 
