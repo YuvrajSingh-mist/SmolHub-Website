@@ -24,7 +24,8 @@ tags:
   - Ultra-Low-Bit Quantization
 ---
 
-![Jetson Orin Nano Super 8GB setup used for the Bonsai LLM inference benchmark](/images/blogs/jetson-nano-super-benchmark/jetson-setup-og.jpg)
+[![Jetson Orin Nano Super 8GB setup used for the Bonsai LLM inference benchmark](/images/blogs/jetson-nano-super-benchmark/jetson-setup-og.jpg)](https://www.smolhub.com/posts/jetson-orin-nano-cluster-setup-guide/)
+*My Jetson Nano Orin Super cluster setup - its real!*
 
 ## Benchmark Configuration
 
