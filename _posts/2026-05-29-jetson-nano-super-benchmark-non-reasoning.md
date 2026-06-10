@@ -90,7 +90,7 @@ Eight tiny non-thinking LLMs were benchmarked across all four Jetson Orin Nano S
 | Board | Jetson Orin Nano Super 8GB (Developer Kit) |
 | CPU | 6× Arm Cortex-A78AE @ up to 1.728 GHz |
 | GPU | NVIDIA Ampere, 1024 CUDA cores, 32 Tensor cores |
-| Memory | 8 GB LPDDR5 204.8 GB/s (unified CPU + GPU) |
+| Memory | 8 GB LPDDR5 102 GB/s (unified CPU + GPU) |
 | CMA | 256 MB (contiguous memory pool; depletes across sequential model loads) |
 | Cooling | Active fan; peak junction temperature ≤ 73 °C across all modes |
 
