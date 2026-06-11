@@ -10,7 +10,7 @@ framework: "PyTorch"
 environment: "Gymnasium"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/SAC"
 date: 2025-08-21
-stars: 223
+stars: 224
 ---
 
 Implementation of SAC reinforcement learning algorithm

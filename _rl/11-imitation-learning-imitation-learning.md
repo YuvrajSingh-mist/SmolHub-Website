@@ -10,7 +10,7 @@ framework: "PyTorch"
 environment: "Custom Environment"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/Imitation Learning"
 date: 2025-08-21
-stars: 223
+stars: 224
 ---
 
 

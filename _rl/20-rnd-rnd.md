@@ -10,7 +10,7 @@ framework: "PyTorch"
 environment: "LunarLander"
 github_url: "https://github.com/YuvrajSingh-mist/Reinforcement-Learning/tree/master/RND"
 date: 2025-08-21
-stars: 223
+stars: 224
 ---
 Implementation of RND reinforcement learning algorithm
 

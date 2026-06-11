@@ -9,7 +9,7 @@ framework: "PyTorch"
 environment: "Custom"
 github_url: "https://github.com/YuvrajSingh-mist/NeatRL/tree/master/GRPO"
 date: 2025-06-01
-stars: 223
+stars: 224
 ---
 
 ## Overview
